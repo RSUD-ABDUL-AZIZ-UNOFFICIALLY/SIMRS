@@ -8,3 +8,4 @@ nbdist/
 .nb-gradle/
 /cache/**
 /nbproject/**
+../setting/database.xml
