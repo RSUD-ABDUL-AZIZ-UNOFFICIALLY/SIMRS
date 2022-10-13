@@ -129,7 +129,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Rawat","Nomer RM","Nama Pasien","Alamat Pasien","Penanggung Jawab","Hubungan P.J.","Jenis Bayar","Kamar","Tarif Kamar",
+            "No.Rawat","Nomer RM","Nama Pasien","Alamat Pasien","Penanggung Jawab","Hubungan P.J.","Jenis Bayar","No.Peserta","Kamar","Tarif Kamar",
             "Diagnosa Awal","Diagnosa Akhir","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar",
             "Ttl.Biaya","Stts.Pulang","Lama","Dokter P.J.","Kamar","Status Bayar","Agama"
             }){
@@ -971,13 +971,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari = new widget.panelisi();
         R1 = new widget.RadioButton();
         R2 = new widget.RadioButton();
-        DTPCari1 = new widget.Tanggal();
         jLabel22 = new widget.Label();
-        DTPCari2 = new widget.Tanggal();
         R3 = new widget.RadioButton();
-        DTPCari3 = new widget.Tanggal();
         jLabel25 = new widget.Label();
-        DTPCari4 = new widget.Tanggal();
         Scroll = new widget.ScrollPane();
         tbKamIn = new widget.Table();
         panelGlass9 = new widget.panelisi();
@@ -4454,6 +4450,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(265, 23));
+        TCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TCariActionPerformed(evt);
+            }
+        });
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
@@ -4520,45 +4521,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2022" }));
-        DTPCari1.setDisplayFormat("dd-MM-yyyy");
-        DTPCari1.setName("DTPCari1"); // NOI18N
-        DTPCari1.setOpaque(false);
-        DTPCari1.setPreferredSize(new java.awt.Dimension(95, 23));
-        DTPCari1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                DTPCari1ItemStateChanged(evt);
-            }
-        });
-        DTPCari1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DTPCari1KeyPressed(evt);
-            }
-        });
-        panelCari.add(DTPCari1);
-
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("s.d");
         jLabel22.setName("jLabel22"); // NOI18N
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
-
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2022" }));
-        DTPCari2.setDisplayFormat("dd-MM-yyyy");
-        DTPCari2.setName("DTPCari2"); // NOI18N
-        DTPCari2.setOpaque(false);
-        DTPCari2.setPreferredSize(new java.awt.Dimension(95, 23));
-        DTPCari2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                DTPCari1ItemStateChanged(evt);
-            }
-        });
-        DTPCari2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DTPCari2KeyPressed(evt);
-            }
-        });
-        panelCari.add(DTPCari2);
 
         R3.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.pink));
         buttonGroup1.add(R3);
@@ -4569,45 +4536,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2022" }));
-        DTPCari3.setDisplayFormat("dd-MM-yyyy");
-        DTPCari3.setName("DTPCari3"); // NOI18N
-        DTPCari3.setOpaque(false);
-        DTPCari3.setPreferredSize(new java.awt.Dimension(95, 23));
-        DTPCari3.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                DTPCari3ItemStateChanged(evt);
-            }
-        });
-        DTPCari3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DTPCari3KeyPressed(evt);
-            }
-        });
-        panelCari.add(DTPCari3);
-
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel25.setText("s.d");
         jLabel25.setName("jLabel25"); // NOI18N
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
-
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2022" }));
-        DTPCari4.setDisplayFormat("dd-MM-yyyy");
-        DTPCari4.setName("DTPCari4"); // NOI18N
-        DTPCari4.setOpaque(false);
-        DTPCari4.setPreferredSize(new java.awt.Dimension(95, 23));
-        DTPCari4.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                DTPCari4ItemStateChanged(evt);
-            }
-        });
-        DTPCari4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DTPCari4KeyPressed(evt);
-            }
-        });
-        panelCari.add(DTPCari4);
 
         PanelCariUtama.add(panelCari, java.awt.BorderLayout.PAGE_START);
 
@@ -11939,6 +11872,10 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
     }//GEN-LAST:event_MnPemantauanPEWSActionPerformed
 
+    private void TCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TCariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TCariActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -12290,13 +12227,14 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) like '%"+TCari.getText().trim()+"%' or kamar_inap.kd_kamar like '%"+TCari.getText().trim()+"%' or "+
                "bangsal.nm_bangsal like '%"+TCari.getText().trim()+"%' or kamar_inap.diagnosa_awal like '%"+TCari.getText().trim()+"%' or kamar_inap.diagnosa_akhir like '%"+TCari.getText().trim()+"%' or "+
                "kamar_inap.tgl_masuk like '%"+TCari.getText().trim()+"%' or dokter.nm_dokter like '%"+TCari.getText().trim()+"%' or kamar_inap.stts_pulang like '%"+TCari.getText().trim()+"%' or "+
+               "pasien.no_peserta like '%"+TCari.getText().trim()+"%'or "+
                "kamar_inap.tgl_keluar like '%"+TCari.getText().trim()+"%' or penjab.png_jawab like '%"+TCari.getText().trim()+"%' or pasien.agama like '%"+TCari.getText().trim()+"%') ";
         }
         
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-               "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,reg_periksa.p_jawab,reg_periksa.hubunganpj,"+
+               "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.no_peserta,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,reg_periksa.p_jawab,reg_periksa.hubunganpj,"+
                "penjab.png_jawab,concat(kamar_inap.kd_kamar,' ',bangsal.nm_bangsal) as kamar,kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir," +
                "kamar_inap.tgl_masuk,kamar_inap.jam_masuk,if(kamar_inap.tgl_keluar='0000-00-00','',kamar_inap.tgl_keluar) as tgl_keluar,if(kamar_inap.jam_keluar='00:00:00','',kamar_inap.jam_keluar) as jam_keluar,"+
                "kamar_inap.ttl_biaya,kamar_inap.stts_pulang,kamar_inap.lama,dokter.nm_dokter,kamar_inap.kd_kamar,reg_periksa.kd_pj,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,reg_periksa.status_bayar, "+
@@ -12310,7 +12248,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 while(rs.next()){
                     tabMode.addRow(new String[]{
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+" ("+rs.getString("umur")+")",
-                        rs.getString("alamat"),rs.getString("p_jawab"),rs.getString("hubunganpj"),rs.getString("png_jawab"),
+                        rs.getString("alamat"),rs.getString("p_jawab"),rs.getString("hubunganpj"),rs.getString("png_jawab"),rs.getString("no_peserta"),
                         rs.getString("kamar"),Valid.SetAngka(rs.getDouble("trf_kamar")),rs.getString("diagnosa_awal"),
                         rs.getString("diagnosa_akhir"),rs.getString("tgl_masuk"),rs.getString("jam_masuk"),rs.getString("tgl_keluar"),
                         rs.getString("jam_keluar"),Valid.SetAngka(rs.getDouble("ttl_biaya")),rs.getString("stts_pulang"),
