@@ -165,7 +165,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         tabModekasir=new DefaultTableModel(null,new String[]{
             "Kode Dokter","Dokter Dituju","No.RM","Pasien",
             "Poliklinik","Penanggung Jawab","Alamat P.J.","Hubungan P.J.",
-            "Biaya Reg","Jenis Bayar","Status","No.Rawat","Tanggal",
+            "Biaya Reg","Jenis Bayar","No.Peserta","Status","No.Rawat","Tanggal",
             "Jam","No.Reg","Status Bayar","Stts Poli","Kd PJ","Kd Poli","No.Telp Pasien"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
