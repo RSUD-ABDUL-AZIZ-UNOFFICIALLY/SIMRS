@@ -11413,7 +11413,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             pskasir=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
                 "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,poliklinik.nm_poli,"+
                 "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur, "+
-                "reg_periksa.status_bayar,reg_periksa.status_poli,reg_periksa.kd_pj,reg_periksa.kd_poli,pasien.no_tlp "+
+                "reg_periksa.status_bayar,reg_periksa.status_poli,reg_periksa.kd_pj,reg_periksa.kd_poli,pasien.no_tlp,pasien.no_peserta "+
                 "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+
                 "reg_periksa.tgl_registrasi between ? and ? and reg_periksa.status_lanjut='Ralan' "+tampildiagnosa+
@@ -11452,7 +11452,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                         rskasir.getString(9),rskasir.getString(10),rskasir.getString(11),rskasir.getString(12),Valid.SetAngka(rskasir.getDouble(13)),
                         rskasir.getString("png_jawab"),rskasir.getString(14),rskasir.getString("no_rawat"),rskasir.getString("tgl_registrasi"),
                         rskasir.getString("jam_reg"),rskasir.getString(1),rskasir.getString("status_bayar"),rskasir.getString("status_poli"),
-                        rskasir.getString("kd_pj"),rskasir.getString("kd_poli"),rskasir.getString("no_tlp")
+                        rskasir.getString("kd_pj"),rskasir.getString("kd_poli"),rskasir.getString("no_tlp"),rskasir.getString("no_peserta")
                     });
                 }                
             } catch(Exception e){
