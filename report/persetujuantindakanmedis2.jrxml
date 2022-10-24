@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c52db87b-fd80-46e2-a7b5-a80d65eadcf0">
 	<property name="ireport.zoom" value="1.2396694214876078"/>
 	<property name="ireport.x" value="0"/>
@@ -16,8 +16,10 @@
 pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,
 pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,
 pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.pekerjaanpj,
+reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.tgl_registrasi,
 concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) as alamatpj from pasien
 inner join kelurahan inner join kecamatan inner join kabupaten
+inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel
 and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 	</queryString>
@@ -82,6 +84,18 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="alamatpj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="p_jawab" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="almt_pj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hubunganpj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl_registrasi" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -454,7 +468,7 @@ f. Saya mengetahui RSUD DR. ABDUL AZIZ merupakan tempat praktek mahasiswa kedokt
 				<textFieldExpression><![CDATA[": "+$F{nm_pasien}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="425" y="43" width="131" height="10" uuid="0fca4bdc-49c7-412d-bd8d-17306d5fa6fb">
+				<reportElement x="425" y="43" width="77" height="10" uuid="0fca4bdc-49c7-412d-bd8d-17306d5fa6fb">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement>
@@ -648,14 +662,6 @@ Consent.
 				<text><![CDATA[TANDA TANGAN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="738" width="132" height="12" uuid="04fa6f40-ebc1-42f7-adb5-3d164a025c5a"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Tanda Tangan dan Nama]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="3" y="751" width="132" height="12" uuid="6fca660a-f3c6-4553-b786-a904424202e0"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font fontName="Tahoma" size="8" isBold="false"/>
@@ -679,7 +685,7 @@ Consent.
 				</textElement>
 				<text><![CDATA[Petugas Ruangan]]></text>
 			</staticText>
-			<textField pattern="dd MMMMM yyyy">
+			<textField pattern=" d MMMM yyyy">
 				<reportElement x="330" y="751" width="91" height="12" uuid="b4ec14ca-8691-42ce-90fa-20cc4c4f1fab">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -687,17 +693,7 @@ Consent.
 					<font size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="330" y="790" width="91" height="12" uuid="5ecef434-b035-4837-bcf5-30a5d8f2fec3">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tgl_registrasi}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="291" y="751" width="42" height="12" uuid="ec7f3208-b108-4e32-aa6c-8e5c14053cea"/>
@@ -741,7 +737,7 @@ Consent.
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[": " + $F{namakeluarga}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[": " + $F{p_jawab}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="108" y="197" width="394" height="10" uuid="b513fc7d-902c-4fe2-8f57-83825497213e">
@@ -751,7 +747,72 @@ Consent.
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[": " +$F{alamatpj}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[": " +$F{almt_pj}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="506" y="43" width="42" height="10" uuid="c6b64385-7bfa-4556-ac44-45c4a7650654"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{umur}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="496" y="43" width="10" height="10" uuid="85e24ba8-3b60-4418-ac34-bccf4f565a7c"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["("]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="545" y="43" width="10" height="10" uuid="3bce4260-8e67-427e-ae74-6ef34ecaaf63"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="320" y="432" width="182" height="10" uuid="9ab2e4d7-713e-4bff-be0c-38b1c3602f7b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hubunganpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="76" y="432" width="149" height="10" uuid="e9fffbed-273c-40bf-b551-fd3e7c16e494">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_jawab}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMM d, yyyy">
+				<reportElement x="330" y="789" width="91" height="12" uuid="026eceab-0a5b-4aac-9292-5e87d8ad8435">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tgl_registrasi}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" d MMMM yyyy">
+				<reportElement x="3" y="738" width="132" height="12" uuid="e90400a9-30b0-4de3-8620-ad3dd6881c51">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_jawab}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
