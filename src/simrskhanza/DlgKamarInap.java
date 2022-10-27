@@ -8670,6 +8670,8 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
+//                    System.out.println(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0));
+//                    System.out.println("hello");
                 if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
@@ -8718,7 +8720,9 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     } catch (Exception e) {
                         System.out.println(e);
                     }
-                }else{            
+                }else{       
+                    System.out.println(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1));
+//                    System.out.println(Sequel.cariIsi("select kamar.kelas from kamar_inap INNER JOIN kamar on kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString())));
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         Map<String, Object> param = new HashMap<>();                
                         param.put("nama",TPasien.getText());             
@@ -8736,7 +8740,10 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
                         param.put("emailrs",akses.getemailrs());         
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));   
-                        Valid.MyReport("rptFormulirPenerimaanPasien.jasper",param,"::[ Formulir Penerimaan Pasien ]::"); this.setCursor(Cursor.getDefaultCursor());
+                        param.put("kelas",Sequel.cariIsi("select kamar.kelas from kamar_inap INNER JOIN kamar on kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()));
+                        param.put("bangsal",Sequel.cariIsi("select bangsal.nm_bangsal from kamar_inap INNER JOIN kamar on kamar_inap.kd_kamar=kamar.kd_kamar INNER JOIN bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()));
+                        param.put("noPeserta",Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString()));
+                        Valid.MyReport("rptFormulirPenerimaanPasien.jasper",param,"::[ Formulir Penerimaan Pasien 1]::"); this.setCursor(Cursor.getDefaultCursor());
                 }
             }
         } 
