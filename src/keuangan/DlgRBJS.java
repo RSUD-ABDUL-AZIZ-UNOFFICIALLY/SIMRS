@@ -43,7 +43,7 @@ public class DlgRBJS extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row={"No.","Cara Bayar","Tindakan Medis","Jumlah","Jasa Sarana"};
+        Object[] row={"No.","Cara Bayar","Tindakan Medis","Jumlah","Jasa Sarana","Jasa Pelayanan"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -52,7 +52,7 @@ public class DlgRBJS extends javax.swing.JDialog {
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int m = 0; m < 5; m++) {
+        for (int m = 0; m < 6; m++) {
             TableColumn column = tbDokter.getColumnModel().getColumn(m);
             if(m==0){
                 column.setPreferredWidth(35);
@@ -63,6 +63,8 @@ public class DlgRBJS extends javax.swing.JDialog {
             }else if(m==3){
                 column.setPreferredWidth(100);
             }else if(m==4){
+                column.setPreferredWidth(150);
+            }else if(m==5){
                 column.setPreferredWidth(150);
             }
         }
@@ -110,7 +112,7 @@ public class DlgRBJS extends javax.swing.JDialog {
     }
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
     private int i=0,a=0;
-    private double jm=0,totaljm=0,detaillab=0;
+    private double jm=0,totaljm=0,detaillab=0,totalpl=0, pl=0;
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -412,11 +414,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             int row=tabMode.getRowCount();
             for(int r=0;r<row;r++){  
                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                tabMode.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
                                 tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
                                 tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
                                 tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian BulananDokter"); 
+                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian BulananDokter"); 
             }
             
             Map<String, Object> param = new HashMap<>();
@@ -586,32 +589,37 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 rs=ps.executeQuery();
                 i=1;
                 totaljm=0;
+                totalpl = 0;
                 while(rs.next()){
-                   tabMode.addRow(new Object[]{""+i+".",rs.getString("png_jawab"),"","",""});   
+                   tabMode.addRow(new Object[]{""+i+".",rs.getString("png_jawab"),"","","",""});   
                    jm=0;
                    a=0;
+                   pl=0;
                    //rawat jalan   
                    if(chkRalan.isSelected()==true){
                         psralanpr=koneksi.prepareStatement(
-                            "select jns_perawatan.nm_perawatan,rawat_jl_pr.material,"+
+                            "select jns_perawatan.nm_perawatan,rawat_jl_pr.material,rawat_jl_pr.bhp,"+
                             "count(rawat_jl_pr.kd_jenis_prw) as jml,"+
-                            "sum(rawat_jl_pr.material) as total "+
+                            "sum(rawat_jl_pr.material) as total, "+
+                            "sum(rawat_jl_pr.bhp) as totalPelayana "+
                             "from reg_periksa inner join jns_perawatan inner join rawat_jl_pr "+
                             "on rawat_jl_pr.no_rawat=reg_periksa.no_rawat "+
                             "and rawat_jl_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                             "where reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_pj like ? and rawat_jl_pr.material>0 "+
                             "group by rawat_jl_pr.kd_jenis_prw order by jns_perawatan.nm_perawatan");
-                        psralandrpr=koneksi.prepareStatement("select jns_perawatan.nm_perawatan,rawat_jl_drpr.material,"+
+                        psralandrpr=koneksi.prepareStatement("select jns_perawatan.nm_perawatan,rawat_jl_drpr.material,rawat_jl_drpr.bhp,"+
                             "count(rawat_jl_drpr.kd_jenis_prw) as jml,"+
-                            "sum(rawat_jl_drpr.material) as total "+
+                            "sum(rawat_jl_drpr.material) as total, "+
+                            "sum(rawat_jl_drpr.bhp) as totalPelayana "+
                             "from reg_periksa inner join jns_perawatan inner join rawat_jl_drpr "+
                             "on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat "+
                             "and rawat_jl_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                             "where reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_pj like ? and rawat_jl_drpr.material>0 "+
                             "group by rawat_jl_drpr.kd_jenis_prw order by jns_perawatan.nm_perawatan");
-                        psralandr=koneksi.prepareStatement("select jns_perawatan.nm_perawatan,rawat_jl_dr.material,"+
+                        psralandr=koneksi.prepareStatement("select jns_perawatan.nm_perawatan,rawat_jl_dr.material,rawat_jl_dr.bhp,"+
                             "count(rawat_jl_dr.kd_jenis_prw) as jml,"+
-                            "sum(rawat_jl_dr.material) as total "+
+                            "sum(rawat_jl_dr.material) as total, "+
+                            "sum(rawat_jl_dr.bhp) as totalPelayana "+
                             "from reg_periksa inner join jns_perawatan inner join rawat_jl_dr "+
                             "on rawat_jl_dr.no_rawat=reg_periksa.no_rawat "+
                             "and rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
@@ -635,34 +643,37 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
                             if(rsralanpr.next()||rsralandrpr.next()||rsralandr.next()){ 
                                 a++;
-                                tabMode.addRow(new Object[]{"","",a+". Rawat Jalan","",""});   
+                                tabMode.addRow(new Object[]{"","",a+". Rawat Jalan","","","",""});   
                             }
 
                             rsralanpr.beforeFirst();
                             while(rsralanpr.next()){                    
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsralanpr.getString("nm_perawatan"),
-                                    rsralanpr.getString("jml"),Valid.SetAngka(rsralanpr.getDouble("total"))
+                                    rsralanpr.getString("jml"),Valid.SetAngka(rsralanpr.getDouble("total")),rsralanpr.getString("totalPelayana"),
                                 });        
                                 jm=jm+rsralanpr.getDouble("total");
+                                pl=pl+rsralanpr.getDouble("totalPelayana");
                             }
 
                             rsralandr.beforeFirst();
                             while(rsralandr.next()){                    
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsralandr.getString("nm_perawatan"),
-                                    rsralandr.getString("jml"),Valid.SetAngka(rsralandr.getDouble("total"))
+                                    rsralandr.getString("jml"),Valid.SetAngka(rsralandr.getDouble("total")),rsralandr.getString("totalPelayana")
                                 });        
                                 jm=jm+rsralandr.getDouble("total");
+                                pl=pl+rsralandr.getDouble("totalPelayana");
                             }
                             
                             rsralandrpr.beforeFirst();
                             while(rsralandrpr.next()){                    
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsralandrpr.getString("nm_perawatan"),
-                                    rsralandrpr.getString("jml"),Valid.SetAngka(rsralandrpr.getDouble("total"))
+                                    rsralandrpr.getString("jml"),Valid.SetAngka(rsralandrpr.getDouble("total")),rsralandrpr.getString("totalPelayana")
                                 });        
                                 jm=jm+rsralandrpr.getDouble("total");
+                                pl=pl+rsralandr.getDouble("totalPelayana");
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -690,27 +701,30 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                    
                    //rawat inap               
                    if(chkRanap.isSelected()==true){
-                        psranappr=koneksi.prepareStatement("select jns_perawatan_inap.nm_perawatan,rawat_inap_pr.material,"+
+                        psranappr=koneksi.prepareStatement("select jns_perawatan_inap.nm_perawatan,rawat_inap_pr.material,rawat_inap_pr.bhp,"+
                                 "count(rawat_inap_pr.kd_jenis_prw) as jml, " +
-                                "sum(rawat_inap_pr.material) as total "+
+                                "sum(rawat_inap_pr.material) as total, "+
+                                "sum(rawat_inap_pr.bhp) as totalPelayana "+
                                 "from jns_perawatan_inap inner join rawat_inap_pr inner join reg_periksa "+
                                 "on rawat_inap_pr.no_rawat=reg_periksa.no_rawat and "+
                                 "rawat_inap_pr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw "+
                                 "where rawat_inap_pr.tgl_perawatan between ? and ? and reg_periksa.kd_pj like ? "+
                                 "and rawat_inap_pr.material>0 "+
                                 "group by rawat_inap_pr.kd_jenis_prw order by jns_perawatan_inap.nm_perawatan  ");
-                        psranapdrpr=koneksi.prepareStatement("select jns_perawatan_inap.nm_perawatan,rawat_inap_drpr.material,"+
+                        psranapdrpr=koneksi.prepareStatement("select jns_perawatan_inap.nm_perawatan,rawat_inap_drpr.material,rawat_inap_drpr.bhp,"+
                                 "count(rawat_inap_drpr.kd_jenis_prw) as jml, " +
-                                "sum(rawat_inap_drpr.material) as total "+
+                                "sum(rawat_inap_drpr.material) as total, "+
+                                "sum(rawat_inap_drpr.bhp) as totalPelayana "+
                                 "from jns_perawatan_inap inner join rawat_inap_drpr inner join reg_periksa "+
                                 "on rawat_inap_drpr.no_rawat=reg_periksa.no_rawat and "+
                                 "rawat_inap_drpr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw "+
                                 "where rawat_inap_drpr.tgl_perawatan between ? and ? and reg_periksa.kd_pj like ? "+
                                 "and rawat_inap_drpr.material>0 "+
                                 "group by rawat_inap_drpr.kd_jenis_prw order by jns_perawatan_inap.nm_perawatan  ");
-                        psranapdr=koneksi.prepareStatement("select jns_perawatan_inap.nm_perawatan,rawat_inap_dr.material,"+
+                        psranapdr=koneksi.prepareStatement("select jns_perawatan_inap.nm_perawatan,rawat_inap_dr.material,rawat_inap_dr.bhp,"+
                                 "count(rawat_inap_dr.kd_jenis_prw) as jml, " +
-                                "sum(rawat_inap_dr.material) as total "+
+                                "sum(rawat_inap_dr.material) as total, "+
+                                "sum(rawat_inap_dr.bhp) as totalPelayana "+
                                 "from jns_perawatan_inap inner join rawat_inap_dr inner join reg_periksa "+
                                 "on rawat_inap_dr.no_rawat=reg_periksa.no_rawat and "+
                                 "rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw "+
@@ -741,27 +755,30 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             while(rsranappr.next()){
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsranappr.getString("nm_perawatan"),
-                                    rsranappr.getString("jml"),Valid.SetAngka(rsranappr.getDouble("total"))
+                                    rsranappr.getString("jml"),Valid.SetAngka(rsranappr.getDouble("total")),rsranappr.getString("totalPelayana")
                                 });  
                                 jm=jm+rsranappr.getDouble("total");
+                                pl=pl+rsranappr.getDouble("totalPelayana");
                             }
 
                             rsranapdr.beforeFirst();
                             while(rsranapdr.next()){
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsranapdr.getString("nm_perawatan"),
-                                    rsranapdr.getString("jml"),Valid.SetAngka(rsranapdr.getDouble("total"))
+                                    rsranapdr.getString("jml"),Valid.SetAngka(rsranapdr.getDouble("total")),rsranapdr.getString("totalPelayana")
                                 });  
                                 jm=jm+rsranapdr.getDouble("total");
+                                pl=pl+rsranapdr.getDouble("totalPelayana");
                             }
                             
                             rsranapdrpr.beforeFirst();
                             while(rsranapdrpr.next()){
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsranapdrpr.getString("nm_perawatan"),
-                                    rsranapdrpr.getString("jml"),Valid.SetAngka(rsranapdrpr.getDouble("total"))
+                                    rsranapdrpr.getString("jml"),Valid.SetAngka(rsranapdrpr.getDouble("total")),rsranapdrpr.getString("totalPelayana")
                                 });  
                                 jm=jm+rsranapdrpr.getDouble("total");
+                                pl=pl+rsranapdrpr.getDouble("totalPelayana");
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -846,7 +863,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             while(rsbiayaalat.next()){
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsbiayaalat.getString("nm_perawatan")+" (Alat)",
-                                    rsbiayaalat.getString("jml"),Valid.SetAngka(rsbiayaalat.getDouble("total"))
+                                    rsbiayaalat.getString("jml"),Valid.SetAngka(rsbiayaalat.getDouble("total")),""
                                 });       
                                 jm=jm+rsbiayaalat.getDouble("total");
                             }      
@@ -855,7 +872,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             while(rsbiayasewaok.next()){
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsbiayasewaok.getString("nm_perawatan")+" (Sewa OK/VK)",
-                                    rsbiayasewaok.getString("jml"),Valid.SetAngka(rsbiayasewaok.getDouble("total"))
+                                    rsbiayasewaok.getString("jml"),Valid.SetAngka(rsbiayasewaok.getDouble("total")),""
                                 });       
                                 jm=jm+rsbiayasewaok.getDouble("total");
                             }
@@ -864,7 +881,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             while(rsakomodasi.next()){
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsakomodasi.getString("nm_perawatan")+" (Akomodasi)",
-                                    rsakomodasi.getString("jml"),Valid.SetAngka(rsakomodasi.getDouble("total"))
+                                    rsakomodasi.getString("jml"),Valid.SetAngka(rsakomodasi.getDouble("total")),""
                                 });       
                                 jm=jm+rsakomodasi.getDouble("total");
                             }
@@ -873,7 +890,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             while(rsbiayasarpras.next()){
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsbiayasarpras.getString("nm_perawatan")+" (Sarpras)",
-                                    rsbiayasarpras.getString("jml"),Valid.SetAngka(rsbiayasarpras.getDouble("total"))
+                                    rsbiayasarpras.getString("jml"),Valid.SetAngka(rsbiayasarpras.getDouble("total")),""
                                 });       
                                 jm=jm+rsbiayasarpras.getDouble("total");
                             }
@@ -922,7 +939,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             rsperiksalab=psperiksalab.executeQuery();
                             if(rsperiksalab.next()){
                                 a++;
-                                 tabMode.addRow(new Object[]{"","",a+". Periksa Lab ","",""}); 
+                                 tabMode.addRow(new Object[]{"","",a+". Periksa Lab ","","",""}); 
                             }
                             rsperiksalab.beforeFirst();
                             while(rsperiksalab.next()){ 
@@ -948,7 +965,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     }
                                     tabMode.addRow(new Object[]{
                                         "","","     "+rsperiksalab.getString("nm_perawatan"),
-                                        rsperiksalab.getString("jml"),Valid.SetAngka(rsperiksalab.getDouble("total")+detaillab)
+                                        rsperiksalab.getString("jml"),Valid.SetAngka(rsperiksalab.getDouble("total")+detaillab),""
                                     });     
                                     jm=jm+rsperiksalab.getDouble("total")+detaillab;
                                 } catch (Exception e) {
@@ -991,13 +1008,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             rsperiksaradiologi=psperiksaradiologi.executeQuery();
                             if(rsperiksaradiologi.next()){
                                 a++;
-                                 tabMode.addRow(new Object[]{"","",a+". Periksa Radiologi","",""}); 
+                                 tabMode.addRow(new Object[]{"","",a+". Periksa Radiologi","","",""}); 
                             }
                             rsperiksaradiologi.beforeFirst();
                             while(rsperiksaradiologi.next()){ 
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsperiksaradiologi.getString("nm_perawatan"),
-                                    rsperiksaradiologi.getString("jml"),Valid.SetAngka(rsperiksaradiologi.getDouble("total"))
+                                    rsperiksaradiologi.getString("jml"),Valid.SetAngka(rsperiksaradiologi.getDouble("total")),""
                                 });             
                                 jm=jm+rsperiksaradiologi.getDouble("total");
                             }
@@ -1014,10 +1031,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                    }
                    
                    if(jm>0){
-                        tabMode.addRow(new Object[]{"","","Total : ","",Valid.SetAngka(jm)});
+                        tabMode.addRow(new Object[]{"","","Total : ","",Valid.SetAngka(jm),Valid.SetAngka(pl)});
                    }
 
-                   totaljm=totaljm+jm;   
+                   totaljm=totaljm+jm;
+                   totalpl=totalpl+pl;
                    i++;
                 } 
            } catch (Exception e) {
@@ -1032,7 +1050,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
            }
               
             if(totaljm>0){
-                   tabMode.addRow(new Object[]{">> ","Total Jasa Sarana :"," ","",Valid.SetAngka(totaljm)});
+                   tabMode.addRow(new Object[]{">> ","Total Jasa Sarana :"," ","",Valid.SetAngka(totaljm),""});
+                   tabMode.addRow(new Object[]{">> ","Total Jasa Pelayanan :"," ","","",Valid.SetAngka(totalpl)});
             }             
         }catch(SQLException e){
             System.out.println("Catatan  "+e);
