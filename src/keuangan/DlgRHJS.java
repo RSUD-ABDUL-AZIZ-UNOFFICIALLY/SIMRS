@@ -616,7 +616,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "and rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                             "where reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_pj=? "+
-                            " and rawat_jl_dr.material>0 order by reg_periksa.tgl_registrasi,jns_perawatan.nm_perawatan");
+                            " and rawat_jl_dr.material>0 order by reg_periksa.tgl_registrasi,pasien.nm_pasien");
                         psrawatjalandrpr=koneksi.prepareStatement("select pasien.nm_pasien,rawat_jl_drpr.material,"+
                             "jns_perawatan.nm_perawatan,reg_periksa.tgl_registrasi "+
                             "from pasien inner join reg_periksa  "+
@@ -625,7 +625,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "and rawat_jl_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                             "where reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_pj=? "+
-                            " and rawat_jl_drpr.material>0 order by reg_periksa.tgl_registrasi,jns_perawatan.nm_perawatan");
+                            " and rawat_jl_drpr.material>0 order by reg_periksa.tgl_registrasi,pasien.nm_pasien");
                         psrawatjalanpr=koneksi.prepareStatement("select pasien.nm_pasien,rawat_jl_pr.material,"+
                             "jns_perawatan.nm_perawatan,reg_periksa.tgl_registrasi "+
                             "from pasien inner join reg_periksa  "+
@@ -634,7 +634,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "and rawat_jl_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                             "where reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_pj=? "+
-                            " and rawat_jl_pr.material>0 order by reg_periksa.tgl_registrasi,jns_perawatan.nm_perawatan");                          
+                            " and rawat_jl_pr.material>0 order by reg_periksa.tgl_registrasi,pasien.nm_pasien");                          
                         
                         try {
                             psrawatjalandr.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -714,7 +714,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "and rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw "+
                             "where rawat_inap_dr.tgl_perawatan between ? and ? and reg_periksa.kd_pj=? "+
-                            " and rawat_inap_dr.material>0 order by rawat_inap_dr.tgl_perawatan,jns_perawatan_inap.nm_perawatan");
+                            " and rawat_inap_dr.material>0 order by rawat_inap_dr.tgl_perawatan,pasien.nm_pasien");
                         psrawatinapdrpr=koneksi.prepareStatement("select pasien.nm_pasien,rawat_inap_drpr.material,"+
                             "jns_perawatan_inap.nm_perawatan,rawat_inap_drpr.tgl_perawatan,rawat_inap_drpr.jam_rawat "+
                             "from pasien inner join reg_periksa  "+
@@ -723,7 +723,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "and rawat_inap_drpr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw "+
                             "where rawat_inap_drpr.tgl_perawatan between ? and ? and reg_periksa.kd_pj=? "+
-                            " and rawat_inap_drpr.material>0 order by rawat_inap_drpr.tgl_perawatan,jns_perawatan_inap.nm_perawatan");
+                            " and rawat_inap_drpr.material>0 order by rawat_inap_drpr.tgl_perawatan,pasien.nm_pasien");
                         psrawatinappr=koneksi.prepareStatement("select pasien.nm_pasien,rawat_inap_pr.material,"+
                             "jns_perawatan_inap.nm_perawatan,rawat_inap_pr.tgl_perawatan,rawat_inap_pr.jam_rawat "+
                             "from pasien inner join reg_periksa  "+
@@ -732,7 +732,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "and rawat_inap_pr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw "+
                             "where rawat_inap_pr.tgl_perawatan between ? and ? and reg_periksa.kd_pj=? "+
-                            " and rawat_inap_pr.material>0 order by rawat_inap_pr.tgl_perawatan,jns_perawatan_inap.nm_perawatan");                          
+                            " and rawat_inap_pr.material>0 order by rawat_inap_pr.tgl_perawatan,pasien.nm_pasien");                          
                         
                         try {
                             psrawatinapdr.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -809,22 +809,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "operasi.tgl_operasi from operasi inner join reg_periksa inner join pasien inner join paket_operasi "+
                             "on operasi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and operasi.kode_paket=paket_operasi.kode_paket "+
                             "where operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj=? "+
-                            " and operasi.biayaalat>0 order by operasi.tgl_operasi,paket_operasi.nm_perawatan  ");
+                            " and operasi.biayaalat>0 order by operasi.tgl_operasi,pasien.nm_pasien  ");
                        psbiayasewaok=koneksi.prepareStatement("select pasien.nm_pasien,paket_operasi.nm_perawatan,operasi.biayasewaok,"+
                             "operasi.tgl_operasi from operasi inner join reg_periksa inner join pasien inner join paket_operasi "+
                             "on operasi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and operasi.kode_paket=paket_operasi.kode_paket "+
                             "where operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj=? "+
-                            " and operasi.biayasewaok>0 order by operasi.tgl_operasi,paket_operasi.nm_perawatan  ");
+                            " and operasi.biayasewaok>0 order by operasi.tgl_operasi,pasien.nm_pasien  ");
                        psakomodasi=koneksi.prepareStatement("select pasien.nm_pasien,paket_operasi.nm_perawatan,operasi.akomodasi,"+
                             "operasi.tgl_operasi from operasi inner join reg_periksa inner join pasien inner join paket_operasi "+
                             "on operasi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and operasi.kode_paket=paket_operasi.kode_paket "+
                             "where operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj=? "+
-                            " and operasi.akomodasi>0 order by operasi.tgl_operasi,paket_operasi.nm_perawatan  ");
+                            " and operasi.akomodasi>0 order by operasi.tgl_operasi,pasien.nm_pasien  ");
                        psbiayasarpras=koneksi.prepareStatement("select pasien.nm_pasien,paket_operasi.nm_perawatan,operasi.biayasarpras,"+
                             "operasi.tgl_operasi from operasi inner join reg_periksa inner join pasien inner join paket_operasi "+
                             "on operasi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and operasi.kode_paket=paket_operasi.kode_paket "+
                             "where operasi.tgl_operasi between ? and ? and reg_periksa.kd_pj=? "+
-                            " and operasi.biayasarpras>0 order by operasi.tgl_operasi,paket_operasi.nm_perawatan  ");
+                            " and operasi.biayasarpras>0 order by operasi.tgl_operasi,pasien.nm_pasien  ");
                        try {
                            psbiayaalat.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                            psbiayaalat.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
@@ -931,7 +931,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     " from periksa_lab inner join reg_periksa inner join pasien inner join jns_perawatan_lab "+
                                     " on periksa_lab.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                                     " and periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
-                                    " where periksa_lab.tgl_periksa between ? and ? and reg_periksa.kd_pj=? order by periksa_lab.tgl_periksa,periksa_lab.jam,jns_perawatan_lab.nm_perawatan  ");            
+                                    " where periksa_lab.tgl_periksa between ? and ? and reg_periksa.kd_pj=? order by periksa_lab.tgl_periksa,periksa_lab.jam,pasien.nm_pasien  ");            
                        try {
                             psperiksa_lab.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                             psperiksa_lab.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -996,7 +996,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             " from periksa_radiologi inner join reg_periksa inner join pasien inner join jns_perawatan_radiologi "+
                             " on periksa_radiologi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             " and periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
-                            " where periksa_radiologi.tgl_periksa between ? and ? and reg_periksa.kd_pj=? order by periksa_radiologi.tgl_periksa,periksa_radiologi.jam,jns_perawatan_radiologi.nm_perawatan  ");            
+                            " where periksa_radiologi.tgl_periksa between ? and ? and reg_periksa.kd_pj=? order by periksa_radiologi.tgl_periksa,periksa_radiologi.jam,pasien.nm_pasien  ");            
                        
                        
                        try {
