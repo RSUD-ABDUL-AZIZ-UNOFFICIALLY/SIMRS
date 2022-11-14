@@ -2430,7 +2430,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
                     i = 0;
                     try{
-                          biaya = (String)JOptionPane.showInputDialog(null,"Silahkan pilih nota yang mau dicetak!","Nota",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Nota", "Kwitansi", "Nota & Kwitansi","Kwitansi Piutang"},"Nota");
+                          biaya = (String)JOptionPane.showInputDialog(null,"Silahkan pilih nota yang mau dicetak!","Nota",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Nota", "Kwitansi", "Nota & Kwitansi","Kwitansi Piutang", "Nota 3"},"Nota");
                           switch (biaya) {
                                 case "Nota":
                                       i=1;
@@ -2443,6 +2443,9 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                                       break;
                                 case "Kwitansi Piutang":
                                       i=4;
+                                      break;
+                                case "Nota 3":
+                                      i=5;
                                       break;
                           }
                     }catch(Exception e){
@@ -2478,6 +2481,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                             }else{
                                 JOptionPane.showMessageDialog(null,"Nilai Piutang masih kosong...!!!");
                             }
+                        }else if(i==5){
+                            Valid.panggilUrl("billing/LaporanBillingRS.php?petugas="+akses.getkode().replaceAll(" ","_")+"&tanggal="+DTPTgl.getSelectedItem().toString().replaceAll(" ","_")+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
                         }
                         this.setCursor(Cursor.getDefaultCursor());
                     }

@@ -6908,6 +6908,10 @@ public final class DlgReg extends javax.swing.JDialog {
                     }                    
                 }else if(i==6){
                     MnCetakRegisterActionPerformed(null);
+                }else if(i==7){
+                    MnCetakRegister2ActionPerformed(null);//ganti ke bukti register 3
+                }else if(i==8){
+                    MnPersetujuanMedis1ActionPerformed(null);//isi bukti persetujuan medis 2
                 }
             }
             
@@ -6946,7 +6950,9 @@ public final class DlgReg extends javax.swing.JDialog {
                 }else if(i==6){
                     MnCetakRegisterActionPerformed(null);
                 }else if(i==7){
-                    MnBuktiPelayananRalanActionPerformed(null);
+                    MnCetakRegister2ActionPerformed(null);//ganti ke bukti register 3
+                }else if(i==8){
+                    MnPersetujuanMedis1ActionPerformed(null);//isi bukti persetujuan medis 2
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_A){                
                 for(i=0;i<tbPetugas.getRowCount();i++){ 
