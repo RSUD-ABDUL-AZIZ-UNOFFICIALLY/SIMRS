@@ -194,8 +194,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
         kdkamar.setDocument(new batasInput((byte)15).getKata(kdkamar));
         kdkamarpindah.setDocument(new batasInput((byte)15).getKata(kdkamarpindah));
         ttlbiaya.setDocument(new batasInput((byte)25).getKata(ttlbiaya));
-        diagnosaawal.setDocument(new batasInput((int)100).getKata(diagnosaawal));
-        diagnosaakhir.setDocument(new batasInput((int)100).getKata(diagnosaakhir));
+        diagnosaawal.setDocument(new batasInput((int)225).getKata(diagnosaawal));
+        diagnosaakhir.setDocument(new batasInput((int)300).getKata(diagnosaakhir));
         DiagnosaAwalSementara.setDocument(new batasInput((int)100).getKata(DiagnosaAwalSementara));
         DiagnosaAkhirSementara.setDocument(new batasInput((int)100).getKata(DiagnosaAkhirSementara));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
