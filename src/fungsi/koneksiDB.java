@@ -1084,4 +1084,23 @@ public class koneksiDB {
         }
         return var;
     }
+    
+    public static String URLWAPI(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("URLWAPI");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    public static String ADMINLAB(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("ADMINLAB");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
 }

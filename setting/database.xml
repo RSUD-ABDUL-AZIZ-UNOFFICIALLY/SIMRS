@@ -8,7 +8,7 @@
     <entry key="USER">3U/nwrmKxnn74LTqDTRUKRJFmPKMsQlFKcnmgyjD3qY=</entry>
     <entry key="PAS">RPOEZQf8PFNeWJi3BfqQe3EIZDgBTkuoeT/xYiedRXk=</entry>
     <entry key="CARICEPAT">aktif</entry>
-    <entry key="HOSTHYBRIDWEB">bxxqezlu8GXLKWILn9V9Tg==</entry>
+    <entry key="HOSTHYBRIDWEB">Qt6vYy+U5kdp6cYtOJ5iXf11xcDjyWUZGJ140nhcpEA=</entry>
     <entry key="USERHYBRIDWEB">nmXqCKzrz9i8GTZlq7JruQ==</entry>
     <entry key="PASHYBRIDWEB">AsJ/0/gCnYnD+gK4fw9uKA==</entry>
     <entry key="HYBRIDWEB">webapps</entry>
@@ -122,4 +122,6 @@
     <entry key="VERSIONSOFTMEDIX">NtswCF8BeY91Qs+C0p9G4g==</entry>
     <entry key="USERIDSOFTMEDIX">ZrktPIaFtldPd5VRZVti1g==</entry>
     <entry key="KEYSOFTMEDIX">KAkCm0yrGiE2y7VnPrI2RcLCEN+iP1sFTpvFpySD1f8=</entry>
+    <entry key="URLWAPI">http://dev.rsudaa.singkawangkota.go.id/api/wa/send</entry>
+    <entry key="ADMINLAB">0895321701798</entry>
 </properties>

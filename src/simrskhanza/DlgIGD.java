@@ -106,6 +106,7 @@ import surat.SuratPersetujuanPenolakanTindakan;
 import surat.SuratSakit;
 import surat.SuratSakitPihak2;
 import surat.SuratTidakHamil;
+import bridging.ApiWa;
 
 /**
  *
@@ -175,7 +176,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     private char[] UNIT_1_360 = {ESC,40, 'U', '1', '0'};
     // move vertical print position
     private char[] VERTICAL_PRINT_POSITION = {ESC, 'J', '1'};
-
+    private ApiWa apiwa= new ApiWa();
     /** Creates new form DlgReg
      * @param parent
      * @param modal */
@@ -4416,6 +4417,7 @@ private void KdDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_KdDokterKeyPressed
 
 private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokterActionPerformed
+
         akses.setform("DlgIGD");
         dokter.isCek();        
         dokter.TCari.requestFocus();

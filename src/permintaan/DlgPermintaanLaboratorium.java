@@ -11,6 +11,7 @@
 
 package permintaan;
 
+import bridging.ApiWa;
 import kepegawaian.DlgCariDokter;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
@@ -57,6 +58,8 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     private int jml=0,i=0,index=0,jml2=0,i2=0,index2=0,jmlparsial=0;
     private String aktifkanparsial="no",norawatibu="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",status="",la="",ld="",pa="",pd="",finger="";
     private boolean sukses=true;
+    public String message="";
+    private ApiWa apiwa= new ApiWa();
     
 
     /** Creates new form DlgPerawatan
@@ -1118,7 +1121,23 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     Pemeriksaan.requestFocus();
                 }else{
-                    simpan();              
+                     message = message.concat("Permintaan LAB Atas Nama : "+TPasien.getText()+" - " + TNoRM.getText()+ " \\n " +
+                            "Dokter Perujuk : "+NmPerujuk.getText()+" \\n " +
+                            "Nomor Rawat : " + TNoRw.getText()+" \\n " +
+                            "Informasi Tambahan : " + InformasiTambahan.getText()+" \\n "
+                    );
+                        for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                                   if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+//                                       System.out.println(tbPemeriksaan.getValueAt(i,1).toString());
+                                 message =  message.concat( tbPemeriksaan.getValueAt(i,1).toString()+ " \\n " );
+                                   }
+                               }
+//                        System.out.print(concats);
+//                    String pesan = String.valueOf(message);
+//                        System.out.print(pesan);
+                    
+                    simpan();
+//                  
                 }
             }                     
         }
@@ -2171,6 +2190,8 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     isReset();
                     emptTeks();
                     JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+//                     System.out.print(message);
+                    apiwa.seedWa(message,koneksiDB.ADMINLAB());
                 }else{
                     JOptionPane.showMessageDialog(null,"Proses simpan gagal...!");
                 }
