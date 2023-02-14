@@ -32,7 +32,7 @@ public class DlgRHJS extends javax.swing.JDialog {
     private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
     private int i=0,z=0,pl=0;
-    double total=0,totaljm=0,detail_lab=0,totalpl=0,totalpljm=0;
+    double total=0,totaljm=0,detail_lab=0,detail_lab_bhp=0,totalpl=0,totalpljm=0;
     private PreparedStatement ps,psrawatjalandr,psrawatjalandrpr,psrawatjalanpr,psrawatinapdr,psrawatinapdrpr,
             psrawatinappr,psbiayaalat,psbiayasewaok,psakomodasi,psbiayasarpras,psperiksa_lab,
             psdetail_lab,psperiksa_radiologi;
@@ -965,7 +965,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                    
                    //periksa lab
                    if(chkLaborat.isSelected()==true){
-                       psperiksa_lab=koneksi.prepareStatement("select periksa_lab.bagian_rs,pasien.nm_pasien,"+
+                       psperiksa_lab=koneksi.prepareStatement("select periksa_lab.bagian_rs,periksa_lab.bhp,pasien.nm_pasien,"+
                                     "jns_perawatan_lab.nm_perawatan,periksa_lab.tgl_periksa,periksa_lab.jam,periksa_lab.no_rawat,periksa_lab.kd_jenis_prw "+
                                     " from periksa_lab inner join reg_periksa inner join pasien inner join jns_perawatan_lab "+
                                     " on periksa_lab.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -984,9 +984,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             rsperiksa_lab.beforeFirst();
                             while(rsperiksa_lab.next()){
                                 detail_lab=0;
+                                detail_lab_bhp=0;
                                 
                                 psdetail_lab=koneksi.prepareStatement(
-                                    "select sum(detail_periksa_lab.bagian_rs) as total from detail_periksa_lab "+
+                                    "select sum(detail_periksa_lab.bagian_rs) as total, sum(detail_periksa_lab.bhp) as totalbhp from detail_periksa_lab "+
                                     "inner join jns_perawatan_lab inner join template_laboratorium "+
                                     "on jns_perawatan_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw and "+
                                     "template_laboratorium.id_template=detail_periksa_lab.id_template where "+
@@ -998,6 +999,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     rsdetail_lab=psdetail_lab.executeQuery();
                                     while(rsdetail_lab.next()){
                                         detail_lab=rsdetail_lab.getDouble("total");
+                                        detail_lab_bhp=rsdetail_lab.getDouble("totalbhp");
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notifikasi : "+e);
@@ -1011,9 +1013,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 }
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsperiksa_lab.getString("tgl_periksa")+" "+rsperiksa_lab.getString("jam"),rsperiksa_lab.getString("nm_pasien"),
-                                    rsperiksa_lab.getString("nm_perawatan"),Valid.SetAngka(rsperiksa_lab.getDouble("bagian_rs")+detail_lab),"","",""
+                                    rsperiksa_lab.getString("nm_perawatan"),Valid.SetAngka(rsperiksa_lab.getDouble("bagian_rs")+detail_lab),Valid.SetAngka(rsperiksa_lab.getDouble("bhp")+detail_lab_bhp),"",""
                                 });    
                                 total=total+rsperiksa_lab.getDouble("bagian_rs")+detail_lab;
+                                totalpl=totalpl+rsperiksa_lab.getDouble("bhp")+detail_lab_bhp;
                             }
                        } catch (Exception e) {
                            System.out.println("Notifikasi : "+e);
@@ -1029,7 +1032,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                    
                    //radiologi
                    if(chkRadiologi.isSelected()==true){
-                       psperiksa_radiologi=koneksi.prepareStatement("select periksa_radiologi.bagian_rs,pasien.nm_pasien,"+
+                       psperiksa_radiologi=koneksi.prepareStatement("select periksa_radiologi.bagian_rs,periksa_radiologi.bhp,pasien.nm_pasien,"+
                             "jns_perawatan_radiologi.nm_perawatan,periksa_radiologi.tgl_periksa,periksa_radiologi.jam,"+
                             "periksa_radiologi.no_rawat,periksa_radiologi.kd_jenis_prw "+
                             " from periksa_radiologi inner join reg_periksa inner join pasien inner join jns_perawatan_radiologi "+
@@ -1052,9 +1055,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             while(rsperiksa_radiologi.next()){                                
                                 tabMode.addRow(new Object[]{
                                     "","","     "+rsperiksa_radiologi.getString("tgl_periksa")+" "+rsperiksa_radiologi.getString("jam"),rsperiksa_radiologi.getString("nm_pasien"),
-                                    rsperiksa_radiologi.getString("nm_perawatan"),Valid.SetAngka(rsperiksa_radiologi.getDouble("bagian_rs")),"","",""
+                                    rsperiksa_radiologi.getString("nm_perawatan"),Valid.SetAngka(rsperiksa_radiologi.getDouble("bagian_rs")),Valid.SetAngka(rsperiksa_radiologi.getDouble("bhp")),"",""
                                 });    
                                 total=total+rsperiksa_radiologi.getDouble("bagian_rs");
+                                totalpl=totalpl+rsperiksa_radiologi.getDouble("bhp");
                             }
                        } catch (Exception e) {
                            System.out.println("Notifikasi : "+e);
