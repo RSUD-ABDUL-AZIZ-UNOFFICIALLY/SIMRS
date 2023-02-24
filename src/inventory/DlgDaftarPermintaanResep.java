@@ -2074,7 +2074,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else{
                         Sequel.queryu("delete from antriapotek3");
                         Sequel.queryu("insert into antriapotek3 values('"+NoResep+"','1','"+NoRawat+"')");
+                        Sequel.queryu("update resep_obat SET tgl_penyerahan=current_date(), jam_penyerahan=current_time() WHERE no_resep='"+NoResep+"'");
                         Sequel.queryu("delete from bukti_penyerahan_resep_obat where no_resep='"+NoResep+"'");
+                       pilihTab();
+                        JOptionPane.showMessageDialog(null,"data peneyrahan di simpan");
+//                    TCari.requestFocus();
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Maaf, Anda tidak punya hak akses untuk mengvalidasi...!!!!");
