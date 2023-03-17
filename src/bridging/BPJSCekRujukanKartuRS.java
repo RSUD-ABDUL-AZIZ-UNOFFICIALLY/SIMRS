@@ -6810,16 +6810,16 @@ public final class BPJSCekRujukanKartuRS extends javax.swing.JDialog {
                     }
                     if(DIAGNOSARUJUKANMASUKAPIBPJS.equals("yes")){
                         Sequel.menyimpan3("penyakit","?,?,?,?,?,?","Penyakit",6,new String[]{KdPenyakit.getText(),NmPenyakit.getText(),NmPenyakit.getText(),"-","-","Tidak Menular"});
-                        if(Sequel.cariInteger(
-                                "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+
-                                "inner join reg_periksa inner join pasien on "+
-                                "diagnosa_pasien.no_rawat=reg_periksa.no_rawat and "+
-                                "reg_periksa.no_rkm_medis=pasien.no_rkm_medis where "+
-                                "pasien.no_rkm_medis='"+TNo.getText()+"' and diagnosa_pasien.kd_penyakit='"+KdPenyakit.getText()+"'")>0){
-                            Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdPenyakit.getText(),"Ralan","1","Lama"});
-                        }else{
-                            Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdPenyakit.getText(),"Ralan","1","Baru"});
-                        }
+//                        if(Sequel.cariInteger(
+//                                "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+
+//                                "inner join reg_periksa inner join pasien on "+
+//                                "diagnosa_pasien.no_rawat=reg_periksa.no_rawat and "+
+//                                "reg_periksa.no_rkm_medis=pasien.no_rkm_medis where "+
+//                                "pasien.no_rkm_medis='"+TNo.getText()+"' and diagnosa_pasien.kd_penyakit='"+KdPenyakit.getText()+"'")>0){
+//                            Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdPenyakit.getText(),"Ralan","1","Lama"});
+//                        }else{
+//                            Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdPenyakit.getText(),"Ralan","1","Baru"});
+//                        }
                     }
                     
                     insertSEP();
@@ -6840,16 +6840,16 @@ public final class BPJSCekRujukanKartuRS extends javax.swing.JDialog {
                     }
                     if(DIAGNOSARUJUKANMASUKAPIBPJS.equals("yes")){
                         Sequel.menyimpan3("penyakit","?,?,?,?,?,?","Penyakit",6,new String[]{KdPenyakit.getText(),NmPenyakit.getText(),NmPenyakit.getText(),"-","-","Tidak Menular"});
-                        if(Sequel.cariInteger(
-                                "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+
-                                "inner join reg_periksa inner join pasien on "+
-                                "diagnosa_pasien.no_rawat=reg_periksa.no_rawat and "+
-                                "reg_periksa.no_rkm_medis=pasien.no_rkm_medis where "+
-                                "pasien.no_rkm_medis='"+TNo.getText()+"' and diagnosa_pasien.kd_penyakit='"+KdPenyakit.getText()+"'")>0){
-                            Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdPenyakit.getText(),"Ralan","1","Lama"});
-                        }else{
-                            Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdPenyakit.getText(),"Ralan","1","Baru"});
-                        }
+//                        if(Sequel.cariInteger(
+//                                "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+
+//                                "inner join reg_periksa inner join pasien on "+
+//                                "diagnosa_pasien.no_rawat=reg_periksa.no_rawat and "+
+//                                "reg_periksa.no_rkm_medis=pasien.no_rkm_medis where "+
+//                                "pasien.no_rkm_medis='"+TNo.getText()+"' and diagnosa_pasien.kd_penyakit='"+KdPenyakit.getText()+"'")>0){
+//                            Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdPenyakit.getText(),"Ralan","1","Lama"});
+//                        }else{
+//                            Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdPenyakit.getText(),"Ralan","1","Baru"});
+//                        }
                     }  
                     
                     jmlhari=0;
@@ -7062,7 +7062,7 @@ public final class BPJSCekRujukanKartuRS extends javax.swing.JDialog {
                 }                     
             }else{
                 Sequel.meghapus3("kamar_inap","no_rawat",TNoRw.getText());
-                Sequel.meghapus3("diagnosa_pasien","no_rawat",TNoRw.getText());
+//                Sequel.meghapus3("diagnosa_pasien","no_rawat",TNoRw.getText());
                 Sequel.meghapus3("rujuk_masuk","no_rawat",TNoRw.getText());
                 Sequel.meghapus3("reg_periksa","no_rawat",TNoRw.getText());
                 if(statuspasien.equals("Baru")){
@@ -7071,7 +7071,7 @@ public final class BPJSCekRujukanKartuRS extends javax.swing.JDialog {
             }
         }catch (Exception ex) {
             Sequel.meghapus3("kamar_inap","no_rawat",TNoRw.getText());
-            Sequel.meghapus3("diagnosa_pasien","no_rawat",TNoRw.getText());
+//            Sequel.meghapus3("diagnosa_pasien","no_rawat",TNoRw.getText());
             Sequel.meghapus3("rujuk_masuk","no_rawat",TNoRw.getText());
             Sequel.meghapus3("reg_periksa","no_rawat",TNoRw.getText());
             if(statuspasien.equals("Baru")){

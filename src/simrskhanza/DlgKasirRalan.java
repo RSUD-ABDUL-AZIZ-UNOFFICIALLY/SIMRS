@@ -11481,7 +11481,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }            
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }
+        }  
         LCount.setText(""+tabModekasir.getRowCount());
     }
     
