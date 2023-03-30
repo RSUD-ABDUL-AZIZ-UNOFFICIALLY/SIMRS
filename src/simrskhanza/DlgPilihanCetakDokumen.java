@@ -1569,7 +1569,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
 //            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 5"});//40,0
             TabMode.addRow(new Object[]{false,"Gelang Pasien Ranap 1"});//42,0
 //            TabMode.addRow(new Object[]{false,"Gelang Pasien Ranap 2"});//43,0
-            TabMode.addRow(new Object[]{false,"Lembar SEP Model 1"});//44,0
+            TabMode.addRow(new Object[]{false,"Lembar SEP Resep"});//44,0
             TabMode.addRow(new Object[]{false,"Lembar SEP Model 2"});//45,0
 //            TabMode.addRow(new Object[]{false,"Lembar SEP Model 3"});//46,0
 //            TabMode.addRow(new Object[]{false,"Lembar SEP Model 4"});//47,0
