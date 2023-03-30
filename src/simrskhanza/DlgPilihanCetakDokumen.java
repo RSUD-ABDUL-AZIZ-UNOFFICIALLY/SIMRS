@@ -977,7 +977,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Model 1")){
+                }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Resep")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -986,6 +986,8 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
+                    param.put("logors",Sequel.cariGambar("select setting.logo from setting"));
+                
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));    
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
@@ -997,7 +999,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "if(bridging_sep.klsrawat='1','Kelas 1',if(bridging_sep.klsrawat='2','Kelas 2','Kelas 3')),"+
                                     "if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep.nmkec,', ',bridging_sep.nmkab,', ',bridging_sep.nmprop) as lokasilaka,bridging_sep.user, "+
                                     "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,"+
-                                    "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,bridging_sep.nmdpdjp from bridging_sep where no_sep='"+NoSEP+"'",param);
+                                    "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,reg_periksa.no_reg,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,pasien.no_ktp,bridging_sep.nmdpdjp from bridging_sep inner join reg_periksa inner join pasien on reg_periksa.no_rawat=bridging_sep.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis where no_sep='"+NoSEP+"'",param);
                         }else{
                             Valid.MyReportqry("rptBridgingSEP2.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
                                     "bridging_sep.tglrujukan,bridging_sep.no_rujukan,bridging_sep.kdppkrujukan,"+
@@ -1007,7 +1009,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "if(bridging_sep.klsrawat='1','Kelas 1',if(bridging_sep.klsrawat='2','Kelas 2','Kelas 3')),"+
                                     "if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep.nmkec,', ',bridging_sep.nmkab,', ',bridging_sep.nmprop) as lokasilaka,bridging_sep.user, "+
                                     "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,"+
-                                    "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,bridging_sep.nmdpdjp from bridging_sep where no_sep='"+NoSEP+"'",param);
+                                    "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,reg_periksa.no_reg,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,pasien.no_ktp,bridging_sep.nmdpdjp from bridging_sep inner join reg_periksa inner join pasien on reg_periksa.no_rawat=bridging_sep.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis where no_sep='"+NoSEP+"'",param);
                         }
                     }else{
                         if(JenisPelayanan.equals("ranap")){
@@ -1524,57 +1526,57 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
         try{         
             Valid.tabelKosong(TabMode);
             TabMode.addRow(new Object[]{false,"Kartu Pasien 1"});//0,0
-            TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
-            TabMode.addRow(new Object[]{false,"Kartu Pasien 3"});//2,0
-            TabMode.addRow(new Object[]{false,"Kartu Pasien 4"});//3,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 1"});//4,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 2"});//5,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 3"});//6,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 4"});//7,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 5"});//8,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 6"});//9,0
+//            TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
+//            TabMode.addRow(new Object[]{false,"Kartu Pasien 3"});//2,0
+//            TabMode.addRow(new Object[]{false,"Kartu Pasien 4"});//3,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 1"});//4,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 2"});//5,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 3"});//6,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 4"});//7,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 5"});//8,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 6"});//9,0
             TabMode.addRow(new Object[]{false,"Label Rekam Medis 7"});//10,0
-            TabMode.addRow(new Object[]{false,"Identitas Pasien 1"});//11,0
-            TabMode.addRow(new Object[]{false,"Identitas Pasien 2"});//12,0
-            TabMode.addRow(new Object[]{false,"Kartu Indeks Pasien"});//13,0
-            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 1"});//14,0
-            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 2"});//15,0
-            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 3"});//16,0
-            TabMode.addRow(new Object[]{false,"Formulir Pendaftaran Pasien"});//17,0
-            TabMode.addRow(new Object[]{false,"Lembar Screening Awal Pasien Masuk Rawat Jalan"});//18,0
-            TabMode.addRow(new Object[]{false,"Formulir Penempelan Copy Resep"});//19,0
+//            TabMode.addRow(new Object[]{false,"Identitas Pasien 1"});//11,0
+//            TabMode.addRow(new Object[]{false,"Identitas Pasien 2"});//12,0
+//            TabMode.addRow(new Object[]{false,"Kartu Indeks Pasien"});//13,0
+//            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 1"});//14,0
+//            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 2"});//15,0
+//            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 3"});//16,0
+//            TabMode.addRow(new Object[]{false,"Formulir Pendaftaran Pasien"});//17,0
+//            TabMode.addRow(new Object[]{false,"Lembar Screening Awal Pasien Masuk Rawat Jalan"});//18,0
+//            TabMode.addRow(new Object[]{false,"Formulir Penempelan Copy Resep"});//19,0
             TabMode.addRow(new Object[]{false,"Bukti Register 1"});//20,0
             TabMode.addRow(new Object[]{false,"Bukti Register 2"});//21,0
-            TabMode.addRow(new Object[]{false,"Persetujuan Medis"});//22,0
-            TabMode.addRow(new Object[]{false,"Surat Jaminan & Bukti Pelayanan Ralan"});//23,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan"});//24,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri"});//25,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan+Tracker"});//26,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri+Tracker"});//27,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan"});//28,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri"});//29,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan 2"});//30,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri 2"});//31,0
+//            TabMode.addRow(new Object[]{false,"Persetujuan Medis"});//22,0
+//            TabMode.addRow(new Object[]{false,"Surat Jaminan & Bukti Pelayanan Ralan"});//23,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan"});//24,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri"});//25,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan+Tracker"});//26,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri+Tracker"});//27,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan"});//28,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri"});//29,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan 2"});//30,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri 2"});//31,0
             TabMode.addRow(new Object[]{false,"Label Tracker 1"});//32,0
-            TabMode.addRow(new Object[]{false,"Label Tracker 2"});//33,0
-            TabMode.addRow(new Object[]{false,"Label Tracker 3"});//34,0
-            TabMode.addRow(new Object[]{false,"Label Tracker 4"});//35,0
+//            TabMode.addRow(new Object[]{false,"Label Tracker 2"});//33,0
+//            TabMode.addRow(new Object[]{false,"Label Tracker 3"});//34,0
+//            TabMode.addRow(new Object[]{false,"Label Tracker 4"});//35,0
             TabMode.addRow(new Object[]{false,"Barcode Perawatan"});//36,0
             TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 1"});//37,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 2"});//38,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 3"});//39,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 4"});//40,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 5"});//40,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 2"});//38,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 3"});//39,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 4"});//40,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 5"});//40,0
             TabMode.addRow(new Object[]{false,"Gelang Pasien Ranap 1"});//42,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ranap 2"});//43,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ranap 2"});//43,0
             TabMode.addRow(new Object[]{false,"Lembar SEP Model 1"});//44,0
             TabMode.addRow(new Object[]{false,"Lembar SEP Model 2"});//45,0
-            TabMode.addRow(new Object[]{false,"Lembar SEP Model 3"});//46,0
-            TabMode.addRow(new Object[]{false,"Lembar SEP Model 4"});//47,0
-            TabMode.addRow(new Object[]{false,"PDF SEP Model 1"});//44,0
-            TabMode.addRow(new Object[]{false,"PDF SEP Model 2"});//45,0
-            TabMode.addRow(new Object[]{false,"PDF SEP Model 3"});//46,0
-            TabMode.addRow(new Object[]{false,"PDF SEP Model 4"});//47,0
+//            TabMode.addRow(new Object[]{false,"Lembar SEP Model 3"});//46,0
+//            TabMode.addRow(new Object[]{false,"Lembar SEP Model 4"});//47,0
+//            TabMode.addRow(new Object[]{false,"PDF SEP Model 1"});//44,0
+//            TabMode.addRow(new Object[]{false,"PDF SEP Model 2"});//45,0
+//            TabMode.addRow(new Object[]{false,"PDF SEP Model 3"});//46,0
+//            TabMode.addRow(new Object[]{false,"PDF SEP Model 4"});//47,0
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1585,47 +1587,47 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
         try{         
             Valid.tabelKosong(TabMode);
             TabMode.addRow(new Object[]{false,"Kartu Pasien 1"});//0,0
-            TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
-            TabMode.addRow(new Object[]{false,"Kartu Pasien 3"});//2,0
-            TabMode.addRow(new Object[]{false,"Kartu Pasien 4"});//3,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 1"});//4,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 2"});//5,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 3"});//6,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 4"});//7,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 5"});//8,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 6"});//9,0
+//            TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
+//            TabMode.addRow(new Object[]{false,"Kartu Pasien 3"});//2,0
+//            TabMode.addRow(new Object[]{false,"Kartu Pasien 4"});//3,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 1"});//4,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 2"});//5,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 3"});//6,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 4"});//7,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 5"});//8,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 6"});//9,0
             TabMode.addRow(new Object[]{false,"Label Rekam Medis 7"});//10,0
-            TabMode.addRow(new Object[]{false,"Identitas Pasien 1"});//11,0
-            TabMode.addRow(new Object[]{false,"Identitas Pasien 2"});//12,0
-            TabMode.addRow(new Object[]{false,"Kartu Indeks Pasien"});//13,0
-            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 1"});//14,0
-            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 2"});//15,0
-            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 3"});//16,0
-            TabMode.addRow(new Object[]{false,"Formulir Pendaftaran Pasien"});//17,0
-            TabMode.addRow(new Object[]{false,"Lembar Screening Awal Pasien Masuk Rawat Jalan"});//18,0
-            TabMode.addRow(new Object[]{false,"Formulir Penempelan Copy Resep"});//19,0
+//            TabMode.addRow(new Object[]{false,"Identitas Pasien 1"});//11,0
+//            TabMode.addRow(new Object[]{false,"Identitas Pasien 2"});//12,0
+//            TabMode.addRow(new Object[]{false,"Kartu Indeks Pasien"});//13,0
+//            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 1"});//14,0
+//            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 2"});//15,0
+//            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 3"});//16,0
+//            TabMode.addRow(new Object[]{false,"Formulir Pendaftaran Pasien"});//17,0
+//            TabMode.addRow(new Object[]{false,"Lembar Screening Awal Pasien Masuk Rawat Jalan"});//18,0
+//            TabMode.addRow(new Object[]{false,"Formulir Penempelan Copy Resep"});//19,0
             TabMode.addRow(new Object[]{false,"Bukti Register 1"});//20,0
             TabMode.addRow(new Object[]{false,"Bukti Register 2"});//21,0
-            TabMode.addRow(new Object[]{false,"Persetujuan Medis"});//22,0
-            TabMode.addRow(new Object[]{false,"Surat Jaminan & Bukti Pelayanan Ralan"});//23,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan"});//24,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri"});//25,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan+Tracker"});//26,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri+Tracker"});//26,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan"});//27,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri"});//28,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan 2"});//29,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri 2"});//30,0
+//            TabMode.addRow(new Object[]{false,"Persetujuan Medis"});//22,0
+//            TabMode.addRow(new Object[]{false,"Surat Jaminan & Bukti Pelayanan Ralan"});//23,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan"});//24,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri"});//25,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan+Tracker"});//26,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri+Tracker"});//26,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan"});//27,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri"});//28,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan 2"});//29,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri 2"});//30,0
             TabMode.addRow(new Object[]{false,"Label Tracker 1"});//31,0
             TabMode.addRow(new Object[]{false,"Label Tracker 2"});//32,0
-            TabMode.addRow(new Object[]{false,"Label Tracker 3"});//33,0
-            TabMode.addRow(new Object[]{false,"Label Tracker 4"});//34,0
-            TabMode.addRow(new Object[]{false,"Barcode Perawatan"});//35,0
+//            TabMode.addRow(new Object[]{false,"Label Tracker 3"});//33,0
+//            TabMode.addRow(new Object[]{false,"Label Tracker 4"});//34,0
+//            TabMode.addRow(new Object[]{false,"Barcode Perawatan"});//35,0
             TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 1"});//36,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 2"});//37,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 3"});//38,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 4"});//39,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 5"});//40,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 2"});//37,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 3"});//38,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 4"});//39,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 5"});//40,0
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1636,51 +1638,51 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
         try{         
             Valid.tabelKosong(TabMode);
             TabMode.addRow(new Object[]{false,"Kartu Pasien 1"});//0,0
-            TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
-            TabMode.addRow(new Object[]{false,"Kartu Pasien 3"});//2,0
-            TabMode.addRow(new Object[]{false,"Kartu Pasien 4"});//3,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 1"});//4,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 2"});//5,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 3"});//6,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 4"});//7,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 5"});//8,0
-            TabMode.addRow(new Object[]{false,"Label Rekam Medis 6"});//9,0
+//            TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
+//            TabMode.addRow(new Object[]{false,"Kartu Pasien 3"});//2,0
+//            TabMode.addRow(new Object[]{false,"Kartu Pasien 4"});//3,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 1"});//4,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 2"});//5,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 3"});//6,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 4"});//7,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 5"});//8,0
+//            TabMode.addRow(new Object[]{false,"Label Rekam Medis 6"});//9,0
             TabMode.addRow(new Object[]{false,"Label Rekam Medis 7"});//10,0
-            TabMode.addRow(new Object[]{false,"Identitas Pasien 1"});//11,0
-            TabMode.addRow(new Object[]{false,"Identitas Pasien 2"});//12,0
-            TabMode.addRow(new Object[]{false,"Kartu Indeks Pasien"});//13,0
-            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 1"});//14,0
-            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 2"});//15,0
-            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 3"});//16,0
-            TabMode.addRow(new Object[]{false,"Formulir Pendaftaran Pasien"});//17,0
-            TabMode.addRow(new Object[]{false,"Lembar Screening Awal Pasien Masuk Rawat Jalan"});//18,0
-            TabMode.addRow(new Object[]{false,"Formulir Penempelan Copy Resep"});//19,0
+//            TabMode.addRow(new Object[]{false,"Identitas Pasien 1"});//11,0
+//            TabMode.addRow(new Object[]{false,"Identitas Pasien 2"});//12,0
+//            TabMode.addRow(new Object[]{false,"Kartu Indeks Pasien"});//13,0
+//            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 1"});//14,0
+//            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 2"});//15,0
+//            TabMode.addRow(new Object[]{false,"Lembar Rawat Jalan Model 3"});//16,0
+//            TabMode.addRow(new Object[]{false,"Formulir Pendaftaran Pasien"});//17,0
+//            TabMode.addRow(new Object[]{false,"Lembar Screening Awal Pasien Masuk Rawat Jalan"});//18,0
+//            TabMode.addRow(new Object[]{false,"Formulir Penempelan Copy Resep"});//19,0
             TabMode.addRow(new Object[]{false,"Bukti Register 1"});//20,0
             TabMode.addRow(new Object[]{false,"Bukti Register 2"});//20,0
-            TabMode.addRow(new Object[]{false,"Persetujuan Medis"});//21,0
-            TabMode.addRow(new Object[]{false,"Surat Jaminan & Bukti Pelayanan Ralan"});//22,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan"});//23,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri"});//24,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan+Tracker"});//25,0
-            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri+Tracker"});//26,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan"});//27,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri"});//28,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan 2"});//29,0
-            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri 2"});//30,0
+//            TabMode.addRow(new Object[]{false,"Persetujuan Medis"});//21,0
+//            TabMode.addRow(new Object[]{false,"Surat Jaminan & Bukti Pelayanan Ralan"});//22,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan"});//23,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri"});//24,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kanan+Tracker"});//25,0
+//            TabMode.addRow(new Object[]{false,"Check List Kelengkapan Pendaftaran Kiri+Tracker"});//26,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan"});//27,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri"});//28,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kanan 2"});//29,0
+//            TabMode.addRow(new Object[]{false,"Lembar Periksa Pasien Kiri 2"});//30,0
             TabMode.addRow(new Object[]{false,"Label Tracker 1"});//31,0
             TabMode.addRow(new Object[]{false,"Label Tracker 2"});//32,0
-            TabMode.addRow(new Object[]{false,"Label Tracker 3"});//33,0
-            TabMode.addRow(new Object[]{false,"Label Tracker 4"});//34,0
-            TabMode.addRow(new Object[]{false,"Barcode Perawatan"});//35,0
+//            TabMode.addRow(new Object[]{false,"Label Tracker 3"});//33,0
+//            TabMode.addRow(new Object[]{false,"Label Tracker 4"});//34,0
+//            TabMode.addRow(new Object[]{false,"Barcode Perawatan"});//35,0
             TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 1"});//36,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 2"});//37,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 3"});//38,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 4"});//39,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 5"});//40,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 2"});//37,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 3"});//38,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 4"});//39,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ralan 5"});//40,0
             TabMode.addRow(new Object[]{false,"Gelang Pasien Ranap 1"});//41,0
-            TabMode.addRow(new Object[]{false,"Gelang Pasien Ranap 2"});//42,0
+//            TabMode.addRow(new Object[]{false,"Gelang Pasien Ranap 2"});//42,0
             TabMode.addRow(new Object[]{false,"Lembar SJP"});//43,0
-            TabMode.addRow(new Object[]{false,"PDF SJP"});//43,0
+//            TabMode.addRow(new Object[]{false,"PDF SJP"});//43,0
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
