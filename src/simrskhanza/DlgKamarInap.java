@@ -5331,6 +5331,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     if(akses.getdpjp_ranap()==true){
                         MnDPJPActionPerformed(null);
                     }
+                }else if(i==6){
+                    MnFormulirPenerimaan1ActionPerformed(null);
+                    MnFormulirPenerimaanActionPerformed(null);
+                }else if(i==7){
+                    MnBarcodeRM9ActionPerformed(null);
+                    MnGelang11ActionPerformed(null);
                 }
             }
         }
@@ -5437,6 +5443,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     if(akses.getdpjp_ranap()==true){
                         MnDPJPActionPerformed(null);
                     }
+                }else if(i==6){
+                    MnFormulirPenerimaan1ActionPerformed(null);
+                    MnFormulirPenerimaanActionPerformed(null);
+                }else if(i==7){
+                    MnBarcodeRM9ActionPerformed(null);
+                    MnGelang11ActionPerformed(null);
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
@@ -9888,7 +9900,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 param.put("kotars",akses.getkabupatenrs());
                                 param.put("propinsirs",akses.getpropinsirs());
                                 param.put("kontakrs",akses.getkontakrs());
-                                param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
+                                param.put("tanggalmasuk",Sequel.cariIsi("select DATE_FORMAT(tgl_masuk,'%d %M %Y') from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
                                 param.put("jammasuk",Sequel.cariIsi("select jam_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
                                 param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
                                 param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());  

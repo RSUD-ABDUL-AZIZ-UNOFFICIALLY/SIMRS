@@ -4359,6 +4359,8 @@ public final class DlgIGD extends javax.swing.JDialog {
                     }                    
                 }else if(i==7){
                     MnPersetujuanMedis1ActionPerformed(null);//isi bukti persetujuan medis 2
+                }else if(i==8){
+                    MnBarcodeRM9ActionPerformed(null);
                 }
             }
             
@@ -4392,6 +4394,8 @@ public final class DlgIGD extends javax.swing.JDialog {
                     }                    
                 }else if(i==7){
                     MnPersetujuanMedis1ActionPerformed(null);//isi bukti persetujuan medis 2
+                }else if(i==8){
+                    MnBarcodeRM9ActionPerformed(null);
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_L){
                 MnBarcodeRM9ActionPerformed(null);

@@ -5508,6 +5508,20 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         Catatan.setText("-");
     }
     
+    private void isAddDPJPRanap() {
+        String dokterRanapDpjp=Sequel.cariIsi("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs=? ",KdDPJP.getText());
+        if (!dokterRanapDpjp.equals("")) {
+
+            try {
+                Sequel.menyimpan("dpjp_ranap","?,?","Dokter",2,new String[]{
+                    TNoRw.getText(),dokterRanapDpjp
+                });
+            } catch (Exception e) {
+                System.out.println("Notifikasi dpjp ranap: "+e);
+            }
+        }
+    }
+    
     private void emptTeks(){
         TNoRw.setText("");
         TPasien.setText("");
@@ -5985,6 +5999,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                  Valid.SetTgl(TanggalSEP.getSelectedItem()+""),
                                  response.asText()
                             });
+                            isAddDPJPRanap();
                             emptTeks();                         
                             tampil();     
                      } 
