@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="396" pageHeight="291" orientation="Landscape" columnWidth="386" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="e7056ac0-2b71-451a-a9b5-943162b8cc3e">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="396" pageHeight="291" columnWidth="386" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="2b15529a-93f9-4564-a469-e875a10dfd46">
 	<property name="ireport.zoom" value="4.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="namars" class="java.lang.String"/>
 	<parameter name="alamatrs" class="java.lang.String"/>
 	<parameter name="kotars" class="java.lang.String"/>
@@ -14,7 +23,7 @@
 		<![CDATA[select reg_periksa.no_reg,reg_periksa.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir,
 reg_periksa.p_jawab, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, reg_periksa.stts_daftar 
 from reg_periksa inner join dokter inner join pasien inner join penjab inner join kelurahan inner join kecamatan inner join kabupaten 
-on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where reg_periksa.no_rawat=$P{no_rawat}]]>
+on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where reg_periksa.no_rawat=$P{no_rawat} limit 1]]>
 	</queryString>
 	<field name="no_rkm_medis" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -40,46 +49,52 @@ on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_
 	<detail>
 		<band height="281" splitType="Stretch">
 			<rectangle>
-				<reportElement x="5" y="186" width="378" height="45" uuid="01e5392d-81a6-45f7-ac5d-dcb65da9cfd6">
+				<reportElement x="5" y="141" width="378" height="45" uuid="208f121d-ddbf-419f-9c48-747ee16224db">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="5" y="231" width="378" height="45" uuid="09a3bacf-fd06-4b07-ae2d-7cfb18f11d9d">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</rectangle>
-			<rectangle>
-				<reportElement x="5" y="141" width="378" height="45" uuid="acce0cc9-1816-44bf-ad82-88711372fb1d">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</rectangle>
-			<rectangle>
-				<reportElement x="5" y="6" width="378" height="45" uuid="61f81d97-666e-422e-afc1-d22e3997311d"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="5" y="51" width="378" height="45" uuid="7c315300-8fd0-4a79-b8b4-15510f15ab2a">
+				<reportElement x="5" y="96" width="378" height="45" uuid="cc03cd2e-60dc-4e6c-8260-40787eea79ff">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="5" y="96" width="378" height="45" uuid="658745a3-6e9f-46d7-8bea-3e1c62927a88">
+				<reportElement x="5" y="6" width="378" height="45" uuid="19caa9fd-c428-489c-b6ac-fa08af9b42b9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="5" y="186" width="378" height="45" uuid="bcd27db4-9901-45fc-85f2-9195b8353f87">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="5" y="51" width="378" height="45" uuid="45d73fbe-9fdc-4df2-b9a9-9ae3d1d775ba">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="5" y="231" width="378" height="45" uuid="33f9e132-b0c2-4ff7-924b-601c721ee6f4">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</rectangle>
 			<textField>
-				<reportElement x="11" y="12" width="249" height="34" uuid="7585cca9-c0b5-4b45-8ef3-592ac38126dc"/>
+				<reportElement x="11" y="12" width="249" height="34" uuid="ef0867f3-2a64-4c96-b63d-bf13d776ee06"/>
 				<textElement>
 					<font fontName="Tahoma" size="14"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nm_pasien}]]></textFieldExpression>
 			</textField>
+			<componentElement>
+				<reportElement x="310" y="12" width="44" height="27" uuid="f2484170-7e21-4bad-a751-47529f5c2f78"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$F{no_rkm_medis}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
 			<textField>
-				<reportElement x="288" y="40" width="88" height="9" uuid="cf63afcf-6c0c-446c-84a7-f226ff2e2f11"/>
+				<reportElement x="288" y="40" width="88" height="9" uuid="515a46a9-c15d-41d2-bcdd-a589a364cb1f"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="6"/>
 					<paragraph lineSpacing="Single"/>
@@ -87,15 +102,15 @@ on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_
 				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="143" width="365" height="40" uuid="481326d2-547e-4608-9f39-ed64b21bc75f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="69" y="65" width="249" height="20" uuid="71c75ce1-c473-4022-8818-c07691425ba3"/>
+				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="12"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{jk}.equals("L")? "Laki-Laki":"Perempuan"]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="69" y="110" width="249" height="20" uuid="b3793a85-e85e-4663-8617-c0a34176a3b3"/>
+				<reportElement x="69" y="110" width="249" height="20" uuid="340f8bd8-afb9-4243-adc4-77b0d24c87ab"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="12"/>
 					<paragraph lineSpacing="Single"/>
@@ -103,19 +118,13 @@ on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_
 				<textFieldExpression><![CDATA[$F{tgl_lahir}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="69" y="65" width="249" height="20" uuid="6adfdf3f-14de-42df-b846-8e2acdb04571"/>
-				<textElement textAlignment="Center">
+				<reportElement x="11" y="143" width="365" height="40" uuid="1b6547f4-8ceb-4100-966e-31beccd2abf1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="12"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{jk}.equals("L")? "Laki-Laki":"Perempuan"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
 			</textField>
-			<componentElement>
-				<reportElement x="310" y="12" width="44" height="27" uuid="e2f7463f-ca5f-4f6c-8584-6c2d1e2786fa"/>
-				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<jr:codeExpression><![CDATA[$F{no_rkm_medis}]]></jr:codeExpression>
-				</jr:QRCode>
-			</componentElement>
 		</band>
 	</detail>
 	<summary>

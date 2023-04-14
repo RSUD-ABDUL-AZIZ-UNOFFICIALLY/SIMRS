@@ -159,7 +159,7 @@
 					<font fontName="Tahoma" size="10" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[SURAT KETERANGAN]]></text>
+				<text><![CDATA[SURAT KETERANGAN RAWAT INAP]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="70" y="272" width="113" height="14" uuid="06925126-39bd-4831-8cc0-c14ac6c8fbc0"/>
@@ -183,7 +183,7 @@
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nm_dokter}+" menerangkan"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{dokterpj}+" menerangkan"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="191" y="232" width="301" height="14" uuid="da9dd610-7ea0-4d76-835d-cdb666faa53e"/>
@@ -283,7 +283,7 @@
 			</line>
 			<textField>
 				<reportElement x="183" y="118" width="180" height="14" uuid="be6621d1-5f61-4436-9093-7ac0a55e4efc"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Left">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>

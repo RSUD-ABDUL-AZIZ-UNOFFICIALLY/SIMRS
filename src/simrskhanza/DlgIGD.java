@@ -4116,6 +4116,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
+        DTPReg.setDate(new Date());
         isForm(); 
         emptTeks();        
 }//GEN-LAST:event_BtnBatalActionPerformed

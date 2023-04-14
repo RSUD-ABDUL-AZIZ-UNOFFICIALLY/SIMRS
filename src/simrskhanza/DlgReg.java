@@ -5837,6 +5837,7 @@ public final class DlgReg extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
         isForm(); 
+        DTPReg.setDate(new Date());
         emptTeks();        
 }//GEN-LAST:event_BtnBatalActionPerformed
 
