@@ -128,13 +128,13 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="-10" y="93" width="572" height="179" uuid="bb109e72-1af9-40ee-b3d0-15aae673240d"/>
+				<reportElement x="-10" y="93" width="572" height="197" uuid="bb109e72-1af9-40ee-b3d0-15aae673240d"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="-10" y="272" width="572" height="108" uuid="808c33e3-3a5e-49df-99b6-1010133aecc7"/>
+				<reportElement x="-10" y="290" width="572" height="90" uuid="808c33e3-3a5e-49df-99b6-1010133aecc7"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
@@ -281,7 +281,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[Pasien/Penanggung Jawab]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="22" y="247" width="117" height="16" uuid="764cac37-5589-4251-87bf-3098b9ee4977">
+				<reportElement x="22" y="258" width="117" height="16" uuid="764cac37-5589-4251-87bf-3098b9ee4977">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -292,7 +292,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[Pekerjaan]]></text>
 			</staticText>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="145" y="230" width="213" height="16" uuid="1e07bd5d-694b-4bd9-a61a-af7b558191bc">
+				<reportElement mode="Opaque" x="145" y="241" width="213" height="16" uuid="1e07bd5d-694b-4bd9-a61a-af7b558191bc">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -304,7 +304,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<textFieldExpression><![CDATA[$F{pnd}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="148" y="298" width="202" height="13" uuid="c637a666-7d35-4498-8526-a734948a55aa"/>
+				<reportElement mode="Opaque" x="148" y="312" width="202" height="13" uuid="c637a666-7d35-4498-8526-a734948a55aa"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -312,7 +312,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<textFieldExpression><![CDATA[$F{namakeluarga}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="22" y="230" width="117" height="16" uuid="c0c8c752-65a9-4c7d-9ee6-463d22ca064b">
+				<reportElement mode="Opaque" x="22" y="241" width="117" height="16" uuid="c0c8c752-65a9-4c7d-9ee6-463d22ca064b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -344,7 +344,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[Alamat Rumah]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="24" y="343" width="117" height="13" uuid="009c5de1-cba5-40af-b209-a88bab46a7ff">
+				<reportElement x="24" y="357" width="117" height="13" uuid="009c5de1-cba5-40af-b209-a88bab46a7ff">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -355,7 +355,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[Hubungan Keluarga]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="146" y="358" width="274" height="13" uuid="a0fcaad4-d8f0-4430-900f-60bec47857eb"/>
+				<reportElement mode="Opaque" x="144" y="274" width="214" height="13" uuid="a0fcaad4-d8f0-4430-900f-60bec47857eb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -363,7 +363,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<textFieldExpression><![CDATA[$F{no_tlp}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="24" y="313" width="117" height="13" uuid="f7fcf7e4-bd2a-4cf7-b4bf-61eba1f1706c"/>
+				<reportElement x="24" y="327" width="117" height="13" uuid="f7fcf7e4-bd2a-4cf7-b4bf-61eba1f1706c"/>
 				<textElement textAlignment="Left">
 					<font fontName="Tahoma"/>
 					<paragraph lineSpacing="Single"/>
@@ -371,7 +371,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[Pekerjaan]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="145" y="247" width="213" height="16" uuid="0d765f69-3099-4941-a2fe-372402528c0a">
+				<reportElement mode="Opaque" x="145" y="258" width="213" height="16" uuid="0d765f69-3099-4941-a2fe-372402528c0a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -383,7 +383,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<textFieldExpression><![CDATA[$F{pekerjaan}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="141" y="298" width="6" height="13" uuid="9c4db3b0-8ffd-4cdc-a36b-4f107b4b32a7"/>
+				<reportElement x="141" y="312" width="6" height="13" uuid="9c4db3b0-8ffd-4cdc-a36b-4f107b4b32a7"/>
 				<textElement textAlignment="Left">
 					<font fontName="Tahoma"/>
 					<paragraph lineSpacing="Single"/>
@@ -391,7 +391,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="139" y="247" width="6" height="16" uuid="d5afbf3b-c776-4eb1-a8b2-4be033c5f8f9">
+				<reportElement x="139" y="258" width="6" height="16" uuid="d5afbf3b-c776-4eb1-a8b2-4be033c5f8f9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -413,7 +413,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="148" y="313" width="230" height="13" uuid="b4668e41-035d-4015-9d36-769d7ae27bea"/>
+				<reportElement mode="Opaque" x="148" y="327" width="230" height="13" uuid="b4668e41-035d-4015-9d36-769d7ae27bea"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -440,7 +440,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="24" y="358" width="117" height="13" uuid="8317c59b-f107-411f-83f9-22daab559644">
+				<reportElement x="22" y="274" width="117" height="13" uuid="8317c59b-f107-411f-83f9-22daab559644">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -451,7 +451,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[No Telp ( Rumah/HP )]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="24" y="298" width="117" height="13" uuid="d656773e-d4f5-4593-bb36-95410d5a9f60"/>
+				<reportElement x="24" y="312" width="117" height="13" uuid="d656773e-d4f5-4593-bb36-95410d5a9f60"/>
 				<textElement textAlignment="Left">
 					<font fontName="Tahoma"/>
 					<paragraph lineSpacing="Single"/>
@@ -459,7 +459,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[Nama Keluarga]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="145" y="195" width="213" height="33" uuid="835c9a4e-72d3-4fd4-9a26-6f99d3bb5717">
+				<reportElement mode="Opaque" x="145" y="195" width="213" height="46" uuid="835c9a4e-72d3-4fd4-9a26-6f99d3bb5717">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -471,7 +471,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="139" y="230" width="6" height="16" uuid="faa09282-1eb1-4087-846a-4944ae3a3c32">
+				<reportElement x="139" y="241" width="6" height="16" uuid="faa09282-1eb1-4087-846a-4944ae3a3c32">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -482,7 +482,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="24" y="328" width="117" height="13" uuid="4a8f4e03-ee7c-4f31-8aa2-edf258f8e4c7"/>
+				<reportElement x="24" y="342" width="117" height="13" uuid="4a8f4e03-ee7c-4f31-8aa2-edf258f8e4c7"/>
 				<textElement textAlignment="Left">
 					<font fontName="Tahoma"/>
 					<paragraph lineSpacing="Single"/>
@@ -506,7 +506,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[Tanggal Lahir]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="141" y="313" width="6" height="13" uuid="048dfa4a-914e-44b1-90cd-11290dda7710"/>
+				<reportElement x="141" y="327" width="6" height="13" uuid="048dfa4a-914e-44b1-90cd-11290dda7710"/>
 				<textElement textAlignment="Left">
 					<font fontName="Tahoma"/>
 					<paragraph lineSpacing="Single"/>
@@ -514,7 +514,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="141" y="358" width="6" height="13" uuid="185dcdf8-97f3-415d-ada4-a1b4ddb2b3ff">
+				<reportElement x="139" y="274" width="6" height="13" uuid="185dcdf8-97f3-415d-ada4-a1b4ddb2b3ff">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -524,7 +524,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="148" y="343" width="230" height="13" uuid="701ebd19-759e-4dc8-8b8c-22ae7814ddd5"/>
+				<reportElement mode="Opaque" x="148" y="357" width="230" height="13" uuid="701ebd19-759e-4dc8-8b8c-22ae7814ddd5"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -532,7 +532,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<textFieldExpression><![CDATA[$F{keluarga}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="141" y="328" width="6" height="13" uuid="4ebc318c-088e-41d9-94d7-bb888bfa8bc0"/>
+				<reportElement x="141" y="342" width="6" height="13" uuid="4ebc318c-088e-41d9-94d7-bb888bfa8bc0"/>
 				<textElement textAlignment="Left">
 					<font fontName="Tahoma"/>
 					<paragraph lineSpacing="Single"/>
@@ -780,7 +780,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[A. IDENTITAS PASIEN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="280" width="264" height="13" uuid="4744e35b-75ac-473e-a12b-442d0da620e6"/>
+				<reportElement x="0" y="294" width="264" height="13" uuid="4744e35b-75ac-473e-a12b-442d0da620e6"/>
 				<textElement textAlignment="Left">
 					<font fontName="Tahoma" isBold="true" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -793,7 +793,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				<text><![CDATA[Yang bertanda tangan di bawah ini menyatakan bersedia mematuhi peraturan Rawat Inap RSUD dr. ABDUL AZIZ dan bertanggung jawab atas seluruh biaya perawatan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="141" y="343" width="6" height="13" uuid="5eb722f9-2b10-4480-bb9d-ee9955c067fe"/>
+				<reportElement x="141" y="357" width="6" height="13" uuid="5eb722f9-2b10-4480-bb9d-ee9955c067fe"/>
 				<textElement textAlignment="Left">
 					<font fontName="Tahoma"/>
 					<paragraph lineSpacing="Single"/>
@@ -858,26 +858,6 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tanggalmasuk}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="43" y="632" width="159" height="14" uuid="be6d870d-1ba7-4625-baca-808016c51b27">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[(...............................................)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="43" y="646" width="159" height="14" uuid="bac7ba48-9605-41c0-8a10-2f7e671b3158">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Nama lengkap dan tanda tangan]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="359" y="632" width="159" height="14" uuid="0a9faa95-2352-4f46-aa7d-1f4ee4a84c0f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -972,6 +952,14 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasi
 				</textElement>
 				<text><![CDATA[I / II / III / VIP / VVIP ]]></text>
 			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="43" y="633" width="158" height="13" uuid="f2ec3f4d-1325-41eb-950c-39f118362110"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["( "+ $F{namakeluarga} +" )"]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
