@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c52db87b-fd80-46e2-a7b5-a80d65eadcf0">
 	<property name="ireport.zoom" value="1.2396694214876078"/>
 	<property name="ireport.x" value="0"/>
@@ -308,16 +308,6 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<text><![CDATA[Alamat]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="108" y="196" width="442" height="12" uuid="674f63c8-43d0-4f5c-a46e-2592282e5f83">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[: ..............................................................................................................]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="130" y="101" width="22" height="10" uuid="a47efa08-ffde-4af8-9f59-13c3c2d19977">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -356,16 +346,6 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[No Telp]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="108" y="209" width="441" height="12" uuid="aea37b7c-b4cc-4700-bc07-317d88eed74a">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[: ..............................................................................................................]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="3" y="79" width="166" height="10" uuid="13540a9e-44dc-4d81-8efc-3135bb2d4ba0"/>
@@ -740,7 +720,7 @@ Consent.
 				<textFieldExpression><![CDATA[": " + $F{p_jawab}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="108" y="197" width="394" height="10" uuid="b513fc7d-902c-4fe2-8f57-83825497213e">
+				<reportElement mode="Opaque" x="108" y="197" width="440" height="10" uuid="b513fc7d-902c-4fe2-8f57-83825497213e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -813,6 +793,16 @@ Consent.
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{p_jawab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="108" y="210" width="394" height="10" uuid="877cd0b3-fcd5-4550-ba78-71a30c34ebcd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " +$F{no_tlp}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

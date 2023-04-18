@@ -52,8 +52,10 @@
 	<parameter name="jammasuk" class="java.lang.String"/>
 	<parameter name="namakamar" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select pasien.no_rkm_medis,pasien.jk, pasien.tgl_lahir,pasien.nm_pasien,pasien.pekerjaan,pasien.alamat, pasien.nm_ibu,pasien.no_ktp,pasien.umur, pasien.agama,pasien.stts_nikah,pasien.pekerjaan, pasien.namakeluarga,pasien.no_peserta, pasien.pekerjaanpj,pasien.alamatpj, pasien.pnd, pasien.keluarga, pasien.no_tlp
- from pasien where  pasien.no_rkm_medis=$P{norm}]]>
+		<![CDATA[select pasien.no_rkm_medis,pasien.jk, pasien.tgl_lahir,pasien.nm_pasien,pasien.pekerjaan,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.nm_ibu,pasien.no_ktp,pasien.umur, pasien.agama,pasien.stts_nikah,pasien.pekerjaan, pasien.namakeluarga,pasien.no_peserta, pasien.pekerjaanpj,pasien.alamatpj, pasien.pnd, pasien.keluarga, pasien.no_tlp
+ from pasien inner join kelurahan inner join kecamatan inner join kabupaten
+inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel
+and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis=$P{norm}]]>
 	</queryString>
 	<field name="no_rkm_medis" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -553,26 +555,6 @@ Consent.
 				</textElement>
 				<text><![CDATA[Petugas Ruangan]]></text>
 			</staticText>
-			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="335" y="742" width="91" height="12" uuid="48d3414e-bc30-4806-83f6-aae26ae10a9e">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="335" y="781" width="91" height="12" uuid="bc441718-5887-49b3-8c7e-abefb5af08ac">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="296" y="742" width="42" height="12" uuid="17e91187-b0b9-41cb-8611-bd84a84b7364"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
@@ -783,6 +765,34 @@ Consent.
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[": " + $F{namakeluarga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="113" y="199" width="433" height="13" uuid="98f9002c-44f1-4d78-a5be-af6b2a3f1050">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": "+$F{no_tlp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="330" y="781" width="134" height="12" uuid="dd70263a-84ac-4a38-950b-78e3155be168"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tanggalmasuk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="744" width="131" height="10" uuid="af940fc2-b8db-4d1a-bca7-db9bdf87f8bd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tanggalmasuk}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
