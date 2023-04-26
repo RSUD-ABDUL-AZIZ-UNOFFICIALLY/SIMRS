@@ -131,7 +131,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","Nomer RM","Nama Pasien","Alamat Pasien","Penanggung Jawab","Hubungan P.J.","Jenis Bayar","Kamar","Tarif Kamar",
             "Diagnosa Awal","Diagnosa Akhir","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar",
-            "Ttl.Biaya","Stts.Pulang","Lama","Dokter P.J.","Kamar","Status Bayar","Agama","No.Peserta"
+            "Ttl.Biaya","Stts.Pulang","Lama","Dokter P.J.","Kamar","Status Bayar","Agama","No.Peserta","NIK"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -185,6 +185,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else if(i==21){
+                column.setPreferredWidth(60);
+            }else if(i==22){
                 column.setPreferredWidth(60);
             }
         }
@@ -5329,6 +5331,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     if(akses.getdpjp_ranap()==true){
                         MnDPJPActionPerformed(null);
                     }
+                }else if(i==6){
+                    MnFormulirPenerimaan1ActionPerformed(null);
+                    MnFormulirPenerimaanActionPerformed(null);
+                }else if(i==7){
+                    MnBarcodeRM9ActionPerformed(null);
+                    MnGelang11ActionPerformed(null);
                 }
             }
         }
@@ -5435,6 +5443,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     if(akses.getdpjp_ranap()==true){
                         MnDPJPActionPerformed(null);
                     }
+                }else if(i==6){
+                    MnFormulirPenerimaan1ActionPerformed(null);
+                    MnFormulirPenerimaanActionPerformed(null);
+                }else if(i==7){
+                    MnBarcodeRM9ActionPerformed(null);
+                    MnGelang11ActionPerformed(null);
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
@@ -9886,7 +9900,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 param.put("kotars",akses.getkabupatenrs());
                                 param.put("propinsirs",akses.getpropinsirs());
                                 param.put("kontakrs",akses.getkontakrs());
-                                param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
+                                param.put("tanggalmasuk",Sequel.cariIsi("select DATE_FORMAT(tgl_masuk,'%d %M %Y') from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
                                 param.put("jammasuk",Sequel.cariIsi("select jam_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
                                 param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
                                 param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());  
@@ -12320,7 +12334,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.no_peserta,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,reg_periksa.p_jawab,reg_periksa.hubunganpj,"+
                "penjab.png_jawab,concat(kamar_inap.kd_kamar,' ',bangsal.nm_bangsal) as kamar,kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir," +
                "kamar_inap.tgl_masuk,kamar_inap.jam_masuk,if(kamar_inap.tgl_keluar='0000-00-00','',kamar_inap.tgl_keluar) as tgl_keluar,if(kamar_inap.jam_keluar='00:00:00','',kamar_inap.jam_keluar) as jam_keluar,"+
-               "kamar_inap.ttl_biaya,kamar_inap.stts_pulang,kamar_inap.lama,dokter.nm_dokter,kamar_inap.kd_kamar,reg_periksa.kd_pj,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,reg_periksa.status_bayar, "+
+               "kamar_inap.ttl_biaya,kamar_inap.stts_pulang,kamar_inap.lama,dokter.nm_dokter,kamar_inap.kd_kamar,reg_periksa.kd_pj,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,reg_periksa.status_bayar,pasien.no_ktp, "+
                "pasien.agama from kamar_inap inner join reg_periksa on kamar_inap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
                "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
@@ -12335,7 +12349,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         rs.getString("kamar"),Valid.SetAngka(rs.getDouble("trf_kamar")),rs.getString("diagnosa_awal"),
                         rs.getString("diagnosa_akhir"),rs.getString("tgl_masuk"),rs.getString("jam_masuk"),rs.getString("tgl_keluar"),
                         rs.getString("jam_keluar"),Valid.SetAngka(rs.getDouble("ttl_biaya")),rs.getString("stts_pulang"),
-                        rs.getString("lama"),rs.getString("nm_dokter"),rs.getString("kd_kamar"),rs.getString("status_bayar"),rs.getString("agama"),rs.getString("no_peserta")
+                        rs.getString("lama"),rs.getString("nm_dokter"),rs.getString("kd_kamar"),rs.getString("status_bayar"),rs.getString("agama"),rs.getString("no_peserta"),rs.getString("no_ktp")
                     });
                     psanak=koneksi.prepareStatement(
                         "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+

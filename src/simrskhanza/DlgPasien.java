@@ -3366,7 +3366,8 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(4, 102, 95, 23);
 
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-03-2023" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
+
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -3498,7 +3499,8 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(TKtp);
         TKtp.setBounds(743, 132, 130, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-03-2023" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
+
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -3609,6 +3611,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnPenjab);
         BtnPenjab.setBounds(845, 42, 28, 23);
 
+        Kelurahan.setEditable(false);
         Kelurahan.setText("KELURAHAN");
         Kelurahan.setHighlighter(null);
         Kelurahan.setName("Kelurahan"); // NOI18N
@@ -3630,6 +3633,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(Kelurahan);
         Kelurahan.setBounds(496, 192, 152, 23);
 
+        Kecamatan.setEditable(false);
         Kecamatan.setText("KECAMATAN");
         Kecamatan.setHighlighter(null);
         Kecamatan.setName("Kecamatan"); // NOI18N
@@ -3651,6 +3655,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(Kecamatan);
         Kecamatan.setBounds(690, 192, 152, 23);
 
+        Kabupaten.setEditable(false);
         Kabupaten.setText("KABUPATEN");
         Kabupaten.setHighlighter(null);
         Kabupaten.setName("Kabupaten"); // NOI18N
@@ -3785,6 +3790,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(AlamatPj);
         AlamatPj.setBounds(496, 252, 346, 23);
 
+        KecamatanPj.setEditable(false);
         KecamatanPj.setText("KECAMATAN");
         KecamatanPj.setHighlighter(null);
         KecamatanPj.setName("KecamatanPj"); // NOI18N
@@ -3818,6 +3824,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnKecamatanPj);
         BtnKecamatanPj.setBounds(845, 282, 28, 23);
 
+        KabupatenPj.setEditable(false);
         KabupatenPj.setText("KABUPATEN");
         KabupatenPj.setHighlighter(null);
         KabupatenPj.setName("KabupatenPj"); // NOI18N
@@ -3863,6 +3870,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnKelurahanPj);
         BtnKelurahanPj.setBounds(651, 282, 28, 23);
 
+        KelurahanPj.setEditable(false);
         KelurahanPj.setText("KELURAHAN");
         KelurahanPj.setHighlighter(null);
         KelurahanPj.setName("KelurahanPj"); // NOI18N
@@ -4263,6 +4271,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnPropinsi);
         BtnPropinsi.setBounds(845, 222, 28, 23);
 
+        Propinsi.setEditable(false);
         Propinsi.setText("PROPINSI");
         Propinsi.setHighlighter(null);
         Propinsi.setName("Propinsi"); // NOI18N
@@ -4284,6 +4293,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(Propinsi);
         Propinsi.setBounds(690, 222, 152, 23);
 
+        PropinsiPj.setEditable(false);
         PropinsiPj.setText("PROPINSI");
         PropinsiPj.setHighlighter(null);
         PropinsiPj.setName("PropinsiPj"); // NOI18N
@@ -6288,27 +6298,57 @@ private void KabupatenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 }//GEN-LAST:event_KabupatenKeyPressed
 
 private void BtnKelurahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKelurahanActionPerformed
-       akses.setform("DlgPasien");
-       pilih=1;
-        kel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        kel.setLocationRelativeTo(internalFrame1);
-        kel.setVisible(true);
+//       akses.setform("DlgPasien");
+//       pilih=1;
+//        kel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//        kel.setLocationRelativeTo(internalFrame1);
+//        kel.setVisible(true);
+        if(KdKec.getText().trim().equals("")||Kecamatan.getText().trim().equals("")||Kecamatan.getText().trim().equals("KECAMATAN")){
+            JOptionPane.showMessageDialog(null,"Silahkan pilih kecamatan dulu..!!");
+            BtnKelurahan.requestFocus();
+        }else{
+            pilih=1;
+            kelurahanref.setPropinsi(KdKec.getText(),Kecamatan.getText());
+            kelurahanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            kelurahanref.setLocationRelativeTo(internalFrame1);
+            kelurahanref.setVisible(true);
+        }
 }//GEN-LAST:event_BtnKelurahanActionPerformed
 
 private void BtnKecamatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKecamatanActionPerformed
-        akses.setform("DlgPasien");
-        pilih=1;
-        kec.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        kec.setLocationRelativeTo(internalFrame1);
-        kec.setVisible(true);
+//        akses.setform("DlgPasien");
+//        pilih=1;
+//        kec.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//        kec.setLocationRelativeTo(internalFrame1);
+//        kec.setVisible(true);
+        if(KdKab.getText().trim().equals("")||Kabupaten.getText().trim().equals("")||Kabupaten.getText().trim().equals("KABUPATEN")){
+            JOptionPane.showMessageDialog(null,"Silahkan pilih kabupaten dulu..!!");
+            BtnKabupaten.requestFocus();
+        }else{
+            pilih=1;
+            kecamatanref.setPropinsi(KdKab.getText(),Kabupaten.getText());
+            kecamatanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            kecamatanref.setLocationRelativeTo(internalFrame1);
+            kecamatanref.setVisible(true);
+        }
 }//GEN-LAST:event_BtnKecamatanActionPerformed
 
 private void BtnKabupatenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKabupatenActionPerformed
-        akses.setform("DlgPasien");
-        pilih=1;
-        kab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        kab.setLocationRelativeTo(internalFrame1);
-        kab.setVisible(true);
+//        akses.setform("DlgPasien");
+//        pilih=1;
+//        kab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//        kab.setLocationRelativeTo(internalFrame1);
+//        kab.setVisible(true);
+        if(KdProp.getText().trim().equals("")||Propinsi.getText().trim().equals("")||Propinsi.getText().trim().equals("PROPINSI")){
+            JOptionPane.showMessageDialog(null,"Silahkan pilih propinsi dulu..!!");
+            BtnPropinsi.requestFocus();
+        }else{
+            pilih=1;
+            kabupatenref.setPropinsi(KdProp.getText(),Propinsi.getText());
+            kabupatenref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            kabupatenref.setLocationRelativeTo(internalFrame1);
+            kabupatenref.setVisible(true);
+        }
 }//GEN-LAST:event_BtnKabupatenActionPerformed
 
 private void ppGrafikDemografiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikDemografiActionPerformed
@@ -6725,11 +6765,21 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     }//GEN-LAST:event_KecamatanPjKeyPressed
 
     private void BtnKecamatanPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKecamatanPjActionPerformed
-        akses.setform("DlgPasien");
-        pilih=3;
-        kec.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        kec.setLocationRelativeTo(internalFrame1);
-        kec.setVisible(true);        // TODO add your handling code here:
+//        akses.setform("DlgPasien");
+//        pilih=3;
+//        kec.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//        kec.setLocationRelativeTo(internalFrame1);
+//        kec.setVisible(true);        // TODO add your handling code here:
+        if(KdKab.getText().trim().equals("")||KabupatenPj.getText().trim().equals("")||KabupatenPj.getText().trim().equals("KABUPATEN")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih kabupaten dulu..!!");
+                BtnKabupaten.requestFocus();
+            }else{
+                pilih=2;
+                kecamatanref.setPropinsi(KdKab.getText(),KabupatenPj.getText());
+                kecamatanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                kecamatanref.setLocationRelativeTo(internalFrame1);
+                kecamatanref.setVisible(true);
+            }
     }//GEN-LAST:event_BtnKecamatanPjActionPerformed
 
     private void KabupatenPjMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenPjMouseMoved
@@ -6776,19 +6826,39 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     }//GEN-LAST:event_KabupatenPjKeyPressed
 
     private void BtnKabupatenPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKabupatenPjActionPerformed
-        akses.setform("DlgPasien");
-        pilih=3;
-        kab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        kab.setLocationRelativeTo(internalFrame1);
-        kab.setVisible(true);
+//        akses.setform("DlgPasien");
+//        pilih=3;
+//        kab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//        kab.setLocationRelativeTo(internalFrame1);
+//        kab.setVisible(true);
+        if(KdProp.getText().trim().equals("")||PropinsiPj.getText().trim().equals("")||PropinsiPj.getText().trim().equals("PROPINSI")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih propinsi dulu..!!");
+                BtnPropinsi.requestFocus();
+            }else{
+                pilih=2;
+                kabupatenref.setPropinsi(KdProp.getText(),PropinsiPj.getText());
+                kabupatenref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                kabupatenref.setLocationRelativeTo(internalFrame1);
+                kabupatenref.setVisible(true);
+            }
     }//GEN-LAST:event_BtnKabupatenPjActionPerformed
 
     private void BtnKelurahanPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKelurahanPjActionPerformed
-        akses.setform("DlgPasien");
-        pilih=3;
-        kel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        kel.setLocationRelativeTo(internalFrame1);
-        kel.setVisible(true);
+//        akses.setform("DlgPasien");
+//        pilih=3;
+//        kel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//        kel.setLocationRelativeTo(internalFrame1);
+//        kel.setVisible(true);
+        if(KdKec.getText().trim().equals("")||KecamatanPj.getText().trim().equals("")||KecamatanPj.getText().trim().equals("KECAMATAN")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih kecamatan dulu..!!");
+                BtnKelurahan.requestFocus();
+            }else{
+                pilih=2;
+                kelurahanref.setPropinsi(KdKec.getText(),KecamatanPj.getText());
+                kelurahanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                kelurahanref.setLocationRelativeTo(internalFrame1);
+                kelurahanref.setVisible(true);
+            }
     }//GEN-LAST:event_BtnKelurahanPjActionPerformed
 
     private void KelurahanPjMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanPjMouseMoved
@@ -8134,14 +8204,6 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         }
     }//GEN-LAST:event_TabRawatMouseClicked
 
-    private void BtnPropinsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPropinsiActionPerformed
-        akses.setform("DlgPasien");
-        pilih=1;
-        prop.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        prop.setLocationRelativeTo(internalFrame1);
-        prop.setVisible(true);
-    }//GEN-LAST:event_BtnPropinsiActionPerformed
-
     private void PropinsiMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PropinsiMouseMoved
         if(Propinsi.getText().equals("PROPINSI")){
             Propinsi.setText("");
@@ -8214,11 +8276,15 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     }//GEN-LAST:event_PropinsiPjKeyPressed
 
     private void btnPropinsiPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPropinsiPjActionPerformed
-        akses.setform("DlgPasien");
-        pilih=3;
-        prop.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        prop.setLocationRelativeTo(internalFrame1);
-        prop.setVisible(true); 
+//        akses.setform("DlgPasien");
+//        pilih=3;
+//        prop.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//        prop.setLocationRelativeTo(internalFrame1);
+//        prop.setVisible(true);
+            pilih=2;
+            propinsiref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            propinsiref.setLocationRelativeTo(internalFrame1);
+            propinsiref.setVisible(true);
     }//GEN-LAST:event_btnPropinsiPjActionPerformed
 
     private void BtnCacatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCacatActionPerformed
@@ -8665,6 +8731,18 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_MnViaSatuSehatNikActionPerformed
+    private void BtnPropinsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPropinsiActionPerformed
+//        akses.setform("DlgPasien");
+//        pilih=1;
+//        prop.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//        prop.setLocationRelativeTo(internalFrame1);
+//        prop.setVisible(true);
+            pilih=1;
+            propinsiref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            propinsiref.setLocationRelativeTo(internalFrame1);
+            propinsiref.setVisible(true);
+    }//GEN-LAST:event_BtnPropinsiActionPerformed
+
 
     /**
      * @data args the command line arguments
