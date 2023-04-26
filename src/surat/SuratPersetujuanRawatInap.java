@@ -12,19 +12,18 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -40,7 +39,7 @@ import kepegawaian.DlgCariPetugas;
  * 
  * @author salimmulyana
  */
-public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog {
+public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -49,20 +48,18 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     private ResultSet rs;
     private int i=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
-    private Date lahir;
-    private LocalDate today=LocalDate.now();
-    private LocalDate birthday;
-    private Period p;
+    private StringBuilder htmlContent;
     
-    public SuratPulangAtasPermintaanSendiri(java.awt.Frame parent, boolean modal) {
+    public SuratPersetujuanRawatInap(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
         
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Surat","No.Rawat","No.R.M.","Nama Pasien","Umur","J.K.","Tgl.Lahir","Tgl.Pulang","Faskes Alternatif/Pindah Rawat/Alasan",
-            "Nama Penanggung Jawab","Lahir","Umur","J.K.","Alamat","Hubungan","Saksi I Keluarga","NIP","Nama Petugas"
+            "No.Persetujuan","No.Rawat","No.R.M.","Nama Pasien","Umur","J.K.","Tgl.Lahir","Tanggal","Nama Pembuat Persetujuan", 
+            "No.KTP P.P.","Pendidikan P.P.","Alamat Pembuat Persetujuan","No.Telp P.P.","Ruang Dipilih","Kelas Ruang",
+            "Persetujuan Terhadap","Hak Kelas","Nama & Alamat Keluarga Terdekat","Pembayaran/Pembiayaan","NIP","Nama Petugas"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -72,7 +69,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 18; i++) {
+        for (i = 0; i < 21; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -91,24 +88,30 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             }else if(i==7){
                 column.setPreferredWidth(65);
             }else if(i==8){
-                column.setPreferredWidth(200);
+                column.setPreferredWidth(150);
             }else if(i==9){
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(100);
             }else if(i==10){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(81);
             }else if(i==11){
-                column.setPreferredWidth(45);
-            }else if(i==12){
-                column.setPreferredWidth(25);
-            }else if(i==13){
-                column.setPreferredWidth(170);
-            }else if(i==14){
-                column.setPreferredWidth(58);
-            }else if(i==15){
                 column.setPreferredWidth(150);
+            }else if(i==12){
+                column.setPreferredWidth(90);
+            }else if(i==13){
+                column.setPreferredWidth(130);
+            }else if(i==14){
+                column.setPreferredWidth(70);
+            }else if(i==15){
+                column.setPreferredWidth(115);
             }else if(i==16){
-                column.setPreferredWidth(80);
+                column.setPreferredWidth(60);
             }else if(i==17){
+                column.setPreferredWidth(200);
+            }else if(i==18){
+                column.setPreferredWidth(130);
+            }else if(i==19){
+                column.setPreferredWidth(80);
+            }else if(i==20){
                 column.setPreferredWidth(150);
             }
         }
@@ -117,12 +120,14 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));    
         NIP.setDocument(new batasInput((byte)20).getKata(NIP));  
         NoSurat.setDocument(new batasInput((byte)20).getKata(NoSurat));
-        Pilihan.setDocument(new batasInput((byte)50).getKata(Pilihan));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        NamaPihak2.setDocument(new batasInput((byte)50).getKata(NamaPihak2));
-        SaksiKeluarga.setDocument(new batasInput((byte)50).getKata(SaksiKeluarga));
+        TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        NamaPJ.setDocument(new batasInput((byte)50).getKata(NamaPJ));
+        NoKTP.setDocument(new batasInput((byte)20).getKata(NoKTP));
+        RuangDipilih.setDocument(new batasInput((byte)40).getKata(RuangDipilih));
+        NamaKeluarga.setDocument(new batasInput((int)130).getKata(NamaKeluarga));
         AlamatPj.setDocument(new batasInput((int)100).getKata(AlamatPj));  
-        TUmurTh.setDocument(new batasInput((byte)3).getKata(TUmurTh));    
+        NoTelp.setDocument(new batasInput((byte)30).getKata(NoTelp));     
+        Pembiayaan.setDocument(new batasInput((byte)30).getKata(Pembiayaan));    
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -179,8 +184,8 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML2.setEditable(true);
         LoadHTML2.setEditorKit(kit);
-        LoadHTML3.setEditable(true);
-        LoadHTML3.setEditorKit(kit);
+        LoadHTML.setEditable(true);
+        LoadHTML.setEditorKit(kit);
         StyleSheet styleSheet = kit.getStyleSheet();
         styleSheet.addRule(
                 ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -195,7 +200,8 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML2.setDocument(doc);
-        LoadHTML3.setDocument(doc);
+        LoadHTML.setDocument(doc);
+        
     }
     
     
@@ -211,6 +217,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        LoadHTML = new widget.editorpane();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -240,9 +247,9 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         TPasien = new widget.TextBox();
         TNoRM = new widget.TextBox();
         jLabel8 = new widget.Label();
-        NamaPihak2 = new widget.TextBox();
+        NamaPJ = new widget.TextBox();
         jLabel9 = new widget.Label();
-        cmbJk = new widget.ComboBox();
+        PendidikanPJ = new widget.ComboBox();
         jLabel10 = new widget.Label();
         jLabel11 = new widget.Label();
         Hubungan = new widget.ComboBox();
@@ -254,19 +261,27 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         NamaPetugas = new widget.TextBox();
         btnPetugas = new widget.Button();
         jLabel16 = new widget.Label();
-        jLabel13 = new widget.Label();
-        TglLahir = new widget.Tanggal();
-        jLabel44 = new widget.Label();
-        TUmurTh = new widget.TextBox();
-        jLabel31 = new widget.Label();
-        jLabel12 = new widget.Label();
-        Pilihan = new widget.TextBox();
         Tanggal = new widget.Tanggal();
         jLabel14 = new widget.Label();
         jLabel3 = new widget.Label();
         NoSurat = new widget.TextBox();
         jLabel15 = new widget.Label();
-        SaksiKeluarga = new widget.TextBox();
+        NoKTP = new widget.TextBox();
+        NoTelp = new widget.TextBox();
+        jLabel20 = new widget.Label();
+        jLabel22 = new widget.Label();
+        RuangDipilih = new widget.TextBox();
+        jLabel23 = new widget.Label();
+        jLabel12 = new widget.Label();
+        KelasDipilih = new widget.ComboBox();
+        jLabel13 = new widget.Label();
+        HakKelas = new widget.ComboBox();
+        jLabel24 = new widget.Label();
+        jLabel25 = new widget.Label();
+        Pembiayaan = new widget.TextBox();
+        jLabel26 = new widget.Label();
+        NamaKeluarga = new widget.TextBox();
+        jLabel27 = new widget.Label();
         ChkInput = new widget.CekBox();
         PanelAccor = new widget.PanelBiasa();
         ChkAccor = new widget.CekBox();
@@ -274,17 +289,17 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         FormPass3 = new widget.PanelBiasa();
         btnAmbil = new widget.Button();
         BtnRefreshPhoto1 = new widget.Button();
-        TabData = new javax.swing.JTabbedPane();
         Scroll5 = new widget.ScrollPane();
         LoadHTML2 = new widget.editorpane();
-        Scroll6 = new widget.ScrollPane();
-        LoadHTML3 = new widget.editorpane();
+
+        LoadHTML.setBorder(null);
+        LoadHTML.setName("LoadHTML"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Penyataan Pulang Atas Permintaan Sendiri ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Persetujuan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -451,13 +466,13 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         panelGlass9.setPreferredSize(new java.awt.Dimension(44, 44));
         panelGlass9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        jLabel19.setText("Tgl. Surat :");
+        jLabel19.setText("Tgl.Persetujuan :");
         jLabel19.setName("jLabel19"); // NOI18N
-        jLabel19.setPreferredSize(new java.awt.Dimension(67, 23));
+        jLabel19.setPreferredSize(new java.awt.Dimension(92, 23));
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-10-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-03-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -471,7 +486,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-10-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-03-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -484,7 +499,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         panelGlass9.add(jLabel6);
 
         TCari.setName("TCari"); // NOI18N
-        TCari.setPreferredSize(new java.awt.Dimension(205, 23));
+        TCari.setPreferredSize(new java.awt.Dimension(180, 23));
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
@@ -526,7 +541,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 235));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 265));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         FormInput.setName("FormInput"); // NOI18N
@@ -562,54 +577,49 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoRMKeyPressed(evt);
-            }
-        });
         FormInput.add(TNoRM);
         TNoRM.setBounds(212, 10, 111, 23);
 
-        jLabel8.setText("Hubungan :");
+        jLabel8.setText(":");
         jLabel8.setName("jLabel8"); // NOI18N
         FormInput.add(jLabel8);
-        jLabel8.setBounds(0, 150, 130, 23);
+        jLabel8.setBounds(0, 180, 130, 23);
 
-        NamaPihak2.setName("NamaPihak2"); // NOI18N
-        NamaPihak2.addKeyListener(new java.awt.event.KeyAdapter() {
+        NamaPJ.setName("NamaPJ"); // NOI18N
+        NamaPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                NamaPihak2KeyPressed(evt);
+                NamaPJKeyPressed(evt);
             }
         });
-        FormInput.add(NamaPihak2);
-        NamaPihak2.setBounds(134, 120, 290, 23);
+        FormInput.add(NamaPJ);
+        NamaPJ.setBounds(104, 90, 190, 23);
 
-        jLabel9.setText("J.K. :");
+        jLabel9.setText("Pendidikan :");
         jLabel9.setName("jLabel9"); // NOI18N
         FormInput.add(jLabel9);
-        jLabel9.setBounds(246, 150, 30, 23);
+        jLabel9.setBounds(285, 120, 80, 23);
 
-        cmbJk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Laki-laki", "Perempuan" }));
-        cmbJk.setName("cmbJk"); // NOI18N
-        cmbJk.addKeyListener(new java.awt.event.KeyAdapter() {
+        PendidikanPJ.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TS", "TK", "SD", "SMP", "SMA", "SLTA/SEDERAJAT", "D1", "D2", "D3", "D4", "S1", "S2", "S3", "-" }));
+        PendidikanPJ.setName("PendidikanPJ"); // NOI18N
+        PendidikanPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbJkKeyPressed(evt);
+                PendidikanPJKeyPressed(evt);
             }
         });
-        FormInput.add(cmbJk);
-        cmbJk.setBounds(280, 150, 105, 23);
+        FormInput.add(PendidikanPJ);
+        PendidikanPJ.setBounds(369, 120, 140, 23);
 
         jLabel10.setText("Nama :");
         jLabel10.setName("jLabel10"); // NOI18N
         FormInput.add(jLabel10);
-        jLabel10.setBounds(0, 120, 130, 23);
+        jLabel10.setBounds(0, 90, 100, 23);
 
         jLabel11.setText("Alamat :");
         jLabel11.setName("jLabel11"); // NOI18N
         FormInput.add(jLabel11);
-        jLabel11.setBounds(394, 150, 50, 23);
+        jLabel11.setBounds(310, 90, 55, 23);
 
-        Hubungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Suami", "Istri", "Anak", "Ayah", "Saudara", "Keponakan" }));
+        Hubungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Suami", "Istri", "Anak", "Ayah", "Ibu", "Saudara", "Keponakan", "Diri Saya" }));
         Hubungan.setName("Hubungan"); // NOI18N
         Hubungan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -617,7 +627,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             }
         });
         FormInput.add(Hubungan);
-        Hubungan.setBounds(134, 150, 105, 23);
+        Hubungan.setBounds(134, 180, 110, 23);
 
         AlamatPj.setName("AlamatPj"); // NOI18N
         AlamatPj.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -626,7 +636,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             }
         });
         FormInput.add(AlamatPj);
-        AlamatPj.setBounds(448, 150, 285, 23);
+        AlamatPj.setBounds(369, 90, 364, 23);
 
         jLabel17.setText("Tgl.Lahir :");
         jLabel17.setName("jLabel17"); // NOI18N
@@ -638,21 +648,21 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         FormInput.add(LahirPasien);
         LahirPasien.setBounds(648, 10, 85, 23);
 
-        jLabel18.setText("Petugas/Saksi II Perawat :");
+        jLabel18.setText("Petugas :");
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
-        jLabel18.setBounds(180, 40, 140, 23);
+        jLabel18.setBounds(170, 40, 55, 23);
 
         NIP.setEditable(false);
         NIP.setHighlighter(null);
         NIP.setName("NIP"); // NOI18N
         FormInput.add(NIP);
-        NIP.setBounds(324, 40, 120, 23);
+        NIP.setBounds(229, 40, 100, 23);
 
         NamaPetugas.setEditable(false);
         NamaPetugas.setName("NamaPetugas"); // NOI18N
         FormInput.add(NamaPetugas);
-        NamaPetugas.setBounds(446, 40, 257, 23);
+        NamaPetugas.setBounds(331, 40, 150, 23);
 
         btnPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPetugas.setMnemonic('2');
@@ -669,7 +679,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             }
         });
         FormInput.add(btnPetugas);
-        btnPetugas.setBounds(705, 40, 28, 23);
+        btnPetugas.setBounds(483, 40, 28, 23);
 
         jLabel16.setText("Tanggal :");
         jLabel16.setName("jLabel16"); // NOI18N
@@ -677,66 +687,8 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         FormInput.add(jLabel16);
         jLabel16.setBounds(0, 40, 70, 23);
 
-        jLabel13.setText("Tanggal Lahir :");
-        jLabel13.setName("jLabel13"); // NOI18N
-        FormInput.add(jLabel13);
-        jLabel13.setBounds(436, 120, 85, 23);
-
-        TglLahir.setForeground(new java.awt.Color(50, 70, 50));
-        TglLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-10-2022" }));
-        TglLahir.setDisplayFormat("dd-MM-yyyy");
-        TglLahir.setName("TglLahir"); // NOI18N
-        TglLahir.setOpaque(false);
-        TglLahir.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                TglLahirItemStateChanged(evt);
-            }
-        });
-        TglLahir.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TglLahirKeyPressed(evt);
-            }
-        });
-        FormInput.add(TglLahir);
-        TglLahir.setBounds(525, 120, 90, 23);
-
-        jLabel44.setText("Umur :");
-        jLabel44.setName("jLabel44"); // NOI18N
-        FormInput.add(jLabel44);
-        jLabel44.setBounds(628, 120, 40, 23);
-
-        TUmurTh.setText("0");
-        TUmurTh.setName("TUmurTh"); // NOI18N
-        TUmurTh.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TUmurThKeyPressed(evt);
-            }
-        });
-        FormInput.add(TUmurTh);
-        TUmurTh.setBounds(672, 120, 45, 23);
-
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel31.setText("Th");
-        jLabel31.setName("jLabel31"); // NOI18N
-        FormInput.add(jLabel31);
-        jLabel31.setBounds(720, 120, 40, 23);
-
-        jLabel12.setText("Faskes Alternatif/Pindah Rawat/Alasan :");
-        jLabel12.setName("jLabel12"); // NOI18N
-        FormInput.add(jLabel12);
-        jLabel12.setBounds(219, 70, 210, 23);
-
-        Pilihan.setName("Pilihan"); // NOI18N
-        Pilihan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                PilihanKeyPressed(evt);
-            }
-        });
-        FormInput.add(Pilihan);
-        Pilihan.setBounds(433, 70, 300, 23);
-
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-10-2022" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-03-2023" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -748,15 +700,16 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         FormInput.add(Tanggal);
         Tanggal.setBounds(74, 40, 90, 23);
 
-        jLabel14.setText("Penanggung Jawab Pasien :");
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("Pembuat Persetujuan :");
         jLabel14.setName("jLabel14"); // NOI18N
         FormInput.add(jLabel14);
-        jLabel14.setBounds(0, 100, 154, 23);
+        jLabel14.setBounds(16, 70, 130, 23);
 
-        jLabel3.setText("No. Surat :");
+        jLabel3.setText("No. Persetujuan :");
         jLabel3.setName("jLabel3"); // NOI18N
         FormInput.add(jLabel3);
-        jLabel3.setBounds(0, 70, 70, 23);
+        jLabel3.setBounds(520, 40, 90, 23);
 
         NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
@@ -766,21 +719,125 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             }
         });
         FormInput.add(NoSurat);
-        NoSurat.setBounds(74, 70, 141, 23);
+        NoSurat.setBounds(614, 40, 119, 23);
 
-        jLabel15.setText("Saksi I Keluarga :");
+        jLabel15.setText("No.KTP/SIM :");
         jLabel15.setName("jLabel15"); // NOI18N
         FormInput.add(jLabel15);
-        jLabel15.setBounds(0, 180, 130, 23);
+        jLabel15.setBounds(0, 120, 100, 23);
 
-        SaksiKeluarga.setName("SaksiKeluarga"); // NOI18N
-        SaksiKeluarga.addKeyListener(new java.awt.event.KeyAdapter() {
+        NoKTP.setName("NoKTP"); // NOI18N
+        NoKTP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                SaksiKeluargaKeyPressed(evt);
+                NoKTPKeyPressed(evt);
             }
         });
-        FormInput.add(SaksiKeluarga);
-        SaksiKeluarga.setBounds(134, 180, 290, 23);
+        FormInput.add(NoKTP);
+        NoKTP.setBounds(104, 120, 160, 23);
+
+        NoTelp.setName("NoTelp"); // NOI18N
+        NoTelp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NoTelpKeyPressed(evt);
+            }
+        });
+        FormInput.add(NoTelp);
+        NoTelp.setBounds(583, 120, 150, 23);
+
+        jLabel20.setText("No.Telp :");
+        jLabel20.setName("jLabel20"); // NOI18N
+        FormInput.add(jLabel20);
+        jLabel20.setBounds(509, 120, 70, 23);
+
+        jLabel22.setText(":");
+        jLabel22.setName("jLabel22"); // NOI18N
+        FormInput.add(jLabel22);
+        jLabel22.setBounds(-2, 150, 90, 23);
+
+        RuangDipilih.setName("RuangDipilih"); // NOI18N
+        RuangDipilih.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                RuangDipilihKeyPressed(evt);
+            }
+        });
+        FormInput.add(RuangDipilih);
+        RuangDipilih.setBounds(92, 150, 230, 23);
+
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel23.setText("Ruang Dipilih");
+        jLabel23.setName("jLabel23"); // NOI18N
+        FormInput.add(jLabel23);
+        jLabel23.setBounds(16, 150, 80, 23);
+
+        jLabel12.setText("Kelas :");
+        jLabel12.setName("jLabel12"); // NOI18N
+        FormInput.add(jLabel12);
+        jLabel12.setBounds(340, 150, 50, 23);
+
+        KelasDipilih.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kelas 1", "Kelas 2", "Kelas 3", "Kelas Utama", "Kelas VIP", "Kelas VVIP" }));
+        KelasDipilih.setName("KelasDipilih"); // NOI18N
+        KelasDipilih.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KelasDipilihKeyPressed(evt);
+            }
+        });
+        FormInput.add(KelasDipilih);
+        KelasDipilih.setBounds(394, 150, 115, 23);
+
+        jLabel13.setText("Hak Kelas Pasien :");
+        jLabel13.setName("jLabel13"); // NOI18N
+        FormInput.add(jLabel13);
+        jLabel13.setBounds(504, 150, 110, 23);
+
+        HakKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kelas 1", "Kelas 2", "Kelas 3", "Kelas Utama", "Kelas VIP", "Kelas VVIP", "-" }));
+        HakKelas.setName("HakKelas"); // NOI18N
+        HakKelas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                HakKelasKeyPressed(evt);
+            }
+        });
+        FormInput.add(HakKelas);
+        HakKelas.setBounds(618, 150, 115, 23);
+
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel24.setText("Persetujuan Terhadap");
+        jLabel24.setName("jLabel24"); // NOI18N
+        FormInput.add(jLabel24);
+        jLabel24.setBounds(16, 180, 120, 23);
+
+        jLabel25.setText("Pembayaran/Pembiayaan Secara :");
+        jLabel25.setName("jLabel25"); // NOI18N
+        FormInput.add(jLabel25);
+        jLabel25.setBounds(269, 180, 180, 23);
+
+        Pembiayaan.setName("Pembiayaan"); // NOI18N
+        Pembiayaan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PembiayaanKeyPressed(evt);
+            }
+        });
+        FormInput.add(Pembiayaan);
+        Pembiayaan.setBounds(453, 180, 280, 23);
+
+        jLabel26.setText(":");
+        jLabel26.setName("jLabel26"); // NOI18N
+        FormInput.add(jLabel26);
+        jLabel26.setBounds(1, 210, 190, 23);
+
+        NamaKeluarga.setName("NamaKeluarga"); // NOI18N
+        NamaKeluarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NamaKeluargaKeyPressed(evt);
+            }
+        });
+        FormInput.add(NamaKeluarga);
+        NamaKeluarga.setBounds(195, 210, 538, 23);
+
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel27.setText("Nama & Alamat Keluarga Terdekat");
+        jLabel27.setName("jLabel27"); // NOI18N
+        FormInput.add(jLabel27);
+        jLabel27.setBounds(16, 210, 180, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -831,7 +888,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         PanelAccor.add(ChkAccor, java.awt.BorderLayout.WEST);
 
         FormPhoto.setBackground(new java.awt.Color(255, 255, 255));
-        FormPhoto.setBorder(null);
+        FormPhoto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), " Bukti Pengambilan Persetujuan : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         FormPhoto.setName("FormPhoto"); // NOI18N
         FormPhoto.setPreferredSize(new java.awt.Dimension(115, 73));
         FormPhoto.setLayout(new java.awt.BorderLayout());
@@ -869,16 +926,6 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
 
         FormPhoto.add(FormPass3, java.awt.BorderLayout.PAGE_END);
 
-        TabData.setBackground(new java.awt.Color(254, 255, 254));
-        TabData.setForeground(new java.awt.Color(50, 50, 50));
-        TabData.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        TabData.setName("TabData"); // NOI18N
-        TabData.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TabDataMouseClicked(evt);
-            }
-        });
-
         Scroll5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll5.setName("Scroll5"); // NOI18N
         Scroll5.setOpaque(true);
@@ -888,20 +935,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         LoadHTML2.setName("LoadHTML2"); // NOI18N
         Scroll5.setViewportView(LoadHTML2);
 
-        TabData.addTab("Tanda Tangan Pembuat Pernyataan", Scroll5);
-
-        Scroll6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        Scroll6.setName("Scroll6"); // NOI18N
-        Scroll6.setOpaque(true);
-        Scroll6.setPreferredSize(new java.awt.Dimension(200, 200));
-
-        LoadHTML3.setBorder(null);
-        LoadHTML3.setName("LoadHTML3"); // NOI18N
-        Scroll6.setViewportView(LoadHTML3);
-
-        TabData.addTab("Tanda Tangan Saksi I Keluarga", Scroll6);
-
-        FormPhoto.add(TabData, java.awt.BorderLayout.CENTER);
+        FormPhoto.add(Scroll5, java.awt.BorderLayout.CENTER);
 
         PanelAccor.add(FormPhoto, java.awt.BorderLayout.CENTER);
 
@@ -915,22 +949,25 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"pasien");
-        }else if(NamaPihak2.getText().trim().equals("")){
-            Valid.textKosong(NamaPihak2,"Nama Pihak Ke 2");
+            Valid.textKosong(TNoRw,"Pasien");
+        }else if(NamaPJ.getText().trim().equals("")){
+            Valid.textKosong(NamaPJ,"Nama Penanggung Jawab");
         }else if(AlamatPj.getText().trim().equals("")){
-            Valid.textKosong(AlamatPj,"Alamat Pihak Ke 2");
-        }else if(SaksiKeluarga.getText().trim().equals("")){
-            Valid.textKosong(SaksiKeluarga,"Saksi I Keluarga");
+            Valid.textKosong(AlamatPj,"Alamat Penanggung Jawab");
+        }else if(NoTelp.getText().trim().equals("")){
+            Valid.textKosong(NoTelp,"Nomor Telp");
+        }else if(NoKTP.getText().trim().equals("")){
+            Valid.textKosong(NoKTP,"Nomor KTP");
         }else if(NamaPetugas.getText().trim().equals("")){
-            Valid.textKosong(NamaPetugas,"Petugas/Saksi II Perawat");
+            Valid.textKosong(NamaPetugas,"Petugas");
         }else if(NoSurat.getText().trim().equals("")){
-            Valid.textKosong(NoSurat,"No.Surat Pernyataan");
+            Valid.textKosong(NoSurat,"No.Persetujuan");
         }else{
-            if(Sequel.menyimpantf("surat_pulang_atas_permintaan_sendiri","?,?,?,?,?,?,?,?,?,?,?,?","Data",12,new String[]{
-                    NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Pilihan.getText(),NamaPihak2.getText(),
-                    Valid.SetTgl(TglLahir.getSelectedItem()+""),TUmurTh.getText(),cmbJk.getSelectedItem().toString().substring(0,1),
-                    AlamatPj.getText(),Hubungan.getSelectedItem().toString(),SaksiKeluarga.getText(),NIP.getText()
+            if(Sequel.menyimpantf("surat_persetujuan_rawat_inap","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",15,new String[]{
+                    NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),NamaPJ.getText(),NoKTP.getText(),
+                    PendidikanPJ.getSelectedItem().toString(),AlamatPj.getText(),NoTelp.getText(),RuangDipilih.getText(),
+                    KelasDipilih.getSelectedItem().toString(),Hubungan.getSelectedItem().toString(),HakKelas.getSelectedItem().toString(),
+                    NamaKeluarga.getText(),Pembiayaan.getText(),NIP.getText()
                 })==true){
                 tampil();
                 emptTeks();
@@ -942,7 +979,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
-            Valid.pindah(evt,SaksiKeluarga,BtnBatal);
+            Valid.pindah(evt,AlamatPj,BtnBatal);
         }
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
@@ -963,7 +1000,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(NIP.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString())){
+                if(NIP.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh petugas yang bersangkutan..!!");
@@ -985,23 +1022,25 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"pasien");
-        }else if(NamaPihak2.getText().trim().equals("")){
-            Valid.textKosong(NamaPihak2,"Nama Pihak Ke 2");
+            Valid.textKosong(TNoRw,"Pasien");
+        }else if(NamaPJ.getText().trim().equals("")){
+            Valid.textKosong(NamaPJ,"Nama Penanggung Jawab");
         }else if(AlamatPj.getText().trim().equals("")){
-            Valid.textKosong(AlamatPj,"Alamat Pihak Ke 2");
-        }else if(SaksiKeluarga.getText().trim().equals("")){
-            Valid.textKosong(SaksiKeluarga,"Saksi I Keluarga");
+            Valid.textKosong(AlamatPj,"Alamat Penanggung Jawab");
+        }else if(NoTelp.getText().trim().equals("")){
+            Valid.textKosong(NoTelp,"Nomor Telp");
+        }else if(NoKTP.getText().trim().equals("")){
+            Valid.textKosong(NoKTP,"Nomor KTP");
         }else if(NamaPetugas.getText().trim().equals("")){
-            Valid.textKosong(NamaPetugas,"Petugas/Saksi II Perawat");
+            Valid.textKosong(NamaPetugas,"Petugas");
         }else if(NoSurat.getText().trim().equals("")){
-            Valid.textKosong(NoSurat,"No.Surat Pernyataan");
+            Valid.textKosong(NoSurat,"No.Persetujuan");
         }else{
             if(tbObat.getSelectedRow()>-1){
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(NIP.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString())){
+                    if(NIP.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString())){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh petugas yang bersangkutan..!!");
@@ -1038,42 +1077,104 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            
-            if(TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptDataFormulirPulangAtasPermintaanSendiri.jasper","report","::[ Data Formulir Pulang Atas Permintaan Sendiri ]::",
-                    "select surat_pulang_atas_permintaan_sendiri.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
-                    "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_pulang_atas_permintaan_sendiri.tgl_pulang,surat_pulang_atas_permintaan_sendiri.rs_pilihan,"+
-                    "surat_pulang_atas_permintaan_sendiri.nama_pj,surat_pulang_atas_permintaan_sendiri.lahir,surat_pulang_atas_permintaan_sendiri.umur,"+
-                    "surat_pulang_atas_permintaan_sendiri.jkpj,surat_pulang_atas_permintaan_sendiri.alamat,surat_pulang_atas_permintaan_sendiri.hubungan,"+
-                    "surat_pulang_atas_permintaan_sendiri.saksi_keluarga,surat_pulang_atas_permintaan_sendiri.nip,petugas.nama from surat_pulang_atas_permintaan_sendiri "+
-                    "inner join reg_periksa on surat_pulang_atas_permintaan_sendiri.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on surat_pulang_atas_permintaan_sendiri.nip=petugas.nip where "+
-                    "surat_pulang_atas_permintaan_sendiri.tgl_pulang between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' order by surat_pulang_atas_permintaan_sendiri.tgl_pulang",param);
-            }else{
-                Valid.MyReportqry("rptDataFormulirPulangAtasPermintaanSendiri.jasper","report","::[ Data Formulir Pulang Atas Permintaan Sendiri ]::",
-                    "select surat_pulang_atas_permintaan_sendiri.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
-                    "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_pulang_atas_permintaan_sendiri.tgl_pulang,surat_pulang_atas_permintaan_sendiri.rs_pilihan,"+
-                    "surat_pulang_atas_permintaan_sendiri.nama_pj,surat_pulang_atas_permintaan_sendiri.lahir,surat_pulang_atas_permintaan_sendiri.umur,"+
-                    "surat_pulang_atas_permintaan_sendiri.jkpj,surat_pulang_atas_permintaan_sendiri.alamat,surat_pulang_atas_permintaan_sendiri.hubungan,"+
-                    "surat_pulang_atas_permintaan_sendiri.saksi_keluarga,surat_pulang_atas_permintaan_sendiri.nip,petugas.nama from surat_pulang_atas_permintaan_sendiri "+
-                    "inner join reg_periksa on surat_pulang_atas_permintaan_sendiri.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on surat_pulang_atas_permintaan_sendiri.nip=petugas.nip where "+
-                    "surat_pulang_atas_permintaan_sendiri.tgl_pulang between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and "+
-                    "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
-                    "surat_pulang_atas_permintaan_sendiri.alamat like '%"+TCari.getText().trim()+"%' or surat_pulang_atas_permintaan_sendiri.nama_pj like '%"+TCari.getText().trim()+"%' or "+
-                    "surat_pulang_atas_permintaan_sendiri.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
-                    "order by surat_pulang_atas_permintaan_sendiri.tgl_pulang",param);
-            }  
+            try{
+                htmlContent = new StringBuilder();
+                htmlContent.append(                             
+                    "<tr class='isi'>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Persetujuan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Rawat</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.R.M.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama Pasien</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Umur</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>J.K.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Tgl.Lahir</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Tanggal</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama Pembuat Persetujuan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.KTP P.P.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Pendidikan P.P.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Alamat Pembuat Persetujuan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Telp P.P.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Ruang Dipilih</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Kelas Ruang</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Persetujuan Terhadap</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Hak Kelas</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama & Alamat Keluarga Terdekat</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Pembayaran/Pembiayaan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>NIP</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama Petugas</b></td>"+
+                    "</tr>"
+                );
+
+                for (i = 0; i < tabMode.getRowCount(); i++) {
+                    htmlContent.append(
+                        "<tr class='isi'>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
+                           "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+ 
+                        "</tr>");
+                }
+                LoadHTML.setText(
+                    "<html>"+
+                      "<table width='2200px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
+                       htmlContent.toString()+
+                      "</table>"+
+                    "</html>"
+                );
+
+                File g = new File("file2.css");            
+                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
+                bg.write(
+                    ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                    ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
+                    ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                    ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                    ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
+                    ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
+                    ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
+                    ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
+                    ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
+                );
+                bg.close();
+
+                File f = new File("DataPersetujuanRawatInap.html");            
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
+                            "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                            "<table width='2200px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                "<tr class='isi2'>"+
+                                    "<td valign='top' align='center'>"+
+                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                        "<font size='2' face='Tahoma'>DATA PERSETUJUAN RAWAT INAP<br><br></font>"+        
+                                    "</td>"+
+                               "</tr>"+
+                            "</table>")
+                );
+                bw.close();                         
+                Desktop.getDesktop().browse(f.toURI());
+
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1153,7 +1254,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     }//GEN-LAST:event_tbObatKeyReleased
 
     private void btnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPetugasKeyPressed
-        Valid.pindah(evt,Tanggal,NamaPihak2);
+        Valid.pindah(evt,Tanggal,NamaPJ);
     }//GEN-LAST:event_btnPetugasKeyPressed
 
     private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
@@ -1165,24 +1266,20 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     }//GEN-LAST:event_btnPetugasActionPerformed
 
     private void AlamatPjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatPjKeyPressed
-        Valid.pindah(evt,cmbJk,SaksiKeluarga);
+        Valid.pindah(evt,NamaPJ,NoKTP);
     }//GEN-LAST:event_AlamatPjKeyPressed
 
     private void HubunganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HubunganKeyPressed
-        Valid.pindah(evt,TglLahir,cmbJk);
+        Valid.pindah(evt,HakKelas,Pembiayaan);
     }//GEN-LAST:event_HubunganKeyPressed
 
-    private void cmbJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJkKeyPressed
-        Valid.pindah(evt,Hubungan,AlamatPj);
-    }//GEN-LAST:event_cmbJkKeyPressed
+    private void PendidikanPJKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PendidikanPJKeyPressed
+        Valid.pindah(evt,NoKTP,NoTelp);
+    }//GEN-LAST:event_PendidikanPJKeyPressed
 
-    private void NamaPihak2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NamaPihak2KeyPressed
-        Valid.pindah(evt,Pilihan,TglLahir);
-    }//GEN-LAST:event_NamaPihak2KeyPressed
-
-    private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
-    // Valid.pindah(evt, TNm, BtnSimpan);
-    }//GEN-LAST:event_TNoRMKeyPressed
+    private void NamaPJKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NamaPJKeyPressed
+        Valid.pindah(evt,NoSurat,AlamatPj);
+    }//GEN-LAST:event_NamaPJKeyPressed
 
     private void TPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasienKeyPressed
         Valid.pindah(evt,TCari,BtnSimpan);
@@ -1197,44 +1294,29 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         }
     }//GEN-LAST:event_TNoRwKeyPressed
 
-    private void TglLahirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TglLahirItemStateChanged
-        lahir = TglLahir.getDate();
-        birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        p = Period.between(birthday,today);
-        TUmurTh.setText(String.valueOf(p.getYears()));
-    }//GEN-LAST:event_TglLahirItemStateChanged
-
-    private void TglLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglLahirKeyPressed
-        Valid.pindah2(evt,NamaPihak2,cmbJk);
-    }//GEN-LAST:event_TglLahirKeyPressed
-
-    private void PilihanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PilihanKeyPressed
-         Valid.pindah(evt,NoSurat,NamaPihak2);
-    }//GEN-LAST:event_PilihanKeyPressed
-
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
         //Valid.pindah(evt,TCari,Jam);
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void NoSuratKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoSuratKeyPressed
-        Valid.pindah(evt,btnPetugas,Pilihan);
+        Valid.pindah(evt,btnPetugas,NamaPJ);
     }//GEN-LAST:event_NoSuratKeyPressed
 
-    private void SaksiKeluargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SaksiKeluargaKeyPressed
-        Valid.pindah(evt,AlamatPj,BtnSimpan);
-    }//GEN-LAST:event_SaksiKeluargaKeyPressed
+    private void NoKTPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoKTPKeyPressed
+        Valid.pindah(evt,AlamatPj,PendidikanPJ);
+    }//GEN-LAST:event_NoKTPKeyPressed
 
-    private void TUmurThKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TUmurThKeyPressed
-        Valid.pindah(evt,TglLahir,Hubungan);
-    }//GEN-LAST:event_TUmurThKeyPressed
+    private void NoTelpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoTelpKeyPressed
+        Valid.pindah(evt,PendidikanPJ,RuangDipilih);
+    }//GEN-LAST:event_NoTelpKeyPressed
 
     private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
         if(tbObat.getSelectedRow()!= -1){
             isPhoto();
-            TabDataMouseClicked(null);
+            panggilPhoto();
         }else{
             ChkAccor.setSelected(false);
-            JOptionPane.showMessageDialog(null,"Silahkan pilih No.Pernyataan..!!!");
+            JOptionPane.showMessageDialog(null,"Silahkan pilih No.Persetujuan..!!!");
         }
     }//GEN-LAST:event_ChkAccorActionPerformed
 
@@ -1244,12 +1326,11 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             TCari.requestFocus();
         }else{
             if(tbObat.getSelectedRow()>-1){
-                Sequel.queryu("delete from antriaps");
-                Sequel.queryu("insert into antriaps values('"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"','"+tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()+"')");
-                Sequel.queryu("delete from surat_pulang_atas_permintaan_sendiri_pembuat_pernyataan where no_surat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'");
-                Sequel.queryu("delete from surat_pulang_atas_permintaan_sendiri_saksi_keluarga where no_surat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'");
+                Sequel.queryu("delete from antripersetujuanrawatinap");
+                Sequel.queryu("insert into antripersetujuanrawatinap values('"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"','"+tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()+"')");
+                Sequel.queryu("delete from surat_persetujuan_rawat_inap_pembuat_pernyataan where no_surat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'");
             }else{
-                JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Pernyataan terlebih dahulu..!!");
+                JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Persetujuan terlebih dahulu..!!");
             }
         }
     }//GEN-LAST:event_btnAmbilActionPerformed
@@ -1258,24 +1339,36 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         if(tbObat.getSelectedRow()>-1){
             panggilPhoto();
         }else{
-            JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Pernyataan terlebih dahulu..!!");
+            JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Persetujuan terlebih dahulu..!!");
         }
     }//GEN-LAST:event_BtnRefreshPhoto1ActionPerformed
 
-    private void TabDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabDataMouseClicked
-        if(tbObat.getSelectedRow()>-1){
-            panggilPhoto();
-        }else{
-            JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Pernyataan terlebih dahulu..!!");
-        }
-    }//GEN-LAST:event_TabDataMouseClicked
+    private void RuangDipilihKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RuangDipilihKeyPressed
+        Valid.pindah(evt,NoTelp,KelasDipilih);
+    }//GEN-LAST:event_RuangDipilihKeyPressed
+
+    private void KelasDipilihKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelasDipilihKeyPressed
+        Valid.pindah(evt,RuangDipilih,HakKelas);
+    }//GEN-LAST:event_KelasDipilihKeyPressed
+
+    private void HakKelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HakKelasKeyPressed
+        Valid.pindah(evt,KelasDipilih,Hubungan);
+    }//GEN-LAST:event_HakKelasKeyPressed
+
+    private void PembiayaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PembiayaanKeyPressed
+        Valid.pindah(evt,Hubungan,NamaKeluarga);
+    }//GEN-LAST:event_PembiayaanKeyPressed
+
+    private void NamaKeluargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NamaKeluargaKeyPressed
+        Valid.pindah(evt,Pembiayaan,BtnSimpan);
+    }//GEN-LAST:event_NamaKeluargaKeyPressed
 
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            SuratPulangAtasPermintaanSendiri dialog = new SuratPulangAtasPermintaanSendiri(new javax.swing.JFrame(), true);
+            SuratPersetujuanRawatInap dialog = new SuratPersetujuanRawatInap(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1304,33 +1397,34 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     private widget.PanelBiasa FormInput;
     private widget.PanelBiasa FormPass3;
     private widget.PanelBiasa FormPhoto;
+    private widget.ComboBox HakKelas;
     private widget.ComboBox Hubungan;
+    private widget.ComboBox KelasDipilih;
     private widget.Label LCount;
     private widget.TextBox LahirPasien;
+    private widget.editorpane LoadHTML;
     private widget.editorpane LoadHTML2;
-    private widget.editorpane LoadHTML3;
     private widget.TextBox NIP;
+    private widget.TextBox NamaKeluarga;
+    private widget.TextBox NamaPJ;
     private widget.TextBox NamaPetugas;
-    private widget.TextBox NamaPihak2;
+    private widget.TextBox NoKTP;
     private widget.TextBox NoSurat;
+    private widget.TextBox NoTelp;
     private widget.PanelBiasa PanelAccor;
     private javax.swing.JPanel PanelInput;
-    private widget.TextBox Pilihan;
-    private widget.TextBox SaksiKeluarga;
+    private widget.TextBox Pembiayaan;
+    private widget.ComboBox PendidikanPJ;
+    private widget.TextBox RuangDipilih;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll5;
-    private widget.ScrollPane Scroll6;
     private widget.TextBox TCari;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
-    private widget.TextBox TUmurTh;
-    private javax.swing.JTabbedPane TabData;
     private widget.Tanggal Tanggal;
-    private widget.Tanggal TglLahir;
     private widget.Button btnAmbil;
     private widget.Button btnPetugas;
-    private widget.ComboBox cmbJk;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
@@ -1342,11 +1436,16 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
+    private widget.Label jLabel20;
     private widget.Label jLabel21;
+    private widget.Label jLabel22;
+    private widget.Label jLabel23;
+    private widget.Label jLabel24;
+    private widget.Label jLabel25;
+    private widget.Label jLabel26;
+    private widget.Label jLabel27;
     private widget.Label jLabel3;
-    private widget.Label jLabel31;
     private widget.Label jLabel4;
-    private widget.Label jLabel44;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
@@ -1362,30 +1461,32 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         try{
             if(TCari.getText().trim().equals("")){
                 ps=koneksi.prepareStatement(
-                    "select surat_pulang_atas_permintaan_sendiri.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
-                    "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_pulang_atas_permintaan_sendiri.tgl_pulang,surat_pulang_atas_permintaan_sendiri.rs_pilihan,"+
-                    "surat_pulang_atas_permintaan_sendiri.nama_pj,surat_pulang_atas_permintaan_sendiri.lahir,surat_pulang_atas_permintaan_sendiri.umur,"+
-                    "surat_pulang_atas_permintaan_sendiri.jkpj,surat_pulang_atas_permintaan_sendiri.alamat,surat_pulang_atas_permintaan_sendiri.hubungan,"+
-                    "surat_pulang_atas_permintaan_sendiri.saksi_keluarga,surat_pulang_atas_permintaan_sendiri.nip,petugas.nama from surat_pulang_atas_permintaan_sendiri "+
-                    "inner join reg_periksa on surat_pulang_atas_permintaan_sendiri.no_rawat=reg_periksa.no_rawat "+
+                    "select surat_persetujuan_rawat_inap.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
+                    "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_persetujuan_rawat_inap.tanggal,surat_persetujuan_rawat_inap.nama_pj,"+
+                    "surat_persetujuan_rawat_inap.no_ktppj,surat_persetujuan_rawat_inap.pendidikan_pj,surat_persetujuan_rawat_inap.alamatpj,"+
+                    "surat_persetujuan_rawat_inap.no_telppj,surat_persetujuan_rawat_inap.ruang,surat_persetujuan_rawat_inap.kelas,"+
+                    "surat_persetujuan_rawat_inap.hubungan,surat_persetujuan_rawat_inap.hak_kelas,surat_persetujuan_rawat_inap.nama_alamat_keluarga_terdekat,"+
+                    "surat_persetujuan_rawat_inap.bayar_secara,surat_persetujuan_rawat_inap.nip,petugas.nama from surat_persetujuan_rawat_inap "+
+                    "inner join reg_periksa on surat_persetujuan_rawat_inap.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on surat_pulang_atas_permintaan_sendiri.nip=petugas.nip where "+
-                    "surat_pulang_atas_permintaan_sendiri.tgl_pulang between ? and ? order by surat_pulang_atas_permintaan_sendiri.tgl_pulang");
+                    "inner join petugas on surat_persetujuan_rawat_inap.nip=petugas.nip where "+
+                    "surat_persetujuan_rawat_inap.tanggal between ? and ? order by surat_persetujuan_rawat_inap.tanggal");
             }else{
                 ps=koneksi.prepareStatement(
-                    "select surat_pulang_atas_permintaan_sendiri.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
-                    "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_pulang_atas_permintaan_sendiri.tgl_pulang,surat_pulang_atas_permintaan_sendiri.rs_pilihan,"+
-                    "surat_pulang_atas_permintaan_sendiri.nama_pj,surat_pulang_atas_permintaan_sendiri.lahir,surat_pulang_atas_permintaan_sendiri.umur,"+
-                    "surat_pulang_atas_permintaan_sendiri.jkpj,surat_pulang_atas_permintaan_sendiri.alamat,surat_pulang_atas_permintaan_sendiri.hubungan,"+
-                    "surat_pulang_atas_permintaan_sendiri.saksi_keluarga,surat_pulang_atas_permintaan_sendiri.nip,petugas.nama from surat_pulang_atas_permintaan_sendiri "+
-                    "inner join reg_periksa on surat_pulang_atas_permintaan_sendiri.no_rawat=reg_periksa.no_rawat "+
+                    "select surat_persetujuan_rawat_inap.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
+                    "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_persetujuan_rawat_inap.tanggal,surat_persetujuan_rawat_inap.nama_pj,"+
+                    "surat_persetujuan_rawat_inap.no_ktppj,surat_persetujuan_rawat_inap.pendidikan_pj,surat_persetujuan_rawat_inap.alamatpj,"+
+                    "surat_persetujuan_rawat_inap.no_telppj,surat_persetujuan_rawat_inap.ruang,surat_persetujuan_rawat_inap.kelas,"+
+                    "surat_persetujuan_rawat_inap.hubungan,surat_persetujuan_rawat_inap.hak_kelas,surat_persetujuan_rawat_inap.nama_alamat_keluarga_terdekat,"+
+                    "surat_persetujuan_rawat_inap.bayar_secara,surat_persetujuan_rawat_inap.nip,petugas.nama from surat_persetujuan_rawat_inap "+
+                    "inner join reg_periksa on surat_persetujuan_rawat_inap.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on surat_pulang_atas_permintaan_sendiri.nip=petugas.nip where "+
-                    "surat_pulang_atas_permintaan_sendiri.tgl_pulang between ? and ? and "+
+                    "inner join petugas on surat_persetujuan_rawat_inap.nip=petugas.nip where "+
+                    "surat_persetujuan_rawat_inap.tanggal between ? and ? and "+
                     "(reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
-                    "surat_pulang_atas_permintaan_sendiri.alamat like ? or surat_pulang_atas_permintaan_sendiri.nama_pj like ? or "+
-                    "surat_pulang_atas_permintaan_sendiri.nip like ? or petugas.nama like ?) "+
-                    "order by surat_pulang_atas_permintaan_sendiri.tgl_pulang");
+                    "surat_persetujuan_rawat_inap.alamatpj like ? or surat_persetujuan_rawat_inap.nama_pj like ? or "+
+                    "surat_persetujuan_rawat_inap.nip like ? or petugas.nama like ?) "+
+                    "order by surat_persetujuan_rawat_inap.tanggal");
             }
                 
             try {
@@ -1409,9 +1510,10 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
                     tabMode.addRow(new String[]{
                         rs.getString("no_surat"),rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
                         rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),rs.getString("jk"),rs.getString("tgl_lahir"),
-                        rs.getString("tgl_pulang"),rs.getString("rs_pilihan"),rs.getString("nama_pj"),rs.getString("lahir"),
-                        rs.getString("umur"),rs.getString("jkpj"),rs.getString("alamat"),rs.getString("hubungan"),
-                        rs.getString("saksi_keluarga"),rs.getString("nip"),rs.getString("nama") 
+                        rs.getString("tanggal"),rs.getString("nama_pj"),rs.getString("no_ktppj"),rs.getString("pendidikan_pj"),
+                        rs.getString("alamatpj"),rs.getString("no_telppj"),rs.getString("ruang"),rs.getString("kelas"),
+                        rs.getString("hubungan"),rs.getString("hak_kelas"),rs.getString("nama_alamat_keluarga_terdekat"),
+                        rs.getString("bayar_secara"),rs.getString("nip"),rs.getString("nama") 
                     });
                 }
             } catch (Exception e) {
@@ -1431,16 +1533,20 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     }
 
     public void emptTeks() {
-        Pilihan.setText("");
-        NamaPihak2.setText("");
-        TUmurTh.setText("0");
-        AlamatPj.setText("");
+        NamaPJ.setText("");
         Hubungan.setSelectedIndex(0);
-        cmbJk.setSelectedIndex(0);
-        SaksiKeluarga.setText("");
-        Pilihan.requestFocus();
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_pulang_atas_permintaan_sendiri.no_surat,3),signed)),0) from surat_pulang_atas_permintaan_sendiri where surat_pulang_atas_permintaan_sendiri.tgl_pulang='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
-                "APS"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoSurat);
+        PendidikanPJ.setSelectedIndex(0);
+        KelasDipilih.setSelectedIndex(0);
+        HakKelas.setSelectedIndex(0);
+        Pembiayaan.setText("");
+        NamaKeluarga.setText("");
+        NoTelp.setText("");
+        RuangDipilih.setText("");
+        NoKTP.setText("");
+        AlamatPj.setText("");
+        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_persetujuan_rawat_inap.no_surat,3),signed)),0) from surat_persetujuan_rawat_inap where surat_persetujuan_rawat_inap.tanggal='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
+                "PRI"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoSurat);
+        NamaPJ.requestFocus();
     }
 
  
@@ -1451,15 +1557,18 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
             LahirPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Pilihan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            NamaPihak2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()); 
-            TUmurTh.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()); 
-            cmbJk.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan")); 
-            AlamatPj.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()); 
-            Hubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()); 
-            SaksiKeluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString()); 
+            NamaPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
+            NoKTP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+            PendidikanPJ.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            AlamatPj.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            RuangDipilih.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            KelasDipilih.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            Hubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            HakKelas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            NamaKeluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
+            Pembiayaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
             Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            Valid.SetTgl(TglLahir,tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
         }
     }
 
@@ -1485,7 +1594,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,235));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,265));
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           
@@ -1498,10 +1607,10 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
        
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getsurat_pulang_atas_permintaan_sendiri());
-        BtnHapus.setEnabled(akses.getsurat_pulang_atas_permintaan_sendiri());
-        BtnEdit.setEnabled(akses.getsurat_pulang_atas_permintaan_sendiri());
-        BtnPrint.setEnabled(akses.getsurat_pulang_atas_permintaan_sendiri()); 
+        BtnSimpan.setEnabled(akses.getsurat_persetujuan_rawat_inap());
+        BtnHapus.setEnabled(akses.getsurat_persetujuan_rawat_inap());
+        BtnEdit.setEnabled(akses.getsurat_persetujuan_rawat_inap());
+        BtnPrint.setEnabled(akses.getsurat_persetujuan_rawat_inap()); 
         if(akses.getjml2()>=1){
             NIP.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -1515,17 +1624,19 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     }
   
     private void ganti() {
-        Sequel.mengedit("surat_pulang_atas_permintaan_sendiri","no_surat=?","no_surat=?,no_rawat=?,tgl_pulang=?,rs_pilihan=?,nama_pj=?,lahir=?,umur=?,jkpj=?,alamat=?,hubungan=?,saksi_keluarga=?,nip=?",13,new String[]{
-            NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Pilihan.getText(),NamaPihak2.getText(),
-            Valid.SetTgl(TglLahir.getSelectedItem()+""),TUmurTh.getText(),cmbJk.getSelectedItem().toString().substring(0,1),
-            AlamatPj.getText(),Hubungan.getSelectedItem().toString(),SaksiKeluarga.getText(),NIP.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+        Sequel.mengedit("surat_persetujuan_rawat_inap","no_surat=?","no_surat=?,no_rawat=?,tanggal=?,nama_pj=?,no_ktppj=?,pendidikan_pj=?,alamatpj=?,"+
+            "no_telppj=?,ruang=?,kelas=?,hubungan=?,hak_kelas=?,nama_alamat_keluarga_terdekat=?,bayar_secara=?,nip=?",16,new String[]{
+            NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),NamaPJ.getText(),NoKTP.getText(),
+            PendidikanPJ.getSelectedItem().toString(),AlamatPj.getText(),NoTelp.getText(),RuangDipilih.getText(),
+            KelasDipilih.getSelectedItem().toString(),Hubungan.getSelectedItem().toString(),HakKelas.getSelectedItem().toString(),
+            NamaKeluarga.getText(),Pembiayaan.getText(),NIP.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         });
         if(tabMode.getRowCount()!=0){tampil();}
         emptTeks();
     }
 
     private void hapus() {
-        if(Sequel.queryu2tf("delete from surat_pulang_atas_permintaan_sendiri where no_surat=?",1,new String[]{
+        if(Sequel.queryu2tf("delete from surat_persetujuan_rawat_inap where no_surat=?",1,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
             tampil();
@@ -1538,7 +1649,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(430,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(480,HEIGHT));
             FormPhoto.setVisible(true);  
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){    
@@ -1551,63 +1662,33 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
 
     private void panggilPhoto() {
         if(FormPhoto.isVisible()==true){
-            if(TabData.getSelectedIndex()==0){
+            try {
+                ps=koneksi.prepareStatement("select surat_persetujuan_rawat_inap_pembuat_pernyataan.photo from surat_persetujuan_rawat_inap_pembuat_pernyataan where surat_persetujuan_rawat_inap_pembuat_pernyataan.no_surat=?");
                 try {
-                    ps=koneksi.prepareStatement("select surat_pulang_atas_permintaan_sendiri_pembuat_pernyataan.photo from surat_pulang_atas_permintaan_sendiri_pembuat_pernyataan where surat_pulang_atas_permintaan_sendiri_pembuat_pernyataan.no_surat=?");
-                    try {
-                        ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-                        rs=ps.executeQuery();
-                        if(rs.next()){
-                            if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){
-                                LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
-                            }else{
-                                LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pulangaps/"+rs.getString("photo")+"' alt='photo' width='450' height='550'/></center></body></html>");
-                            }  
-                        }else{
+                    ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                    rs=ps.executeQuery();
+                    if(rs.next()){
+                        if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){
                             LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Notif : "+e);
-                    } finally{
-                        if(rs!=null){
-                            rs.close();
-                        }
-                        if(ps!=null){
-                            ps.close();
-                        }
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                }
-            }else{
-                try {
-                    ps=koneksi.prepareStatement("select surat_pulang_atas_permintaan_sendiri_saksi_keluarga.photo from surat_pulang_atas_permintaan_sendiri_saksi_keluarga where surat_pulang_atas_permintaan_sendiri_saksi_keluarga.no_surat=?");
-                    try {
-                        ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-                        rs=ps.executeQuery();
-                        if(rs.next()){
-                            if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){
-                                LoadHTML3.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
-                            }else{
-                                LoadHTML3.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pulangaps/"+rs.getString("photo")+"' alt='photo' width='450' height='550'/></center></body></html>");
-                            }  
                         }else{
-                            LoadHTML3.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Notif : "+e);
-                    } finally{
-                        if(rs!=null){
-                            rs.close();
-                        }
-                        if(ps!=null){
-                            ps.close();
-                        }
+                            LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/persetujuanrawatinap/"+rs.getString("photo")+"' alt='photo' width='500' height='500'/></center></body></html>");
+                        }  
+                    }else{
+                        LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                     }
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
+                } finally{
+                    if(rs!=null){
+                        rs.close();
+                    }
+                    if(ps!=null){
+                        ps.close();
+                    }
                 }
-            } 
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            }
         }
     }
 }
