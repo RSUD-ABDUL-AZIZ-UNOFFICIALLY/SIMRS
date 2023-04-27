@@ -533,6 +533,13 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        MSKKJ = new javax.swing.JMenu();
+        MCaleg = new javax.swing.JMenu();
+        MnCetakSKKJ1 = new javax.swing.JMenuItem();
+        MnCetakSKKJ2 = new javax.swing.JMenuItem();
+        MP3K = new javax.swing.JMenu();
+        MnCetakSKKJ3 = new javax.swing.JMenuItem();
+        MnCetakSKKJ4 = new javax.swing.JMenuItem();
         MnDataRM = new javax.swing.JMenu();
         MnRMIGD = new javax.swing.JMenu();
         MnDataTriaseIGD = new javax.swing.JMenuItem();
@@ -769,6 +776,13 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         nmpenjab = new widget.TextBox();
         btnBayar = new widget.Button();
         jPopupMenu2 = new javax.swing.JPopupMenu();
+        MSKKJ1 = new javax.swing.JMenu();
+        MCaleg1 = new javax.swing.JMenu();
+        MnCetakSKKJ5 = new javax.swing.JMenuItem();
+        MnCetakSKKJ6 = new javax.swing.JMenuItem();
+        MP3K1 = new javax.swing.JMenu();
+        MnCetakSKKJ7 = new javax.swing.JMenuItem();
+        MnCetakSKKJ8 = new javax.swing.JMenuItem();
         MnPermintaan1 = new javax.swing.JMenu();
         MnJadwalOperasi1 = new javax.swing.JMenuItem();
         MnPermintaanLab1 = new javax.swing.JMenuItem();
@@ -878,6 +892,89 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         jPopupMenu1.setForeground(new java.awt.Color(50, 50, 50));
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        MSKKJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MSKKJ.setText("SKKJ");
+        MSKKJ.setEnabled(false);
+        MSKKJ.setName("MSKKJ"); // NOI18N
+
+        MCaleg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MCaleg.setText("Caleg");
+        MCaleg.setName("MCaleg"); // NOI18N
+
+        MnCetakSKKJ1.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakSKKJ1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSKKJ1.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSKKJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSKKJ1.setText("Propinsi");
+        MnCetakSKKJ1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakSKKJ1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakSKKJ1.setName("MnCetakSKKJ1"); // NOI18N
+        MnCetakSKKJ1.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnCetakSKKJ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSKKJ1ActionPerformed(evt);
+            }
+        });
+        MCaleg.add(MnCetakSKKJ1);
+
+        MnCetakSKKJ2.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakSKKJ2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSKKJ2.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSKKJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSKKJ2.setText("Daerah");
+        MnCetakSKKJ2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakSKKJ2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakSKKJ2.setName("MnCetakSKKJ2"); // NOI18N
+        MnCetakSKKJ2.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnCetakSKKJ2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSKKJ2ActionPerformed(evt);
+            }
+        });
+        MCaleg.add(MnCetakSKKJ2);
+
+        MSKKJ.add(MCaleg);
+
+        MP3K.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MP3K.setText("P3k");
+        MP3K.setName("MP3K"); // NOI18N
+
+        MnCetakSKKJ3.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakSKKJ3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSKKJ3.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSKKJ3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSKKJ3.setText("Fungsional Guru");
+        MnCetakSKKJ3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakSKKJ3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakSKKJ3.setName("MnCetakSKKJ3"); // NOI18N
+        MnCetakSKKJ3.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnCetakSKKJ3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSKKJ3ActionPerformed(evt);
+            }
+        });
+        MP3K.add(MnCetakSKKJ3);
+
+        MnCetakSKKJ4.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakSKKJ4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSKKJ4.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSKKJ4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSKKJ4.setText("P3k Guru");
+        MnCetakSKKJ4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakSKKJ4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakSKKJ4.setName("MnCetakSKKJ4"); // NOI18N
+        MnCetakSKKJ4.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnCetakSKKJ4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSKKJ4ActionPerformed(evt);
+            }
+        });
+        MP3K.add(MnCetakSKKJ4);
+
+        MSKKJ.add(MP3K);
+
+        jPopupMenu1.add(MSKKJ);
 
         MnDataRM.setBackground(new java.awt.Color(250, 255, 245));
         MnDataRM.setForeground(new java.awt.Color(50, 50, 50));
@@ -4286,6 +4383,90 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         jPopupMenu2.setName("jPopupMenu2"); // NOI18N
 
+        MSKKJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MSKKJ1.setText("SKKJ");
+        MSKKJ1.setName("MSKKJ1"); // NOI18N
+
+        MCaleg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MCaleg1.setText("Caleg");
+        MCaleg1.setName("MCaleg1"); // NOI18N
+        MCaleg1.setPreferredSize(new java.awt.Dimension(180, 26));
+
+        MnCetakSKKJ5.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakSKKJ5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSKKJ5.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSKKJ5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSKKJ5.setText("Propinsi");
+        MnCetakSKKJ5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakSKKJ5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakSKKJ5.setName("MnCetakSKKJ5"); // NOI18N
+        MnCetakSKKJ5.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnCetakSKKJ5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSKKJ5ActionPerformed(evt);
+            }
+        });
+        MCaleg1.add(MnCetakSKKJ5);
+
+        MnCetakSKKJ6.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakSKKJ6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSKKJ6.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSKKJ6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSKKJ6.setText("Daerah");
+        MnCetakSKKJ6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakSKKJ6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakSKKJ6.setName("MnCetakSKKJ6"); // NOI18N
+        MnCetakSKKJ6.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnCetakSKKJ6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSKKJ6ActionPerformed(evt);
+            }
+        });
+        MCaleg1.add(MnCetakSKKJ6);
+
+        MSKKJ1.add(MCaleg1);
+
+        MP3K1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MP3K1.setText("P3k");
+        MP3K1.setName("MP3K1"); // NOI18N
+        MP3K1.setPreferredSize(new java.awt.Dimension(180, 26));
+
+        MnCetakSKKJ7.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakSKKJ7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSKKJ7.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSKKJ7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSKKJ7.setText("Fungsional Guru");
+        MnCetakSKKJ7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakSKKJ7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakSKKJ7.setName("MnCetakSKKJ7"); // NOI18N
+        MnCetakSKKJ7.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnCetakSKKJ7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSKKJ7ActionPerformed(evt);
+            }
+        });
+        MP3K1.add(MnCetakSKKJ7);
+
+        MnCetakSKKJ8.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakSKKJ8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSKKJ8.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSKKJ8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSKKJ8.setText("P3k Guru");
+        MnCetakSKKJ8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakSKKJ8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakSKKJ8.setName("MnCetakSKKJ8"); // NOI18N
+        MnCetakSKKJ8.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnCetakSKKJ8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSKKJ8ActionPerformed(evt);
+            }
+        });
+        MP3K1.add(MnCetakSKKJ8);
+
+        MSKKJ1.add(MP3K1);
+
+        jPopupMenu2.add(MSKKJ1);
+
         MnPermintaan1.setBackground(new java.awt.Color(250, 255, 245));
         MnPermintaan1.setForeground(new java.awt.Color(50, 50, 50));
         MnPermintaan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
@@ -4954,7 +5135,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2022" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-04-2023" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5001,7 +5182,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2022" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-04-2023" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -5124,11 +5305,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(303, 23));
-        TCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TCariActionPerformed(evt);
-            }
-        });
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
@@ -5278,7 +5454,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-04-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5291,7 +5467,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-04-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -11060,6 +11236,190 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         // TODO add your handling code here:
     }//GEN-LAST:event_TCariActionPerformed
 
+    private void MnCetakSKKJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ1ActionPerformed
+        if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("norawat",TNoRw.getText());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
+//                param.put("bb",Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));
+                Valid.MyReport("rptSKKJCalegProv.jasper",param,"::[ SKKJ Caleg Prov ]::");
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnCetakSKKJ1ActionPerformed
+
+    private void MnCetakSKKJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ2ActionPerformed
+        if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("norawat",TNoRw.getText());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
+//                param.put("bb",Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));
+                Valid.MyReport("rptSKKJCalegDaerah.jasper",param,"::[ SKKJ Caleg Daerah ]::");
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnCetakSKKJ2ActionPerformed
+
+    private void MnCetakSKKJ3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ3ActionPerformed
+        if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("norawat",TNoRw.getText());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
+//                param.put("bb",Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));
+                Valid.MyReport("rptSKKJFungsionalGuru.jasper",param,"::[ SKKJ Fungsional Guru ]::");
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnCetakSKKJ3ActionPerformed
+
+    private void MnCetakSKKJ4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ4ActionPerformed
+        if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("norawat",TNoRw.getText());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
+//                param.put("bb",Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));
+                Valid.MyReport("rptSKKJP3kGuru.jasper",param,"::[ SKKJ P3K Guru ]::");
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnCetakSKKJ4ActionPerformed
+
+    private void MnCetakSKKJ5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ5ActionPerformed
+        if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            if(tbKasirRalan2.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("norawat",TNoRwCari.getText());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
+//                param.put("bb",Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));
+                Valid.MyReport("rptSKKJCalegProv.jasper",param,"::[ SKKJ Caleg Prov ]::");
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnCetakSKKJ5ActionPerformed
+
+    private void MnCetakSKKJ6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ6ActionPerformed
+        if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            if(tbKasirRalan2.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("norawat",TNoRwCari.getText());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
+//                param.put("bb",Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));
+                Valid.MyReport("rptSKKJCalegDaerah.jasper",param,"::[ SKKJ Caleg Daerah ]::");
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnCetakSKKJ6ActionPerformed
+
+    private void MnCetakSKKJ7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ7ActionPerformed
+        if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            if(tbKasirRalan2.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("norawat",TNoRwCari.getText());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
+//                param.put("bb",Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));
+                Valid.MyReport("rptSKKJFungsionalGuru.jasper",param,"::[ SKKJ Fungsional Guru ]::");
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnCetakSKKJ7ActionPerformed
+
+    private void MnCetakSKKJ8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ8ActionPerformed
+        if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            if(tbKasirRalan2.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("norawat",TNoRwCari.getText());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
+//                param.put("bb",Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));
+                Valid.MyReport("rptSKKJP3kGuru.jasper",param,"::[ SKKJ P3K Guru ]::");
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnCetakSKKJ8ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -11109,6 +11469,12 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private widget.TextBox Kd2;
     private widget.Label LCount;
     private widget.Label LabelCatatan;
+    private javax.swing.JMenu MCaleg;
+    private javax.swing.JMenu MCaleg1;
+    private javax.swing.JMenu MP3K;
+    private javax.swing.JMenu MP3K1;
+    private javax.swing.JMenu MSKKJ;
+    private javax.swing.JMenu MSKKJ1;
     private javax.swing.JMenu MenuInputData;
     private javax.swing.JMenu MenuInputData1;
     private javax.swing.JMenuItem MnBarcode;
@@ -11125,6 +11491,14 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem MnBuktiPelayananRalan;
     private javax.swing.JMenuItem MnCatatanObservasiIGD;
     private javax.swing.JMenuItem MnCetakBebasNarkoba;
+    private javax.swing.JMenuItem MnCetakSKKJ1;
+    private javax.swing.JMenuItem MnCetakSKKJ2;
+    private javax.swing.JMenuItem MnCetakSKKJ3;
+    private javax.swing.JMenuItem MnCetakSKKJ4;
+    private javax.swing.JMenuItem MnCetakSKKJ5;
+    private javax.swing.JMenuItem MnCetakSKKJ6;
+    private javax.swing.JMenuItem MnCetakSKKJ7;
+    private javax.swing.JMenuItem MnCetakSKKJ8;
     private javax.swing.JMenuItem MnCetakSuratBebasTBC;
     private javax.swing.JMenuItem MnCetakSuratCovid;
     private javax.swing.JMenuItem MnCetakSuratCutiHamil;
