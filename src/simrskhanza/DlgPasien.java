@@ -3369,7 +3369,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(4, 102, 95, 23);
 
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-08-2022" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -3407,7 +3407,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel19);
         jLabel19.setBounds(629, 12, 100, 23);
 
-        CmbStts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MENIKAH", "BELUM MENIKAH", "JANDA", "DUDHA" }));
+        CmbStts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MENIKAH", "BELUM MENIKAH", "JANDA", "DUDHA", "CERAI HIDUP", "CERAI MATI" }));
         CmbStts.setLightWeightPopupEnabled(false);
         CmbStts.setName("CmbStts"); // NOI18N
         CmbStts.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3501,7 +3501,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(TKtp);
         TKtp.setBounds(743, 132, 130, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-08-2022" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -3612,7 +3612,6 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnPenjab);
         BtnPenjab.setBounds(845, 42, 28, 23);
 
-        Kelurahan.setEditable(false);
         Kelurahan.setText("KELURAHAN");
         Kelurahan.setHighlighter(null);
         Kelurahan.setName("Kelurahan"); // NOI18N
@@ -3634,7 +3633,6 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(Kelurahan);
         Kelurahan.setBounds(496, 192, 152, 23);
 
-        Kecamatan.setEditable(false);
         Kecamatan.setText("KECAMATAN");
         Kecamatan.setHighlighter(null);
         Kecamatan.setName("Kecamatan"); // NOI18N
@@ -3656,7 +3654,6 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(Kecamatan);
         Kecamatan.setBounds(690, 192, 152, 23);
 
-        Kabupaten.setEditable(false);
         Kabupaten.setText("KABUPATEN");
         Kabupaten.setHighlighter(null);
         Kabupaten.setName("Kabupaten"); // NOI18N
@@ -3791,7 +3788,6 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(AlamatPj);
         AlamatPj.setBounds(496, 252, 346, 23);
 
-        KecamatanPj.setEditable(false);
         KecamatanPj.setText("KECAMATAN");
         KecamatanPj.setHighlighter(null);
         KecamatanPj.setName("KecamatanPj"); // NOI18N
@@ -3825,7 +3821,6 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnKecamatanPj);
         BtnKecamatanPj.setBounds(845, 282, 28, 23);
 
-        KabupatenPj.setEditable(false);
         KabupatenPj.setText("KABUPATEN");
         KabupatenPj.setHighlighter(null);
         KabupatenPj.setName("KabupatenPj"); // NOI18N
@@ -3871,7 +3866,6 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnKelurahanPj);
         BtnKelurahanPj.setBounds(651, 282, 28, 23);
 
-        KelurahanPj.setEditable(false);
         KelurahanPj.setText("KELURAHAN");
         KelurahanPj.setHighlighter(null);
         KelurahanPj.setName("KelurahanPj"); // NOI18N
@@ -4272,7 +4266,6 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnPropinsi);
         BtnPropinsi.setBounds(845, 222, 28, 23);
 
-        Propinsi.setEditable(false);
         Propinsi.setText("PROPINSI");
         Propinsi.setHighlighter(null);
         Propinsi.setName("Propinsi"); // NOI18N
@@ -4294,7 +4287,6 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(Propinsi);
         Propinsi.setBounds(690, 222, 152, 23);
 
-        PropinsiPj.setEditable(false);
         PropinsiPj.setText("PROPINSI");
         PropinsiPj.setHighlighter(null);
         PropinsiPj.setName("PropinsiPj"); // NOI18N
