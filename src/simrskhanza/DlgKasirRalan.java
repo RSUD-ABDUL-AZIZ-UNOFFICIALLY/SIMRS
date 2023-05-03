@@ -44,6 +44,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -115,8 +116,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private PreparedStatement psotomatis,psotomatis2,pskasir,pscaripiutang,psrekening;
-    private ResultSet rskasir,rsrekening;
+    private PreparedStatement ps,psotomatis,psotomatis2,pskasir,pscaripiutang,psrekening;
+    private ResultSet rs,rskasir,rsrekening;
     private String aktifkanparsial="no",kamar_inap_kasir_ralan=Sequel.cariIsi("select set_jam_minimal.kamar_inap_kasir_ralan from set_jam_minimal"),caripenjab="",filter="no",bangsal=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),nonota="",
             sqlpsotomatis2="insert into rawat_jl_dr values (?,?,?,?,?,?,?,?,?,?,?,'Belum')",
             sqlpsotomatis2petugas="insert into rawat_jl_pr values (?,?,?,?,?,?,?,?,?,?,?,'Belum')",
@@ -770,13 +771,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         btnBayar = new widget.Button();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         MSKKJ = new javax.swing.JMenu();
-        MCaleg = new javax.swing.JMenu();
-        MnCetakSKKJ1 = new javax.swing.JMenuItem();
-        MnCetakSKKJ2 = new javax.swing.JMenuItem();
-        MnCetakSKKJ3 = new javax.swing.JMenuItem();
-        MP3k = new javax.swing.JMenu();
-        MnCetakSKKJ4 = new javax.swing.JMenuItem();
-        MnCetakSKKJ5 = new javax.swing.JMenuItem();
+        MLainnya = new javax.swing.JMenuItem();
         MnPermintaan1 = new javax.swing.JMenu();
         MnJadwalOperasi1 = new javax.swing.JMenuItem();
         MnPermintaanLab1 = new javax.swing.JMenuItem();
@@ -4299,74 +4294,16 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MSKKJ.setName("MSKKJ"); // NOI18N
         MSKKJ.setPreferredSize(new java.awt.Dimension(210, 26));
 
-        MCaleg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MCaleg.setText("Caleg");
-        MCaleg.setName("MCaleg"); // NOI18N
-        MCaleg.setPreferredSize(new java.awt.Dimension(210, 26));
-
-        MnCetakSKKJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSKKJ1.setText("RI");
-        MnCetakSKKJ1.setName("MnCetakSKKJ1"); // NOI18N
-        MnCetakSKKJ1.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnCetakSKKJ1.addActionListener(new java.awt.event.ActionListener() {
+        MLainnya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MLainnya.setText("Lainnya");
+        MLainnya.setName("MLainnya"); // NOI18N
+        MLainnya.setPreferredSize(new java.awt.Dimension(210, 26));
+        MLainnya.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakSKKJ1ActionPerformed(evt);
+                MLainnyaActionPerformed(evt);
             }
         });
-        MCaleg.add(MnCetakSKKJ1);
-
-        MnCetakSKKJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSKKJ2.setText("Prov");
-        MnCetakSKKJ2.setName("MnCetakSKKJ2"); // NOI18N
-        MnCetakSKKJ2.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnCetakSKKJ2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakSKKJ2ActionPerformed(evt);
-            }
-        });
-        MCaleg.add(MnCetakSKKJ2);
-
-        MnCetakSKKJ3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSKKJ3.setText("Daerah");
-        MnCetakSKKJ3.setName("MnCetakSKKJ3"); // NOI18N
-        MnCetakSKKJ3.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnCetakSKKJ3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakSKKJ3ActionPerformed(evt);
-            }
-        });
-        MCaleg.add(MnCetakSKKJ3);
-
-        MSKKJ.add(MCaleg);
-
-        MP3k.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MP3k.setText("P3K");
-        MP3k.setName("MP3k"); // NOI18N
-        MP3k.setPreferredSize(new java.awt.Dimension(210, 26));
-
-        MnCetakSKKJ4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSKKJ4.setText("Fungsional Guru");
-        MnCetakSKKJ4.setName("MnCetakSKKJ4"); // NOI18N
-        MnCetakSKKJ4.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnCetakSKKJ4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakSKKJ4ActionPerformed(evt);
-            }
-        });
-        MP3k.add(MnCetakSKKJ4);
-
-        MnCetakSKKJ5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSKKJ5.setText("P3K Guru");
-        MnCetakSKKJ5.setName("MnCetakSKKJ5"); // NOI18N
-        MnCetakSKKJ5.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnCetakSKKJ5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakSKKJ5ActionPerformed(evt);
-            }
-        });
-        MP3k.add(MnCetakSKKJ5);
-
-        MSKKJ.add(MP3k);
+        MSKKJ.add(MLainnya);
 
         jPopupMenu2.add(MSKKJ);
 
@@ -11139,7 +11076,37 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         // TODO add your handling code here:
     }//GEN-LAST:event_TCariActionPerformed
 
-    private void MnCetakSKKJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ1ActionPerformed
+    private void MLainnyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MLainnyaActionPerformed
+//        Object[] options = {
+//                    "NONE"
+//                };
+        JComboBox optionList = new JComboBox();
+        try{
+            ps=koneksi.prepareStatement("select nama from template_skkj ");  
+            try{
+                rs=ps.executeQuery();
+                while(rs.next()){
+                    optionList.addItem(rs.getString("nama")); 
+                }          
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+                
+//                optionList.setSelectedIndex(7);
+                JOptionPane.showMessageDialog(null, optionList, "Title",
+                     JOptionPane.QUESTION_MESSAGE);
+//                System.out.println("select: "+optionList.getSelectedItem());
         if(TPasienCari.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
@@ -11153,101 +11120,14 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 param.put("norawat",TNoRwCari.getText());
+                param.put("keperluan",optionList.getSelectedItem());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReport("rptSKKJCalegRI.jasper",param,"::[ SKKJ Caleg RI ]::");
+                Valid.MyReport("rptSKKJ.jasper",param,"::[ SKKJ ]::");
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
-    }//GEN-LAST:event_MnCetakSKKJ1ActionPerformed
-
-    private void MnCetakSKKJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ2ActionPerformed
-        if(TPasienCari.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-        }else{
-            if(tbKasirRalan2.getSelectedRow()!= -1){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("norawat",TNoRwCari.getText());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReport("rptSKKJCalegProv.jasper",param,"::[ SKKJ Caleg Prov ]::");
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        }
-    }//GEN-LAST:event_MnCetakSKKJ2ActionPerformed
-
-    private void MnCetakSKKJ3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ3ActionPerformed
-        if(TPasienCari.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-        }else{
-            if(tbKasirRalan2.getSelectedRow()!= -1){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("norawat",TNoRwCari.getText());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReport("rptSKKJCalegDaerah.jasper",param,"::[ SKKJ Caleg Daerah ]::");
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        }
-    }//GEN-LAST:event_MnCetakSKKJ3ActionPerformed
-
-    private void MnCetakSKKJ4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ4ActionPerformed
-        if(TPasienCari.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-        }else{
-            if(tbKasirRalan2.getSelectedRow()!= -1){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("norawat",TNoRwCari.getText());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReport("rptSKKJFungsionalGuru.jasper",param,"::[ SKKJ Fungsional Guru ]::");
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        }
-    }//GEN-LAST:event_MnCetakSKKJ4ActionPerformed
-
-    private void MnCetakSKKJ5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSKKJ5ActionPerformed
-        if(TPasienCari.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-        }else{
-            if(tbKasirRalan2.getSelectedRow()!= -1){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("norawat",TNoRwCari.getText());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("logo2",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReport("rptSKKJP3kGuru.jasper",param,"::[ SKKJ P3K Guru ]::");
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        }
-    }//GEN-LAST:event_MnCetakSKKJ5ActionPerformed
+    }//GEN-LAST:event_MLainnyaActionPerformed
 
     /**
     * @param args the command line arguments
@@ -11298,8 +11178,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private widget.TextBox Kd2;
     private widget.Label LCount;
     private widget.Label LabelCatatan;
-    private javax.swing.JMenu MCaleg;
-    private javax.swing.JMenu MP3k;
+    private javax.swing.JMenuItem MLainnya;
     private javax.swing.JMenu MSKKJ;
     private javax.swing.JMenu MenuInputData;
     private javax.swing.JMenu MenuInputData1;
@@ -11317,11 +11196,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem MnBuktiPelayananRalan;
     private javax.swing.JMenuItem MnCatatanObservasiIGD;
     private javax.swing.JMenuItem MnCetakBebasNarkoba;
-    private javax.swing.JMenuItem MnCetakSKKJ1;
-    private javax.swing.JMenuItem MnCetakSKKJ2;
-    private javax.swing.JMenuItem MnCetakSKKJ3;
-    private javax.swing.JMenuItem MnCetakSKKJ4;
-    private javax.swing.JMenuItem MnCetakSKKJ5;
     private javax.swing.JMenuItem MnCetakSuratBebasTBC;
     private javax.swing.JMenuItem MnCetakSuratCovid;
     private javax.swing.JMenuItem MnCetakSuratCutiHamil;

@@ -460,7 +460,7 @@ public class DlgPasien extends javax.swing.JDialog {
         tbPasien3.setDefaultRenderer(Object.class, new WarnaTable());
         
         TNo.setDocument(new batasInput((byte)15).getKata(TNo));
-        TNm.setDocument(new batasInput((byte)40).getKata(TNm));
+        TNm.setDocument(new batasInput((byte)60).getKata(TNm));
         NmIbu.setDocument(new batasInput((byte)40).getKata(NmIbu));
         TKtp.setDocument(new batasInput((byte)20).getKata(TKtp));
         Kdpnj.setDocument(new batasInput((byte)3).getKata(Kdpnj));
@@ -468,8 +468,8 @@ public class DlgPasien extends javax.swing.JDialog {
         TTmp.setDocument(new batasInput((byte)15).getKata(TTmp));
         Alamat.setDocument(new batasInput((int)200).getFilter(Alamat));
         AlamatPj.setDocument(new batasInput((int)100).getFilter(AlamatPj));
-        Pekerjaan.setDocument(new batasInput((byte)15).getKata(Pekerjaan));
-        PekerjaanPj.setDocument(new batasInput((byte)15).getKata(PekerjaanPj));
+        Pekerjaan.setDocument(new batasInput((byte)60).getKata(Pekerjaan));
+        PekerjaanPj.setDocument(new batasInput((byte)60).getKata(PekerjaanPj));
         TUmurTh.setDocument(new batasInput((byte)5).getOnlyAngka(TUmurTh));
         Saudara.setDocument(new batasInput((byte)50).getKata(Saudara));
         Kabupaten.setDocument(new batasInput((byte)60).getFilter(Kabupaten));
