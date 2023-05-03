@@ -1494,7 +1494,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         isForm();
         NoKartu.setDocument(new batasInput((int)80).getKata(NoKartu));
         TNo.setDocument(new batasInput((byte)15).getKata(TNo));
-        TNm.setDocument(new batasInput((byte)40).getKata(TNm));
+        TNm.setDocument(new batasInput((byte)60).getKata(TNm));
         NmIbu.setDocument(new batasInput((byte)40).getKata(NmIbu));
         TKtp.setDocument(new batasInput((byte)20).getKata(TKtp));
         Kdpnj.setDocument(new batasInput((byte)3).getKata(Kdpnj));
@@ -1502,8 +1502,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         TTmp.setDocument(new batasInput((byte)15).getKata(TTmp));
         Alamat.setDocument(new batasInput((int)200).getFilter(Alamat));
         AlamatPj.setDocument(new batasInput((int)100).getFilter(AlamatPj));
-        Pekerjaan.setDocument(new batasInput((byte)15).getKata(Pekerjaan));
-        PekerjaanPj.setDocument(new batasInput((byte)15).getKata(PekerjaanPj));
+        Pekerjaan.setDocument(new batasInput((byte)60).getKata(Pekerjaan));
+        PekerjaanPj.setDocument(new batasInput((byte)60).getKata(PekerjaanPj));
         TUmur.setDocument(new batasInput((byte)10).getKata(TUmur));
         Saudara.setDocument(new batasInput((byte)50).getKata(Saudara));
         Kabupaten.setDocument(new batasInput((byte)60).getFilter(Kabupaten));
@@ -1987,7 +1987,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         DTPLahir.setEditable(false);
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-05-2023" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-05-2023" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -2404,7 +2404,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanPasien.add(TNo);
         TNo.setBounds(107, 25, 160, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-05-2023" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-05-2023" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -2517,6 +2517,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnPenjab.setBounds(407, 205, 28, 23);
 
         Kelurahan.setText("KELURAHAN");
+        Kelurahan.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        Kelurahan.setEnabled(false);
         Kelurahan.setHighlighter(null);
         Kelurahan.setName("Kelurahan"); // NOI18N
         Kelurahan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2538,6 +2540,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         Kelurahan.setBounds(534, 55, 156, 23);
 
         Kecamatan.setText("KECAMATAN");
+        Kecamatan.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        Kecamatan.setEnabled(false);
         Kecamatan.setHighlighter(null);
         Kecamatan.setName("Kecamatan"); // NOI18N
         Kecamatan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2559,6 +2563,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         Kecamatan.setBounds(723, 55, 156, 23);
 
         Kabupaten.setText("KABUPATEN");
+        Kabupaten.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        Kabupaten.setEnabled(false);
         Kabupaten.setHighlighter(null);
         Kabupaten.setName("Kabupaten"); // NOI18N
         Kabupaten.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2680,6 +2686,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         AlamatPj.setBounds(534, 175, 375, 23);
 
         KecamatanPj.setText("KECAMATAN");
+        KecamatanPj.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        KecamatanPj.setEnabled(false);
         KecamatanPj.setHighlighter(null);
         KecamatanPj.setName("KecamatanPj"); // NOI18N
         KecamatanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2713,6 +2721,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKecamatanPj.setBounds(881, 205, 28, 23);
 
         KabupatenPj.setText("KABUPATEN");
+        KabupatenPj.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        KabupatenPj.setEnabled(false);
         KabupatenPj.setHighlighter(null);
         KabupatenPj.setName("KabupatenPj"); // NOI18N
         KabupatenPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2758,6 +2768,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKelurahanPj.setBounds(692, 205, 28, 23);
 
         KelurahanPj.setText("KELURAHAN");
+        KelurahanPj.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        KelurahanPj.setEnabled(false);
         KelurahanPj.setHighlighter(null);
         KelurahanPj.setName("KelurahanPj"); // NOI18N
         KelurahanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2938,6 +2950,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         EMail.setBounds(534, 295, 161, 23);
 
         Propinsi.setText("PROPINSI");
+        Propinsi.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        Propinsi.setEnabled(false);
         Propinsi.setHighlighter(null);
         Propinsi.setName("Propinsi"); // NOI18N
         Propinsi.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2971,6 +2985,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnPropinsi.setBounds(881, 85, 28, 23);
 
         PropinsiPj.setText("PROPINSI");
+        PropinsiPj.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        PropinsiPj.setEnabled(false);
         PropinsiPj.setHighlighter(null);
         PropinsiPj.setName("PropinsiPj"); // NOI18N
         PropinsiPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -3242,7 +3258,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel23);
         jLabel23.setBounds(295, 355, 54, 23);
 
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-05-2023 07:35:17" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-05-2023 13:42:04" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -3261,7 +3277,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel30);
         jLabel30.setBounds(341, 325, 50, 23);
 
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-05-2023" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-05-2023" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setName("TanggalRujuk"); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -3645,7 +3661,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel47.setBounds(724, 25, 90, 23);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-05-2023" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-05-2023" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setName("TanggalKKL"); // NOI18N
