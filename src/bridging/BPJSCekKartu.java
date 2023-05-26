@@ -1709,6 +1709,27 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             LabelJabatanPolri.setVisible(false);
             LabelJabatanTNI.setVisible(false);
         }
+        
+                
+        Propinsi.setEditable(false);
+        Propinsi.setBackground(new Color(245,250,240));
+        PropinsiPj.setEditable(false);
+        PropinsiPj.setBackground(new Color(245,250,240));
+        
+        Kecamatan.setEditable(false);
+        Kecamatan.setBackground(new Color(245,250,240));
+        KecamatanPj.setEditable(false);
+        KecamatanPj.setBackground(new Color(245,250,240));
+        
+        Kabupaten.setEditable(false);
+        Kabupaten.setBackground(new Color(245,250,240));
+        KabupatenPj.setEditable(false);
+        KabupatenPj.setBackground(new Color(245,250,240));
+        
+        Kelurahan.setEditable(false);
+        Kelurahan.setBackground(new Color(245,250,240));
+        KelurahanPj.setEditable(false);
+        KelurahanPj.setBackground(new Color(245,250,240));
     }
     
     
@@ -1987,7 +2008,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         DTPLahir.setEditable(false);
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-05-2022" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-05-2023" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -2404,7 +2425,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanPasien.add(TNo);
         TNo.setBounds(107, 25, 160, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-05-2022" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-05-2023" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -3211,12 +3232,11 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanPasien.add(LabelJabatanPolri);
         LabelJabatanPolri.setBounds(441, 445, 135, 23);
 
-        labelNamePasienx.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        labelNamePasienx.setText("(name)");
-        labelNamePasienx.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        labelNamePasienx.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelNamePasienx.setText("(Name)");
         labelNamePasienx.setName("labelNamePasienx"); // NOI18N
         FormKelengkapanPasien.add(labelNamePasienx);
-        labelNamePasienx.setBounds(190, 10, 390, 14);
+        labelNamePasienx.setBounds(170, 13, 280, 10);
 
         FormInput.add(FormKelengkapanPasien);
 
@@ -3243,7 +3263,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel23);
         jLabel23.setBounds(295, 355, 54, 23);
 
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-05-2022 07:58:08" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-05-2023 14:23:34" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -3262,7 +3282,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel30);
         jLabel30.setBounds(341, 325, 50, 23);
 
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-05-2022" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-05-2023" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setName("TanggalRujuk"); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -3646,7 +3666,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel47.setBounds(724, 25, 90, 23);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-05-2022" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-05-2023" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setName("TanggalKKL"); // NOI18N
