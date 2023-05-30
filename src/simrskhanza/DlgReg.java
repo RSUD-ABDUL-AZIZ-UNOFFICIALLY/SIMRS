@@ -8138,9 +8138,10 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
+            param.put("terdahulu",Sequel.cariIsi("SELECT CONCAT(DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y'),' | ',IFNULL(diagnosa_pasien.kd_penyakit, '-'),' | ',poliklinik.nm_poli) FROM reg_periksa LEFT JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli WHERE reg_periksa.no_rkm_medis = ? AND reg_periksa.tgl_registrasi <> DATE(NOW()) ORDER BY reg_periksa.tgl_registrasi DESC LIMIT 1",TNoRM.getText()));
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptBuktiRegister.jasper","report","::[ Bukti Register ]::",
-                   "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,pasien.no_tlp,"+
+                   "select reg_periksa.no_reg,reg_periksa.no_rawat,DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') as tgl_registrasi,reg_periksa.jam_reg,pasien.no_tlp,"+
                    "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.umur as umur,poliklinik.nm_poli,"+
                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab, "+
                    "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat "+
