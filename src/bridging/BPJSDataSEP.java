@@ -5792,6 +5792,10 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             Status.setText("AKTIF");
         }
     }
+
+    public void setNoRm2(String text, Date SetTgl2, String _Ralan, String toString, String toString0, String toString1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     public static class HttpEntityEnclosingDeleteRequest extends HttpEntityEnclosingRequestBase {
         public HttpEntityEnclosingDeleteRequest(final URI uri) {
