@@ -1102,7 +1102,7 @@ public class koneksiDB {
             var=""; 
         }
         return var;
-    }
+    } 
     public static String AKTIFKANWARNARALAN(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
