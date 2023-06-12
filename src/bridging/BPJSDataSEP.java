@@ -762,6 +762,14 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(skdp.getTable().getSelectedRow()!= -1){                   
                     NoSKDP.setText(skdp.getTable().getValueAt(skdp.getTable().getSelectedRow(),9).toString());
+                    KdPenyakit.setText(skdp.getTable().getValueAt(skdp.getTable().getSelectedRow(),15).toString());
+                    NmPenyakit.setText(skdp.getTable().getValueAt(skdp.getTable().getSelectedRow(),7).toString());
+                    KdPoli.setText(skdp.getTable().getValueAt(skdp.getTable().getSelectedRow(),13).toString());
+                    NmPoli.setText(skdp.getTable().getValueAt(skdp.getTable().getSelectedRow(),14).toString());
+                    KdDPJP.setText(skdp.getTable().getValueAt(skdp.getTable().getSelectedRow(),11).toString());
+                    NmDPJP.setText(skdp.getTable().getValueAt(skdp.getTable().getSelectedRow(),12).toString());
+                    KdDPJPLayanan.setText(skdp.getTable().getValueAt(skdp.getTable().getSelectedRow(),11).toString());
+                    NmDPJPLayanan.setText(skdp.getTable().getValueAt(skdp.getTable().getSelectedRow(),12).toString());
                     NoSKDP.requestFocus();
                 }                  
             }
@@ -3244,14 +3252,6 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                     Valid.textKosong(KdPenyakit, "Diagnosa");
                 }else if (Catatan.getText().trim().equals("")) {
                     Valid.textKosong(Catatan, "Catatan");
-                }else if((LakaLantas.getSelectedIndex()==1)&&Keterangan.getText().equals("")) {
-                    Valid.textKosong(Keterangan,"Keterangan");
-                }else if((LakaLantas.getSelectedIndex()==1)&&NmPropinsi.getText().equals("")) {
-                    Valid.textKosong(btnPropinsi,"Propinsi");
-                }else if((LakaLantas.getSelectedIndex()==1)&&NmKabupaten.getText().equals("")) {
-                    Valid.textKosong(btnKabupaten,"Kabupaten");
-                }else if((LakaLantas.getSelectedIndex()==1)&&NmKecamatan.getText().equals("")) {
-                    Valid.textKosong(btnKecamatan,"Kecamatan");
                 }else if (KdDPJP.getText().trim().equals("")||NmDPJP.getText().trim().equals("")) {
                     Valid.textKosong(KdDPJP, "DPJP");
                 }else{
@@ -3259,6 +3259,15 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         tglkkl="0000-00-00";
                         if(LakaLantas.getSelectedIndex()>0){
                             tglkkl=Valid.SetTgl(TanggalKKL.getSelectedItem()+"");
+                            if((LakaLantas.getSelectedIndex()==1)&&Keterangan.getText().equals("")) {
+                                Valid.textKosong(Keterangan,"Keterangan");
+                            }else if((LakaLantas.getSelectedIndex()==1)&&NmPropinsi.getText().equals("")) {
+                                Valid.textKosong(btnPropinsi,"Propinsi");
+                            }else if((LakaLantas.getSelectedIndex()==1)&&NmKabupaten.getText().equals("")) {
+                                Valid.textKosong(btnKabupaten,"Kabupaten");
+                            }else if((LakaLantas.getSelectedIndex()==1)&&NmKecamatan.getText().equals("")) {
+                                Valid.textKosong(btnKecamatan,"Kecamatan");
+                            }
                         }
 
                         headers = new HttpHeaders();

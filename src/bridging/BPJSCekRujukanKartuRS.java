@@ -6465,7 +6465,15 @@ public final class BPJSCekRujukanKartuRS extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     "       Hak Kelas",": "+response.path("peserta").path("hakKelas").path("kode").asText()+". "+response.path("peserta").path("hakKelas").path("keterangan").asText()
                 });
-                Kelas.setSelectedItem(response.path("peserta").path("hakKelas").path("kode").asText()+". "+response.path("peserta").path("hakKelas").path("keterangan").asText().replaceAll("KELAS","Kelas"));
+//                Kelas.setSelectedItem(response.path("peserta").path("hakKelas").path("kode").asText()+". "+response.path("peserta").path("hakKelas").path("keterangan").asText().replaceAll("KELAS","Kelas"));
+                String kelas = response.path("peserta").path("hakKelas").path("kode").asText();
+                if(kelas.equals("1")){
+                    Kelas.setSelectedIndex(0);
+                }else if(kelas.equals("2")){
+                    Kelas.setSelectedIndex(1);
+                }else if(kelas.equals("3")){
+                    Kelas.setSelectedIndex(2);
+                }                
                 tabMode.addRow(new Object[]{
                     "       Informasi",": "
                 });

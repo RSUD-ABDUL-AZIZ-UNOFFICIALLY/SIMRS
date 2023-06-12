@@ -672,21 +672,21 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnSuratJaminanPelayananIGD = new javax.swing.JMenuItem();
         MnLembarKeluarMasuk2 = new javax.swing.JMenuItem();
         MnGelang = new javax.swing.JMenu();
+        MnLabelTracker = new javax.swing.JMenuItem();
+        MnLabelTracker1 = new javax.swing.JMenuItem();
+        MnBarcodeRM9 = new javax.swing.JMenuItem();
         MnGelang1 = new javax.swing.JMenuItem();
         MnGelang2 = new javax.swing.JMenuItem();
         MnGelang3 = new javax.swing.JMenuItem();
         MnGelang4 = new javax.swing.JMenuItem();
         MnGelang5 = new javax.swing.JMenuItem();
         MnGelang6 = new javax.swing.JMenuItem();
-        MnLabelTracker = new javax.swing.JMenuItem();
-        MnLabelTracker1 = new javax.swing.JMenuItem();
         MnLabelTracker2 = new javax.swing.JMenuItem();
         MnLabelTracker3 = new javax.swing.JMenuItem();
         MnBarcode1 = new javax.swing.JMenuItem();
         MnBarcode2 = new javax.swing.JMenuItem();
         MnBarcode3 = new javax.swing.JMenuItem();
         MnBarcode = new javax.swing.JMenuItem();
-        MnBarcodeRM9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         MnCheckList4 = new javax.swing.JMenuItem();
         MnCheckList5 = new javax.swing.JMenuItem();
@@ -2099,6 +2099,54 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnGelang.setPreferredSize(new java.awt.Dimension(250, 26));
         MnGelang.setRequestFocusEnabled(false);
 
+        MnLabelTracker.setBackground(new java.awt.Color(255, 255, 254));
+        MnLabelTracker.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnLabelTracker.setForeground(new java.awt.Color(50, 50, 50));
+        MnLabelTracker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnLabelTracker.setText("Label Depan MAP");
+        MnLabelTracker.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnLabelTracker.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnLabelTracker.setName("MnLabelTracker"); // NOI18N
+        MnLabelTracker.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnLabelTracker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnLabelTrackerActionPerformed(evt);
+            }
+        });
+        MnGelang.add(MnLabelTracker);
+
+        MnLabelTracker1.setBackground(new java.awt.Color(255, 255, 254));
+        MnLabelTracker1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnLabelTracker1.setForeground(new java.awt.Color(50, 50, 50));
+        MnLabelTracker1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnLabelTracker1.setText("Label 7 Baris");
+        MnLabelTracker1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnLabelTracker1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnLabelTracker1.setName("MnLabelTracker1"); // NOI18N
+        MnLabelTracker1.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnLabelTracker1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnLabelTracker1ActionPerformed(evt);
+            }
+        });
+        MnGelang.add(MnLabelTracker1);
+
+        MnBarcodeRM9.setBackground(new java.awt.Color(255, 255, 254));
+        MnBarcodeRM9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnBarcodeRM9.setForeground(new java.awt.Color(50, 50, 50));
+        MnBarcodeRM9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnBarcodeRM9.setMnemonic('L');
+        MnBarcodeRM9.setText("Label 8 Baris");
+        MnBarcodeRM9.setToolTipText("L");
+        MnBarcodeRM9.setName("MnBarcodeRM9"); // NOI18N
+        MnBarcodeRM9.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnBarcodeRM9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnBarcodeRM9ActionPerformed(evt);
+            }
+        });
+        MnGelang.add(MnBarcodeRM9);
+
         MnGelang1.setBackground(new java.awt.Color(255, 255, 254));
         MnGelang1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnGelang1.setForeground(new java.awt.Color(50, 50, 50));
@@ -2195,38 +2243,6 @@ public final class DlgIGD extends javax.swing.JDialog {
         });
         MnGelang.add(MnGelang6);
 
-        MnLabelTracker.setBackground(new java.awt.Color(255, 255, 254));
-        MnLabelTracker.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnLabelTracker.setForeground(new java.awt.Color(50, 50, 50));
-        MnLabelTracker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnLabelTracker.setText("Label Tracker 1");
-        MnLabelTracker.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnLabelTracker.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnLabelTracker.setName("MnLabelTracker"); // NOI18N
-        MnLabelTracker.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnLabelTrackerActionPerformed(evt);
-            }
-        });
-        MnGelang.add(MnLabelTracker);
-
-        MnLabelTracker1.setBackground(new java.awt.Color(255, 255, 254));
-        MnLabelTracker1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnLabelTracker1.setForeground(new java.awt.Color(50, 50, 50));
-        MnLabelTracker1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnLabelTracker1.setText("Label Tracker 2");
-        MnLabelTracker1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnLabelTracker1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnLabelTracker1.setName("MnLabelTracker1"); // NOI18N
-        MnLabelTracker1.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnLabelTracker1ActionPerformed(evt);
-            }
-        });
-        MnGelang.add(MnLabelTracker1);
-
         MnLabelTracker2.setBackground(new java.awt.Color(255, 255, 254));
         MnLabelTracker2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnLabelTracker2.setForeground(new java.awt.Color(50, 50, 50));
@@ -2322,22 +2338,6 @@ public final class DlgIGD extends javax.swing.JDialog {
             }
         });
         MnGelang.add(MnBarcode);
-
-        MnBarcodeRM9.setBackground(new java.awt.Color(255, 255, 254));
-        MnBarcodeRM9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnBarcodeRM9.setForeground(new java.awt.Color(50, 50, 50));
-        MnBarcodeRM9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnBarcodeRM9.setMnemonic('L');
-        MnBarcodeRM9.setText("Label Rekam Medis 10");
-        MnBarcodeRM9.setToolTipText("L");
-        MnBarcodeRM9.setName("MnBarcodeRM9"); // NOI18N
-        MnBarcodeRM9.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnBarcodeRM9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnBarcodeRM9ActionPerformed(evt);
-            }
-        });
-        MnGelang.add(MnBarcodeRM9);
 
         jPopupMenu1.add(MnGelang);
 
