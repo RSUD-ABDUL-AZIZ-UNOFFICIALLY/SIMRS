@@ -465,8 +465,8 @@ public class DlgPasien extends javax.swing.JDialog {
         TTmp.setDocument(new batasInput((byte)15).getKata(TTmp));
         Alamat.setDocument(new batasInput((int)200).getFilter(Alamat));
         AlamatPj.setDocument(new batasInput((int)100).getFilter(AlamatPj));
-        Pekerjaan.setDocument(new batasInput((byte)15).getKata(Pekerjaan));
-        PekerjaanPj.setDocument(new batasInput((byte)15).getKata(PekerjaanPj));
+        Pekerjaan.setDocument(new batasInput((byte)100).getKata(Pekerjaan));
+        PekerjaanPj.setDocument(new batasInput((byte)100).getKata(PekerjaanPj));
         TUmurTh.setDocument(new batasInput((byte)5).getOnlyAngka(TUmurTh));
         Saudara.setDocument(new batasInput((byte)50).getKata(Saudara));
         Kabupaten.setDocument(new batasInput((byte)60).getFilter(Kabupaten));
@@ -3426,7 +3426,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel19);
         jLabel19.setBounds(629, 12, 100, 23);
 
-        CmbStts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MENIKAH", "BELUM MENIKAH", "JANDA", "DUDHA" }));
+        CmbStts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MENIKAH", "BELUM MENIKAH", "JANDA", "DUDHA", "CERAI HIDUP", "CERAI MATI" }));
         CmbStts.setLightWeightPopupEnabled(false);
         CmbStts.setName("CmbStts"); // NOI18N
         CmbStts.addKeyListener(new java.awt.event.KeyAdapter() {
