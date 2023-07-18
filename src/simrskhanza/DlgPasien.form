@@ -2679,9 +2679,10 @@
                         <Component class="widget.ComboBox" name="CmbJk">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="2">
-                                <StringItem index="0" value="LAKI-LAKI"/>
-                                <StringItem index="1" value="PEREMPUAN"/>
+                              <StringArray count="3">
+                                <StringItem index="0" value="-"/>
+                                <StringItem index="1" value="LAKI-LAKI"/>
+                                <StringItem index="2" value="PEREMPUAN"/>
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="CmbJk" noResource="true"/>
@@ -2770,7 +2771,7 @@
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="14-06-2023"/>
+                                <StringItem index="0" value="07-07-2023"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -2802,13 +2803,13 @@
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="7">
-                                <StringItem index="0" value="ISLAM"/>
-                                <StringItem index="1" value="KRISTEN"/>
-                                <StringItem index="2" value="KATOLIK"/>
-                                <StringItem index="3" value="HINDU"/>
-                                <StringItem index="4" value="BUDHA"/>
-                                <StringItem index="5" value="KONG HU CHU"/>
-                                <StringItem index="6" value="-"/>
+                                <StringItem index="0" value="-"/>
+                                <StringItem index="1" value="ISLAM"/>
+                                <StringItem index="2" value="KRISTEN"/>
+                                <StringItem index="3" value="KATOLIK"/>
+                                <StringItem index="4" value="HINDU"/>
+                                <StringItem index="5" value="BUDHA"/>
+                                <StringItem index="6" value="KONG HU CHU"/>
                               </StringArray>
                             </Property>
                             <Property name="lightWeightPopupEnabled" type="boolean" value="false"/>
@@ -2837,13 +2838,14 @@
                         <Component class="widget.ComboBox" name="CmbStts">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="6">
-                                <StringItem index="0" value="MENIKAH"/>
-                                <StringItem index="1" value="BELUM MENIKAH"/>
-                                <StringItem index="2" value="JANDA"/>
-                                <StringItem index="3" value="DUDHA"/>
-                                <StringItem index="4" value="CERAI HIDUP"/>
-                                <StringItem index="5" value="CERAI MATI"/>
+                              <StringArray count="7">
+                                <StringItem index="0" value="-"/>
+                                <StringItem index="1" value="MENIKAH"/>
+                                <StringItem index="2" value="BELUM MENIKAH"/>
+                                <StringItem index="3" value="JANDA"/>
+                                <StringItem index="4" value="DUDHA"/>
+                                <StringItem index="5" value="CERAI HIDUP"/>
+                                <StringItem index="6" value="CERAI MATI"/>
                               </StringArray>
                             </Property>
                             <Property name="lightWeightPopupEnabled" type="boolean" value="false"/>
@@ -2991,7 +2993,7 @@
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="14-06-2023"/>
+                                <StringItem index="0" value="07-07-2023"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>

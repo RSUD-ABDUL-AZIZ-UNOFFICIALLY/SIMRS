@@ -3343,7 +3343,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(TTmp);
         TTmp.setBounds(102, 102, 187, 23);
 
-        CmbJk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LAKI-LAKI", "PEREMPUAN" }));
+        CmbJk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "LAKI-LAKI", "PEREMPUAN" }));
         CmbJk.setName("CmbJk"); // NOI18N
         CmbJk.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3388,7 +3388,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(4, 102, 95, 23);
 
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-05-2023" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-06-2023" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -3410,7 +3410,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel18);
         jLabel18.setBounds(402, 12, 90, 23);
 
-        cmbAgama.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISLAM", "KRISTEN", "KATOLIK", "HINDU", "BUDHA", "KONG HU CHU", "-" }));
+        cmbAgama.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "ISLAM", "KRISTEN", "KATOLIK", "HINDU", "BUDHA", "KONG HU CHU" }));
         cmbAgama.setLightWeightPopupEnabled(false);
         cmbAgama.setName("cmbAgama"); // NOI18N
         cmbAgama.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3426,7 +3426,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel19);
         jLabel19.setBounds(629, 12, 100, 23);
 
-        CmbStts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MENIKAH", "BELUM MENIKAH", "JANDA", "DUDHA", "CERAI HIDUP", "CERAI MATI" }));
+        CmbStts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "MENIKAH", "BELUM MENIKAH", "JANDA", "DUDHA", "CERAI HIDUP", "CERAI MATI" }));
         CmbStts.setLightWeightPopupEnabled(false);
         CmbStts.setName("CmbStts"); // NOI18N
         CmbStts.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3520,7 +3520,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(TKtp);
         TKtp.setBounds(743, 132, 130, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-05-2023" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-06-2023" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -4711,12 +4711,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             Valid.textKosong(TNo,"No.Rekam Medis");
         }else if(TNm.getText().trim().equals("")){
             Valid.textKosong(TNm,"nama pasien");
+        }else if(cmbAgama.getSelectedItem().toString().equals("-")){
+            Valid.textKosong(cmbAgama,"Agama");
+        }else if(CmbJk.getSelectedItem().toString().equals("-")){
+            Valid.textKosong(CmbJk,"Jenis Kelamin");
+        }else if(CmbStts.getSelectedItem().toString().equals("-")){
+            Valid.textKosong(CmbStts,"Status Menikah");
         }else if(nmpnj.getText().trim().equals("")||Kdpnj.getText().trim().equals("")){
             Valid.textKosong(Kdpnj,"Asuransi/Askes/Png.Jawab");
         }else if(no_ktp.equals("Yes")&&(TKtp.getText().trim().length()<p_no_ktp)){
             Valid.textKosong(TKtp,"No.KTP/SIM minimal "+p_no_ktp+" karakter dan ");            
+        }else if((TKtp.getText().trim().length()>p_no_ktp)&&(!"".equals(Sequel.cariIsi("select no_rkm_medis FROM pasien WHERE no_ktp="+TKtp.getText())))){
+            Valid.textKosong(TKtp,"No.KTP/SIM telah digunakan pada no RM."+Sequel.cariIsi("select no_rkm_medis FROM pasien WHERE no_ktp="+TKtp.getText())+"/");            
         }else if(tmp_lahir.equals("Yes")&&(TTmp.getText().trim().length()<p_tmp_lahir)){
             Valid.textKosong(TTmp,"Tempat Lahir minimal "+p_tmp_lahir+" karakter dan ");            
+        }else if(DTPLahir.getSelectedItem().toString().equals("01-01-1970")){
+            Valid.textKosong(DTPLahir,"Sesuaikan Tgl Lahir");            
         }else if(nm_ibu.equals("Yes")&&(NmIbu.getText().trim().length()<p_nm_ibu)){
             Valid.textKosong(NmIbu,"Nama Ibu minimal "+p_nm_ibu+" karakter dan ");            
         }else if(alamat.equals("Yes")&&(Alamat.getText().trim().length()<p_alamat)){
@@ -9824,7 +9834,8 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         NIP.setText("");
         EMail.setText("");
         R5.setSelected(true);
-        DTPLahir.setDate(new Date());
+//        DTPLahir.setDate(new Date());
+        DTPLahir.setDate(new Date(0));
         DTPDaftar.setDate(new Date());
         chkPolri.setSelected(false);
         chkTNI.setSelected(false);
