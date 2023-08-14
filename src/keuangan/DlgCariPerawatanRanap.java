@@ -1124,13 +1124,13 @@ private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             switch (pilihtable) {
                 case "rawat_inap_dr":
-                    Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",nmdokter,kddokter.getText());
+                    nmdokter.setText(dokter.tampil3(kddokter.getText()));
                     break;
                 case "rawat_inap_pr":
-                    Sequel.cariIsi("select petugas.nama from petugas where petugas.nip=?",nmdokter,kddokter.getText());
+                    nmdokter.setText(petugas.tampil3(kddokter.getText()));
                     break;
                 case "rawat_inap_drpr":
-                    Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",nmdokter,kddokter.getText());
+                    nmdokter.setText(dokter.tampil3(kddokter.getText()));
                     break;
             }
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -1201,7 +1201,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void KdPtg2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPtg2KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            Sequel.cariIsi("select petugas.nama from petugas where petugas.nip=?",NmPtg2,KdPtg2.getText());
+            NmPtg2.setText(petugas.tampil3(KdPtg2.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
@@ -1389,7 +1389,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 switch (pilihtable) {
                     case "rawat_inap_dr":
                         while(rs.next()){
-                            if(rs.getDouble("total_byrdr")>=0){
+                            if(rs.getDouble("total_byrdr")>0){
                                 tabMode.addRow(new Object[] {
                                     false,rs.getString(1),rs.getString(2),rs.getString(3),
                                     rs.getDouble("total_byrdr"),rs.getDouble("material"),
@@ -1403,7 +1403,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         break;
                     case "rawat_inap_pr":
                         while(rs.next()){
-                            if(rs.getDouble("total_byrpr")>=0){
+                            if(rs.getDouble("total_byrpr")>0){
                                 tabMode.addRow(new Object[] {
                                     false,rs.getString(1),rs.getString(2),rs.getString(3),
                                     rs.getDouble("total_byrpr"),rs.getDouble("material"),
@@ -1417,7 +1417,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         break;
                     case "rawat_inap_drpr":
                         while(rs.next()){
-                            if(rs.getDouble("total_byrdrpr")>=0){
+                            if(rs.getDouble("total_byrdrpr")>0){
                                 tabMode.addRow(new Object[] {
                                     false,rs.getString(1),rs.getString(2),rs.getString(3),
                                     rs.getDouble("total_byrdrpr"),rs.getDouble("material"),
@@ -1571,9 +1571,9 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         TNoRw.setText(norwt);
         TPasien.setText(pasien);
         kddokter.setText("");
-        this.kd_pj=Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat=?",TNoRw.getText());
+        this.kd_pj=Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
         
-        norawatibu=Sequel.cariIsi("select no_rawat from ranap_gabung where no_rawat2=?",norwt);
+        norawatibu=Sequel.cariIsi("select ranap_gabung.no_rawat from ranap_gabung where ranap_gabung.no_rawat2=?",norwt);
         if(!norawatibu.equals("")){
             this.kd_bangsal=Sequel.cariIsi(
                     "select bangsal.kd_bangsal from bangsal inner join kamar inner join kamar_inap "+

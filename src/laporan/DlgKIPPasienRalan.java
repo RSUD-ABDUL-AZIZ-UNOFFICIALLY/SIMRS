@@ -36,7 +36,7 @@ public class DlgKIPPasienRalan extends javax.swing.JDialog {
                 pulang=0,rawat=0,rujuk=0,kbl=0,kbp=0,kll=0,klp=0;
     private String sthr0s6l="",sthr0s6p="",sthr7s28l="",sthr7s28p="",sthr28s1thl="",sthr28s1thp="",stth1s4l="",stth1s4p="",
                 stth5s14l="",stth5s14p="",stth15s24l="",stth15s24p="",stth25s44l="",stth25s44p="",stth45s64l="",stth45s64p="",
-                stlbth65l="",stlbth65p="",stmatilb48="",stmatikr48="",diagnosa="",stpulang="",strawat="",strujuk="",
+                stlbth65l="",stlbth65p="",diagnosa="",stpulang="",strawat="",strujuk="",
                 stkbl="",stkbp="",stkll="",stklp="";
     
     /** Creates new form DlgProgramStudi
@@ -424,55 +424,55 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             
             htmlContent.append(                             
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='10px' rowspan='3'>NO.</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='40px' rowspan='3'>NO.R.M.</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='150px' rowspan='3'>Nama Pasien</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='90px' rowspan='3'>NIK</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='50px' rowspan='3'>TGL.MASUK</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='200px' colspan='18'>GOLONGAN UMUR</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='60px' rowspan='3'>DIAGNOSA KOMPILASI</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='70px' rowspan='2' colspan='3'>TINDAK LANJUT PERAWATAN</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='50px' rowspan='2' colspan='2'>KASUS BARU</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='50px' rowspan='2' colspan='2'>KASUS LAMA</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='"+(70*kolom)+"px' rowspan='2' colspan='"+kolom+"'>KETERANGAN</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10px' rowspan='3'>NO.</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='40px' rowspan='3'>NO.R.M.</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='150px' rowspan='3'>Nama Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='90px' rowspan='3'>NIK</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='50px' rowspan='3'>TGL.MASUK</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='200px' colspan='18'>GOLONGAN UMUR</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='60px' rowspan='3'>DIAGNOSA KOMPILASI</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px' rowspan='2' colspan='3'>TINDAK LANJUT PERAWATAN</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='50px' rowspan='2' colspan='2'>KASUS BARU</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='50px' rowspan='2' colspan='2'>KASUS LAMA</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='"+(70*kolom)+"px' rowspan='2' colspan='"+kolom+"'>KETERANGAN</td>"+
                 "</tr>"+
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' colspan='2'>0-6 hr</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' colspan='2'>7-27hr</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' colspan='2'>28hr-&lsaquo;1th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' colspan='2'>1-4th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' colspan='2'>5-14th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' colspan='2'>15-24th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' colspan='2'>25-44th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' colspan='2'>45-64th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' colspan='2'>&rsaquo;&nbsp;64</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>0-6 hr</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>7-27hr</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>28hr-&lsaquo;1th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-4th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>5-14th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>15-24th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>25-44th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>45-64th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>&rsaquo;&nbsp;64</td>"+
                 "</tr>"+
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>PULANG</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>RAWAT</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>RUJUK</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>L</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>P</td>"
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>PULANG</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>RAWAT</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>RUJUK</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"
             );
             i=0;
             ps2=koneksi.prepareStatement("select kd_pj,png_jawab from penjab order by png_jawab");
@@ -482,7 +482,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     kodebayar[i]=rs2.getString("kd_pj");
                     jumlahcarabayar[i]=0;
                     i++;
-                    htmlContent.append("<td valign='middle' bgcolor='#FFFAF8' align='center'>"+rs2.getString("png_jawab")+"</td>");
+                    htmlContent.append("<td valign='middle' bgcolor='#FFFAFA' align='center'>"+rs2.getString("png_jawab")+"</td>");
                 }
             } catch (Exception e) {
                 System.out.println("Akun Bayar : "+e);

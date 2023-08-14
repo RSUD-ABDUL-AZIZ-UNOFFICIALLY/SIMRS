@@ -98,7 +98,7 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(50, 50, 50));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Server :");
+        jLabel4.setText("Database Server :");
         jLabel4.setName("jLabel4"); // NOI18N
         panelGlass1.add(jLabel4);
         jLabel4.setBounds(0, 22, 104, 14);
@@ -106,7 +106,7 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(50, 50, 50));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Nama Aplikasi :");
+        jLabel7.setText("Versi Aplikasi :");
         jLabel7.setName("jLabel7"); // NOI18N
         panelGlass1.add(jLabel7);
         jLabel7.setBounds(0, 8, 104, 14);
@@ -172,7 +172,7 @@ public class DlgAbout extends javax.swing.JDialog {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel17.setText("Khanza SIMKES 2022");
+        jLabel17.setText("Update 2022-08-14");
         jLabel17.setName("jLabel17"); // NOI18N
         panelGlass1.add(jLabel17);
         jLabel17.setBounds(107, 8, 120, 14);
@@ -223,7 +223,7 @@ public class DlgAbout extends javax.swing.JDialog {
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel19.setText("RS Permata Medika Kebumen, RS Juanda Kuningan, ");
+        jLabel19.setText("RS Permata Medika Kebumen, RS Handayani Lampung Utara, ");
         jLabel19.setName("jLabel19"); // NOI18N
         panelGlass4.add(jLabel19);
         jLabel19.setBounds(126, 160, 320, 14);
