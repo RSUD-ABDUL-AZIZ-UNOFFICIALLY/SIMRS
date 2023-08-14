@@ -1442,7 +1442,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             Valid.textKosong(Pemeriksaan,"Data Permintaan");
         }else{
             if(jml>0){
-                Sequel.queryu("truncate table temporary_permintaan_lab");
+                Sequel.queryu("delete from temporary_permintaan_lab");
                 for(i=0;i<tbDetailPK.getRowCount();i++){ 
                     if(tbDetailPK.getValueAt(i,0).toString().equals("true")){
                         Sequel.menyimpan("temporary_permintaan_lab","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
@@ -1484,7 +1484,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             }
               
             if(jml2>0){
-                Sequel.queryu("truncate table temporary_permintaan_lab");
+                Sequel.queryu("delete from temporary_permintaan_lab");
                 for(i=0;i<tbTarifPA.getRowCount();i++){ 
                     if(tbTarifPA.getValueAt(i,0).toString().equals("true")){
                         Sequel.menyimpan("temporary_permintaan_lab","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
@@ -1532,7 +1532,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             }
             
             if(jml3>0){
-                Sequel.queryu("truncate table temporary_permintaan_labmb");
+                Sequel.queryu("delete from temporary_permintaan_labmb");
                 for(i=0;i<tbDetailMB.getRowCount();i++){ 
                     if(tbDetailMB.getValueAt(i,0).toString().equals("true")){
                         Sequel.menyimpan("temporary_permintaan_labmb","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
@@ -1662,7 +1662,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void KodePerujukKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodePerujukKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",NmPerujuk,KodePerujuk.getText());
+            NmPerujuk.setText(dokter.tampil3(KodePerujuk.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnDokterActionPerformed(null);
         }else{            

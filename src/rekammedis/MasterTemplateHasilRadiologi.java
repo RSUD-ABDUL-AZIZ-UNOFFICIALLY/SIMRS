@@ -475,9 +475,13 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Pilih dulu data yang akan Anda hapus dengan menklik data pada tabel...!!!");
             tbDokter.requestFocus();
         }else{
-            Valid.hapusTable(tabMode,Kd,"template_hasil_radiologi","no_template");
-            tampil();
-            emptTeks();
+            if(Valid.hapusTabletf(tabMode,Kd,"template_hasil_radiologi","no_template")==true){
+                if(tbDokter.getSelectedRow()!= -1){
+                    tabMode.removeRow(tbDokter.getSelectedRow());
+                    LCount.setText(""+tabMode.getRowCount());
+                    emptTeks();
+                }
+            }
         }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -497,11 +501,13 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
         }else if(Template.getText().trim().equals("")){
             Valid.textKosong(Template,"Template Hasil Radiologi");
         }else{
-            Valid.editTable(tabMode,"template_hasil_radiologi","no_template","?","no_template=?,nama_pemeriksaan=?,template_hasil_radiologi=?",4,new String[]{
+            if(Valid.editTabletf(tabMode,"template_hasil_radiologi","no_template","?","no_template=?,nama_pemeriksaan=?,template_hasil_radiologi=?",4,new String[]{
                 Kd.getText(),Nm.getText(),Template.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
-            });
-            if(tabMode.getRowCount()!=0){tampil();emptTeks();TabRawat.setSelectedIndex(1);}
-            
+            })==true){
+                tbDokter.setValueAt(Kd.getText(),tbDokter.getSelectedRow(),0);
+                tbDokter.setValueAt(Template.getText(),tbDokter.getSelectedRow(),1);
+                emptTeks();TabRawat.setSelectedIndex(1);
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -547,7 +553,6 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
             if(Sequel.menyimpantf("template_hasil_radiologi","?,?,?","No.Template",3,new String[]{
                 Kd.getText(),Nm.getText(),Template.getText() 
             })==true){
-                tampil();
                 emptTeks();
             }                
         }
@@ -704,6 +709,5 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
-       tampil();
     }
 }

@@ -232,21 +232,6 @@
             <Property name="verticalGap" type="int" value="9"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JComboBox" name="CariStsPoli">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="-"/>
-                    <StringItem index="1" value="Baru"/>
-                    <StringItem index="2" value="Lama"/>
-                  </StringArray>
-                </Property>
-                <Property name="name" type="java.lang.String" value="CariStsPoli" noResource="true"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
             <Component class="widget.Label" name="label11">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tanggal :"/>

@@ -1692,15 +1692,15 @@ public final class RMPenilaianPasienPenyakitMenular extends javax.swing.JDialog 
     }
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getpenilaian_awal_medis_ralan_penyakit_dalam());
-        BtnHapus.setEnabled(akses.getpenilaian_awal_medis_ralan_penyakit_dalam());
-        BtnEdit.setEnabled(akses.getpenilaian_awal_medis_ralan_penyakit_dalam());
-        BtnEdit.setEnabled(akses.getpenilaian_awal_medis_ralan_penyakit_dalam());
+        BtnSimpan.setEnabled(akses.getpenilaian_pasien_penyakit_menular());
+        BtnHapus.setEnabled(akses.getpenilaian_pasien_penyakit_menular());
+        BtnEdit.setEnabled(akses.getpenilaian_pasien_penyakit_menular());
+        BtnEdit.setEnabled(akses.getpenilaian_pasien_penyakit_menular());
         if(akses.getjml2()>=1){
             KdDokter.setEditable(false);
             BtnDokter.setEnabled(false);
             KdDokter.setText(akses.getkode());
-            Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?", NmDokter,KdDokter.getText());
+            NmDokter.setText(dokter.tampil3(KdDokter.getText()));
             if(NmDokter.getText().equals("")){
                 KdDokter.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");

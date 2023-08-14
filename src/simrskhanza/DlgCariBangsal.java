@@ -335,7 +335,7 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/bangsal.iyem")<8){
+            if(Valid.daysOld("./cache/bangsal.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -382,7 +382,7 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
             file.createNewFile();
             fileWriter = new FileWriter(file);
             iyem="";
-            ps=koneksi.prepareStatement("select * from bangsal where status='1' order by nm_bangsal");
+            ps=koneksi.prepareStatement("select * from bangsal where bangsal.status='1' order by bangsal.nm_bangsal");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){

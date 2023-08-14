@@ -183,7 +183,7 @@ public final class DlgPelayananLabMB extends javax.swing.JDialog {
 
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
-        panelGlass5.setBackground(new java.awt.Color(255, 250, 248));
+        panelGlass5.setBackground(new java.awt.Color(255,250,250));
         panelGlass5.setName("panelGlass5"); // NOI18N
         panelGlass5.setPreferredSize(new java.awt.Dimension(55, 55));
         panelGlass5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
@@ -319,7 +319,7 @@ public final class DlgPelayananLabMB extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());   
             param.put("tanggal",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
-            Sequel.queryu("truncate table temporary_lama_pelayanan_radiologi");
+            Sequel.queryu("delete from temporary_lama_pelayanan_radiologi");
             for(int r=0;r<tabMode.getRowCount();r++){ 
                 Sequel.menyimpan("temporary_lama_pelayanan_radiologi","'0','"+
                     tabMode.getValueAt(r,0).toString()+"','"+

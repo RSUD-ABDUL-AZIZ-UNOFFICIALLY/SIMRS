@@ -5,8 +5,6 @@ import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,7 +23,7 @@ public class LaporanTahunanIGD extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private StringBuilder htmlContent;
-    private int jan=0,feb=0,mar=0,apr=0,mei=0,jun=0,jul=0,agu=0,sep=0,okt=0,nov=0,des=0,
+    private int i=0,jan=0,feb=0,mar=0,apr=0,mei=0,jun=0,jul=0,agu=0,sep=0,okt=0,nov=0,des=0,
                 ttljan=0,ttlfeb=0,ttlmar=0,ttlapr=0,ttlmei=0,ttljun=0,ttljul=0,ttlagu=0,ttlsep=0,ttlokt=0,ttlnov=0,ttldes=0;
     
     /** Creates new form DlgProgramStudi
@@ -67,8 +65,6 @@ public class LaporanTahunanIGD extends javax.swing.JDialog {
         
         Valid.LoadTahun(ThnCari);
     }
-    private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
-    private int i=0;
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -420,9 +416,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent = new StringBuilder();
             htmlContent.append(                             
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='5%'>No</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='65%'>Bulan Pelayanan</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='30%'>Jumlah Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>No</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65%'>Bulan Pelayanan</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='30%'>Jumlah Pasien</td>"+
                 "</tr>"         
             );    
             LoadHTML.setText(
@@ -524,9 +520,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             des=Sequel.cariInteger("select count(no_rawat) from reg_periksa where DATE_FORMAT(tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and kd_poli='IGDK'");
             htmlContent.append(                             
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='5%'>No</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='65%'>Bulan Pelayanan</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='30%'>Jumlah Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>No</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65%'>Bulan Pelayanan</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='30%'>Jumlah Pasien</td>"+
                 "</tr>"+                            
                 "<tr class='isi'>"+
                     "<td valign='middle' align='center'>1.</td>"+
@@ -609,9 +605,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFCFB' align='center'>"+(okt+nov+des)+"</td>"+
                 "</tr>"+                            
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>18.</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='left'>Total</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>18.</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='left'>Total</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                 "</tr>"
             );    
             LoadHTML.setText(
@@ -632,28 +628,28 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent = new StringBuilder();
             htmlContent.append(                             
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='2%' rowspan='2'>No</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='20%' rowspan='2'>Nama Dokter</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Nama Dokter</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
                 "</tr>"+                            
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Total</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
             );            
             i=1;
@@ -786,28 +782,28 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent = new StringBuilder();
             htmlContent.append(                             
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='2%' rowspan='2'>No</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='20%' rowspan='2'>Jenis Pasien</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Jenis Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
                 "</tr>"+                            
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Total</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
             );            
             ttljan=0;ttlfeb=0;ttlmar=0;ttlapr=0;ttlmei=0;ttljun=0;ttljul=0;ttlagu=0;ttlsep=0;ttlokt=0;ttlnov=0;ttldes=0;
@@ -977,28 +973,28 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent = new StringBuilder();
             htmlContent.append(                             
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='2%' rowspan='2'>No</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='20%' rowspan='2'>Jenis Kelamin</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Jenis Kelamin</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
                 "</tr>"+                            
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Total</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
             );   
             
@@ -1168,28 +1164,28 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent = new StringBuilder();
             htmlContent.append(                             
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='2%' rowspan='2'>No</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='20%' rowspan='2'>Uraian</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Uraian</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
                 "</tr>"+                            
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Total</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
             );            
             i=1;
@@ -1316,28 +1312,28 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent = new StringBuilder();
             htmlContent.append(                             
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='2%' rowspan='2'>No</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='20%' rowspan='2'>Status Pelayanan</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Status Pelayanan</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
                 "</tr>"+                            
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center'>Total</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mar "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW I "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Apr "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mei "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jun "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW II "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jul "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Agus "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sep "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW III "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Okt "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nov "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Des "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
             );            
             
