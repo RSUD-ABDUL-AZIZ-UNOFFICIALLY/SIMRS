@@ -3,23 +3,20 @@
 <properties>
     <comment>KhanzaHMS</comment> 
     <entry key="HOST">yDrGuzAT0Bg3nHnS1r5t3Q==</entry>
-    <entry key="DATABASE">IKOYi1UPQadRKxXecEOIbg==</entry>
+    <entry key="DATABASE">2H/Rm3pPCG5wmPvISSGZOA==</entry>
     <entry key="PORT">nioxtijcpDaKSUiUiP5FAg==</entry>
     <entry key="USER">3U/nwrmKxnn74LTqDTRUKRJFmPKMsQlFKcnmgyjD3qY=</entry>
     <entry key="PAS">RPOEZQf8PFNeWJi3BfqQe3EIZDgBTkuoeT/xYiedRXk=</entry>
     <entry key="CARICEPAT">aktif</entry>
-    <entry key="HOSTHYBRIDWEB">l/V2DoBXYfA+OAl4ihmqsSiDdb8SIBR9FNs2NB7vuaQ=</entry>
+    <entry key="HOSTHYBRIDWEB">Qt6vYy+U5kdp6cYtOJ5iXf11xcDjyWUZGJ140nhcpEA=</entry>
     <entry key="USERHYBRIDWEB">nmXqCKzrz9i8GTZlq7JruQ==</entry>
     <entry key="PASHYBRIDWEB">AsJ/0/gCnYnD+gK4fw9uKA==</entry>
     <entry key="HYBRIDWEB">webapps</entry>
     <entry key="PORTWEB">80</entry>
-    <entry key="AKTIFKANWARNARALAN">no</entry>
     <entry key="ANTRIAN">player</entry>
     <entry key="ALARMAPOTEK">yes</entry>
-    <entry key="LOKETANTRIAN">1</entry>
-    <entry key="RESEPRAJALKEPLAN">yes</entry>
     <entry key="FORMALARMAPOTEK">ralan + ranap</entry>
-    <entry key="STOKKOSONGRESEP">yes</entry>
+    <entry key="STOKKOSONGRESEP">no</entry>
     <entry key="HPPFARMASI">dasar</entry>
     <entry key="HPPTOKO">dasar</entry>
     <entry key="ALARMLAB">yes</entry>
@@ -31,19 +28,18 @@
     <entry key="ALARMPENGADUANPASIEN">yes</entry>
     <entry key="ALARMPERMINTAANRANAP">yes</entry>
     <entry key="MENUTRANSPARAN">yes</entry>
-    <entry key="URLAPIBPJS">https://apijkn.bpjs-kesehatan.go.id/vclaim-rest</entry>
-    <entry key="SECRETKEYAPIBPJS">mexad4OLL9PKJ0cZWCwxqQ==</entry>
-    <entry key="CONSIDAPIBPJS">/OhkMILzz4Mzc3APdmDEqw==</entry>
-    <entry key="DIAGNOSARUJUKANMASUKAPIBPJS">no</entry>
-    <entry key="USERKEYAPIBPJS">t5pZUx/uLXPbA77XAkisHOqMvUkbeEil5HjDejPtPlmakAZ9Up9vjsnc1FgN/BEa</entry>
+    <entry key="URLAPIBPJS">https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev</entry>
+    <entry key="SECRETKEYAPIBPJS">bG8uKuiLOvMFRUiI+eE0/Q==</entry>
+    <entry key="CONSIDAPIBPJS">dny+KPWdZvobkM9Otfy2YA==</entry>
+    <entry key="USERKEYAPIBPJS">BhCdBuSiawGSmPpE7DY1Q4SD97eKonUKI/glHgIK+mCf+7rGIdogPXAHV3uuOwSF</entry>
     <entry key="URLAPIAPLICARE">https://new-api.bpjs-kesehatan.go.id/aplicaresws</entry>
-    <entry key="SECRETKEYAPIAPLICARE">mexad4OLL9PKJ0cZWCwxqQ==</entry>
-    <entry key="CONSIDAPIAPLICARE">/OhkMILzz4Mzc3APdmDEqw==</entry>
-    <entry key="USERKEYAPIAPLICARE">I3fjIkt9ES+5+Hcym5vQpNiE7ITT03Ju/HaLr8ao8GFZXTAkTj6PBvQAjXj7BSyn</entry>
-    <entry key="URLAPIMOBILEJKN">https://apijkn.bpjs-kesehatan.go.id/antreanrs</entry>
-    <entry key="SECRETKEYAPIMOBILEJKN">mexad4OLL9PKJ0cZWCwxqQ==</entry>
-    <entry key="CONSIDAPIMOBILEJKN">/OhkMILzz4Mzc3APdmDEqw==</entry>
-    <entry key="USERKEYAPIMOBILEJKN">I3fjIkt9ES+5+Hcym5vQpNiE7ITT03Ju/HaLr8ao8GFZXTAkTj6PBvQAjXj7BSyn</entry>
+    <entry key="SECRETKEYAPIAPLICARE">bG8uKuiLOvMFRUiI+eE0/Q==</entry>
+    <entry key="CONSIDAPIAPLICARE">dny+KPWdZvobkM9Otfy2YA==</entry>
+    <entry key="USERKEYAPIAPLICARE">BhCdBuSiawGSmPpE7DY1Q4SD97eKonUKI/glHgIK+mCf+7rGIdogPXAHV3uuOwSF</entry>
+    <entry key="URLAPIMOBILEJKN">https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev</entry>
+    <entry key="SECRETKEYAPIMOBILEJKN">bG8uKuiLOvMFRUiI+eE0/Q==</entry>
+    <entry key="CONSIDAPIMOBILEJKN">dny+KPWdZvobkM9Otfy2YA==</entry>
+    <entry key="USERKEYAPIMOBILEJKN">D9gEifPTIeKaAfId9XRH936gpsVURA+n7YGOhoLBrAI++RUvQ04plYvxXVCJj9hH</entry>
     <entry key="URLAPIAPOTEKBPJS">https://dev-soa.bpjs-kesehatan.go.id/apotek-rest</entry>
     <entry key="SECRETKEYAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="CONSIDAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
@@ -63,13 +59,13 @@
     <entry key="IDSIRS">EXbXbvGwMp9CpQ1s9K748A==</entry>
     <entry key="PASSSIRS">gILNCSeqFSr4Hvjwkpqrow==</entry>
     <entry key="URLAPISITT">http://sirs.yankes.kemkes.go.id/sirsservice/sitbtraining/sitb/senddata</entry>
-    <entry key="IDSITT">KfLwnOnB1B/6tEewwnw8Mw==</entry>
-    <entry key="PASSSITT">Av04yfiPerC83sIQPOm+dA==</entry>
-    <entry key="KABUPATENSITT">6172011</entry>
+    <entry key="IDSITT">Fm2U09DVwzqY2V8sl5jUCA==</entry>
+    <entry key="PASSSITT">ri7lfclUM11skv5F+NuUUg==</entry>
+    <entry key="KABUPATENSITT">12345</entry>
     <entry key="URLAPICORONA">http://sirs.kemkes.go.id/fo/index.php</entry>
     <entry key="IDCORONA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASSCORONA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="KAMARAKTIFRANAP"></entry>
+    <entry key="KAMARAKTIFRANAP">Penyakit Dalam</entry>
     <entry key="DOKTERAKTIFKASIRRALAN"></entry>
     <entry key="POLIAKTIFKASIRRALAN"></entry>
     <entry key="RUANGANAKTIFINVENTARIS"></entry>
@@ -81,7 +77,7 @@
     <entry key="TOKENINHEALTH">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PEMBULATANHARGAOBAT">no</entry>
     <entry key="AKTIFKANBATCHOBAT">yes</entry>
-    <entry key="CETAKRINCIANOBAT">yes</entry>
+    <entry key="CETAKRINCIANOBAT">no</entry>
     <entry key="DEPOAKTIFOBAT"></entry>
     <entry key="VALIDASIULANGBERIOBAT">no</entry>
     <entry key="AKTIFKANBILLINGPARSIAL">no</entry>
@@ -136,5 +132,5 @@
     <entry key="USERORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>
     <entry key="PASSORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>
     <entry key="URLWAPI">http://dev.rsudaa.singkawangkota.go.id/api/wa/send</entry>
-    <entry key="ADMINLAB">089673745446</entry>
+    <entry key="ADMINLAB">0895321701798</entry>
 </properties>
