@@ -1,5 +1,5 @@
 +---------------------------------------------------------+
-| Tables_in_rsudaa                                        |
+| Tables_in_rsudaa                                          |
 +---------------------------------------------------------+
 | admin                                                   |
 | akun_aset_inventaris                                    |
@@ -22,6 +22,7 @@
 | antriloket                                              |
 | antriloketcetak                                         |
 | antripemulangan                                         |
+| antripenolakananjuranmedis                              |
 | antripenundaanpelayanan                                 |
 | antripernyataanumum                                     |
 | antripersetujuan                                        |
@@ -117,6 +118,7 @@
 | bukti_persetujuan_penundaan_pelayanan                   |
 | bukti_persetujuan_transfer_pasien_antar_ruang           |
 | cacat_fisik                                             |
+| catatan_adime_gizi                                      |
 | catatan_cek_gds                                         |
 | catatan_keperawatan_ranap                               |
 | catatan_observasi_igd                                   |
@@ -125,6 +127,10 @@
 | catatan_observasi_ranap_postpartum                      |
 | catatan_pasien                                          |
 | catatan_perawatan                                       |
+| checklist_kriteria_keluar_hcu                           |
+| checklist_kriteria_keluar_icu                           |
+| checklist_kriteria_masuk_hcu                            |
+| checklist_kriteria_masuk_icu                            |
 | checklist_post_operasi                                  |
 | checklist_pre_operasi                                   |
 | closing_kasir                                           |
@@ -195,6 +201,7 @@
 | emergency_index                                         |
 | evaluasi_kinerja                                        |
 | evaluasi_kinerja_pegawai                                |
+| follow_up_dbd                                           |
 | gambar                                                  |
 | gambar_radiologi                                        |
 | golongan_barang                                         |
@@ -205,6 +212,7 @@
 | hasil_pemeriksaan_usg                                   |
 | hasil_pemeriksaan_usg_gambar                            |
 | hasil_radiologi                                         |
+| hasil_tindakan_eswl                                     |
 | hemodialisa                                             |
 | hibah_obat_bhp                                          |
 | icd9                                                    |
@@ -339,13 +347,16 @@
 | master_imunisasi                                        |
 | master_masalah_keperawatan                              |
 | master_masalah_keperawatan_anak                         |
+| master_masalah_keperawatan_geriatri                     |
 | master_masalah_keperawatan_gigi                         |
 | master_masalah_keperawatan_igd                          |
 | master_masalah_keperawatan_mata                         |
 | master_masalah_keperawatan_psikiatri                    |
 | master_masalah_mpp                                      |
+| master_menolak_anjuran_medis                            |
 | master_rencana_keperawatan                              |
 | master_rencana_keperawatan_anak                         |
+| master_rencana_keperawatan_geriatri                     |
 | master_rencana_keperawatan_gigi                         |
 | master_rencana_keperawatan_igd                          |
 | master_rencana_keperawatan_mata                         |
@@ -404,6 +415,8 @@
 | pcare_tindakan_ranap_diberikan                          |
 | pegawai                                                 |
 | pelayanan_informasi_obat                                |
+| pemantauan_ews_neonatus                                 |
+| pemantauan_meows_obstetri                               |
 | pemantauan_pews_anak                                    |
 | pemantauan_pews_dewasa                                  |
 | pemasukan_lain                                          |
@@ -432,6 +445,8 @@
 | pengaduan                                               |
 | pengajuan_barang_medis                                  |
 | pengajuan_barang_nonmedis                               |
+| pengajuan_biaya                                         |
+| pengajuan_biaya_disetujui                               |
 | pengajuan_cuti                                          |
 | pengajuan_inventaris                                    |
 | pengeluaran_harian                                      |
@@ -450,11 +465,14 @@
 | penilaian_awal_keperawatan_ralan                        |
 | penilaian_awal_keperawatan_ralan_bayi                   |
 | penilaian_awal_keperawatan_ralan_bayi_masalah           |
+| penilaian_awal_keperawatan_ralan_geriatri               |
 | penilaian_awal_keperawatan_ralan_masalah                |
+| penilaian_awal_keperawatan_ralan_masalah_geriatri       |
 | penilaian_awal_keperawatan_ralan_masalah_psikiatri      |
 | penilaian_awal_keperawatan_ralan_psikiatri              |
 | penilaian_awal_keperawatan_ralan_rencana                |
 | penilaian_awal_keperawatan_ralan_rencana_anak           |
+| penilaian_awal_keperawatan_ralan_rencana_geriatri       |
 | penilaian_awal_keperawatan_ralan_rencana_gigi           |
 | penilaian_awal_keperawatan_ralan_rencana_igd            |
 | penilaian_awal_keperawatan_ralan_rencana_psikiatri      |
@@ -465,6 +483,7 @@
 | penilaian_korban_kekerasan                              |
 | penilaian_lanjutan_resiko_jatuh_anak                    |
 | penilaian_lanjutan_resiko_jatuh_dewasa                  |
+| penilaian_lanjutan_resiko_jatuh_geriatri                |
 | penilaian_lanjutan_resiko_jatuh_lansia                  |
 | penilaian_mcu                                           |
 | penilaian_medis_igd                                     |
@@ -474,6 +493,7 @@
 | penilaian_medis_ralan_bedah_mulut                       |
 | penilaian_medis_ralan_geriatri                          |
 | penilaian_medis_ralan_kandungan                         |
+| penilaian_medis_ralan_kulitdankelamin                   |
 | penilaian_medis_ralan_mata                              |
 | penilaian_medis_ralan_neurologi                         |
 | penilaian_medis_ralan_orthopedi                         |
@@ -482,11 +502,14 @@
 | penilaian_medis_ralan_tht                               |
 | penilaian_medis_ranap                                   |
 | penilaian_medis_ranap_kandungan                         |
+| penilaian_pasien_keracunan                              |
 | penilaian_pasien_penyakit_menular                       |
 | penilaian_pasien_terminal                               |
 | penilaian_pre_anestesi                                  |
 | penilaian_pre_operasi                                   |
 | penilaian_psikologi                                     |
+| penilaian_risiko_dekubitus                              |
+| penilaian_risiko_jatuh_neonatus                         |
 | penilaian_tambahan_beresiko_melarikan_diri              |
 | penilaian_tambahan_bunuh_diri                           |
 | penilaian_tambahan_geriatri                             |
@@ -729,6 +752,7 @@
 | surat_masuk_kendali                                     |
 | surat_pemesanan_medis                                   |
 | surat_pemesanan_non_medis                               |
+| surat_penolakan_anjuran_medis_pembuat_pernyataan        |
 | surat_pernyataan_pasien_umum                            |
 | surat_pernyataan_pasien_umum_pembuat_pernyataan         |
 | surat_persetujuan_rawat_inap                            |
@@ -766,6 +790,7 @@
 | telaah_farmasi                                          |
 | template_hasil_radiologi                                |
 | template_laboratorium                                   |
+| template_laporan_operasi                                |
 | template_pemeriksaan_dokter                             |
 | template_pemeriksaan_dokter_detail_permintaan_lab       |
 | template_pemeriksaan_dokter_penyakit                    |
@@ -872,3 +897,4 @@
 | zis_keterangan_penghasilan_penerima_dankes              |
 | zis_keterangan_ternak_penerima_dankes                   |
 | zis_keterangan_ukuran_rumah_penerima_dankes             |
++---------------------------------------------------------+
