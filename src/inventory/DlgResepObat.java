@@ -298,6 +298,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup2 = new javax.swing.JPopupMenu();
+        ppEResep = new javax.swing.JMenuItem();
         ppResepObat = new javax.swing.JMenuItem();
         ppResepObat1 = new javax.swing.JMenuItem();
         ppResepObat2 = new javax.swing.JMenuItem();
@@ -381,6 +382,22 @@ public final class DlgResepObat extends javax.swing.JDialog {
         LoadHTML = new widget.editorpane();
 
         Popup2.setName("Popup2"); // NOI18N
+
+        ppEResep.setBackground(new java.awt.Color(255, 255, 254));
+        ppEResep.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppEResep.setForeground(new java.awt.Color(50, 50, 50));
+        ppEResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppEResep.setText("Cetak e-resep");
+        ppEResep.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppEResep.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppEResep.setName("ppEResep"); // NOI18N
+        ppEResep.setPreferredSize(new java.awt.Dimension(225, 25));
+        ppEResep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppEResepActionPerformed(evt);
+            }
+        });
+        Popup2.add(ppEResep);
 
         ppResepObat.setBackground(new java.awt.Color(255, 255, 254));
         ppResepObat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -863,7 +880,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2022 20:49:52" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-04-2022 12:23:50" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -877,7 +894,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2022 20:49:53" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-04-2022 12:23:51" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1007,7 +1024,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 95, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2022" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-04-2022" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1109,7 +1126,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         PanelAccor.setPreferredSize(new java.awt.Dimension(445, 43));
         PanelAccor.setLayout(new java.awt.BorderLayout(1, 1));
 
-        ChkAccor.setBackground(new java.awt.Color(255,250,250));
+        ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
         ChkAccor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
         ChkAccor.setSelected(true);
         ChkAccor.setFocusable(false);
@@ -2215,6 +2232,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_ppLembarObat2ActionPerformed
 
+    private void ppEResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppEResepActionPerformed
+        Valid.panggilUrl("billing/LembarEresep.php?petugas="+akses.getkode().replaceAll(" ","_")+"&noresep="+NoResep.getText().replaceAll(" ","_")+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+    }//GEN-LAST:event_ppEResepActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2300,6 +2321,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.panelisi panelGlass9;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi2;
+    private javax.swing.JMenuItem ppEResep;
     private javax.swing.JMenuItem ppLabelDataObat;
     private javax.swing.JMenuItem ppLembarObat;
     private javax.swing.JMenuItem ppLembarObat1;
