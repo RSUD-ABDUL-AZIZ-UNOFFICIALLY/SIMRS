@@ -6013,10 +6013,20 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         dokter.dispose();
         pasien.dispose();
         try {
-            i=JOptionPane.showConfirmDialog(null, "Mau skalian update status pasien sudah diperiksa ????","Konfirmasi",JOptionPane.YES_NO_OPTION);
-            if(i==JOptionPane.YES_OPTION){
-                Sequel.mengedit("reg_periksa","no_rawat=?","stts=?",2,new String[]{"Sudah",TNoRw.getText()});
-            }
+            jmlparsial=0;
+            jmlparsial=Sequel.cariInteger("select count(pemeriksaan_ralan.no_rawat) from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat=?",TNoRw.getText());
+
+            if(jmlparsial<1){    
+                jmlparsial=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.stts='Belum' AND reg_periksa.no_rawat=?",TNoRw.getText());
+
+                if(jmlparsial>0){    
+                    i=JOptionPane.showConfirmDialog(null, "Mau skalian update status pasien sudah diperiksa ????","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if(i==JOptionPane.YES_OPTION){
+                        Sequel.mengedit("reg_periksa","no_rawat=?","stts=?",2,new String[]{"Sudah",TNoRw.getText()});
+                    }
+                } 
+            } 
+            
         } catch (Exception e) {
         }
         dispose();
