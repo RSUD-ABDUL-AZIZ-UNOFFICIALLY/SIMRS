@@ -25,7 +25,7 @@ import java.awt.event.KeyEvent;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker;
+import javafx.concurrent.Worker.State;
 import static javafx.concurrent.Worker.State.FAILED;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -303,7 +303,7 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
                         "}";
             System.out.println("JSON : "+requestJson+"\n");
 	    requestEntity = new HttpEntity(requestJson,headers);
-            requestJson= mapper.writeValueAsString(api.getRest().exchange(link+"/api/rs/validate", HttpMethod.POST, requestEntity,Object.class).getBody());
+            requestJson= mapper.writeValueAsString(api.getRest().exchange(link+"/validate", HttpMethod.POST, requestEntity,Object.class).getBody());
             System.out.println("URL:"+link+"/validate");
             System.out.println("JSON : "+requestJson);
             root = mapper.readTree(requestJson);
@@ -390,10 +390,10 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
                     });
                 });
                 
-                engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                engine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
                     @Override
-                    public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
-                        if (newState == Worker.State.SUCCEEDED) {
+                    public void changed(ObservableValue ov, State oldState, State newState) {
+                        if (newState == State.SUCCEEDED) {
                             try {
                                 System.out.println("URL : "+engine.getLocation());
                             } catch (Exception ex) {

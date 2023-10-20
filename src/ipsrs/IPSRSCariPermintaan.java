@@ -698,6 +698,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        isCek();
         TCari.setText("");
         NoPermintaan.setText("");
         kdbar.setText("");
@@ -705,8 +706,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         nmjenis.setText("");
         nmbar.setText("");
         Ruangan.setText("");
-        KdPeg.setText("");
-        NmPeg.setText("");
+//        KdPeg.setText("");
+//        NmPeg.setText("");
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
@@ -714,6 +715,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
+            isCek();
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
@@ -984,5 +986,16 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }    
         ppDisetujui.setEnabled(akses.getipsrs_stok_keluar());
         ppTidakDisetujui.setEnabled(akses.getipsrs_stok_keluar());
+        if (!akses.getipsrs_barang()) {
+            btnPetugas.setEnabled(akses.getipsrs_barang());
+            KdPeg.setEditable(akses.getipsrs_barang());
+            NmPeg.setEditable(akses.getipsrs_barang());
+            KdPeg.setText(akses.getkode());
+            Sequel.cariIsi("select nama from pegawai where nik=?", NmPeg,KdPeg.getText());
+        } else {
+            KdPeg.setText("");
+            NmPeg.setText("");
+        }
+
     }
 }
