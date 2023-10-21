@@ -6194,6 +6194,10 @@ public final class DlgIGD extends javax.swing.JDialog {
                     if(akses.getrujukan_masuk()==true){
                         MnRujukMasukActionPerformed(null);
                     }                    
+                }else if(i==7){
+                    MnPersetujuanMedis1ActionPerformed(null);//isi bukti persetujuan medis 2
+                }else if(i==8){
+                    MnBarcodeRM9ActionPerformed(null);
                 }
             }
             
