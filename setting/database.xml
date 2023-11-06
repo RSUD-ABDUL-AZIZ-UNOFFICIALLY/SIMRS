@@ -14,6 +14,10 @@
     <entry key="HYBRIDWEB">webapps</entry>
     <entry key="PORTWEB">80</entry>
     <entry key="AKTIFKANWARNARALAN">yes</entry>
+    <entry key="AKTIFKANNOLRANAP">yes</entry>
+    <entry key="AKTIFKANRANAPIGDFARM">yes</entry>
+    <entry key="AKTIFKANFARMINAP">yes</entry>
+    <entry key="AKTIFKANPENYERAHANMANUAL">yes</entry>
     <entry key="ANTRIAN">player</entry>
     <entry key="LOKETANTRIAN">1</entry>
     <entry key="ALARMAPOTEK">yes</entry>
@@ -89,7 +93,7 @@
     <entry key="KABUPATENSATUSEHAT">3313</entry>
     <entry key="PROPINSISATUSEHAT">33</entry>
     <entry key="KODEPOSSATUSEHAT">57752</entry>
-    <entry key="KAMARAKTIFRANAP">Penyakit Dalam</entry>
+    <entry key="KAMARAKTIFRANAP"></entry>
     <entry key="DOKTERAKTIFKASIRRALAN"></entry>
     <entry key="POLIAKTIFKASIRRALAN"></entry>
     <entry key="RUANGANAKTIFINVENTARIS"></entry>

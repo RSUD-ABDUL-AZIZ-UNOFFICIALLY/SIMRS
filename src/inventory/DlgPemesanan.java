@@ -45,7 +45,7 @@ public class DlgPemesanan extends javax.swing.JDialog {
     private double hargakonversi=0,meterai=0,ttl=0,y=0,w=0,ttldisk=0,
             sbttl=0,ppn=0,jmlkonversi=0,hargappn=0,hargadiskon=0;
     private int jml=0,i=0,row=0,index=0;
-    private String[] kodebarang,namabarang,satuan,satuanbeli,kadaluwarsa,nobatch;
+    private String[] kodebarang,namabarang,satuan,satuanbeli,kadaluwarsa,nobatch,kategori;
     private boolean[] ganti;
     private double[] harga,jumlah,subtotal,diskon,besardiskon,jmltotal,jmlstok,hpp,isi,jmlbesar,
                      ralan,kelas1,kelas2,kelas3,utama,vip,vvip,beliluar,jualbebas,karyawan,dasar;
@@ -81,7 +81,7 @@ public class DlgPemesanan extends javax.swing.JDialog {
             "Jml","Satuan Beli","Kode Barang","Nama Barang","Satuan","G","Kadaluwarsa",
             "Harga(Rp)","Subtotal(Rp)","Disk(%)","Diskon(Rp)","Total","Stok","No.Batch",
             "Ralan", "Kelas 1", "Kelas 2", "Kelas 3", "Utama", "VIP", "VVIP", "Beli Luar", 
-            "Jual Bebas", "Karyawan","HPP","Isi","Isibesar","Dasar"}){
+            "Jual Bebas", "Karyawan","HPP","Isi","Isibesar","Dasar","Kategori Obat"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                boolean a = false;
                if ((colIndex==0)||(colIndex==5)||(colIndex==6)||(colIndex==7)||(colIndex==9)||(colIndex==10)||(colIndex==13)) {
@@ -96,7 +96,7 @@ public class DlgPemesanan extends javax.swing.JDialog {
                 java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.String.class,
                 java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,
                 java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,
-                java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class
+                java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -1531,7 +1531,7 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             iyem="";
             ps=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,databarang.kode_sat, databarang.h_beli, "+
                 " ifnull(date_format(databarang.expire,'%d-%m-%Y'),'00-00-0000'),databarang.kode_satbesar,databarang.isi, "+
-                " (databarang.h_beli*databarang.isi) as hargabesar from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
+                " (databarang.h_beli*databarang.isi) as hargabesar, kategori_barang.nama as kategori from databarang inner join jenis inner join kategori_barang on databarang.kdjns=jenis.kdjns and databarang.kode_kategori=kategori_barang.kode"+
                 " where databarang.status='1' order by databarang.nama_brng");
             try {
                 rs=ps.executeQuery();
@@ -1541,9 +1541,9 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             "",rs.getString(6),rs.getString(1),
                             rs.getString(2),rs.getString(3),true,
                             rs.getString(5),rs.getDouble(8),0,0,0,0,0,"",
-                            0,0,0,0,0,0,0,0,0,0,0,rs.getDouble(7),1,0
+                            0,0,0,0,0,0,0,0,0,0,0,rs.getDouble(7),1,0,rs.getString(9)
                         });
-                        iyem=iyem+"{\"SatuanBeli\":\""+rs.getString(6)+"\",\"KodeBarang\":\""+rs.getString(1)+"\",\"NamaBarang\":\""+rs.getString(2).replaceAll("\"","")+"\",\"Satuan\":\""+rs.getString(3)+"\",\"Kadaluwarsa\":\""+rs.getString(5)+"\",\"Harga\":\""+rs.getString(8)+"\",\"Isi\":\""+rs.getString(7)+"\"},";
+                        iyem=iyem+"{\"SatuanBeli\":\""+rs.getString(6)+"\",\"KodeBarang\":\""+rs.getString(1)+"\",\"NamaBarang\":\""+rs.getString(2).replaceAll("\"","")+"\",\"Satuan\":\""+rs.getString(3)+"\",\"Kadaluwarsa\":\""+rs.getString(5)+"\",\"Harga\":\""+rs.getString(8)+"\",\"Isi\":\""+rs.getString(7)+"\",\"Kategori\":\""+rs.getString(9)+"\"},";
                     } 
                 }else{
                     while(rs.next()){
@@ -1551,9 +1551,9 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             "",rs.getString(6),rs.getString(1),
                             rs.getString(2),rs.getString(3),false,
                             rs.getString(5),rs.getDouble(8),0,0,0,0,0,"",
-                            0,0,0,0,0,0,0,0,0,0,0,rs.getDouble(7),1,0
+                            0,0,0,0,0,0,0,0,0,0,0,rs.getDouble(7),1,0,rs.getString("kategori")
                         });
-                        iyem=iyem+"{\"SatuanBeli\":\""+rs.getString(6)+"\",\"KodeBarang\":\""+rs.getString(1)+"\",\"NamaBarang\":\""+rs.getString(2).replaceAll("\"","")+"\",\"Satuan\":\""+rs.getString(3)+"\",\"Kadaluwarsa\":\""+rs.getString(5)+"\",\"Harga\":\""+rs.getString(8)+"\",\"Isi\":\""+rs.getString(7)+"\"},";
+                        iyem=iyem+"{\"SatuanBeli\":\""+rs.getString(6)+"\",\"KodeBarang\":\""+rs.getString(1)+"\",\"NamaBarang\":\""+rs.getString(2).replaceAll("\"","")+"\",\"Satuan\":\""+rs.getString(3)+"\",\"Kadaluwarsa\":\""+rs.getString(5)+"\",\"Harga\":\""+rs.getString(8)+"\",\"Isi\":\""+rs.getString(7)+"\",\"Kategori\":\""+rs.getString(9)+"\"},";
                     } 
                 }                                               
             } catch (Exception e) {
@@ -1614,6 +1614,7 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             jualbebas=null;
             karyawan=null;
             ganti=null;
+            kategori=null;
             kodebarang=new String[jml];
             namabarang=new String[jml];
             satuan=new String[jml];
@@ -1641,7 +1642,9 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             isi=new double[jml]; 
             jmlbesar=new double[jml];
             dasar=new double[jml];  
-            ganti=new boolean[jml];        
+            ganti=new boolean[jml]; 
+            kategori=new String[jml];
+
 
             index=0;        
             for(i=0;i<row;i++){
@@ -1675,6 +1678,7 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         isi[index]=Double.parseDouble(tbDokter.getValueAt(i,25).toString());
                         jmlbesar[index]=Double.parseDouble(tbDokter.getValueAt(i,26).toString());
                         dasar[index]=Double.parseDouble(tbDokter.getValueAt(i,27).toString());
+                        kategori[index]=tbDokter.getValueAt(i,28).toString();
                         index++;
                     }
                 } catch (Exception e) {
@@ -1685,7 +1689,7 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[]{
                     jumlah[i],satuanbeli[i],kodebarang[i],namabarang[i],satuan[i],ganti[i],kadaluwarsa[i],harga[i],subtotal[i],diskon[i],besardiskon[i],jmltotal[i],
-                    jmlstok[i],nobatch[i],ralan[i],kelas1[i],kelas2[i],kelas3[i],utama[i],vip[i],vvip[i],beliluar[i],jualbebas[i],karyawan[i],hpp[i],isi[i],jmlbesar[i],dasar[i]
+                    jmlstok[i],nobatch[i],ralan[i],kelas1[i],kelas2[i],kelas3[i],utama[i],vip[i],vvip[i],beliluar[i],jualbebas[i],karyawan[i],hpp[i],isi[i],jmlbesar[i],dasar[i],kategori[i]
                 });
             }
             
@@ -1697,7 +1701,7 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     for(JsonNode list:response){
                         if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                             tabMode.addRow(new Object[]{
-                                "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),true,list.path("Kadaluwarsa").asText(),list.path("Harga").asDouble(),0,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0,0,list.path("Isi").asDouble(),1,0
+                                "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),true,list.path("Kadaluwarsa").asText(),list.path("Harga").asDouble(),0,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0,0,list.path("Isi").asDouble(),1,0,list.path("Kategori").asText()
                             });
                         }
                     }
@@ -1705,7 +1709,7 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     for(JsonNode list:response){
                         if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                             tabMode.addRow(new Object[]{
-                                "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),false,list.path("Kadaluwarsa").asText(),list.path("Harga").asDouble(),0,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0,0,list.path("Isi").asDouble(),1,0
+                                "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),false,list.path("Kadaluwarsa").asText(),list.path("Harga").asDouble(),0,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0,0,list.path("Isi").asDouble(),1,0,list.path("Kategori").asText()
                             });
                         }
                     }

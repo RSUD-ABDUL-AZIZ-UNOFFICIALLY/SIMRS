@@ -51,6 +51,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private int jmlparsial=0,nilai_detik,resepbaru=0,i=0;
     private BackgroundMusic music;
     private boolean aktif=false,semua;
+    private boolean aktifkanfarminap=false;
     
     /** Creates new form 
      * @param parent
@@ -1665,8 +1666,11 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     }else{
                         if(Status.equals("Sudah Terlayani")){
                             JOptionPane.showMessageDialog(rootPane,"Resep sudah tervalidasi ..!!");
-                        }else {                           
-                            if(Sequel.cariRegistrasi(NoRawat)>0){
+                        }else {       
+                            if (koneksiDB.AKTIFKANRANAPIGDFARM().equals("yes")){
+                                    aktifkanfarminap=false;
+                                } else aktifkanfarminap = Sequel.cariRegistrasi(NoRawat)>0;
+                            if(aktifkanfarminap){
                                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
                             }else{ 
                                 panggilform2();                             
@@ -2133,7 +2137,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else{
                         Sequel.queryu("delete from antriapotek3");
                         Sequel.queryu("insert into antriapotek3 values('"+NoResep+"','1','"+NoRawat+"')");
-                        Sequel.queryu("delete from bukti_penyerahan_resep_obat where no_resep='"+NoResep+"'");
+                        if (koneksiDB.AKTIFKANPENYERAHANMANUAL().equals("yes")){
+                            Sequel.queryu("update resep_obat SET tgl_penyerahan=current_date(), jam_penyerahan=current_time() WHERE no_resep='"+NoResep+"'");
+                            Sequel.queryu("delete from bukti_penyerahan_resep_obat where no_resep='"+NoResep+"'");
+                            pilihTab();
+                            JOptionPane.showMessageDialog(null,"data peneyrahan di simpan");
+                        } else {
+                            Sequel.queryu("delete from bukti_penyerahan_resep_obat where no_resep='"+NoResep+"'");
+                        }
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Maaf, Anda tidak punya hak akses untuk mengvalidasi...!!!!");
@@ -3256,7 +3267,28 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         Valid.tabelKosong(tabMode3);
         try{  
             semua=CrDokter2.getText().trim().equals("")&&Kamar.getText().trim().equals("")&&TCari.getText().trim().equals("");
-            ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
+            
+            if (koneksiDB.AKTIFKANFARMINAP().equals("yes")){
+                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
+                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter, "+
+                    " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
+                    " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
+                    " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
+                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam from resep_obat  "+
+                    " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
+                    " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                    " inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter "+
+                    " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
+                    " inner join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
+                    " inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+                    " inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                    " where resep_obat.tgl_peresepan<>'0000-00-00' and resep_obat.status='ranap' and resep_obat.tgl_peresepan between ? and ? "+
+                    (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
+                    "(resep_obat.no_resep like ? or resep_obat.no_rawat like ? or "+
+                    "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or dokter.nm_dokter like ? or penjab.png_jawab like ?)")+
+                    " group by resep_obat.no_resep order by resep_obat.tgl_peresepan desc,resep_obat.jam_peresepan desc");
+            } else {
+                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
                     " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter, "+
                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
@@ -3274,6 +3306,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     "(resep_obat.no_resep like ? or resep_obat.no_rawat like ? or "+
                     "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or dokter.nm_dokter like ? or penjab.png_jawab like ?)")+
                     " group by resep_obat.no_resep order by resep_obat.tgl_peresepan desc,resep_obat.jam_peresepan desc");
+            }
             try{
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
