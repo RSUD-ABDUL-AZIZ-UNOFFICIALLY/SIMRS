@@ -90,6 +90,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
     private FileWriter fileWriter;
     private String iyem;
     private FileReader myObj;
+    private boolean aktifranapnol=false;
     
     /** Creates new form DlgPenyakit
      * @param parent
@@ -1385,11 +1386,15 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     pscari8.setString(1,kelas.trim());
                     rs=pscari8.executeQuery();
                 }
-
+                
+                if (koneksiDB.AKTIFKANNOLRANAP().equals("yes")){
+                    aktifranapnol=true;
+                } else aktifranapnol = rs.getDouble("total_byrdr") > 0;
+                
                 switch (pilihtable) {
                     case "rawat_inap_dr":
                         while(rs.next()){
-                            if(rs.getDouble("total_byrdr")>0){
+                            if(aktifranapnol){
                                 tabMode.addRow(new Object[] {
                                     false,rs.getString(1),rs.getString(2),rs.getString(3),
                                     rs.getDouble("total_byrdr"),rs.getDouble("material"),
@@ -1403,7 +1408,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         break;
                     case "rawat_inap_pr":
                         while(rs.next()){
-                            if(rs.getDouble("total_byrpr")>0){
+                            if(aktifranapnol){
                                 tabMode.addRow(new Object[] {
                                     false,rs.getString(1),rs.getString(2),rs.getString(3),
                                     rs.getDouble("total_byrpr"),rs.getDouble("material"),
@@ -1417,7 +1422,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         break;
                     case "rawat_inap_drpr":
                         while(rs.next()){
-                            if(rs.getDouble("total_byrdrpr")>0){
+                            if(aktifranapnol){
                                 tabMode.addRow(new Object[] {
                                     false,rs.getString(1),rs.getString(2),rs.getString(3),
                                     rs.getDouble("total_byrdrpr"),rs.getDouble("material"),

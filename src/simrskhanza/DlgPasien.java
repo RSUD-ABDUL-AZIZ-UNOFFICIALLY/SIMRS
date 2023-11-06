@@ -1535,7 +1535,25 @@ public class DlgPasien extends javax.swing.JDialog {
         );
         
         Document doc = kit.createDefaultDocument();
-        LoadHTML.setDocument(doc);
+        LoadHTML.setDocument(doc);        
+                
+        Propinsi.setEditable(false);
+        Propinsi.setBackground(new Color(245,250,240));
+        PropinsiPj.setEditable(false);
+        PropinsiPj.setBackground(new Color(245,250,240));
+        Kecamatan.setEditable(false);
+        Kecamatan.setBackground(new Color(245,250,240));
+        KecamatanPj.setEditable(false);
+        KecamatanPj.setBackground(new Color(245,250,240));
+        Kelurahan.setEditable(false);
+        Kelurahan.setBackground(new Color(245,250,240));
+        KelurahanPj.setEditable(false);
+        KelurahanPj.setBackground(new Color(245,250,240));
+        Kabupaten.setEditable(false);
+        Kabupaten.setBackground(new Color(245,250,240));
+        KabupatenPj.setEditable(false);
+        KabupatenPj.setBackground(new Color(245,250,240));
+        
     }
     
 

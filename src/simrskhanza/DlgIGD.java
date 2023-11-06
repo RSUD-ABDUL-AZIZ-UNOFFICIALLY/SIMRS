@@ -170,6 +170,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     private PreparedStatement ps,ps3,pscaripiutang;
     private ResultSet rs;
     private boolean ceksukses=false;
+    private boolean aktifranapigd=false;
     private int i=0,jmlparsial=0;
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     private double biaya=0,biayabaru=0,biayalama=0;
@@ -7507,9 +7508,15 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
             tbPetugas.requestFocus();
         }else{
-            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
+            if (koneksiDB.AKTIFKANRANAPIGDFARM().equals("yes")){
+                aktifranapigd=false;
+            } else aktifranapigd = Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0;
+//            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
+//                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+//            }else {
+            if (aktifranapigd) {
                 JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            }else {
+            } else {
                 DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
                 resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 resep.setLocationRelativeTo(internalFrame1);

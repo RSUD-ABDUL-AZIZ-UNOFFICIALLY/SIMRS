@@ -65,6 +65,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             Beban_Jasa_Sarana_Tindakan_Ranap="",Utang_Jasa_Sarana_Tindakan_Ranap="",Beban_Jasa_Menejemen_Tindakan_Ranap="",Utang_Jasa_Menejemen_Tindakan_Ranap="",
             HPP_BHP_Tindakan_Ranap="",Persediaan_BHP_Tindakan_Ranap="";    
     public DlgKtgPerawatan ktg=new DlgKtgPerawatan(null,false);
+    private boolean aktifranapnol=false;
     
     /** Creates new form DlgPenyakit
      * @param parent
@@ -2510,9 +2511,13 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         }
                     }
                     if(index==0){
+                        if (koneksiDB.AKTIFKANNOLRANAP().equals("yes")){
+                            aktifranapnol=true;
+                        } else aktifranapnol = rs.getDouble("total_byrdr") > 0;
                         switch (pilihtable) {
                             case "rawat_inap_dr":
-                                    if(rs.getDouble("total_byrdr")>0){
+//                                    if(rs.getDouble("total_byrdr")>0){
+                                    if(aktifranapnol){
                                         tabMode.addRow(new Object[] {
                                             pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
                                             rs.getDouble("total_byrdr"),rs.getDouble("material"),
@@ -2523,7 +2528,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     }            
                                 break;
                             case "rawat_inap_pr":
-                                    if(rs.getDouble("total_byrpr")>0){
+                                    if(aktifranapnol){
                                         tabMode.addRow(new Object[] {
                                             pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
                                             rs.getDouble("total_byrpr"),rs.getDouble("material"),
@@ -2534,7 +2539,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     }            
                                 break;
                             case "rawat_inap_drpr":
-                                    if(rs.getDouble("total_byrdrpr")>0){
+                                    if(aktifranapnol){
                                         tabMode.addRow(new Object[] {
                                             pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
                                             rs.getDouble("total_byrdrpr"),rs.getDouble("material"),
@@ -3029,9 +3034,13 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }   
                             break;
                     }
+                    if (koneksiDB.AKTIFKANNOLRANAP().equals("yes")){
+                        aktifranapnol=true;
+                    } else aktifranapnol = rs.getDouble("total_byrdr") > 0;
                     switch (pilihtable) {
                             case "rawat_inap_dr":
-                                    if(rs.getDouble("total_byrdr")>0){
+//                                    if(rs.getDouble("total_byrdr")>0){
+                                    if(aktifranapnol){
                                         tabMode.addRow(new Object[] {
                                             pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
                                             rs.getDouble("total_byrdr"),rs.getDouble("material"),
@@ -3042,7 +3051,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     }  
                                 break;
                             case "rawat_inap_pr":
-                                    if(rs.getDouble("total_byrpr")>0){
+                                    if(aktifranapnol){
                                         tabMode.addRow(new Object[] {
                                             pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
                                             rs.getDouble("total_byrpr"),rs.getDouble("material"),
@@ -3053,7 +3062,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     }            
                                 break;
                             case "rawat_inap_drpr":
-                                    if(rs.getDouble("total_byrdrpr")>0){
+                                    if(aktifranapnol){
                                         tabMode.addRow(new Object[] {
                                             pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
                                             rs.getDouble("total_byrdrpr"),rs.getDouble("material"),

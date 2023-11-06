@@ -1112,6 +1112,42 @@ public class koneksiDB {
         }
         return var;
     }
+    public static String AKTIFKANNOLRANAP(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("AKTIFKANNOLRANAP");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    public static String AKTIFKANRANAPIGDFARM(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("AKTIFKANRANAPIGDFARM");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    public static String AKTIFKANPENYERAHANMANUAL(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("AKTIFKANPENYERAHANMANUAL");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    public static String AKTIFKANFARMINAP(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("AKTIFKANFARMINAP");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
     
     public static String CLIENTIDSATUSEHAT(){
         try{
