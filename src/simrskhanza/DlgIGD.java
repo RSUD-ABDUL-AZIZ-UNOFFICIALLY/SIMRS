@@ -10880,6 +10880,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         TNoReg.setText("");
         TNoRw.setText("");
         Kd2.setText("");
+        DTPReg.setDate(new Date());
         AsalRujukan.setText("");        
         alamatperujuk="";
         TNoRM.setText("");
