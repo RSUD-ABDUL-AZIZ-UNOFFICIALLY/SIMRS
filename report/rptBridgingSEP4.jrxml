@@ -903,13 +903,13 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				</jr:barbecue>
 			</componentElement>
 			<line>
-				<reportElement x="0" y="315" width="591" height="1" uuid="9893a3fc-9cef-427c-9765-8b9ebe2cdac4"/>
+				<reportElement x="0" y="335" width="591" height="1" uuid="9893a3fc-9cef-427c-9765-8b9ebe2cdac4"/>
 				<graphicElement>
 					<pen lineWidth="2.0" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<textField isStretchWithOverflow="true">
-				<reportElement mode="Transparent" x="75" y="373" width="250" height="13" uuid="1ce8d592-99ef-4639-b3c5-f8c4d890bc31">
+				<reportElement mode="Transparent" x="75" y="393" width="250" height="13" uuid="1ce8d592-99ef-4639-b3c5-f8c4d890bc31">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -919,7 +919,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{no_sep}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="373" width="67" height="13" uuid="607a8d9b-7caa-4bc2-acf9-838ef88d2db0">
+				<reportElement x="0" y="393" width="67" height="13" uuid="607a8d9b-7caa-4bc2-acf9-838ef88d2db0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -929,7 +929,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[No. SEP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="68" y="373" width="7" height="13" uuid="8855b061-7a23-4e26-8114-595ca9e67b39">
+				<reportElement x="68" y="393" width="7" height="13" uuid="8855b061-7a23-4e26-8114-595ca9e67b39">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -939,7 +939,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
-				<reportElement mode="Transparent" x="75" y="387" width="250" height="13" uuid="bc72b176-3ee0-4b0f-b310-e2675e25818c">
+				<reportElement mode="Transparent" x="75" y="407" width="250" height="13" uuid="bc72b176-3ee0-4b0f-b310-e2675e25818c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -949,7 +949,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{tglsep}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="387" width="67" height="13" uuid="b1acb158-a613-434e-baf6-5970fb9935d1">
+				<reportElement x="0" y="407" width="67" height="13" uuid="b1acb158-a613-434e-baf6-5970fb9935d1">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -959,7 +959,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Tgl. SEP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="68" y="387" width="7" height="13" uuid="5c94e325-6ed0-4c77-a239-0a489c3c3d65">
+				<reportElement x="68" y="407" width="7" height="13" uuid="5c94e325-6ed0-4c77-a239-0a489c3c3d65">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -969,7 +969,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="401" width="250" height="19" uuid="262b98cf-16b0-435c-b97e-f4232f1c12ee">
+				<reportElement mode="Transparent" x="75" y="421" width="250" height="19" uuid="262b98cf-16b0-435c-b97e-f4232f1c12ee">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -979,7 +979,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{no_kartu}+" ( MR : "+$F{nomr}+" )"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="401" width="67" height="19" uuid="77439df2-dbb0-43e3-8d59-7dae1d3fa157">
+				<reportElement x="0" y="421" width="67" height="19" uuid="77439df2-dbb0-43e3-8d59-7dae1d3fa157">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -989,7 +989,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[No. Kartu]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="68" y="401" width="7" height="13" uuid="1ebb27a3-8356-4753-9f86-695baa3be2dd">
+				<reportElement x="68" y="421" width="7" height="13" uuid="1ebb27a3-8356-4753-9f86-695baa3be2dd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -999,7 +999,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="68" y="420" width="7" height="13" uuid="889c7043-a447-45f2-9922-fad756f84562">
+				<reportElement x="68" y="440" width="7" height="13" uuid="889c7043-a447-45f2-9922-fad756f84562">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -1009,7 +1009,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="420" width="250" height="19" uuid="91557911-9143-48a0-8ef0-b7710166498d">
+				<reportElement mode="Transparent" x="75" y="440" width="250" height="19" uuid="91557911-9143-48a0-8ef0-b7710166498d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -1019,7 +1019,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{nama_pasien}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="420" width="67" height="19" uuid="73377d74-1bf9-46b7-8e1f-090c55b865b8">
+				<reportElement x="0" y="440" width="67" height="19" uuid="73377d74-1bf9-46b7-8e1f-090c55b865b8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -1029,7 +1029,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Nama Peserta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="439" width="67" height="13" uuid="ec1f9aff-a65e-4f68-b14f-b02e3d048aee">
+				<reportElement x="0" y="459" width="67" height="13" uuid="ec1f9aff-a65e-4f68-b14f-b02e3d048aee">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -1039,7 +1039,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Tgl. Lahir]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
-				<reportElement mode="Transparent" x="75" y="439" width="250" height="13" uuid="6645ff6e-f78e-43be-ac19-f2809519c94f">
+				<reportElement mode="Transparent" x="75" y="459" width="250" height="13" uuid="6645ff6e-f78e-43be-ac19-f2809519c94f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -1049,7 +1049,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{tanggal_lahir}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="68" y="439" width="7" height="13" uuid="f064993e-a97a-4113-a038-6e63159352d6">
+				<reportElement x="68" y="459" width="7" height="13" uuid="f064993e-a97a-4113-a038-6e63159352d6">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -1059,7 +1059,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="453" width="67" height="13" uuid="593903ee-5225-437e-b4ab-e5417d6bfa3f">
+				<reportElement x="0" y="473" width="67" height="13" uuid="593903ee-5225-437e-b4ab-e5417d6bfa3f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -1069,7 +1069,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[No.Telepon]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="453" width="250" height="13" uuid="6b222b00-0348-4191-9d23-02e502a1bf43">
+				<reportElement mode="Transparent" x="75" y="473" width="250" height="13" uuid="6b222b00-0348-4191-9d23-02e502a1bf43">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -1079,7 +1079,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{notelep}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="68" y="453" width="7" height="13" uuid="96c51964-0d31-4252-b139-e5155b6684a2">
+				<reportElement x="68" y="473" width="7" height="13" uuid="96c51964-0d31-4252-b139-e5155b6684a2">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -1089,7 +1089,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="68" y="467" width="7" height="13" uuid="c726743a-421f-4979-bcff-a9e2114fd027">
+				<reportElement x="68" y="487" width="7" height="13" uuid="c726743a-421f-4979-bcff-a9e2114fd027">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -1099,7 +1099,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="467" width="250" height="13" uuid="194b0cac-31fe-4812-834a-1b988f20cea3">
+				<reportElement mode="Transparent" x="75" y="487" width="250" height="13" uuid="194b0cac-31fe-4812-834a-1b988f20cea3">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -1109,7 +1109,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{nmpolitujuan}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="467" width="67" height="13" uuid="d12c46b8-046b-479c-b3db-aba702f7c95f">
+				<reportElement x="0" y="487" width="67" height="13" uuid="d12c46b8-046b-479c-b3db-aba702f7c95f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -1119,7 +1119,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Sub/Spesialis]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="48" y="325" width="484" height="18" uuid="01a4cd6c-2355-4fba-afec-61ffaaa93300"/>
+				<reportElement x="48" y="345" width="484" height="18" uuid="01a4cd6c-2355-4fba-afec-61ffaaa93300"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="13" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -1127,7 +1127,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[SURAT ELEGIBILITAS PESERTA]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="48" y="346" width="484" height="17" uuid="c0b133bd-f6b8-4aa2-b88d-dd99560be430"/>
+				<reportElement x="48" y="366" width="484" height="17" uuid="c0b133bd-f6b8-4aa2-b88d-dd99560be430"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="11"/>
 					<paragraph lineSpacing="Single"/>
@@ -1135,11 +1135,11 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame" onErrorType="Blank">
-				<reportElement x="0" y="325" width="141" height="38" uuid="513f4a38-60fc-4619-b506-59bc37e34d17"/>
+				<reportElement x="0" y="345" width="141" height="38" uuid="513f4a38-60fc-4619-b506-59bc37e34d17"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="68" y="495" width="7" height="13" uuid="c1fe5590-690c-4d3a-9d33-47764b31b2e8">
+				<reportElement x="68" y="515" width="7" height="13" uuid="c1fe5590-690c-4d3a-9d33-47764b31b2e8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1149,7 +1149,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="495" width="250" height="13" uuid="d6e10120-c9b2-425a-b9e1-3cffb8d22332">
+				<reportElement mode="Transparent" x="75" y="515" width="250" height="13" uuid="d6e10120-c9b2-425a-b9e1-3cffb8d22332">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1159,7 +1159,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{nmppkrujukan}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="495" width="67" height="13" uuid="f259ac3d-c31a-4c71-959f-3a2bbcfe2275">
+				<reportElement x="0" y="515" width="67" height="13" uuid="f259ac3d-c31a-4c71-959f-3a2bbcfe2275">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1169,7 +1169,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Faskes Perujuk]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="68" y="509" width="7" height="13" uuid="39f5cbd0-78fa-4a62-a165-5c77666b43ed">
+				<reportElement x="68" y="529" width="7" height="13" uuid="39f5cbd0-78fa-4a62-a165-5c77666b43ed">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1179,7 +1179,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="509" width="250" height="24" uuid="1046a4fa-eb29-4e2e-b366-c8dccf01a480">
+				<reportElement mode="Transparent" x="75" y="529" width="250" height="24" uuid="1046a4fa-eb29-4e2e-b366-c8dccf01a480">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1189,7 +1189,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{nmdiagnosaawal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="509" width="67" height="13" uuid="b91b9e58-0621-4096-9e34-7164485b9edb">
+				<reportElement x="0" y="529" width="67" height="13" uuid="b91b9e58-0621-4096-9e34-7164485b9edb">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1199,7 +1199,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Diagnosa Awal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="68" y="534" width="7" height="13" uuid="3e32a82d-ffc3-49d9-921d-cfe5a38d17b9">
+				<reportElement x="68" y="554" width="7" height="13" uuid="3e32a82d-ffc3-49d9-921d-cfe5a38d17b9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1209,7 +1209,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="534" width="214" height="28" uuid="2df8f252-1239-4c05-8265-33f11dcaaf5c">
+				<reportElement mode="Transparent" x="75" y="554" width="214" height="28" uuid="2df8f252-1239-4c05-8265-33f11dcaaf5c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1219,7 +1219,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{catatan}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="534" width="67" height="13" uuid="7b142b6e-a760-4209-8c67-a28114b3d1fd">
+				<reportElement x="0" y="554" width="67" height="13" uuid="7b142b6e-a760-4209-8c67-a28114b3d1fd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1229,7 +1229,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Catatan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="581" width="341" height="11" uuid="ef87b100-d108-442b-b414-44d038e13b86"/>
+				<reportElement x="0" y="601" width="341" height="11" uuid="ef87b100-d108-442b-b414-44d038e13b86"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="7" isBold="false" isItalic="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -1237,7 +1237,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[*Saya Menyetujui BPJS Kesehatan menggunakan informasi Medis Pasien jika diperlukan.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="590" width="341" height="11" uuid="679313b1-a0a7-4cd4-bd37-d3ff7c57e5b7"/>
+				<reportElement x="0" y="610" width="341" height="11" uuid="679313b1-a0a7-4cd4-bd37-d3ff7c57e5b7"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="7" isBold="false" isItalic="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -1245,7 +1245,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[*SEP bukan sebagai bukti penjaminan peserta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="602" width="48" height="11" uuid="2b5d26a2-17e5-4520-a526-4ba93d644380"/>
+				<reportElement x="0" y="622" width="48" height="11" uuid="2b5d26a2-17e5-4520-a526-4ba93d644380"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="7" isBold="false" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -1253,7 +1253,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Cetakan ke 1]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy h:mm:ss a" isBlankWhenNull="false">
-				<reportElement key="textField" x="48" y="602" width="216" height="11" forecolor="#000000" backcolor="#FFFFFF" uuid="463fab7c-6780-4d68-b8b7-50225c08ce59"/>
+				<reportElement key="textField" x="48" y="622" width="216" height="11" forecolor="#000000" backcolor="#FFFFFF" uuid="463fab7c-6780-4d68-b8b7-50225c08ce59"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1267,7 +1267,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="68" y="481" width="7" height="13" uuid="c2d186a8-79cc-41e5-91e2-c4bca917a4f7">
+				<reportElement x="68" y="501" width="7" height="13" uuid="c2d186a8-79cc-41e5-91e2-c4bca917a4f7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1277,7 +1277,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="481" width="67" height="13" uuid="5d8378f5-5916-431d-87f3-bf8ab9589dfc">
+				<reportElement x="0" y="501" width="67" height="13" uuid="5d8378f5-5916-431d-87f3-bf8ab9589dfc">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1287,7 +1287,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Dokter]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="481" width="250" height="13" uuid="05b38fb8-e836-4e26-af79-79c2472e5a31">
+				<reportElement mode="Transparent" x="75" y="501" width="250" height="13" uuid="05b38fb8-e836-4e26-af79-79c2472e5a31">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1297,7 +1297,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{nmdpdjp}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="392" y="490" width="7" height="13" uuid="43754f79-65bc-45be-91ff-27012beeb650">
+				<reportElement x="392" y="510" width="7" height="13" uuid="43754f79-65bc-45be-91ff-27012beeb650">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1307,7 +1307,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="490" width="132" height="13" uuid="1f0c11b5-bcc3-4a4e-aa9b-5ab26bc46db6">
+				<reportElement mode="Transparent" x="400" y="510" width="132" height="13" uuid="1f0c11b5-bcc3-4a4e-aa9b-5ab26bc46db6">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1317,7 +1317,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{if(bridging_sep.klsrawat='1','Kelas 1',if(bridging_sep.klsrawat='2','Kelas 2','Kelas 3'))}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="325" y="490" width="66" height="13" uuid="69de6f02-1d74-4b9e-adef-4a718c07c920">
+				<reportElement x="325" y="510" width="66" height="13" uuid="69de6f02-1d74-4b9e-adef-4a718c07c920">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1327,7 +1327,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Kls. Hak]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="325" y="534" width="206" height="13" uuid="89240c4d-fce5-4688-a206-67dc07123993">
+				<reportElement x="325" y="554" width="206" height="13" uuid="89240c4d-fce5-4688-a206-67dc07123993">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -1337,7 +1337,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Pasien/Keluarga Pasien]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="392" y="504" width="7" height="13" uuid="9e047f92-a84c-4ed6-9ff7-d33730a2e73c">
+				<reportElement x="392" y="524" width="7" height="13" uuid="9e047f92-a84c-4ed6-9ff7-d33730a2e73c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1347,7 +1347,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="325" y="504" width="66" height="13" uuid="2da8f6b8-e9e0-44e6-864d-17318627b8c3">
+				<reportElement x="325" y="524" width="66" height="13" uuid="2da8f6b8-e9e0-44e6-864d-17318627b8c3">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1357,7 +1357,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Kls. Rawat]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="504" width="132" height="13" uuid="f4a6fc5a-d149-4db4-b51a-ee278d66fed5">
+				<reportElement mode="Transparent" x="400" y="524" width="132" height="13" uuid="f4a6fc5a-d149-4db4-b51a-ee278d66fed5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1368,7 +1368,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
                         replaceAll("3","Kelas I").replaceAll("4","Kelas II").replaceAll("5","Kelas III").replaceAll("6","ICCU").replaceAll("7","ICU")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="392" y="518" width="7" height="13" uuid="5022542b-12e6-4f24-b7d0-7afd1894471d">
+				<reportElement x="392" y="538" width="7" height="13" uuid="5022542b-12e6-4f24-b7d0-7afd1894471d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1378,7 +1378,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="325" y="518" width="66" height="13" uuid="c2a7fd0b-a296-4a69-9df4-9d56312ae035">
+				<reportElement x="325" y="538" width="66" height="13" uuid="c2a7fd0b-a296-4a69-9df4-9d56312ae035">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1388,7 +1388,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Penjamin]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="518" width="132" height="13" uuid="ff2110b5-97ec-4040-afeb-4bdc9a55653a">
+				<reportElement mode="Transparent" x="400" y="538" width="132" height="13" uuid="ff2110b5-97ec-4040-afeb-4bdc9a55653a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1398,7 +1398,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{pembiayaan}.replaceAll("1","Pribadi").replaceAll("2","Pemberi Kerja").replaceAll("2","Asuransi Lain")]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="325" y="548" width="201" height="54" isRemoveLineWhenBlank="true" uuid="1ed9349f-852e-439c-96af-efa25a680bb6">
+				<reportElement x="325" y="568" width="201" height="54" isRemoveLineWhenBlank="true" uuid="1ed9349f-852e-439c-96af-efa25a680bb6">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
@@ -1406,7 +1406,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				</jr:QRCode>
 			</componentElement>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="325" y="603" width="204" height="13" uuid="22589813-2edf-4d56-ac90-9175ff82e4fc">
+				<reportElement mode="Transparent" x="325" y="623" width="204" height="13" uuid="22589813-2edf-4d56-ac90-9175ff82e4fc">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -1416,7 +1416,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{nama_pasien}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="392" y="476" width="7" height="13" uuid="6b64bb17-ff95-48e1-9f82-33125f7ba745">
+				<reportElement x="392" y="496" width="7" height="13" uuid="6b64bb17-ff95-48e1-9f82-33125f7ba745">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1426,7 +1426,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="476" width="7" height="13" uuid="005073c2-79bb-4237-991c-23b620c47491">
+				<reportElement x="400" y="496" width="7" height="13" uuid="005073c2-79bb-4237-991c-23b620c47491">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1436,7 +1436,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="325" y="476" width="66" height="13" uuid="e5414ef8-6f88-415b-871c-c9550d5cb86d">
+				<reportElement x="325" y="496" width="66" height="13" uuid="e5414ef8-6f88-415b-871c-c9550d5cb86d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1446,7 +1446,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Poli Perujuk]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="455" width="132" height="20" uuid="b3bc494d-d5fc-47de-81bb-9c699194e6dc">
+				<reportElement mode="Transparent" x="400" y="475" width="132" height="20" uuid="b3bc494d-d5fc-47de-81bb-9c699194e6dc">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1456,7 +1456,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{flagprosedur}.replaceAll("0","- Prosedur Tidak Berkelanjutan").replaceAll("1","- Prosedur dan Terapi Berkelanjutan")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="444" width="132" height="10" uuid="ba88beb3-3e11-4b2c-b160-c53a7324ee9b">
+				<reportElement mode="Transparent" x="400" y="464" width="132" height="10" uuid="ba88beb3-3e11-4b2c-b160-c53a7324ee9b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1466,7 +1466,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA["- "+($F{tujuankunjungan}.equals("0")?"Konsultasi dokter(pertama)":"Kunjungan Kontrol(ulangan)")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="392" y="444" width="7" height="13" uuid="b25c7250-9abc-4475-a3cc-14ecae15f9f8">
+				<reportElement x="392" y="464" width="7" height="13" uuid="b25c7250-9abc-4475-a3cc-14ecae15f9f8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1476,7 +1476,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="325" y="444" width="66" height="13" uuid="b05c8dbb-ce2c-410e-8fbd-292a6e756c5c">
+				<reportElement x="325" y="464" width="66" height="13" uuid="b05c8dbb-ce2c-410e-8fbd-292a6e756c5c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1486,7 +1486,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Jns.Kunjungan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="392" y="420" width="7" height="13" uuid="e43be693-9235-4e0a-a38a-a0c3b9ff125c">
+				<reportElement x="392" y="440" width="7" height="13" uuid="e43be693-9235-4e0a-a38a-a0c3b9ff125c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1496,7 +1496,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="392" y="406" width="7" height="13" uuid="93f96dd6-b345-4797-9a84-a9ad8969e833">
+				<reportElement x="392" y="426" width="7" height="13" uuid="93f96dd6-b345-4797-9a84-a9ad8969e833">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1506,7 +1506,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="325" y="406" width="66" height="13" uuid="23982893-3b84-427f-a4aa-8fdbe546d7e7">
+				<reportElement x="325" y="426" width="66" height="13" uuid="23982893-3b84-427f-a4aa-8fdbe546d7e7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1516,7 +1516,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Peserta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="325" y="420" width="66" height="19" uuid="5e0a6f85-d25d-4b5b-a35f-8a05f6663145">
+				<reportElement x="325" y="440" width="66" height="19" uuid="5e0a6f85-d25d-4b5b-a35f-8a05f6663145">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1526,7 +1526,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Jns. Rawat]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="406" width="132" height="13" uuid="d373fc37-10bb-43d1-a8da-04d72ec3e6a5">
+				<reportElement mode="Transparent" x="400" y="426" width="132" height="13" uuid="d373fc37-10bb-43d1-a8da-04d72ec3e6a5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1536,7 +1536,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{peserta}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="420" width="140" height="19" uuid="ff94a74e-485e-41bb-b5df-8d5b9a8e8611">
+				<reportElement mode="Transparent" x="400" y="440" width="140" height="19" uuid="ff94a74e-485e-41bb-b5df-8d5b9a8e8611">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1546,7 +1546,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{if(bridging_sep.jnspelayanan='1','Rawat Inap','Rawat Jalan')}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="325" y="391" width="206" height="13" uuid="b7b5b0a3-db78-4332-8c2f-36fe303a271c">
+				<reportElement mode="Transparent" x="325" y="411" width="206" height="13" uuid="b7b5b0a3-db78-4332-8c2f-36fe303a271c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -1556,7 +1556,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$P{prb}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="326" y="366" width="205" height="24" uuid="9fe9d108-ec60-4987-87a8-44bfe2e4e43c"/>
+				<reportElement x="326" y="386" width="205" height="24" uuid="9fe9d108-ec60-4987-87a8-44bfe2e4e43c"/>
 				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barHeight="45">
 					<jr:codeExpression><![CDATA[$F{no_sep}]]></jr:codeExpression>
 				</jr:barbecue>

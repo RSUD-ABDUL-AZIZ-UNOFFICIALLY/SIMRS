@@ -10880,6 +10880,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         TNoReg.setText("");
         TNoRw.setText("");
         Kd2.setText("");
+        DTPReg.setDate(new Date());
         AsalRujukan.setText("");        
         alamatperujuk="";
         TNoRM.setText("");
@@ -11027,7 +11028,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     kdpnj.setText(rs.getString("kd_pj"));
                     nmpnj.setText(rs.getString("png_jawab"));
                     TStatus.setText(rs.getString("daftar"));
-                    JK.setText("jk");
+                    JK.setText(rs.getString("jk"));
                     umur="0";
                     sttsumur="Th";
                     if(rs.getInt("tahun")>0){
