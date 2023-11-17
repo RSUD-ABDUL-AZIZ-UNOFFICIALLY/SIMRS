@@ -2486,7 +2486,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
                     i = 0;
                     try{
-                          biaya = (String)JOptionPane.showInputDialog(null,"Silahkan pilih nota yang mau dicetak!","Nota",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Nota", "Kwitansi", "Nota & Kwitansi","Kwitansi Piutang"},"Nota");
+                          biaya = (String)JOptionPane.showInputDialog(null,"Silahkan pilih nota yang mau dicetak!","Nota",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Nota", "Kwitansi", "Nota & Kwitansi","Kwitansi Piutang","Nota & Kwitansi2","Bukti Pembayaran"},"Nota");
                           switch (biaya) {
                                 case "Nota":
                                       i=1;
@@ -2499,6 +2499,12 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                                       break;
                                 case "Kwitansi Piutang":
                                       i=4;
+                                      break;
+                                case "Nota & Kwitansi2":
+                                      i=5;
+                                      break;
+                                case "Bukti Pembayaran":
+                                      i=6;
                                       break;
                           }
                     }catch(Exception e){
@@ -2534,6 +2540,12 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                             }else{
                                 JOptionPane.showMessageDialog(null,"Nilai Piutang masih kosong...!!!");
                             }
+                        }else if(i==5){
+                            Valid.panggilUrl("billing/LaporanBillingGabung1.php?petugas="+akses.getkode().replaceAll(" ","_")+"&tanggal="+DTPTgl.getSelectedItem().toString().replaceAll(" ","_")+"&nonota="+Sequel.cariIsi("select count(reg_periksa.no_rawat) from reg_periksa "+
+                                        "where reg_periksa.kd_pj='"+kd_pj+"' and reg_periksa.tgl_registrasi like '%"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,7)+"%'")+"/RJ/"+kd_pj+"/"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(5,7)+"/"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,4)+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());                        
+                        }else if(i==6){
+                            Valid.panggilUrl("billing/LaporanBuktiBayar1.php?petugas="+akses.getkode().replaceAll(" ","_")+"&nonota="+Sequel.cariIsi("select count(reg_periksa.no_rawat) from reg_periksa "+
+                                        "where reg_periksa.kd_pj='"+kd_pj+"' and reg_periksa.tgl_registrasi like '%"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,7)+"%'")+"/RJ/"+kd_pj+"/"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(5,7)+"/"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,4)+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());                        
                         }
                         this.setCursor(Cursor.getDefaultCursor());
                     }
