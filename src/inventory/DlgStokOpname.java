@@ -65,7 +65,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
 
         Object[] row={
             "Kode Barang","Nama Barang","Harga Beli","Satuan","Tanggal","Stok","Real","Selisih","Lebih","Total Real",
-            "Nominal Hilang(Rp)","Nominal Lebih(Rp)","Keterangan","Kode Lokasi","Nama Lokasi","No.Batch","No.Faktur"};
+            "Nominal Hilang(Rp)","Nominal Lebih(Rp)","Keterangan","Kode Lokasi","Nama Lokasi","No.Batch","No.Faktur","Kategori Obat"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -74,7 +74,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 17; i++) {
+        for (int i = 0; i < 18; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(80);
@@ -110,6 +110,8 @@ public final class DlgStokOpname extends javax.swing.JDialog {
                 column.setPreferredWidth(70);
             }else if(i==16){
                 column.setPreferredWidth(100);
+            }else if(i==17){
+                column.setPreferredWidth(70);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -1242,7 +1244,7 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
             if(nmjns.getText().equals("")&&nmkategori.getText().equals("")&&nmgolongan.getText().equals("")&&NmGudang.getText().equals("")&&TCari.getText().equals("")){
                 pstampil=koneksi.prepareStatement("select opname.kode_brng, databarang.nama_brng,opname.h_beli, databarang.kode_sat, opname.tanggal, opname.stok, "+
                      "opname.real, opname.selisih, opname.lebih, (opname.real*opname.h_beli) as totalreal,opname.nomihilang,opname.nomilebih, opname.keterangan, bangsal.kd_bangsal, bangsal.nm_bangsal, "+
-                     "opname.no_batch,opname.no_faktur from opname inner join databarang on opname.kode_brng=databarang.kode_brng "+
+                     "opname.no_batch,opname.no_faktur,kategori_barang.nama from opname inner join databarang on opname.kode_brng=databarang.kode_brng "+
                      "inner join bangsal on opname.kd_bangsal=bangsal.kd_bangsal "+
                      "inner join jenis on databarang.kdjns=jenis.kdjns "+
                      "inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
@@ -1251,7 +1253,7 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
             }else{
                 pstampil=koneksi.prepareStatement("select opname.kode_brng, databarang.nama_brng,opname.h_beli, databarang.kode_sat, opname.tanggal, opname.stok, "+
                      "opname.real, opname.selisih, opname.lebih, (opname.real*opname.h_beli) as totalreal,opname.nomihilang,opname.nomilebih, opname.keterangan, bangsal.kd_bangsal, bangsal.nm_bangsal, "+
-                     "opname.no_batch,opname.no_faktur from opname inner join databarang on opname.kode_brng=databarang.kode_brng "+
+                     "opname.no_batch,opname.no_faktur,kategori_barang.nama from opname inner join databarang on opname.kode_brng=databarang.kode_brng "+
                      "inner join bangsal on opname.kd_bangsal=bangsal.kd_bangsal "+
                      "inner join jenis on databarang.kdjns=jenis.kdjns "+
                      "inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
@@ -1290,7 +1292,7 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
                         rstampil.getString(4),rstampil.getString(5),rstampil.getString(6),rstampil.getString(7),                              
                         rstampil.getString(8),rstampil.getString(9),df2.format(rstampil.getDouble(10)),df2.format(rstampil.getDouble(11)),
                         df2.format(rstampil.getDouble(12)),rstampil.getString(13),rstampil.getString(14),rstampil.getString(15),
-                        rstampil.getString(16),rstampil.getString(17)
+                        rstampil.getString(16),rstampil.getString(17),rstampil.getString(18)
                     });
                 }
             } catch (Exception e) {
