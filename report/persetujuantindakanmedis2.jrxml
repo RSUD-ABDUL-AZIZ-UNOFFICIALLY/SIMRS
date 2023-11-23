@@ -11,6 +11,7 @@
 	<parameter name="kontakrs" class="java.lang.String"/>
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="petugas" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk,
 pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,
@@ -650,14 +651,6 @@ Consent.
 				<text><![CDATA[Yang menyatakan persetujuan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="777" width="132" height="12" uuid="bee420e8-830c-449d-980a-ed1e90ad2834"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Tanda Tangan dan Nama]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="3" y="790" width="132" height="12" uuid="9ab15d8c-597d-4726-bb8e-7ebcc2042a75"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font fontName="Tahoma" size="8" isBold="false"/>
@@ -803,6 +796,16 @@ Consent.
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[": " +$F{no_tlp}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" d MMMM yyyy">
+				<reportElement x="4" y="776" width="132" height="12" uuid="3b5d12eb-a998-466e-a3f1-9cb20fc5705f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{petugas}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

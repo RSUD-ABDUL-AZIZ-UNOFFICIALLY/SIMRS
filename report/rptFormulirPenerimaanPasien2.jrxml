@@ -51,6 +51,7 @@
 	</parameter>
 	<parameter name="jammasuk" class="java.lang.String"/>
 	<parameter name="namakamar" class="java.lang.String"/>
+	<parameter name="petugas" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select pasien.no_rkm_medis,pasien.jk, pasien.tgl_lahir,pasien.nm_pasien,pasien.pekerjaan,pasien.alamat, pasien.nm_ibu,pasien.no_ktp,pasien.umur, pasien.agama,pasien.stts_nikah,pasien.pekerjaan, pasien.namakeluarga,pasien.no_peserta, pasien.pekerjaanpj,pasien.alamatpj, pasien.pnd, pasien.keluarga, pasien.no_tlp
  from pasien where  pasien.no_rkm_medis=$P{norm}]]>
@@ -538,14 +539,6 @@ Consent.
 				<text><![CDATA[Yang menyatakan persetujuan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="8" y="768" width="132" height="12" uuid="10a7a783-180e-4e92-8d07-ece12970aa94"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Tanda Tangan dan Nama]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="8" y="781" width="132" height="12" uuid="8339b547-79f9-40e6-bc65-ed43edf34ec2"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font fontName="Tahoma" size="8" isBold="false"/>
@@ -783,6 +776,16 @@ Consent.
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[": " + $F{namakeluarga}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" d MMMM yyyy">
+				<reportElement x="8" y="767" width="132" height="12" uuid="cfb685b8-f55f-4e17-8df1-29d0a7a7af5c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{petugas}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
