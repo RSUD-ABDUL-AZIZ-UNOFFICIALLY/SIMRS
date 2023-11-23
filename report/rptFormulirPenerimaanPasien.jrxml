@@ -47,6 +47,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="petugas" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select pasien.no_rkm_medis,pasien.jk, pasien.tgl_lahir,pasien.nm_pasien,pasien.pekerjaan,
 concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.nm_ibu,pasien.no_ktp,pasien.umur, pasien.agama,pasien.stts_nikah,pasien.pekerjaan, pasien.namakeluarga, pasien.pekerjaanpj,pasien.alamatpj, pasien.pnd, pasien.keluarga, pasien.no_tlp
@@ -859,16 +860,6 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where  pas
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tanggalmasuk}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="359" y="632" width="159" height="14" uuid="0a9faa95-2352-4f46-aa7d-1f4ee4a84c0f">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[(...............................................)]]></text>
-			</staticText>
 			<textField>
 				<reportElement mode="Opaque" x="454" y="425" width="75" height="13" uuid="b6b81316-903a-4707-af1a-d8c737ad8b7f"/>
 				<textElement verticalAlignment="Middle">
@@ -960,6 +951,14 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where  pas
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA["( "+ $F{namakeluarga} +" )"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="350" y="634" width="179" height="13" uuid="0194b66a-0dad-4bc6-8b48-18a2876ce048"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["( "+ $P{petugas} +" )"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

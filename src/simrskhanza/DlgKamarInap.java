@@ -9319,7 +9319,8 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());  
                                 param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
                                 param.put("emailrs",akses.getemailrs());         
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));   
+                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                                param.put("petugas",Sequel.cariIsi("select nama from pegawai where nik=?",akses.getkode().replaceAll(" ","_")));    
                                 Valid.MyReport("rptFormulirPenerimaanPasien.jasper",param,"::[ Formulir Penerimaan Pasien ]::"); 
                                 this.setCursor(Cursor.getDefaultCursor());
                             }else{
@@ -9357,7 +9358,8 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
                         param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());  
                         param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
-                        param.put("emailrs",akses.getemailrs());         
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("petugas",Sequel.cariIsi("select nama from pegawai where nik=?",akses.getkode().replaceAll(" ","_")));          
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));   
                         param.put("kelas",Sequel.cariIsi("select kamar.kelas from kamar_inap INNER JOIN kamar on kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()));
                         param.put("bangsal",Sequel.cariIsi("select bangsal.nm_bangsal from kamar_inap INNER JOIN kamar on kamar_inap.kd_kamar=kamar.kd_kamar INNER JOIN bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()));
@@ -10480,7 +10482,8 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());  
                                 param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
                                 param.put("emailrs",akses.getemailrs());         
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));   
+                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                                param.put("petugas",Sequel.cariIsi("select nama from pegawai where nik=?",akses.getkode().replaceAll(" ","_")));   
                                 Valid.MyReport("rptFormulirPenerimaanPasien2.jasper",param,"::[ Formulir Penerimaan Pasien ]::"); 
                                 this.setCursor(Cursor.getDefaultCursor());
                             }else{
@@ -10517,7 +10520,8 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
                         param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());  
                         param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
-                        param.put("emailrs",akses.getemailrs());         
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("petugas",Sequel.cariIsi("select nama from pegawai where nik=?",akses.getkode().replaceAll(" ","_")));          
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));   
                         Valid.MyReport("rptFormulirPenerimaanPasien2.jasper",param,"::[ Formulir Penerimaan Pasien ]::"); this.setCursor(Cursor.getDefaultCursor());
                 }
