@@ -7153,7 +7153,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             CmbJk.setSelectedItem(cekViaBPJS.sex);
             TNoPeserta.setText(cekViaBPJS.noKartu);
             Pekerjaan.setText(cekViaBPJS.jenisPesertaketerangan);
-            TUmurTh.setText(cekViaBPJS.umurumurSekarang);
+//            TUmurTh.setText(cekViaBPJS.umurumurSekarang);
             Valid.SetTgl(DTPLahir,cekViaBPJS.tglLahir);
             this.setCursor(Cursor.getDefaultCursor());
         }   
@@ -7171,7 +7171,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             CmbJk.setSelectedItem(cekViaBPJSKartu.sex);
             TKtp.setText(cekViaBPJSKartu.nik);
             Pekerjaan.setText(cekViaBPJSKartu.jenisPesertaketerangan);
-            TUmurTh.setText(cekViaBPJSKartu.umurumurSekarang);
+//            TUmurTh.setText(cekViaBPJSKartu.umurumurSekarang);
             Valid.SetTgl(DTPLahir,cekViaBPJSKartu.tglLahir);
             this.setCursor(Cursor.getDefaultCursor());
         }
