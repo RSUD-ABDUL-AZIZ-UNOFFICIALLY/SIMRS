@@ -7050,7 +7050,8 @@ public final class DlgReg extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
         isForm(); 
-        emptTeks();        
+        emptTeks();  
+        DTPReg.setDate(new Date());
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -14778,7 +14779,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         TNoReg.setText("");
         TNoRw.setText("");
         Kd2.setText("");
-        DTPReg.setDate(new Date());
+//        DTPReg.setDate(new Date());
         TNoRM.setText("");
         TPasien.setText("");
         TPngJwb.setText("");

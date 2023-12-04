@@ -842,6 +842,8 @@ public final class SuratPersetujuanUmum extends javax.swing.JDialog {
             Valid.textKosong(NamaPJ,"Nama Penanggung Jawab");
         }else if(UmurPJ.getText().trim().equals("")){
             Valid.textKosong(UmurPJ,"Umur");
+        }else if(UmurPJ.getText().length()>3){
+            Valid.textKosong(UmurPJ,"Umur Tidak valid dan");
         }else if(NoTelp.getText().trim().equals("")){
             Valid.textKosong(NoTelp,"Nomor Telp");
         }else if(NoKTP.getText().trim().equals("")){
@@ -1372,7 +1374,7 @@ public final class SuratPersetujuanUmum extends javax.swing.JDialog {
                     TPasien.setText(rs.getString("nm_pasien"));
                     JK.setText(rs.getString("jk"));
                     LahirPasien.setText(rs.getString("tgl_lahir"));
-                    UmurPJ.setText(rs.getString("umurdaftar")+" "+rs.getString("sttsumur"));
+                    Umur.setText(rs.getString("umurdaftar")+" "+rs.getString("sttsumur"));
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
