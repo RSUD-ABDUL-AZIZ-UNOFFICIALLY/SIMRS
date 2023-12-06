@@ -2433,14 +2433,32 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                  Integer.parseInt(NilaiResiko5.getText())+Integer.parseInt(NilaiResiko6.getText())+Integer.parseInt(NilaiResiko7.getText())+Integer.parseInt(NilaiResiko8.getText())+
                  Integer.parseInt(NilaiResiko9.getText())+Integer.parseInt(NilaiResiko10.getText())+Integer.parseInt(NilaiResiko11.getText()))+""
             );
-            if(Integer.parseInt(NilaiResikoTotal.getText())<=3){
-                TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (0 - 3), Tindakan : Intervensi pencegahan risiko jatuh standar");
-            }else if(Integer.parseInt(NilaiResikoTotal.getText())>=4){
-                TingkatResiko.setText("Tingkat Resiko : Risiko Tinggi (>= 4), Tindakan : Intervensi pencegahan risiko jatuh standar dan Intervensi risiko jatuh tinggi");
+            if(Integer.parseInt(NilaiResikoTotal.getText())<6){
+                TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (0-5), Tindakan : Intervensi pencegahan risiko jatuh standar");
+                HasilSkrining.setText("Risiko Rendah");
+                Saran.setText("1.Orientasi lingkungan\n"
+                        + "2.Roda tempat tidur berada pada posisi terkunci\n"
+                        + "3.Posisi tempat tidur pada posisi terendah\n"
+                        + "4.Naikkan pagar pengaman tempat tidur\n"
+                        + "5.Berikan brosur edukasi jatuh");
+            }else if(Integer.parseInt(NilaiResikoTotal.getText())<=16){
+                TingkatResiko.setText("Tingkat Resiko : Risiko Sedang (6-16), Tindakan : Intervensi pencegahan risiko jatuh standar");
+                HasilSkrining.setText("Risiko Sedang");
+                Saran.setText("1.Lakukan  semua pedoman pencegahan jatuh risiko rendah\n"
+                        + "2.Beri tanda segitiga warna kuning pada bed pasien\n"
+                        + "3.Beri stiker fall risk berwarna kuning pada gelang identitas yang menempel pasien");
+            }else if(Integer.parseInt(NilaiResikoTotal.getText())>16){
+                TingkatResiko.setText("Tingkat Resiko : Risiko Tinggi (17-30), Tindakan : Intervensi pencegahan risiko jatuh standar dan Intervensi risiko jatuh tinggi");
+                HasilSkrining.setText("Risiko Tinggi");
+                Saran.setText("1.Lakukan semua pedoman pencegahan jatuh risiko rendah dan  risiko sedang\n"
+                        + "2.Temani pasien saat mobilisasi\n"
+                        + "3.Tempatkan pasien dikamar yang paling dekat dengan nurse station ( bila mungkin )\n"
+                        + "4.Pastikan pasien menggunakan alat bantu jalan\n"
+                        + "5.Libatkan keluarga untuk mengawasi pasien");
             }
         } catch (Exception e) {
             NilaiResikoTotal.setText("0");
-            TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (0 - 3), Tindakan : Intervensi pencegahan risiko jatuh standar");
+            TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (0-5), Tindakan : Intervensi pencegahan risiko jatuh standar");
         }
     } 
 }
