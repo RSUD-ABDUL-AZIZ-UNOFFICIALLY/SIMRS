@@ -4056,7 +4056,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         FormMenu.add(BtnFollowUpDBD);
 
         BtnCatatanKeperawatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnCatatanKeperawatan.setText("Catatan Keperawatan");
+        BtnCatatanKeperawatan.setText("Catatan Keperawatan&Kebidanan");
         BtnCatatanKeperawatan.setFocusPainted(false);
         BtnCatatanKeperawatan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnCatatanKeperawatan.setGlassColor(new java.awt.Color(255, 255, 255));

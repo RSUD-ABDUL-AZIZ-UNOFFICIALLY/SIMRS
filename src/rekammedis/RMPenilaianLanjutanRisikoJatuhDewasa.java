@@ -469,7 +469,7 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-03-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-12-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -483,7 +483,7 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-03-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-12-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -604,7 +604,7 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-03-2023" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-12-2023" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1859,15 +1859,32 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
         try {
             NilaiResikoTotal.setText((Integer.parseInt(NilaiResiko1.getText())+Integer.parseInt(NilaiResiko2.getText())+Integer.parseInt(NilaiResiko3.getText())+Integer.parseInt(NilaiResiko4.getText())+Integer.parseInt(NilaiResiko5.getText())+Integer.parseInt(NilaiResiko6.getText()))+"");
             if(Integer.parseInt(NilaiResikoTotal.getText())<25){
-                TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (0-24), Tindakan : Intervensi pencegahan risiko jatuh standar");
+                TingkatResiko.setText("Tingkat Resiko : Tidak Risiko (0-24), Tindakan : Intervensi pencegahan risiko jatuh standar");
+                HasilSkrining.setText("Tidak Risiko");
+                Saran.setText("1.Orientasi lingkungan\n"
+                        + "2.Roda tempat tidur berada pada posisi terkunci\n"
+                        + "3.Posisikan tempat tidur pada posisi terendah\n"
+                        + "4.Naikkan pagar pengaman tempat tidur\n"
+                        + "5.Pastikan lampu tidur hidup saat malam hari\n"
+                        + "6.Berikan edukasi/brosur risiko jatuh pada pasien");
             }else if(Integer.parseInt(NilaiResikoTotal.getText())<45){
-                TingkatResiko.setText("Tingkat Resiko : Risiko Sedang (25-44), Tindakan : Intervensi pencegahan risiko jatuh standar");
+                TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (25-50), Tindakan : Intervensi pencegahan risiko jatuh standar");
+                HasilSkrining.setText("Risiko Rendah");
+                Saran.setText("1.Lakukan  semua pedoman pencegahan jatuh tidak risiko dan  risiko rendah\n"
+                        + "2.Beri tanda segitiga warna kuning pada bed pasien\n"
+                        + "3.Beri stiker fall risk berwarna kuning pada gelang identitas yang menempel pasien");
             }else if(Integer.parseInt(NilaiResikoTotal.getText())>=45){
-                TingkatResiko.setText("Tingkat Resiko : Risiko Tinggi (> 45), Tindakan : Intervensi pencegahan risiko jatuh standar dan Intervensi risiko jatuh tinggi");
+                TingkatResiko.setText("Tingkat Resiko : Risiko Tinggi (≥50), Tindakan : Intervensi pencegahan risiko jatuh standar dan Intervensi risiko jatuh tinggi");
+                HasilSkrining.setText("Risiko Tinggi");
+                Saran.setText("1.Lakukan semua pedoman pencegahan jatuh tidak risiko dan  risiko rendah\n"
+                        + "2.Temani pasien saat mobilisasi\n"
+                        + "3.Tempatkan pasien dikamar yang paling dekat dengan nurse station ( bila mungkin )\n"
+                        + "4.Pastikan pasien menggunakan alat bantu jalan\n"
+                        + "5.Libatkan keluarga untuk mengawasi pasien");
             }
         } catch (Exception e) {
             NilaiResikoTotal.setText("0");
-            TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (0-24), Tindakan : Intervensi pencegahan risiko jatuh standar");
+            TingkatResiko.setText("Tingkat Resiko : Tidak Risiko (0-24), Tindakan : Intervensi pencegahan risiko jatuh standar");
         }
     }
 }

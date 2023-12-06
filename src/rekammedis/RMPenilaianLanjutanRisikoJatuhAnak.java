@@ -1854,8 +1854,29 @@ public final class RMPenilaianLanjutanRisikoJatuhAnak extends javax.swing.JDialo
             NilaiResikoTotal.setText((Integer.parseInt(NilaiResiko1.getText())+Integer.parseInt(NilaiResiko2.getText())+Integer.parseInt(NilaiResiko3.getText())+Integer.parseInt(NilaiResiko4.getText())+Integer.parseInt(NilaiResiko5.getText())+Integer.parseInt(NilaiResiko6.getText())+Integer.parseInt(NilaiResiko7.getText()))+"");
             if(Integer.parseInt(NilaiResikoTotal.getText())<12){
                 TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (7-11), Tindakan : Intervensi pencegahan risiko jatuh standar");
+                HasilSkrining.setText("Risiko Rendah");
+                Saran.setText("1.Orientasikan ruangan pada Pasien/keluarga\n"
+                        + "2.Roda tempat tidur berada pada posisi terkunci\n"
+                        + "3.Posisi tempat tidur pada posisi terendah\n"
+                        + "4.Naikkan pagar pengaman tempat tidur\n"
+                        + "5.Berikan  edukasi/brosur risiko jatuh");
             }else if(Integer.parseInt(NilaiResikoTotal.getText())<7){
                 TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (0-7), Tindakan : Intervensi pencegahan risiko jatuh standar");
+                HasilSkrining.setText("Risiko Rendah");
+                Saran.setText("1.Orientasikan ruangan pada Pasien/keluarga\n"
+                        + "2.Roda tempat tidur berada pada posisi terkunci\n"
+                        + "3.Posisi tempat tidur pada posisi terendah\n"
+                        + "4.Naikkan pagar pengaman tempat tidur\n"
+                        + "5.Berikan  edukasi/brosur risiko jatuh");
+            }else if(Integer.parseInt(NilaiResikoTotal.getText())>=12){
+                TingkatResiko.setText("Tingkat Resiko : Risiko Tinggi (≥12), Tindakan : Intervensi pencegahan risiko jatuh standar dan Intervensi risiko jatuh tinggi");
+                HasilSkrining.setText("Risiko Tinggi");
+                Saran.setText("1.Tempelkan stiker Fall Risk berwarna kuning di gelang pasien\n"
+                        + "2.Lakukan intervensi jatuh risiko rendah\n"
+                        + "3.Pasang tanda risiko jatuh segitiga warna kuning pada tempat tidur\n"
+                        + "4.Temani Pasien saat mobilisasi\n"
+                        + "5.Pasien ditempatkan dekat nurse station\n"
+                        + "6.Libatkan keluarga pasien untuk selalu menunggu pasien");
             }
         } catch (Exception e) {
             NilaiResikoTotal.setText("0");
