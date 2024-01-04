@@ -1806,7 +1806,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 Valid.MyReportqry("rptItemResep6.jasper","report","::[ Aturan Pakai Obat ]::",
                     "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir," +
                     "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik," +
-                    "obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur " +
+                    "obat_racikan.aturan_pakai,obat_racikan.keterangan,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur " +
                     "from resep_obat inner join reg_periksa inner join pasien inner join " +
                     "obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat " +
                     "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
