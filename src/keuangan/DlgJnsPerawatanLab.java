@@ -51,8 +51,8 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         setSize(628,674);
 
         Object[] row={
-            "P","Kode Periksa","Nama Pemeriksaan","J.S. RS",
-            "Paket BHP","J.M. Perujuk","J.M. Dokter","J.M. Petugas",
+            "P","Kode Periksa","Nama Pemeriksaan","Jasa pelayanan",
+            "Jasa Sarana","J.M. Perujuk","J.M. Dokter","J.M. Petugas",
             "K.S.O.","Menejemen","Total Tarif","Jenis Bayar","Kelas","Kategori"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -504,7 +504,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         FormInput.add(TNm);
         TNm.setBounds(433, 12, 283, 23);
 
-        jLabel9.setText("J.S. Rumah Sakit : Rp.");
+        jLabel9.setText("Jasa Pelayanan : Rp.");
         jLabel9.setName("jLabel9"); // NOI18N
         FormInput.add(jLabel9);
         jLabel9.setBounds(-10, 42, 135, 23);
@@ -561,7 +561,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         FormInput.add(jLabel12);
         jLabel12.setBounds(-10, 162, 135, 23);
 
-        jLabel14.setText("Paket BHP : Rp.");
+        jLabel14.setText("Jasa Sarana : Rp.");
         jLabel14.setName("jLabel14"); // NOI18N
         FormInput.add(jLabel14);
         jLabel14.setBounds(-10, 72, 135, 23);
