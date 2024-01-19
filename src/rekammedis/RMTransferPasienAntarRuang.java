@@ -646,7 +646,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         jLabel11.setBounds(740, 10, 30, 23);
 
         TanggalMasuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-04-2023 11:05:53" }));
+        TanggalMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2023 14:51:33" }));
         TanggalMasuk.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalMasuk.setName("TanggalMasuk"); // NOI18N
         TanggalMasuk.setOpaque(false);
@@ -665,7 +665,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         label12.setBounds(201, 40, 55, 23);
 
         TanggalPindah.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-04-2023 11:05:53" }));
+        TanggalPindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2023 14:51:34" }));
         TanggalPindah.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPindah.setName("TanggalPindah"); // NOI18N
         TanggalPindah.setOpaque(false);
@@ -722,7 +722,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         jLabel14.setText("Metode Pemindahan :");
         jLabel14.setName("jLabel14"); // NOI18N
         FormInput.add(jLabel14);
-        jLabel14.setBounds(629, 80, 106, 23);
+        jLabel14.setBounds(629, 80, 104, 23);
 
         jLabel15.setText("Ruang Rawat Selanjutnya :");
         jLabel15.setName("jLabel15"); // NOI18N
@@ -1002,7 +1002,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel42);
         jLabel42.setBounds(46, 410, 90, 23);
 
-        KeadaanUmumSebelumTransfer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Gelisah", "Delirium", "Koma" }));
+        KeadaanUmumSebelumTransfer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Gelisah", "Delirium", "Koma", "DPO", "Disorientasi", "Apatis", "Samnolent/Lethargy" }));
         KeadaanUmumSebelumTransfer.setName("KeadaanUmumSebelumTransfer"); // NOI18N
         KeadaanUmumSebelumTransfer.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1114,7 +1114,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel44);
         jLabel44.setBounds(46, 520, 90, 23);
 
-        KeadaanUmumSetelahTransfer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Gelisah", "Delirium", "Koma" }));
+        KeadaanUmumSetelahTransfer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Gelisah", "Delirium", "Koma", "DPO", "Disorientasi", "Apatis", "Samnolent/Lethargy" }));
         KeadaanUmumSetelahTransfer.setName("KeadaanUmumSetelahTransfer"); // NOI18N
         KeadaanUmumSetelahTransfer.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1357,7 +1357,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-04-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1371,7 +1371,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-04-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
