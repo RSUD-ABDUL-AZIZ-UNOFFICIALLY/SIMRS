@@ -8748,7 +8748,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         for(i=0;i<row;i++){
             try{
                 psdpjp=koneksi.prepareStatement("select dokter.nm_dokter from dpjp_ranap inner join dokter "+
-                    "on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? ");
+                    "on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? ORDER BY ABS(dpjp_ranap.no) ASC");
                 dokterranap="";
                 try {
                     psdpjp.setString(1,tbKamIn.getValueAt(i,0).toString());
