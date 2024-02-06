@@ -31,9 +31,9 @@ public class DlgHarianHAIs extends javax.swing.JDialog {
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
     private DlgCariBangsal bangsal=new DlgCariBangsal(null,false);
     private ResultSet rs;
-    private int i=0,deku=0,urine=0,sputum=0,darah=0,antibiotik=0,jmlETT,jmlCVL,
+    private int i=0,deku=0,urine=0,sputum=0,darah=0,antibiotik=0,mdro=0,tirahbaring=0,operasi=0,jmlETT,jmlCVL,
             jmlIVL,jmlUC,jmlVAP,jmlIAD,jmlPLEB,jmlISK,jmlILO,jmldeku,jmlsputum,
-            jmlHAP,jmlTinea,jmlScabies,jmldarah,jmlurine,jmlANTIBIOTIK;
+            jmlHAP,jmlTinea,jmlScabies,jmldarah,jmlurine,jmlANTIBIOTIK,jmlMDRO,jmlTirahBaring,jmlOperasi;
     
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -547,6 +547,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='3%' rowspan='2'>Deku</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%' colspan='3'>Hasil Kultur</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='2'>Antibiotik</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='2'>MDRO</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='2'>Tirah Baring</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='2'>Operasi</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' rowspan='2'>Kamar/Bangsal</td>"+
                 "</tr>"+
                 "<tr class='isi'>"+
@@ -572,7 +575,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 "data_HAIs.ETT,data_HAIs.CVL,data_HAIs.IVL,data_HAIs.UC,data_HAIs.VAP,data_HAIs.IAD,"+
                 "data_HAIs.PLEB,data_HAIs.ISK,data_HAIs.ILO,data_HAIs.HAP,data_HAIs.Tinea,data_HAIs.Scabies,"+
                 "data_HAIs.DEKU,data_HAIs.SPUTUM,data_HAIs.DARAH,data_HAIs.URINE,data_HAIs.ANTIBIOTIK,"+
-                "concat(data_HAIs.kd_kamar,', ',bangsal.nm_bangsal) as ruang,data_HAIs.kd_kamar from data_HAIs inner join reg_periksa "+
+                "concat(data_HAIs.kd_kamar,', ',bangsal.nm_bangsal) as ruang,data_HAIs.kd_kamar,data_HAIs.MDRO,data_HAIs.TirahBaring,data_HAIs.Operasi from data_HAIs inner join reg_periksa "+
                 "inner join pasien inner join kamar inner join bangsal inner join penjab on data_HAIs.kd_kamar=kamar.kd_kamar "+
                 "and kamar.kd_bangsal=bangsal.kd_bangsal and data_HAIs.no_rawat=reg_periksa.no_rawat "+
                 "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.no_rkm_medis=pasien.no_rkm_medis where "+
@@ -584,7 +587,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 i=1;
                 jmlETT=0;jmlCVL=0;jmlIVL=0;jmlUC=0;jmlVAP=0;jmlIAD=0;jmlPLEB=0;
                 jmlISK=0;jmlILO=0;jmldeku=0;jmlsputum=0;jmldarah=0;jmlurine=0;
-                jmlHAP=0;jmlTinea=0;jmlScabies=0;jmlANTIBIOTIK=0;                        
+                jmlHAP=0;jmlTinea=0;jmlScabies=0;jmlMDRO=0;jmlTirahBaring=0;jmlOperasi=0;jmlANTIBIOTIK=0;                        
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                 ps.setString(3,"%"+NmKamar.getText().trim()+"%");
@@ -623,6 +626,18 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     if(!rs.getString("DARAH").equals("")){
                         darah=1;
                         jmldarah=jmldarah+1;
+                    }
+                    if(!rs.getString("MDRO").equals("")){
+                        mdro=1;
+                        jmlMDRO=jmlMDRO+1;
+                    }
+                    if(!rs.getString("TirahBaring").equals("")){
+                        tirahbaring=1;
+                        jmlTirahBaring=jmlTirahBaring+1;
+                    }
+                    if(!rs.getString("Operasi").equals("")){
+                        operasi=1;
+                        jmlOperasi=jmlOperasi+1;
                     }
                     if(!rs.getString("ANTIBIOTIK").equals("")){
                         antibiotik=1;
@@ -664,6 +679,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+darah+"</td>"+
                             "<td valign='middle' align='center'>"+urine+"</td>"+
                             "<td valign='middle' align='center'>"+antibiotik+"</td>"+
+                            "<td valign='middle' align='center'>"+mdro+"</td>"+
+                            "<td valign='middle' align='center'>"+tirahbaring+"</td>"+
+                            "<td valign='middle' align='center'>"+operasi+"</td>"+
                             "<td valign='middle' align='left'>"+rs.getString("ruang")+"</td>"+
                         "</tr>"
                     );
@@ -690,6 +708,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+jmldarah+"</td>"+
                             "<td valign='middle' align='center'>"+jmlurine+"</td>"+
                             "<td valign='middle' align='center'>"+jmlANTIBIOTIK+"</td>"+
+                            "<td valign='middle' align='center'>"+jmlMDRO+"</td>"+
+                            "<td valign='middle' align='center'>"+jmlTirahBaring+"</td>"+
+                            "<td valign='middle' align='center'>"+jmlOperasi+"</td>"+
                             "<td valign='middle' align='center'>&nbsp;</td>"+
                         "</tr>"
                     );

@@ -49,7 +49,7 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
         setSize(656,250);
 
         Object[] row={"Pemeriksaan","Satuan","N.Rujukan L.D.","N.Rujukan L.A.","N.Rujukan P.D.",
-                      "N.Rujukan P.A.","J.S. Rmh Skt","Paket BHP","J.M. Perujuk","J.M. Dokter",
+                      "N.Rujukan P.A.","Jasa Pelayanan","Jasa Sarana","J.M. Perujuk","J.M. Dokter",
                       "J.M. Laborat","K.S.O.","Menejemen","Biaya Item","",""};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){

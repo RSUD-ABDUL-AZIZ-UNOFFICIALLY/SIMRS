@@ -26,8 +26,8 @@ public class DlgHAIsPerBangsal extends javax.swing.JDialog {
     private ResultSet rs;
     private StringBuilder htmlContent;
     private int i=0,deku=0,urine=0,sputum=0,darah=0,pasien=0,jmlpasien=0,ETT=0,CVL=0,IVL=0,UC=0,VAP=0,IAD=0,PLEB=0,
-                ISK=0,ILO=0,ANTIBIOTIK=0,jmlHAP,jmlTinea,jmlScabies,jmlETT,jmlCVL,jmlIVL,jmlUC,jmlVAP,jmlIAD,jmlPLEB,jmlISK,
-                HAP,Tinea,Scabies,jmlILO,jmldeku,jmlsputum,jmldarah,jmlurine,jmlANTIBIOTIK;
+                ISK=0,ILO=0,ANTIBIOTIK=0,MDRO=0,TirahBaring=0,Operasi=0,jmlHAP,jmlTinea,jmlScabies,jmlETT,jmlCVL,jmlIVL,jmlUC,jmlVAP,jmlIAD,jmlPLEB,jmlISK,
+                HAP,Tinea,Scabies,jmlILO,jmldeku,jmlsputum,jmldarah,jmlurine,jmlANTIBIOTIK,jmlMDRO,jmlTirahBaring,jmlOperasi;
     
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -375,6 +375,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='2'>Deku</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%' colspan='3'>Hasil Kultur</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='2'>Antibiotik</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='2'>MDRO</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='2'>Tirah Baring</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='2'>Operasi</td>"+
                 "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>ETT</td>"+
@@ -441,6 +444,12 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         jmlurine=jmlurine+urine;
                         ANTIBIOTIK=Sequel.cariInteger("select count(data_HAIs.no_rawat) from data_HAIs inner join kamar inner join bangsal on data_HAIs.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where data_HAIs.ANTIBIOTIK<>'' and data_HAIs.tanggal between ? and ? and kamar.kd_bangsal=?",Valid.SetTgl(Tgl1.getSelectedItem()+""),Valid.SetTgl(Tgl2.getSelectedItem()+""),rs.getString("kd_bangsal"));
                         jmlANTIBIOTIK=jmlANTIBIOTIK+ANTIBIOTIK;
+                        MDRO=Sequel.cariInteger("select count(data_HAIs.no_rawat) from data_HAIs inner join kamar inner join bangsal on data_HAIs.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where data_HAIs.MDRO<>'' and data_HAIs.tanggal between ? and ? and kamar.kd_bangsal=?",Valid.SetTgl(Tgl1.getSelectedItem()+""),Valid.SetTgl(Tgl2.getSelectedItem()+""),rs.getString("kd_bangsal"));
+                        jmlMDRO=jmlMDRO+MDRO;
+                        TirahBaring=Sequel.cariInteger("select count(data_HAIs.no_rawat) from data_HAIs inner join kamar inner join bangsal on data_HAIs.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where data_HAIs.TirahBaring<>'' and data_HAIs.tanggal between ? and ? and kamar.kd_bangsal=?",Valid.SetTgl(Tgl1.getSelectedItem()+""),Valid.SetTgl(Tgl2.getSelectedItem()+""),rs.getString("kd_bangsal"));
+                        jmlTirahBaring=jmlTirahBaring+TirahBaring;
+                        Operasi=Sequel.cariInteger("select count(data_HAIs.no_rawat) from data_HAIs inner join kamar inner join bangsal on data_HAIs.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where data_HAIs.Operasi<>'' and data_HAIs.tanggal between ? and ? and kamar.kd_bangsal=?",Valid.SetTgl(Tgl1.getSelectedItem()+""),Valid.SetTgl(Tgl2.getSelectedItem()+""),rs.getString("kd_bangsal"));
+                        jmlOperasi=jmlOperasi+Operasi;
                         htmlContent.append(                             
                             "<tr class='isi'>"+
                                 "<td valign='middle' align='center'>"+i+"</td>"+
@@ -463,6 +472,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                 "<td valign='middle' align='center'>"+darah+"</td>"+
                                 "<td valign='middle' align='center'>"+urine+"</td>"+
                                 "<td valign='middle' align='center'>"+ANTIBIOTIK+"</td>"+
+                                "<td valign='middle' align='center'>"+MDRO+"</td>"+
+                                "<td valign='middle' align='center'>"+TirahBaring+"</td>"+
+                                "<td valign='middle' align='center'>"+Operasi+"</td>"+
                             "</tr>"
                         ); 
                         i++;
@@ -489,6 +501,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "<td valign='middle' align='center'>"+jmldarah+"</td>"+
                         "<td valign='middle' align='center'>"+jmlurine+"</td>"+
                         "<td valign='middle' align='center'>"+jmlANTIBIOTIK+"</td>"+
+                        "<td valign='middle' align='center'>"+jmlMDRO+"</td>"+
+                        "<td valign='middle' align='center'>"+jmlTirahBaring+"</td>"+
+                        "<td valign='middle' align='center'>"+jmlOperasi+"</td>"+
                     "</tr>"
                 ); 
             } catch (Exception e) {

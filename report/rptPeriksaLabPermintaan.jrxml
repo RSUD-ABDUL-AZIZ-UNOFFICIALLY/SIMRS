@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="522" leftMargin="56" rightMargin="17" topMargin="20" bottomMargin="20" uuid="5353c680-200b-4a22-8b8e-b6d4e4a440d6">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
@@ -27,6 +27,8 @@
 	<parameter name="finger" class="java.lang.String"/>
 	<parameter name="finger2" class="java.lang.String"/>
 	<parameter name="nopermintaan" class="java.lang.String"/>
+	<parameter name="tanggalsampel" class="java.lang.String"/>
+	<parameter name="jamsampel" class="java.lang.String"/>
 	<parameter name="tanggalpermintaan" class="java.lang.String"/>
 	<parameter name="jampermintaan" class="java.lang.String"/>
 	<queryString>
@@ -519,7 +521,7 @@
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Tgl.Permintaan]]></text>
+				<text><![CDATA[Tgl. Sampel]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement x="385" y="129" width="136" height="15" uuid="e1ea82ae-0039-4947-8969-787754e3c05f"/>
@@ -527,7 +529,7 @@
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{tanggalpermintaan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{tanggalsampel}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Transparent" x="375" y="144" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="a8b4203a-8e3f-433c-be0f-f7f458b72616"/>
@@ -543,7 +545,7 @@
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{jampermintaan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{jamsampel}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Transparent" x="284" y="144" width="91" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="7be7d442-58c3-4d5e-a5a6-81d1d228c42f">
@@ -553,7 +555,7 @@
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Jam Permintaan]]></text>
+				<text><![CDATA[Jam Sampel]]></text>
 			</staticText>
 		</band>
 	</title>
