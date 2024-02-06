@@ -2656,7 +2656,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     if(rs.getString("status_lanjut").equals("Ranap")){
                         try{
                             rs3=koneksi.prepareStatement(
-                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
+                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"' ORDER BY ABS(dpjp_ranap.no) ASC").executeQuery();
                             if(rs3.next()){
                                 htmlContent.append(
                                   "<tr class='isi'>"+ 
@@ -12024,7 +12024,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         "transfer_pasien_antar_ruang.keadaan_umum_sesudah_transfer,transfer_pasien_antar_ruang.td_sesudah_transfer,"+
                         "transfer_pasien_antar_ruang.nadi_sesudah_transfer,transfer_pasien_antar_ruang.rr_sesudah_transfer,transfer_pasien_antar_ruang.suhu_sesudah_transfer,"+
                         "transfer_pasien_antar_ruang.nip_menyerahkan,petugasmenyerahkan.nama as petugasmenyerahkan,transfer_pasien_antar_ruang.nip_menerima,"+
-                        "petugasmenerima.nama as petugasmenerima "+
+                        "petugasmenerima.nama as petugasmenerima,transfer_pasien_antar_ruang.instruksi "+
                         "from transfer_pasien_antar_ruang inner join petugas as petugasmenyerahkan on transfer_pasien_antar_ruang.nip_menyerahkan=petugasmenyerahkan.nip "+
                         "inner join petugas as petugasmenerima on transfer_pasien_antar_ruang.nip_menerima=petugasmenerima.nip where "+
                         "transfer_pasien_antar_ruang.no_rawat='"+norawat+"' order by transfer_pasien_antar_ruang.tanggal_pindah").executeQuery();
@@ -12042,7 +12042,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
-                                       "YANG MELAKUKAN PENGKAJIAN"+  
+                                       "<b>YANG MELAKUKAN PENGKAJIAN</b>"+  
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
                                               "<td width='33%'>Tanggal Masuk : "+rs2.getString("tanggal_masuk")+"</td>"+
@@ -12086,6 +12086,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                           "</tr>"+
                                           "<tr>"+       
                                               "<td width='100%'>Pemeriksaan Penunjang Yang Sudah Dilakukan : "+rs2.getString("pemeriksaan_penunjang_yang_dilakukan")+"</td>"+    
+                                          "</tr>"+
+                                          "<tr>"+       
+                                              "<td width='100%'>Instruksi : "+rs2.getString("instruksi")+"</td>"+    
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
