@@ -5578,8 +5578,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         if (!dokterRanapDpjp.equals("")) {
 
             try {
-                Sequel.menyimpan("dpjp_ranap","?,?","Dokter",2,new String[]{
-                    TNoRw.getText(),dokterRanapDpjp
+                Sequel.menyimpan("dpjp_ranap","?,?,?","Dokter",3,new String[]{
+                    TNoRw.getText(),dokterRanapDpjp,"0"
                 });
             } catch (Exception e) {
                 System.out.println("Notifikasi dpjp ranap: "+e);

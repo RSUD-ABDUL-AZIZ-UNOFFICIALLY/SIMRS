@@ -1504,7 +1504,7 @@
                     <Component class="widget.ComboBox" name="Kategori">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="7">
+                          <StringArray count="11">
                             <StringItem index="0" value="-"/>
                             <StringItem index="1" value="Khusus"/>
                             <StringItem index="2" value="Besar"/>
@@ -1512,6 +1512,10 @@
                             <StringItem index="4" value="Kecil"/>
                             <StringItem index="5" value="Elektive"/>
                             <StringItem index="6" value="Emergency"/>
+                            <StringItem index="7" value="Besar Emergency"/>
+                            <StringItem index="8" value="Khusus Emergency"/>
+                            <StringItem index="9" value="Besar Elektive"/>
+                            <StringItem index="10" value="Khusus Elektive"/>
                           </StringArray>
                         </Property>
                         <Property name="name" type="java.lang.String" value="Kategori" noResource="true"/>
