@@ -17,7 +17,7 @@
 	<queryString>
 		<![CDATA[select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir,
 resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik,
-obat_racikan.aturan_pakai,obat_racikan.keterangan,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur
+obat_racikan.aturan_pakai,obat_racikan.keterangan,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur,resep_obat.status 
 from resep_obat inner join reg_periksa inner join pasien inner join
 obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat 
 and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
@@ -93,6 +93,10 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
 	</field>
 	<field name="keterangan" class="java.lang.String"/>
+	<field name="status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sttsumur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -167,12 +171,12 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2" y="112" width="130" height="20" uuid="8fd6ab91-435c-4ca5-bb27-d6e58a441100"/>
+				<reportElement x="2" y="109" width="130" height="36" uuid="8fd6ab91-435c-4ca5-bb27-d6e58a441100"/>
 				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="9" isBold="false"/>
+					<font fontName="Tahoma" size="7" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{aturan_pakai}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{aturan_pakai}+"("+$F{keterangan}+")"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="2" y="50" width="130" height="9" uuid="d0f7ae14-c2bc-4f15-be82-6c8741ee64ac"/>
@@ -183,7 +187,7 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 				<textFieldExpression><![CDATA[$F{no_rawat}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="96" y="102" width="36" height="9" uuid="47e438d6-d41f-4e56-bae7-3339b6ac2ad0"/>
+				<reportElement x="96" y="100" width="36" height="9" uuid="47e438d6-d41f-4e56-bae7-3339b6ac2ad0"/>
 				<textElement textAlignment="Right">
 					<font fontName="Tahoma" size="6" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -231,7 +235,7 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="2" y="91" width="130" height="10" uuid="8c0c69ea-6623-4afa-9d94-b5fa684ba245">
+				<reportElement x="2" y="90" width="130" height="10" uuid="8c0c69ea-6623-4afa-9d94-b5fa684ba245">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -275,12 +279,14 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 				<textFieldExpression><![CDATA[$F{tgl_lahir}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2" y="134" width="130" height="20" uuid="15436789-1589-4ef9-9297-2f531e16ce7e"/>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="9" isBold="false"/>
+				<reportElement x="2" y="145" width="130" height="9" uuid="e7a55083-a2a6-44c7-958b-3ea0844fea9b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="5" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Call Center "+($F{status}.toLowerCase().equals("ranap") ?    "Ranap: 0813-4957-4833":"Rajal: -")]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

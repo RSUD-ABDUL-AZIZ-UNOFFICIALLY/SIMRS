@@ -17,7 +17,7 @@
 	<queryString>
 		<![CDATA[select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam, resep_obat.no_rawat,pasien.no_rkm_medis,
 pasien.tgl_lahir,pasien.nm_pasien,databarang.nama_brng,aturan_pakai.aturan,detail_pemberian_obat.jml,
-kodesatuan.satuan,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur 
+kodesatuan.satuan,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur,resep_obat.status 
 from resep_obat inner join reg_periksa inner join pasien inner join aturan_pakai 
 inner join databarang inner join detail_pemberian_obat inner join kodesatuan 
 on resep_obat.no_rawat=reg_periksa.no_rawat  and reg_periksa.no_rkm_medis=pasien.no_rkm_medis  
@@ -90,6 +90,10 @@ resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
 	</field>
 	<field name="sttsumur" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sttsumur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+	</field>
+	<field name="status" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="sttsumur"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
 	</field>
@@ -217,9 +221,9 @@ resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="2" y="110" width="130" height="19" uuid="bd2ddf42-612b-4934-a9c5-413fb78f18f2"/>
+				<reportElement x="2" y="110" width="130" height="34" uuid="bd2ddf42-612b-4934-a9c5-413fb78f18f2"/>
 				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="9" isBold="false"/>
+					<font fontName="Tahoma" size="7" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{aturan}]]></textFieldExpression>
@@ -273,6 +277,14 @@ resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tgl_lahir}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="145" width="130" height="9" uuid="4814c329-055a-4f13-8347-9922c65a279d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Call Center "+($F{status}.toLowerCase().equals("ranap") ?    "Ranap: 0813-4957-4833":"Rajal: -")]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
