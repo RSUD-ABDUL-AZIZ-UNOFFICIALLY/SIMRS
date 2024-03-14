@@ -166,10 +166,10 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="false"/>
+					<font fontName="Tahoma" size="6" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[JASA SARANA]]></text>
+				<text><![CDATA[JASA PELAYANAN]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="17" width="802" height="1" uuid="f63bfe13-9757-4370-b40b-fd31a5f9399d"/>
@@ -180,10 +180,10 @@
 			<staticText>
 				<reportElement mode="Opaque" x="750" y="0" width="52" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="3111aef3-c0cf-477a-aa80-5d90a70e4b81"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="false"/>
+					<font fontName="Tahoma" size="6" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[PELAYANAN]]></text>
+				<text><![CDATA[JASA SARANA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="523" y="0" width="87" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="607781d7-5a03-401c-8c4c-92caaa9bc830">
@@ -256,7 +256,7 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="700" y="0" width="50" height="10" uuid="f1838f48-89fb-427e-9e2f-9db483def03f"/>
 				<textElement textAlignment="Right">
-					<font fontName="Tahoma" size="8"/>
+					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp6}]]></textFieldExpression>
@@ -264,7 +264,7 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="750" y="0" width="52" height="10" uuid="eb7bd558-3508-4414-8d28-8de1586795c4"/>
 				<textElement textAlignment="Right">
-					<font fontName="Tahoma" size="8"/>
+					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp7}]]></textFieldExpression>
