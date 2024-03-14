@@ -1775,7 +1775,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         WindowObatOperasi.setResizable(false);
         WindowObatOperasi.getContentPane().setLayout(new java.awt.BorderLayout(1, 1));
 
-        iFObatOperasi.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Laporan Operasi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        iFObatOperasi.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Obat & BHP Operasi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         iFObatOperasi.setName("iFObatOperasi"); // NOI18N
         iFObatOperasi.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -3370,7 +3370,7 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
 
     private void BtnSimpan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan1ActionPerformed
         if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString())>0){
-                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+                JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
         }else{
                 Sequel.AutoComitFalse();
                 
@@ -3391,7 +3391,7 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
                     for(int r=0;r<tbObat.getRowCount();r++){
                         tbObat.setValueAt("",r,0);
                     }
-                    JOptionPane.showMessageDialog(rootPane,"Proses simpan selesai...!");
+                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                 }else{
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
@@ -3426,12 +3426,12 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCari1ActionPerformed(null);
         }else{
-            Valid.pindah(evt, TCari, BtnAll);
+            Valid.pindah(evt, TCari1, BtnAll);
         }
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
-        TCari.setText("");
+        TCari1.setText("");
         tampil2();
     }//GEN-LAST:event_BtnAll1ActionPerformed
 
@@ -3439,7 +3439,7 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnAllActionPerformed(null);
         }else{
-            Valid.pindah(evt, BtnCari, TCari);
+            Valid.pindah(evt, BtnCari, TCari1);
         }
     }//GEN-LAST:event_BtnAll1KeyPressed
 
@@ -3469,8 +3469,8 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
                     getDataObat();
                     int row=tbObat.getSelectedColumn();
                     if(row==1){
-                        TCari.setText("");
-                        TCari.requestFocus();
+                        TCari1.setText("");
+                        TCari1.requestFocus();
                     }
                 } catch (java.lang.NullPointerException e) {
                 }
@@ -3955,9 +3955,9 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
                        "kodesatuan.satuan like ? "+
                        "order by obatbhp_ok.kd_obat");
             try{
-                psobat.setString(1,"%"+TCari.getText()+"%");
-                psobat.setString(2,"%"+TCari.getText()+"%");
-                psobat.setString(3,"%"+TCari.getText()+"%");
+                psobat.setString(1,"%"+TCari1.getText()+"%");
+                psobat.setString(2,"%"+TCari1.getText()+"%");
+                psobat.setString(3,"%"+TCari1.getText()+"%");
                 rs=psobat.executeQuery();
                 while(rs.next()){
                     tabMode2.addRow(new Object[]{"",rs.getString(1),

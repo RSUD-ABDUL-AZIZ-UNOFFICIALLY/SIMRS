@@ -6222,7 +6222,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }                
             
             if(detailjs>0){
-                tabModeRwJlDr.addRow(new Object[]{true,x+". Jasa Sarpras",":","",null,null,null,detailjs,"Ralan Dokter"});
+                tabModeRwJlDr.addRow(new Object[]{true,x+". Jasa Sarana",":","",null,null,null,detailjs,"Ralan Dokter"});
                 x++;
             }
         } catch (Exception ex) {
@@ -6280,7 +6280,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
 
                         if(rsoperasi.getDouble("biayainstrumen")>0){
-                           tabModeRwJlDr.addRow(new Object[]{true,"                           ","  Biaya Instrumen",":",rsoperasi.getDouble("biayainstrumen"),1,0,rsoperasi.getDouble("biayainstrumen"),"Operasi"}); 
+                           tabModeRwJlDr.addRow(new Object[]{true,"                           ","  Jasa Sarana",":",rsoperasi.getDouble("biayainstrumen"),1,0,rsoperasi.getDouble("biayainstrumen"),"Operasi"}); 
                         }
 
                         if(rsoperasi.getDouble("biayadokter_anak")>0){
@@ -6356,7 +6356,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
 
                         if(rsoperasi.getDouble("biayasarpras")>0){
-                           tabModeRwJlDr.addRow(new Object[]{true,"                           ","  Sarpras",":",rsoperasi.getDouble("biayasarpras"),1,0,rsoperasi.getDouble("biayasarpras"),"Operasi"}); 
+                           tabModeRwJlDr.addRow(new Object[]{true,"                           ","  Jasa Pelayanan",":",rsoperasi.getDouble("biayasarpras"),1,0,rsoperasi.getDouble("biayasarpras"),"Operasi"}); 
                         }
                         
                         if(rsoperasi.getDouble("biaya_dokter_pjanak")>0){

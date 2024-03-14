@@ -5139,7 +5139,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         }
 
                         if(rsoperasi.getDouble("biayainstrumen")>0){
-                           tabModeRwJlDr.addRow(new Object[]{true,"                           ","  Biaya Instrumen",":",rsoperasi.getDouble("biayainstrumen"),1,0,rsoperasi.getDouble("biayainstrumen"),"Operasi"}); 
+                           tabModeRwJlDr.addRow(new Object[]{true,"                           ","  Jasa Sarana",":",rsoperasi.getDouble("biayainstrumen"),1,0,rsoperasi.getDouble("biayainstrumen"),"Operasi"}); 
                         }
 
                         if(rsoperasi.getDouble("biayadokter_anak")>0){
@@ -5215,7 +5215,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         }
 
                         if(rsoperasi.getDouble("biayasarpras")>0){
-                           tabModeRwJlDr.addRow(new Object[]{true,"                           ","  Sarpras",":",rsoperasi.getDouble("biayasarpras"),1,0,rsoperasi.getDouble("biayasarpras"),"Operasi"}); 
+                           tabModeRwJlDr.addRow(new Object[]{true,"                           ","  Jasa Pelayanan",":",rsoperasi.getDouble("biayasarpras"),1,0,rsoperasi.getDouble("biayasarpras"),"Operasi"}); 
                         }
                         
                         if(rsoperasi.getDouble("biaya_dokter_pjanak")>0){
