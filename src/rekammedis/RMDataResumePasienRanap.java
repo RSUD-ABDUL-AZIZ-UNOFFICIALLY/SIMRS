@@ -2017,7 +2017,9 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KodeDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString())){
+                    if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString())){
+                        ganti();
+                    }else if(Sequel.cariInteger("select COUNT(dpjp_ranap.kd_dokter) from dpjp_ranap where dpjp_ranap.kd_dokter=? AND dpjp_ranap.no_rawat=?",akses.getkode(),TNoRw.getText())>0){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh dokter yang bersangkutan..!!");
@@ -2911,6 +2913,8 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());  
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());  
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());  
+            KodeDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+            NamaDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             KodeDokterPengirim.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());  
             NamaDokterPengirim.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());  
             KdRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
