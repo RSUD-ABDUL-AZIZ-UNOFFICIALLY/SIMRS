@@ -26,6 +26,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     private String aktifkanparsial="no",norm="",kddokter="",kode_pj="",norawat="",status="";
     private final Properties prop = new Properties();
     private int jmlparsial=0;
+    private String cekvalid="";
     
     /** Creates new form 
      * @param parent
@@ -105,7 +106,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Daftar Resep Dokter Di Kunjungan Sebelumnya ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Daftar Resep Dokter Di Kunjungan Sebelumnya ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -127,7 +128,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         panelisi1.add(ChkTanggal);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2019" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -141,7 +142,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         panelisi1.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2019" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -405,8 +406,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString().equals("")){
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Resep..!!");
             }else {
-                Sequel.meghapus("resep_obat","no_resep",tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString()); 
-                tampil();               
+                cekvalid = Sequel.cariIsi("SELECT * FROM resep_obat WHERE resep_obat.no_resep=? AND UNIX_TIMESTAMP(tgl_perawatan) != 0",tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
+                if(cekvalid.equals("")){
+//                    JOptionPane.showMessageDialog(rootPane,"Cek:!!"+cekvalid);
+                    Sequel.meghapus("resep_obat","no_resep",tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString()); 
+                    tampil();      
+                }else{
+                    JOptionPane.showMessageDialog(rootPane,"Resep Telah Divalidasi..!!"+cekvalid);
+                }
+                    
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -598,19 +606,24 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
     
     private void panggilform2() {
-        DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
-        resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-        resep.setLocationRelativeTo(internalFrame1);
-        resep.MatikanJam();
-        resep.setNoRm(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),3).toString(),
-                Valid.SetTgl2(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),1).toString()),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(0,2),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(3,5),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(6,8),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),7).toString(),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),6).toString(),status);
-        resep.isCek();
-        resep.tampilobat(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
-        resep.setVisible(true);   
+        cekvalid = Sequel.cariIsi("SELECT * FROM resep_obat WHERE resep_obat.no_resep=? AND UNIX_TIMESTAMP(tgl_perawatan) != 0",tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
+        if(cekvalid.equals("")){   
+            DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
+            resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            resep.setLocationRelativeTo(internalFrame1);
+            resep.MatikanJam();
+            resep.setNoRm(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),3).toString(),
+                    Valid.SetTgl2(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),1).toString()),
+                    tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(0,2),
+                    tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(3,5),
+                    tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(6,8),
+                    tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),7).toString(),
+                    tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),6).toString(),status);
+            resep.isCek();
+            resep.tampilobat(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
+            resep.setVisible(true);   
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Resep Telah Divalidasi..!!"+cekvalid);
+        }
     }
 }
