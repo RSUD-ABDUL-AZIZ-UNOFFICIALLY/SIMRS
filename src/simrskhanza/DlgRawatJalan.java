@@ -5653,8 +5653,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                         TDiagnosaKerja.getText(),TIkthiarKlinik.getText(),TKonsulYgDiminta.getText(),KdDrLKPJ.getText(),KdDrLKK.getText(),"0000-00-00","00:00:00","","",""})==true){
                                             tabModeLembarKonsul.addRow(new Object[]{
                                                 false,TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                                                TDiagnosaKerja.getText(),TIkthiarKlinik.getText(),TKonsulYgDiminta.getText(),KdDrLKPJ.getText(),nMDrLKPJ.getText(),KdDrLKK.getText(),nMDrLKK.getText(),"0000-00-00","00:00:00",
-                                                TPenemuanKonsulen.getText(),TDiagnosaKonsulen.getText(),TSaranKonsulen.getText()
+                                                TDiagnosaKerja.getText(),TIkthiarKlinik.getText(),TKonsulYgDiminta.getText(),KdDrLKPJ.getText(),nMDrLKPJ.getText(),KdDrLKK.getText(),nMDrLKK.getText(),
+                                                TPenemuanKonsulen.getText(),TDiagnosaKonsulen.getText(),TSaranKonsulen.getText(),"0000-00-00","00:00:00"
                                             });
                                             TDiagnosaKerja.setText("");
                                             TIkthiarKlinik.setText("");
@@ -5848,6 +5848,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TPenemuanKonsulen.setText("");
         TDiagnosaKonsulen.setText("");
         TSaranKonsulen.setText("");
+        BtnJawabKonsulen.setVisible(false);
+        BtnSeeDrLKPJ.setVisible(false);
+        BtnSeeDrLKK.setVisible(true);
+        KdDrLKK.setText(Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
+        KdDrLKPJ.setText(KdDrLKK.getText());
+        nMDrLKK.setText(dokter.tampil3(KdDrLKK.getText())); 
+        nMDrLKPJ.setText(nMDrLKK.getText());
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -6879,7 +6886,7 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                             "' and jam_minta_konsulen='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),5)+"'",
                                             "no_rawat='"+TNoRw.getText()+"', tgl_minta_konsulen='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"', "+
                                             "jam_minta_konsulen='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"', "+
-                                            "diagnosa_kerja='"+TDiagnosaKerja.getText()+"', ikhtiar_kelinik='"+TIkthiarKlinik.getText()+"', konsul_yg_diminta='"+TKonsulYgDiminta.getText()+"', dokter_konsulen='"+KdDrLKK.getText()+"'")==true){
+                                            "diagnosa_kerja='"+TDiagnosaKerja.getText()+"', ikhtiar_klinik='"+TIkthiarKlinik.getText()+"', konsul_yg_diminta='"+TKonsulYgDiminta.getText()+"', dokter_konsulen='"+KdDrLKK.getText()+"'")==true){
                                             tbLembarKonsul.setValueAt(TNoRw.getText(),tbLembarKonsul.getSelectedRow(), 1);
                                             tbLembarKonsul.setValueAt(TNoRM.getText(),tbLembarKonsul.getSelectedRow(), 2);
                                             tbLembarKonsul.setValueAt(TPasien.getText(),tbLembarKonsul.getSelectedRow(), 3);
@@ -10404,7 +10411,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "lembar_konsultasi_rajal.konsul_yg_diminta, "+
                     "lembar_konsultasi_rajal.dokter_merawat,dokter.nm_dokter As nm_dokter_merawat,lembar_konsultasi_rajal.dokter_konsulen,dokter2.nm_dokter AS nm_dokter_kosulen, "+
                     "lembar_konsultasi_rajal.penemuan,lembar_konsultasi_rajal.diagnosa,lembar_konsultasi_rajal.usul_saran, "+
-                    "lembar_konsultasi_rajal.tgl_minta_konsulen,lembar_konsultasi_rajal.jam_minta_konsulen "+
+                    "lembar_konsultasi_rajal.tgl_konsulen,lembar_konsultasi_rajal.jam_konsulen "+
                     "from pasien inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join lembar_konsultasi_rajal on lembar_konsultasi_rajal.no_rawat=reg_periksa.no_rawat "+
                     "inner join dokter AS dokter on lembar_konsultasi_rajal.dokter_merawat=dokter.kd_dokter  "+
@@ -10533,25 +10540,27 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 TPenemuanKonsulen.setEditable(false);
                 TDiagnosaKonsulen.setEditable(false);
                 TSaranKonsulen.setEditable(false);
-                KdDrLKPJ.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),9).toString()); 
-                nMDrLKPJ.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),10).toString()); 
                 Valid.SetTgl(DTPTgl,tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),4).toString()); 
                 cmbJam.setSelectedItem(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),5).toString().substring(0,2));
                 cmbMnt.setSelectedItem(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),5).toString().substring(3,5));
                 cmbDtk.setSelectedItem(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),5).toString().substring(6,8));
-            
-            }else{
+                BtnJawabKonsulen.setVisible(false);
+                BtnSeeDrLKPJ.setVisible(false);
+                BtnSeeDrLKK.setVisible(true);
+            }else if(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),11).toString().equals(akses.getkode())){
                 TDiagnosaKerja.setEditable(false);
                 TIkthiarKlinik.setEditable(false);
                 TKonsulYgDiminta.setEditable(false);
                 TPenemuanKonsulen.setEditable(true);
                 TDiagnosaKonsulen.setEditable(true);
                 TSaranKonsulen.setEditable(true);
-                Valid.SetTgl(DTPTgl,tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),16).toString()); 
-                cmbJam.setSelectedItem(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),17).toString().substring(0,2));
-                cmbMnt.setSelectedItem(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),17).toString().substring(3,5));
-                cmbDtk.setSelectedItem(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),17).toString().substring(6,8));
-
+                BtnJawabKonsulen.setVisible(true);
+                BtnSeeDrLKPJ.setVisible(false);
+                BtnSeeDrLKK.setVisible(false);
+            }else{
+                BtnJawabKonsulen.setVisible(false);
+                BtnSeeDrLKPJ.setVisible(false);
+                BtnSeeDrLKK.setVisible(false);
             }
             TNoRw.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),1).toString());
             TNoRM.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),2).toString());
@@ -10559,6 +10568,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             TDiagnosaKerja.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),6).toString()); 
             TIkthiarKlinik.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),7).toString()); 
             TKonsulYgDiminta.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),8).toString()); 
+            KdDrLKPJ.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),9).toString()); 
+            nMDrLKPJ.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),10).toString()); 
             KdDrLKK.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),11).toString()); 
             nMDrLKK.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),12).toString()); 
             TPenemuanKonsulen.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),13).toString()); 
