@@ -675,8 +675,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             double getJPdr = 0;
                             rsrawatjalandr.beforeFirst();
                             while(rsrawatjalandr.next()){
-                                if(rsrawatjalandr.getDouble("material")<=0){
-                                    if(rsrawatjalandr.getDouble("tarif_tindakandr")<=0){
+                                if(rsrawatjalandr.getDouble("material")<1){
+                                    if(rsrawatjalandr.getDouble("tarif_tindakandr")<1){
                                       getJPdr=rsrawatjalandr.getDouble("tarif_tindakandr");  
                                     }else{
                                       getJPdr=rsrawatjalandr.getDouble("tarif_tindakandr");  
@@ -692,9 +692,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             double getJPdrpr = 0;
                             rsrawatjalandrpr.beforeFirst();
                             while(rsrawatjalandrpr.next()){
-                                if(rsrawatjalandrpr.getDouble("material")<=0){
-                                    if(rsrawatjalandrpr.getDouble("tarif_tindakandr")<=0){
-                                        if(rsrawatjalandrpr.getDouble("tarif_tindakanpr")<=0){
+                                if(rsrawatjalandrpr.getDouble("material")<1){
+                                    if(rsrawatjalandrpr.getDouble("tarif_tindakandr")<1){
+                                        if(rsrawatjalandrpr.getDouble("tarif_tindakanpr")<1){
                                            getJPdrpr=rsrawatjalandrpr.getDouble("tarif_tindakanpr"); 
                                         }else{
                                           getJPdrpr=rsrawatjalandrpr.getDouble("tarif_tindakanpr");  
@@ -713,8 +713,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             double getJPpr = 0;
                             rsrawatjalanpr.beforeFirst();
                             while(rsrawatjalanpr.next()){
-                                if(rsrawatjalanpr.getDouble("material")<=0){
-                                    if(rsrawatjalanpr.getDouble("tarif_tindakanpr")<=0){
+                                if(rsrawatjalanpr.getDouble("material")<1){
+                                    if(rsrawatjalanpr.getDouble("tarif_tindakanpr")<1){
                                        getJPpr=rsrawatjalanpr.getDouble("tarif_tindakanpr"); 
                                     }else{
                                       getJPpr=rsrawatjalanpr.getDouble("tarif_tindakanpr");  
@@ -723,11 +723,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     getJPpr=rsrawatjalanpr.getDouble("material");
                                 }
                                 tabMode.addRow(new Object[]{"","","     "+rsrawatjalanpr.getString("tgl_registrasi"),rsrawatjalanpr.getString("nm_pasien"),
-                                    rsrawatjalanpr.getString("nm_perawatan"),Valid.SetAngka(getJPpr),Valid.SetAngka(rsrawatjalanpr.getDouble("bhp")),"",rsrawatjalandrpr.getString("nama")});                   
+                                    rsrawatjalanpr.getString("nm_perawatan"),Valid.SetAngka(getJPpr),Valid.SetAngka(rsrawatjalanpr.getDouble("bhp")),"",rsrawatjalanpr.getString("nama")});                   
                                 total=total+getJPpr+rsrawatjalanpr.getDouble("bhp");
                             }                           
                         } catch (Exception e) {
-                            System.out.println("Notifikasi : "+e);
+                            System.out.println("Notifikasi RJ: "+e);
                         } finally{
                             if(rsrawatjalandr!=null){
                                rsrawatjalandr.close();
@@ -811,8 +811,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             double getJPdri = 0;
                             rsrawatinapdr.beforeFirst();
                             while(rsrawatinapdr.next()){
-                                if(rsrawatinapdr.getDouble("material")<=0){
-                                    if(rsrawatinapdr.getDouble("tarif_tindakandr")<=0){
+                                if(rsrawatinapdr.getDouble("material")<1){
+                                    if(rsrawatinapdr.getDouble("tarif_tindakandr")<1){
                                       getJPdri=rsrawatinapdr.getDouble("tarif_tindakandr");  
                                     }else{
                                       getJPdri=rsrawatinapdr.getDouble("tarif_tindakandr");  
@@ -828,9 +828,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             double getJPdrpri = 0;
                             rsrawatinapdrpr.beforeFirst();
                             while(rsrawatinapdrpr.next()){
-                                if(rsrawatinapdrpr.getDouble("material")<=0){
-                                    if(rsrawatinapdrpr.getDouble("tarif_tindakandr")<=0){
-                                        if(rsrawatinapdrpr.getDouble("tarif_tindakanpr")<=0){
+                                if(rsrawatinapdrpr.getDouble("material")<1){
+                                    if(rsrawatinapdrpr.getDouble("tarif_tindakandr")<1){
+                                        if(rsrawatinapdrpr.getDouble("tarif_tindakanpr")<1){
                                            getJPdrpri=rsrawatinapdrpr.getDouble("tarif_tindakanpr"); 
                                         }else{
                                           getJPdrpri=rsrawatinapdrpr.getDouble("tarif_tindakanpr");  
@@ -849,8 +849,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             double getJPpri = 0;
                             rsrawatinappr.beforeFirst();
                             while(rsrawatinappr.next()){
-                                if(rsrawatinappr.getDouble("material")<=0){
-                                    if(rsrawatinappr.getDouble("tarif_tindakanpr")<=0){
+                                if(rsrawatinappr.getDouble("material")<1){
+                                    if(rsrawatinappr.getDouble("tarif_tindakanpr")<1){
                                        getJPpri=rsrawatinappr.getDouble("tarif_tindakanpr"); 
                                     }else{
                                       getJPpri=rsrawatinappr.getDouble("tarif_tindakanpr");  
@@ -859,11 +859,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     getJPpri=rsrawatinappr.getDouble("material");
                                 }
                                 tabMode.addRow(new Object[]{"","","     "+rsrawatinappr.getString("tgl_perawatan")+" "+rsrawatinappr.getString("jam_rawat"),rsrawatinappr.getString("nm_pasien"),
-                                    rsrawatinappr.getString("nm_perawatan"),Valid.SetAngka(getJPpri),Valid.SetAngka(rsrawatinappr.getDouble("bhp")),"",rsrawatinapdrpr.getString("nama")});                   
+                                    rsrawatinappr.getString("nm_perawatan"),Valid.SetAngka(getJPpri),Valid.SetAngka(rsrawatinappr.getDouble("bhp")),"",rsrawatinappr.getString("nama")});                   
                                 total=total+getJPpri+rsrawatinappr.getDouble("bhp");
                             }                           
                         } catch (Exception e) {
-                            System.out.println("Notifikasi : "+e);
+                            System.out.println("Notifikasi INAP: "+e);
                         } finally{
                             if(rsrawatinapdr!=null){
                                rsrawatinapdr.close();
