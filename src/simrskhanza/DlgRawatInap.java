@@ -5586,7 +5586,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TDiagnosaKonsulen.setEditable(false);
         TSaranKonsulen.setEditable(false);
         BtnJawabKonsulen.setVisible(false);
-        BtnSeeDrLKPJ.setVisible(false);
+        BtnSeeDrLKPJ.setVisible(true);
         BtnSeeDrLKK.setVisible(true);
         TDiagnosaKerja.setText("");
         TIkthiarKlinik.setText("");
