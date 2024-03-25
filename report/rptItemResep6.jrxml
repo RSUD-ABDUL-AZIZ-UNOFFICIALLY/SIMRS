@@ -286,7 +286,7 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 					<font fontName="Tahoma" size="5" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Call Center "+($F{status}.toLowerCase().equals("ranap") ?    "Ranap: 0813-4957-4833":"Rajal: -")]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Call Center "+($F{status}.toLowerCase().equals("ranap") ?    "Ranap: 0813-4957-4833":"Rajal: 0823-5139-2921")]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
