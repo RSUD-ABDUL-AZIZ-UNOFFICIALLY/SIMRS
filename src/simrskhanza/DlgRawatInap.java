@@ -1821,7 +1821,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-03-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1835,7 +1835,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-03-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2668,7 +2668,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass12.add(jLabel58);
         jLabel58.setBounds(234, 220, 70, 23);
 
-        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Somnolence", "Sopor", "Coma" }));
+        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Somnolence", "Sopor", "Coma", "Alert", "Confusion", "Voice", "Pain", "Unresponsive", "Dengan Pengaruh Obat", "Apatis" }));
         cmbKesadaran.setName("cmbKesadaran"); // NOI18N
         cmbKesadaran.setPreferredSize(new java.awt.Dimension(62, 28));
         cmbKesadaran.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3754,7 +3754,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TPasien.setBounds(283, 10, 260, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-03-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -5598,6 +5598,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         KdDrLKPJ.setText(KdDrLKK.getText());
         nMDrLKK.setText(perawatan.dokter.tampil3(KdDrLKK.getText())); 
         nMDrLKPJ.setText(nMDrLKK.getText());
+        BtnSimpan.setEnabled(true);
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -6223,8 +6224,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 tampilPemeriksaan();
                 break;
             case 4:
-//                tampilLembarKonsul();
-                tbLembarKonsul.requestFocus();
+                tampilLembarKonsul();
+//                tbLembarKonsul.requestFocus();
                 break;
             case 5:
                 tampilPemeriksaanObstetri();
@@ -6790,6 +6791,8 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             }else{
                                 if(akses.getkode().equals(KdDrLKPJ.getText())){
                                     if(Sequel.mengedittf("lembar_konsultasi_rajal","no_rawat='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),1)+
+                                            "' and dokter_merawat='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),9)+
+                                            "' and dokter_konsulen='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),11)+
                                             "' and tgl_minta_konsulen='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),4)+
                                             "' and jam_minta_konsulen='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),5)+"'",
                                             "no_rawat='"+TNoRw.getText()+"', tgl_minta_konsulen='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"', "+
@@ -9002,6 +9005,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(tabModeLembarKonsul.getRowCount()!=0){
             try {
                 getDataLembarKonsul();
+//                BtnSimpan.setEnabled(false);
             } catch (java.lang.NullPointerException e) {
             }
 
@@ -9074,6 +9078,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }else{
                     if(akses.getkode().equals(KdDrLKK.getText())){
                         if(Sequel.mengedittf("lembar_konsultasi_rajal","no_rawat='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),1)+
+                            "' and dokter_merawat='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),9)+
+                            "' and dokter_konsulen='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),11)+
                             "' and tgl_minta_konsulen='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),4)+
                             "' and jam_minta_konsulen='"+tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),5)+"'",
                             "no_rawat='"+TNoRw.getText()+"', tgl_konsulen='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"', "+
@@ -10234,7 +10240,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         rs.getString(16),rs.getString(17),rs.getString(18),rs.getString(19),
                         rs.getString(20),rs.getString(21),rs.getString(22),rs.getString(23),
                         rs.getString(24),
-                        Sequel.cariIsi("select CONCAT(verif_ppja, '|', pegawai.nama, '|', tgl_verif_ppja, ' ', jam_verif_ppja) from verifikasi_soapie_ranap inner join pegawai on verifikasi_soapie_ranap.verif_ppja=pegawai.nik where no_rawat='"+rs.getString(1)+"' AND tgl_perawatan='"+rs.getString(4)+"' "),
+                        Sequel.cariIsi("select CONCAT(verif_ppja, '|', pegawai.nama, '|', tgl_verif_ppja, ' ', jam_verif_ppja) from verifikasi_soapie_ranap inner join pegawai inner join pemeriksaan_ranap inner join petugas on verifikasi_soapie_ranap.verif_ppja=pegawai.nik AND verifikasi_soapie_ranap.no_rawat=pemeriksaan_ranap.no_rawat AND pemeriksaan_ranap.nip=petugas.nip where verifikasi_soapie_ranap.no_rawat='"+rs.getString(1)+"' AND verifikasi_soapie_ranap.tgl_perawatan='"+rs.getString(4)+"' AND pemeriksaan_ranap.nip='"+rs.getString(22)+"' AND petugas.nip='"+rs.getString(22)+"' LIMIT 1"),
                         Sequel.cariIsi("select CONCAT(nip_menerima, '|',pegawai.nama, '|', tgl_menerima, ' ', jam_menerima) from serah_terima_pasien_ruangan inner join pegawai on serah_terima_pasien_ruangan.nip_menerima=pegawai.nik where no_rawat='"+rs.getString(1)+"' AND tgl_perawatan='"+rs.getString(4)+"' AND jam_rawat='"+rs.getString(5)+"' "),
                         Sequel.cariIsi("select CONCAT(verif_dpjp_utama, '|', pegawai.nama, '|', tgl_verif_dpjp_utama, ' ', jam_verif_dpjp_utama) from verifikasi_soapie_ranap inner join pegawai on verifikasi_soapie_ranap.verif_dpjp_utama=pegawai.nik where no_rawat ='"+rs.getString(1)+"' AND tgl_perawatan='"+rs.getString(4)+"' ")
                     });
@@ -10257,9 +10263,15 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
     private void getDataPemeriksaan() {
         if(tbPemeriksaan.getSelectedRow()!= -1){
-            TNoRw.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1).toString());
-            TNoRM.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),2).toString());
-            TPasien.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),3).toString());             
+              
+            if (!TNoRw.getText().equals(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1).toString())) {
+                int reply = JOptionPane.showConfirmDialog(rootPane,"Nomor Rawat Tidak Sama dengan Sebelumnya, Anda ingin Menggunakan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    TNoRw.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1).toString());
+                    TNoRM.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),2).toString());
+                    TPasien.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),3).toString());
+                }         
+            }
             TSuhu.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),6).toString()); 
             TTensi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),7).toString()); 
             TNadi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),8).toString()); 
@@ -10363,14 +10375,21 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 BtnJawabKonsulen.setVisible(true);
                 BtnSeeDrLKPJ.setVisible(false);
                 BtnSeeDrLKK.setVisible(false);
+                BtnSimpan.setEnabled(false);
             }else{
                 BtnJawabKonsulen.setVisible(false);
                 BtnSeeDrLKPJ.setVisible(false);
                 BtnSeeDrLKK.setVisible(false);
+                BtnSimpan.setEnabled(true);
             }
-            TNoRw.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),1).toString());
-            TNoRM.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),2).toString());
-            TPasien.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),3).toString());             
+            if (!TNoRw.getText().equals(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),1).toString())) {
+                int reply = JOptionPane.showConfirmDialog(rootPane,"Nomor Rawat Tidak Sama dengan Sebelumnya, Anda ingin Menggunakan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    TNoRw.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),1).toString());
+                    TNoRM.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),2).toString());
+                    TPasien.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),3).toString());             
+                }         
+            }
             TDiagnosaKerja.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),6).toString()); 
             TIkthiarKlinik.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),7).toString()); 
             TKonsulYgDiminta.setText(tbLembarKonsul.getValueAt(tbLembarKonsul.getSelectedRow(),8).toString()); 
