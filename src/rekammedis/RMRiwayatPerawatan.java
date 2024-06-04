@@ -4596,7 +4596,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                         "<td align='left'>"+rs2.getString("rtl").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                         "<td align='left'>"+rs2.getString("instruksi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                         "<td align='left'>"+rs2.getString("evaluasi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                        "<td align='center' bgcolor='#FFFAC8'>"+Sequel.cariIsi("select CONCAT(verif_ppja, '<br>', pegawai.nama, '<br>', tgl_verif_ppja, ' ', jam_verif_ppja) from verifikasi_soapie_ranap inner join pegawai on verifikasi_soapie_ranap.verif_ppja=pegawai.nik where no_rawat='"+rs2.getString("no_rawat")+"' AND tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' ")+"</td>"+
+                                        "<td align='center' bgcolor='#FFFAC8'>"+Sequel.cariIsi("select CONCAT(verif_ppja, '<br>', pegawai.nama, '<br>', tgl_verif_ppja, ' ', jam_verif_ppja) from verifikasi_soapie_ranap inner join pegawai inner join pemeriksaan_ranap inner join petugas on verifikasi_soapie_ranap.verif_ppja=pegawai.nik AND verifikasi_soapie_ranap.no_rawat=pemeriksaan_ranap.no_rawat AND pemeriksaan_ranap.nip=petugas.nip where verifikasi_soapie_ranap.no_rawat='"+rs2.getString("no_rawat")+"' AND verifikasi_soapie_ranap.tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' AND pemeriksaan_ranap.nip='"+rs2.getString("nip")+"' AND petugas.nip='"+rs2.getString("nip")+"' LIMIT 1")+"</td>"+
                                         "<td align='center' bgcolor='#FFFAB8'>"+Sequel.cariIsi("select CONCAT(nip_menerima, '<br>',pegawai.nama, '<br>', tgl_menerima, ' ', jam_menerima) from serah_terima_pasien_ruangan inner join pegawai on serah_terima_pasien_ruangan.nip_menerima=pegawai.nik where no_rawat='"+rs2.getString("no_rawat")+"' AND tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' AND jam_rawat='"+rs2.getString("jam_rawat")+"' ")+"</td>"+
                                         "<td align='center' bgcolor='#FFFAA8'>"+Sequel.cariIsi("select CONCAT(verif_dpjp_utama, '<br>', pegawai.nama, '<br>', tgl_verif_dpjp_utama, ' ', jam_verif_dpjp_utama) from verifikasi_soapie_ranap inner join pegawai on verifikasi_soapie_ranap.verif_dpjp_utama=pegawai.nik where no_rawat='"+rs2.getString("no_rawat")+"' AND tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' ")+"</td>"+
                                     "</tr>"
@@ -9388,7 +9388,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         rs2.close();
                     }
                 }
-
+           
+                // Lembar Konsul
                 try {
                     rs2=koneksi.prepareStatement(
                             "select lembar_konsultasi_rajal.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
@@ -9440,6 +9441,154 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                         "<td align='left'>"+rs2.getString("diagnosa").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                         "<td align='left'>"+rs2.getString("usul_saran").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                      "</tr>");
+                        }
+                        htmlContent.append(
+                              "</table>"+
+                            "</td>"+
+                          "</tr>");
+                    }                                
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+                
+                // PPK
+                try {
+                    rs2=koneksi.prepareStatement(
+                        "SELECT\n" +
+                                "	ppk.kodediagnosa, \n" +
+                                "	ppk.definisi, \n" +
+                                "	ppk.anamnesis, \n" +
+                                "	ppk.pemeriksaan_fisik, \n" +
+                                "	ppk.pemeriksaan_penunjang, \n" +
+                                "	ppk.kriteria_diagnosis, \n" +
+                                "	ppk.diagnosa_kerja, \n" +
+                                "	ppk.diagnosa_banding, \n" +
+                                "	ppk.terapi, \n" +
+                                "	ppk.edukasi, \n" +
+                                "	ppk.prognosis, \n" +
+                                "	ppk.kompetensi, \n" +
+                                "	ppk.kriteria_pasien_pulang_ranap, \n" +
+                                "	ppk.keputusan, \n" +
+                                "	lembar_ppk.indikator_medis, \n" +
+                                "	DATE_FORMAT(lembar_ppk.tgl, '%d-%m-Y') As tgl, \n" +
+                                "	lembar_ppk.jam, \n" +
+                                "	lembar_ppk.kd_dokter, \n" +
+                                "	dokter.nm_dokter, \n" +
+                                "	poliklinik.kd_poli, \n" +
+                                "	poliklinik.nm_poli\n" +
+                                "FROM\n" +
+                                "	lembar_ppk\n" +
+                                "	INNER JOIN\n" +
+                                "	ppk\n" +
+                                "	ON \n" +
+                                "		lembar_ppk.kodediagnosa = ppk.kodediagnosa AND \n" +
+                                "		lembar_ppk.kd_poli = ppk.kd_poli \n" +
+                                "	INNER JOIN\n" +
+                                "	dokter\n" +
+                                "	ON \n" +
+                                "		lembar_ppk.kd_dokter = dokter.kd_dokter\n" +
+                                "	INNER JOIN\n" +
+                                "	poliklinik\n" +
+                                "	ON \n" +
+                                "		lembar_ppk.kd_poli = poliklinik.kd_poli \n" +
+                                "		WHERE "+
+                                "	lembar_ppk.no_rawat = '"+norawat+"' "+
+                                "order by lembar_ppk.tgl,lembar_ppk.jam").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+ 
+                            "<td valign='top' width='2%'></td>"+        
+                            "<td valign='top' width='18%'>Lembar Panduan Praktik Klinis</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        rs2.beforeFirst();
+                       
+                        while(rs2.next()){ 
+                            
+                            htmlContent.append(
+                                    "<tr>"+
+                                        "<td valign='middle' bgcolor='#FFFFF8' colspan='3' >Dokter = "+rs2.getString("nm_dokter")+"| Poliklinik = "+rs2.getString("nm_poli")+"| Tgl. "+rs2.getString("tgl")+" "+rs2.getString("jam")+"</td>"+
+                                    "</tr>"+
+                                    "<tr>"+
+                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' colspan='3' >Panduan Praktik Klinis <br>"+rs2.getString("diagnosa_kerja")+"</td>"+
+                                    "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>1</td>"+
+                                        "<td align='left'>Definisi (Pengertian)</td>"+
+                                        "<td align='left'>"+rs2.getString("definisi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>2</td>"+
+                                        "<td align='left'>Anamnesa</td>"+
+                                        "<td align='left'>"+rs2.getString("anamnesis").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>3</td>"+
+                                        "<td align='left'Pemeriksaan Fisik</td>"+
+                                        "<td align='left'>"+rs2.getString("pemeriksaan_fisik").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>4</td>"+
+                                        "<td align='left'>Pemeriksaan Penunjang</td>"+
+                                        "<td align='left'>"+rs2.getString("pemeriksaan_penunjang").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>5</td>"+
+                                        "<td align='left'>Kriteria Diagnosa</td>"+
+                                        "<td align='left'>"+rs2.getString("kriteria_diagnosis").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>6</td>"+
+                                        "<td align='left'>Diagnosa Kerja</td>"+
+                                        "<td align='left'>"+rs2.getString("diagnosa_kerja").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>7</td>"+
+                                        "<td align='left'>Diagnosa Banding</td>"+
+                                        "<td align='left'>"+rs2.getString("diagnosa_banding").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>8</td>"+
+                                        "<td align='left'>Terapi</td>"+
+                                        "<td align='left'>"+rs2.getString("terapi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>9</td>"+
+                                        "<td align='left'>Edukasi</td>"+
+                                        "<td align='left'>"+rs2.getString("edukasi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>10</td>"+
+                                        "<td align='left'>Prognosis</td>"+
+                                        "<td align='left'>"+rs2.getString("prognosis").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>11</td>"+
+                                        "<td align='left'>Kompetensi</td>"+
+                                        "<td align='left'>"+rs2.getString("kompetensi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>12</td>"+
+                                        "<td align='left'>Indikator Medis</td>"+
+                                        "<td align='left'>"+rs2.getString("indikator_medis").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>13</td>"+
+                                        "<td align='left'>Kriteria Pasien Pulang Ranap</td>"+
+                                        "<td align='left'>"+rs2.getString("kriteria_pasien_pulang_ranap").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"+
+                                    "<tr>"+
+                                        "<td align='left'>14</td>"+
+                                        "<td align='left'>Keputusan</td>"+
+                                        "<td align='left'>"+rs2.getString("keputusan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                     "</tr>"
+                            );
                         }
                         htmlContent.append(
                               "</table>"+
@@ -12548,7 +12697,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<td valign='top'>"+rs2.getString("tgl_perawatan")+" "+rs2.getString("jam_rawat")+"</td>"+
                                     "<td valign='top' colspan='2'>"+rs2.getString("nip")+" "+rs2.getString("nama")+"</td>"+
                                     "<td valign='top' colspan='1'>"+rs2.getString("jbtn")+"</td>"+
-                                    "<td valign='top' bgcolor='#FFFAC8' align='center' colspan='2'>"+Sequel.cariIsi("select CONCAT(verif_ppja, '<br>', pegawai.nama, '<br>', tgl_verif_ppja, ' ', jam_verif_ppja) from verifikasi_soapie_ranap inner join pegawai on verifikasi_soapie_ranap.verif_ppja=pegawai.nik where no_rawat='"+norawat+"' AND tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' ")+"</td>"+
+                                    "<td valign='top' bgcolor='#FFFAC8' align='center' colspan='2'>"+Sequel.cariIsi("select CONCAT(verif_ppja, '<br>', pegawai.nama, '<br>', tgl_verif_ppja, ' ', jam_verif_ppja) from verifikasi_soapie_ranap inner join pegawai inner join pemeriksaan_ranap inner join petugas on verifikasi_soapie_ranap.verif_ppja=pegawai.nik AND verifikasi_soapie_ranap.no_rawat=pemeriksaan_ranap.no_rawat AND pemeriksaan_ranap.nip=petugas.nip where verifikasi_soapie_ranap.no_rawat='"+norawat+"' AND verifikasi_soapie_ranap.tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' AND pemeriksaan_ranap.nip='"+rs2.getString("nip")+"' AND petugas.nip='"+rs2.getString("nip")+"' LIMIT 1 ")+"</td>"+
                                     "<td valign='top' bgcolor='#FFFAB8' align='center' colspan='2'>"+Sequel.cariIsi("select CONCAT(nip_menerima, '<br>',pegawai.nama, '<br>', tgl_menerima, ' ', jam_menerima) from serah_terima_pasien_ruangan inner join pegawai on serah_terima_pasien_ruangan.nip_menerima=pegawai.nik where no_rawat='"+norawat+"' AND tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' AND jam_rawat='"+rs2.getString("jam_rawat")+"' ")+"</td>"+
                                     "<td valign='top' bgcolor='#FFFAA8' align='center' colspan='2'>"+Sequel.cariIsi("select CONCAT(verif_dpjp_utama, '<br>', pegawai.nama, '<br>', tgl_verif_dpjp_utama, ' ', jam_verif_dpjp_utama) from verifikasi_soapie_ranap inner join pegawai on verifikasi_soapie_ranap.verif_dpjp_utama=pegawai.nik where no_rawat='"+norawat+"' AND tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' ")+"</td>"+
                                  "</tr>");   
