@@ -144,7 +144,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         
         tabMode3=new DefaultTableModel(null,new Object[]{
                 "No.Resep","Tgl.Peresepan","Jam Peresepan","No.Rawat","No.RM","Pasien","Dokter Peresep",
-                "Status","Kode Dokter","Ruang/Kamar","Kode Bangsal","Jenis Bayar","Tgl.Validasi","Jam Validasi"
+                "Status","Kode Dokter","Ruang/Kamar","Kode Bangsal","Jenis Bayar","Tgl.Validasi","Jam Validasi","No Tlp"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -154,7 +154,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         tbResepRanap.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbResepRanap.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i <14; i++) {
+        for (int i = 0; i <15; i++) {
             TableColumn column = tbResepRanap.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(75);
@@ -185,6 +185,8 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }else if(i==12){
                 column.setPreferredWidth(65);
             }else if(i==13){
+                column.setPreferredWidth(70);
+            }else if(i==14){
                 column.setPreferredWidth(70);
             }
         }
@@ -3274,7 +3276,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
-                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam from resep_obat  "+
+                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam, pasien.no_tlp from resep_obat  "+
                     " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
                     " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     " inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter "+
@@ -3293,7 +3295,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
-                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam from resep_obat  "+
+                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam, pasien.no_tlp from resep_obat  "+
                     " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
                     " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     " inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter "+
@@ -3328,7 +3330,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
                             rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
-                            rs.getString("tgl_perawatan"),rs.getString("jam")
+                            rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("no_tlp")
                         });            
                     } 
                 }else{
@@ -3338,7 +3340,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
                                 rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
                                 rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
-                                rs.getString("tgl_perawatan"),rs.getString("jam")
+                                rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("no_tlp")
                             });  
                         }                  
                     } 
@@ -3361,7 +3363,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
-                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam from resep_obat  "+
+                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam, pasien.no_tlp from resep_obat  "+
                     " inner join ranap_gabung on ranap_gabung.no_rawat2=resep_obat.no_rawat "+
                     " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
                     " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -3396,7 +3398,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
                             rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
-                            rs.getString("tgl_perawatan"),rs.getString("jam")
+                            rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("no_tlp")
                         });            
                     } 
                 }else{
@@ -3406,7 +3408,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
                                 rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
                                 rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
-                                rs.getString("tgl_perawatan"),rs.getString("jam")
+                                rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("no_tlp")
                             });  
                         }                  
                     } 
@@ -4357,7 +4359,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " inner join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
                     " inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
                     " inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                    " where kamar_inap.stts_pulang='-' and permintaan_resep_pulang.tgl_permintaan between ? and ? "+
+                    " where permintaan_resep_pulang.tgl_permintaan between ? and ? "+
                     (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                     "(permintaan_resep_pulang.no_permintaan like ? or permintaan_resep_pulang.no_rawat like ? or "+
                     "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or dokter.nm_dokter like ? or penjab.png_jawab like ?)")+
@@ -4421,7 +4423,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " inner join kamar_inap on ranap_gabung.no_rawat=kamar_inap.no_rawat "+
                     " inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
                     " inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                    " where kamar_inap.stts_pulang='-' and permintaan_resep_pulang.tgl_permintaan between ? and ? "+
+                    " where permintaan_resep_pulang.tgl_permintaan between ? and ? "+
                     (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                     "(permintaan_resep_pulang.no_permintaan like ? or permintaan_resep_pulang.no_rawat like ? or "+
                     "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or dokter.nm_dokter like ? or penjab.png_jawab like ?)")+
@@ -4491,7 +4493,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
                     " inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
                     " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                    " where kamar_inap.stts_pulang='-' and permintaan_resep_pulang.tgl_permintaan between ? and ? "+
+                    " where permintaan_resep_pulang.tgl_permintaan between ? and ? "+
                     (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                     "(permintaan_resep_pulang.no_permintaan like ? or permintaan_resep_pulang.no_rawat like ? or "+
                     "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or dokter.nm_dokter like ? or penjab.png_jawab like ?)")+
@@ -4603,7 +4605,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
                     " inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
                     " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                    " where kamar_inap.stts_pulang='-' and permintaan_resep_pulang.tgl_permintaan between ? and ? "+
+                    " where permintaan_resep_pulang.tgl_permintaan between ? and ? "+
                     (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                     "(permintaan_resep_pulang.no_permintaan like ? or permintaan_resep_pulang.no_rawat like ? or "+
                     "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or dokter.nm_dokter like ? or penjab.png_jawab like ?)")+

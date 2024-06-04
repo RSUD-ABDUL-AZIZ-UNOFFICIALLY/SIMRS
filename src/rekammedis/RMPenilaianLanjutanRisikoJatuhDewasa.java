@@ -1867,13 +1867,13 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
                         + "4.Naikkan pagar pengaman tempat tidur\n"
                         + "5.Pastikan lampu tidur hidup saat malam hari\n"
                         + "6.Berikan edukasi/brosur risiko jatuh pada pasien");
-            }else if(Integer.parseInt(NilaiResikoTotal.getText())<45){
+            }else if(Integer.parseInt(NilaiResikoTotal.getText())<50){
                 TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (25-50), Tindakan : Intervensi pencegahan risiko jatuh standar");
                 HasilSkrining.setText("Risiko Rendah");
                 Saran.setText("1.Lakukan  semua pedoman pencegahan jatuh tidak risiko dan  risiko rendah\n"
                         + "2.Beri tanda segitiga warna kuning pada bed pasien\n"
                         + "3.Beri stiker fall risk berwarna kuning pada gelang identitas yang menempel pasien");
-            }else if(Integer.parseInt(NilaiResikoTotal.getText())>=45){
+            }else if(Integer.parseInt(NilaiResikoTotal.getText())>=50){
                 TingkatResiko.setText("Tingkat Resiko : Risiko Tinggi (≥50), Tindakan : Intervensi pencegahan risiko jatuh standar dan Intervensi risiko jatuh tinggi");
                 HasilSkrining.setText("Risiko Tinggi");
                 Saran.setText("1.Lakukan semua pedoman pencegahan jatuh tidak risiko dan  risiko rendah\n"

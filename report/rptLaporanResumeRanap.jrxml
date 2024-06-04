@@ -1582,7 +1582,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cara_keluar}+($F{ket_keluar}.equals("")?"":", "+$F{ket_keluar})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{keadaan}.equals("Meninggal")?"-":($F{cara_keluar}+($F{ket_keluar}.equals("")?"":", "+$F{ket_keluar}))]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="291" y="655" width="60" height="10" uuid="256420ee-1b33-4764-a544-b81c764e81a1">
@@ -1612,7 +1612,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dilanjutkan}+($F{ket_dilanjutkan}.equals("")?"":", "+$F{ket_dilanjutkan})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{keadaan}.equals("Meninggal")?"-":$F{dilanjutkan}+($F{ket_dilanjutkan}.equals("")?"":", "+$F{ket_dilanjutkan})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="291" y="667" width="60" height="10" uuid="9bca8abd-5dc5-45af-adb4-f746d202699e">
@@ -1632,7 +1632,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{kontrol}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{keadaan}.equals("Meninggal")?"-":$F{kontrol}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="6" y="161" width="84" height="10" uuid="68b438b2-4483-4429-a4ad-ff64d9cbde73">

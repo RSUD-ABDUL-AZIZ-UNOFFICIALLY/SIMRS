@@ -1848,8 +1848,15 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         cmbJam.setSelectedItem(jam);
         cmbMnt.setSelectedItem(menit);
         cmbDtk.setSelectedItem(detik); 
-        KdDokter.setText(KodeDokter);
-        NmDokter.setText(NamaDokter);
+        if(akses.getkode().equals("Admin Utama")){
+            KdDokter.setText(KodeDokter);
+            NmDokter.setText(NamaDokter);
+            btnDokter.setEnabled(true);
+        }else{
+            KdDokter.setText(akses.getkode());
+            NmDokter.setText(dokter.tampil3(KdDokter.getText()));
+            btnDokter.setEnabled(true);
+        }
         KdPj.setText(Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",norwt));
         TCari.requestFocus();
         this.status=status;

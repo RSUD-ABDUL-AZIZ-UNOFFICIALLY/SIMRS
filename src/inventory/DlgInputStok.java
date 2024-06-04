@@ -1949,15 +1949,16 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             fileWriter = new FileWriter(file);
             iyem="";
             pstampil=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat, "+
-                "databarang."+hppfarmasi+" as dasar,kategori_barang.nama as kategori_obat from databarang inner join jenis on databarang.kdjns=jenis.kdjns inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode"+
-                " where databarang.status='1' "+order);
+                "databarang."+hppfarmasi+" as dasar,kategori_barang.nama as kategori_obat, gudangbarang.no_batch, gudangbarang.no_faktur,gudangbarang.stok,gudangbarang.kd_bangsal from databarang inner join jenis on databarang.kdjns=jenis.kdjns inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode inner join gudangbarang on gudangbarang.kode_brng=databarang.kode_brng"+
+                " where databarang.status='1' AND gudangbarang.kd_bangsal like ? "+order);
             try {
+                pstampil.setString(1,"%"+kdgudang.getText().trim()+"%");
                 rstampil=pstampil.executeQuery();
                 while(rstampil.next()){                            
                     tabMode.addRow(new Object[]{
                         "",rstampil.getString("kode_brng"),rstampil.getString("nama_brng"),rstampil.getString("nama"),rstampil.getString("kode_sat"),rstampil.getDouble("dasar"),0,0,0,0,0,"","",rstampil.getString("kategori_obat"),
                     });
-                    iyem=iyem+"{\"KodeBarang\":\""+rstampil.getString("kode_brng")+"\",\"NamaBarang\":\""+rstampil.getString("nama_brng").replaceAll("\"","")+"\",\"Kategori\":\""+rstampil.getString("nama")+"\",\"Satuan\":\""+rstampil.getString("kode_sat")+"\",\"Harga\":\""+rstampil.getString("dasar")+"\",\"NoBatch\":\"\",\"NoFaktur\":\"\",\"Stok\":\"0\",\"KategoriObat\":\""+rstampil.getString("kategori_obat")+"\"},";
+                    iyem=iyem+"{\"KodeBarang\":\""+rstampil.getString("kode_brng")+"\",\"NamaBarang\":\""+rstampil.getString("nama_brng").replaceAll("\"","")+"\",\"Kategori\":\""+rstampil.getString("nama")+"\",\"Satuan\":\""+rstampil.getString("kode_sat")+"\",\"Harga\":\""+rstampil.getString("dasar")+"\",\"NoBatch\":\""+rstampil.getString("no_batch")+"\",\"NoFaktur\":\""+rstampil.getString("no_faktur")+"\",\"Stok\":\""+rstampil.getString("stok")+"\",\"KategoriObat\":\""+rstampil.getString("kategori_obat").replaceAll("\"","")+"\"},";
                 }  
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -2181,6 +2182,9 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 nmgudang.setText(bangsal.tampil3(DEPOAKTIFOBAT));
                 BtnGudang.setEnabled(false);
             }
+        }
+         if (kdgudang.getText().equals("")) {
+            kdgudang.setText("");
         }
     }
 
