@@ -1835,6 +1835,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         try {
             autoNomor();
             autoNomor2();
+            autoNomor3();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_TanggalItemStateChanged
