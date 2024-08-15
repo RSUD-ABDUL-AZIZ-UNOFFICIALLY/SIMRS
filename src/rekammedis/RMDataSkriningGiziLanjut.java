@@ -1237,6 +1237,16 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
 
     private void MnSkriningGiziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkriningGiziActionPerformed
         if(tbObat.getSelectedRow()>-1){
+            String bb = tbObat.getValueAt(tbObat.getSelectedRow(),6).toString();
+            String tb = tbObat.getValueAt(tbObat.getSelectedRow(),7).toString();
+            String imt = "";
+            if((Valid.SetAngka(tb)>0)&&(Valid.SetAngka(bb)>0)){
+                try {
+                    imt = (Valid.SetAngka8(Valid.SetAngka(bb)/((Valid.SetAngka(tb)/100)*(Valid.SetAngka(tb)/100)),1)+"");
+                } catch (Exception e) {
+                    imt = "0";
+                }
+            }
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -1244,6 +1254,7 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());   
+            param.put("imt",imt);   
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
             param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),18).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),17).toString():finger)+"\n"+Tanggal.getSelectedItem()); 

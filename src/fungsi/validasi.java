@@ -51,6 +51,9 @@ import widget.ComboBox;
 import widget.Tanggal;
 import widget.TextArea;
 import java.io.File;
+import java.nio.charset.Charset;
+import java.util.Random;
+import java.util.UUID;
 import widget.TextBox;
 /**
  *
@@ -347,6 +350,15 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
             
+        return auto;
+    }
+    
+    public String generateNomer(){
+//        byte[] array = new byte[12]; // length is bounded by 7
+//        new Random().nextBytes(array);
+//        String auto = new String(array, Charset.forName("UTF-8"));
+        UUID uuid = UUID.randomUUID();
+        String auto = uuid.toString();
         return auto;
     }
 
@@ -1284,6 +1296,33 @@ public final class validasi {
         }catch (Exception e) {
         }   
         return s;
+    }    
+    
+    public String SetYears(String tgl){
+        try {
+           Date dtpa = new SimpleDateFormat("yyyy").parse(tgl.replaceAll("'",""));
+           return dtpa.toString();
+        } catch (ParseException ex) {
+           return new SimpleDateFormat("yyyy").toString();
+        }
+    }
+    
+    public String SetMonths(String tgl){
+        try {
+           Date dtpa = new SimpleDateFormat("MM").parse(tgl.replaceAll("'",""));
+           return dtpa.toString();
+        } catch (ParseException ex) {
+           return new SimpleDateFormat("MM").toString();
+        }
+    }
+    
+    public String SetDays(String tgl){
+        try {
+           Date dtpa = new SimpleDateFormat("dd").parse(tgl.replaceAll("'",""));
+           return dtpa.toString();
+        } catch (ParseException ex) {
+           return new SimpleDateFormat("dd").toString();
+        }
     }
     
     public void textKosong(JTextField teks,String pesan){
@@ -1384,6 +1423,23 @@ public final class validasi {
 
             if (number % multiple != 0) {
                 int division = (int) ((number / multiple) + 1);
+                result = division * multiple;
+            }
+            return result;
+        }else{
+            return Math.round(number);
+        }
+    }
+    
+    public double roundDown(double number, int multiple) {
+        if(PEMBULATANHARGAOBAT.equals("yes")){
+            result = multiple;
+            if (number % multiple == 0) {
+                return (int) number;
+            }
+
+            if (number % multiple != 0) {
+                int division = (int) ((number / multiple) + 0);
                 result = division * multiple;
             }
             return result;

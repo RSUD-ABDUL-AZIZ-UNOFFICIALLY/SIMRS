@@ -23,7 +23,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps,ps2,ps3;
     private ResultSet rs,rs2,rs3;
-    private String aktifkanparsial="no",norm="",kddokter="",kode_pj="",norawat="",status="";
+    private String aktifkanparsial="no",norm="",kddokter="",kode_pj="",norawat="",status="",caridokter="";
     private final Properties prop = new Properties();
     private int jmlparsial=0;
     private String cekvalid="";
@@ -60,8 +60,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
             }else if(i==5){
                 column.setPreferredWidth(300);
             }else if(i==6){
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                column.setPreferredWidth(300);
             }else if(i==7){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -75,7 +74,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         } catch (Exception ex) {
             aktifkanparsial="no";
         }
-
+        ChkDokter.setSelected(true);
     }
 
     /** This method is called from within the constructor to
@@ -89,6 +88,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
 
         internalFrame1 = new widget.InternalFrame();
         panelisi1 = new widget.panelisi();
+        ChkDokter = new widget.CekBox();
         ChkTanggal = new widget.CekBox();
         DTPCari1 = new widget.Tanggal();
         jLabel21 = new widget.Label();
@@ -114,6 +114,19 @@ public class DlgCopyResep extends javax.swing.JDialog {
         panelisi1.setPreferredSize(new java.awt.Dimension(55, 55));
         panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
+        ChkDokter.setText("Semua Dokter");
+        ChkDokter.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        ChkDokter.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ChkDokter.setName("ChkDokter"); // NOI18N
+        ChkDokter.setOpaque(false);
+        ChkDokter.setPreferredSize(new java.awt.Dimension(90, 23));
+        ChkDokter.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkDokterItemStateChanged(evt);
+            }
+        });
+        panelisi1.add(ChkDokter);
+
         ChkTanggal.setText("Tgl.Resep :");
         ChkTanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ChkTanggal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -128,7 +141,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         panelisi1.add(ChkTanggal);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -142,7 +155,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         panelisi1.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -427,6 +440,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnHapusKeyPressed
 
+    private void ChkDokterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkDokterItemStateChanged
+        tampil();
+    }//GEN-LAST:event_ChkDokterItemStateChanged
+
     /**
     * @param args the command line arguments
     */
@@ -449,6 +466,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnTambah;
+    private widget.CekBox ChkDokter;
     private widget.CekBox ChkTanggal;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
@@ -462,6 +480,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     public void tampil() {
         Valid.tabelKosong(tabMode);
+        if(ChkDokter.isSelected()==true){
+            caridokter="";
+        }else{
+            caridokter="and resep_obat.kd_dokter='"+kddokter+"' ";
+        }
         try{  
             if(ChkTanggal.isSelected()==true){
                 ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
@@ -469,14 +492,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,resep_obat.status as status_asal "+
                     " from resep_obat inner join reg_periksa inner join pasien inner join dokter on resep_obat.no_rawat=reg_periksa.no_rawat  "+
                     " and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and resep_obat.kd_dokter=dokter.kd_dokter where "+
-                    " resep_obat.tgl_peresepan<>'0000-00-00' and resep_obat.tgl_peresepan between ? and ? and pasien.no_rkm_medis=? order by resep_obat.tgl_perawatan,resep_obat.jam desc");
+                    " resep_obat.tgl_peresepan<>'0000-00-00' and resep_obat.tgl_peresepan between ? and ? and pasien.no_rkm_medis=? "+caridokter+" order by DATE(resep_obat.tgl_perawatan) desc,TIME(resep_obat.jam) desc");
             }else{
                 ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
                     " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter, "+
                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,resep_obat.status as status_asal "+
                     " from resep_obat inner join reg_periksa inner join pasien inner join dokter on resep_obat.no_rawat=reg_periksa.no_rawat  "+
                     " and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and resep_obat.kd_dokter=dokter.kd_dokter where "+
-                    " resep_obat.tgl_peresepan<>'0000-00-00' and pasien.no_rkm_medis=? order by resep_obat.tgl_perawatan,resep_obat.jam desc");
+                    " resep_obat.tgl_peresepan<>'0000-00-00' and pasien.no_rkm_medis=? "+caridokter+" order by DATE(resep_obat.tgl_perawatan) desc,TIME(resep_obat.jam) desc");
             }
             try{
                 if(ChkTanggal.isSelected()==true){

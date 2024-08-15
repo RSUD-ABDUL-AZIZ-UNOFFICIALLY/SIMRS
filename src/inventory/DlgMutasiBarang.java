@@ -768,7 +768,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }else if(tbDokter.getSelectedColumn()==8){
                     try {
                         if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().equals("")){
-                            psstok=koneksi.prepareStatement("select data_batch.no_faktur,data_batch."+hppfarmasi+" as dasar,ifnull(data_batch.tgl_kadaluarsa,'0000-00-00') as tgl_kadaluarsa from data_batch where data_batch.no_batch=? and data_batch.kode_brng=? and data_batch.sisa>0 order by data_batch.tgl_kadaluarsa limit 1");
+                            psstok=koneksi.prepareStatement("select data_batch.no_faktur,data_batch."+hppfarmasi+" as dasar,ifnull(data_batch.tgl_kadaluarsa,'0000-00-00') as tgl_kadaluarsa from data_batch where data_batch.no_batch=? and data_batch.kode_brng=? and data_batch.sisa>0 order by data_batch.tgl_kadaluarsa ASC limit 1");
                             try {
                                 psstok.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString());
                                 psstok.setString(2,tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
@@ -1219,7 +1219,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 "from gudangbarang inner join data_batch on gudangbarang.kode_brng=data_batch.kode_brng "+
                                 "where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and "+
                                 "gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>''"+
-                                "order by data_batch.tgl_kadaluarsa desc limit 1");
+                                "order by data_batch.tgl_kadaluarsa ASC limit 1");
                         try {
                             psstok.setString(1,kddari.getText());
                             psstok.setString(2,rs.getString("kode_brng"));

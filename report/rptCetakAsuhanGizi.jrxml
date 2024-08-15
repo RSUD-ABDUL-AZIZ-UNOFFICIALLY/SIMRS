@@ -25,6 +25,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="diagnosa" class="java.lang.String"/>
+	<parameter name="finger2" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,asuhan_gizi.tanggal,
 asuhan_gizi.antropometri_bb,asuhan_gizi.antropometri_tb,asuhan_gizi.antropometri_imt,asuhan_gizi.antropometri_lla,
@@ -378,13 +379,13 @@ inner join petugas on asuhan_gizi.nip=petugas.nip]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="738" width="557" height="1" uuid="b33ba12e-e000-400c-8e7b-b8b517d15a08"/>
+				<reportElement x="0" y="720" width="557" height="1" uuid="b33ba12e-e000-400c-8e7b-b8b517d15a08"/>
 				<graphicElement>
 					<pen lineWidth="2.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="0" y="739" width="230" height="20" uuid="24c4d4b4-2817-4bc7-967f-96cadadb9b43"/>
+				<reportElement x="0" y="721" width="230" height="20" uuid="24c4d4b4-2817-4bc7-967f-96cadadb9b43"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
@@ -1190,6 +1191,38 @@ inner join petugas on asuhan_gizi.nip=petugas.nip]]>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[V]]></text>
+			</staticText>
+			<textField pattern="dd MMMM, yyyy">
+				<reportElement x="431" y="723" width="120" height="12" uuid="15bd6d68-ca3c-41b0-8f5e-55f2b85d9ee8"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{kotars}+", "+new SimpleDateFormat("dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="431" y="790" width="120" height="13" uuid="e87e9f24-2df0-4a28-913f-764faf2cf1d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="446" y="749" width="91" height="38" isRemoveLineWhenBlank="true" uuid="3d72e286-3b14-4a74-82cf-26343b158bf6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
+					<jr:codeExpression><![CDATA[$P{finger2}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<staticText>
+				<reportElement x="431" y="734" width="120" height="15" uuid="a6925b07-767c-4840-aa5b-0ee1f61e3753"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ahli Gizi]]></text>
 			</staticText>
 		</band>
 	</title>

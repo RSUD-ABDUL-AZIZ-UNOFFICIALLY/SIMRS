@@ -409,7 +409,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
         FormInput.add(jLabel5);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-02-2022" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-08-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);

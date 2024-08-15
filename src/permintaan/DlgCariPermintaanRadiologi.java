@@ -454,6 +454,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         BtnAmbilDataFUJI = new widget.Button();
         BtnKirimDataCareStream = new widget.Button();
         BtnAmbilDataFUJI1 = new widget.Button();
+        BtnLabel = new widget.Button();
 
         WindowAmbilSampel.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowAmbilSampel.setName("WindowAmbilSampel"); // NOI18N
@@ -495,7 +496,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-03-2023 11:30:14" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-06-2024 10:56:32" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -1154,6 +1155,23 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnAmbilDataFUJI1);
+
+        BtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnLabel.setText("Label");
+        BtnLabel.setFocusPainted(false);
+        BtnLabel.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnLabel.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnLabel.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnLabel.setName("BtnLabel"); // NOI18N
+        BtnLabel.setPreferredSize(new java.awt.Dimension(215, 23));
+        BtnLabel.setRoundRect(false);
+        BtnLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLabelActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnLabel);
 
         ScrollMenu.setViewportView(FormMenu);
 
@@ -2291,6 +2309,70 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_BtnAmbilDataFUJI1ActionPerformed
 
+    private void BtnLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLabelActionPerformed
+        String noorderby = "";
+        if(tabMode.getRowCount()==0){
+             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+        }else {
+            if(TabPilihRawat.getSelectedIndex()==0){
+                noorderby = tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString();
+            } else if(TabPilihRawat.getSelectedIndex()==1) {
+                noorderby = tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString();
+            }
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Map<String, Object> param = new HashMap<>();  
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());   
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            if(Sequel.cariInteger(
+                    "SELECT\n" +
+                    "	COUNT(permintaan_pemeriksaan_radiologi.kd_jenis_prw) \n" +
+                    "FROM\n" +
+                    "	permintaan_pemeriksaan_radiologi\n" +
+                    "	INNER JOIN\n" +
+                    "	permintaan_radiologi\n" +
+                    "	ON \n" +
+                    "		permintaan_pemeriksaan_radiologi.noorder = permintaan_radiologi.noorder WHERE permintaan_radiologi.noorder=?",noorderby)>0){
+                Valid.MyReportqry("rptLabelRadiologi.jasper","report","::[ Aturan Pakai Obat ]::",
+                    "SELECT\n" +
+                    "	permintaan_radiologi.diagnosa_klinis, \n" +
+                    "	pasien.no_rkm_medis, \n" +
+                    "	pasien.nm_pasien, \n" +
+                    "	pasien.jk, \n" +
+                    "	pasien.tgl_lahir, \n" +
+                    "	reg_periksa.umurdaftar, \n" +
+                    "	reg_periksa.no_rawat,\n" +
+                    "	reg_periksa.sttsumur, \n" +
+                    "	permintaan_pemeriksaan_radiologi.kd_jenis_prw, \n" +
+                    "	jns_perawatan_radiologi.nm_perawatan\n" +
+                    "FROM\n" +
+                    "	permintaan_radiologi\n" +
+                    "	INNER JOIN\n" +
+                    "	reg_periksa\n" +
+                    "	ON \n" +
+                    "		permintaan_radiologi.no_rawat = reg_periksa.no_rawat\n" +
+                    "	INNER JOIN\n" +
+                    "	pasien\n" +
+                    "	ON \n" +
+                    "		reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
+                    "	INNER JOIN\n" +
+                    "	permintaan_pemeriksaan_radiologi\n" +
+                    "	ON \n" +
+                    "		permintaan_radiologi.noorder = permintaan_pemeriksaan_radiologi.noorder\n" +
+                    "	INNER JOIN\n" +
+                    "	jns_perawatan_radiologi\n" +
+                    "	ON \n" +
+                    "		permintaan_pemeriksaan_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw \n"+ 
+                    " WHERE permintaan_radiologi.noorder='"+noorderby+"' ",param);
+            }
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnLabelActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2321,6 +2403,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
     private widget.Button BtnKeluar;
     private widget.Button BtnKirimDataCareStream;
     private widget.Button BtnKirimDataFuji;
+    private widget.Button BtnLabel;
     private widget.Button BtnPrint;
     private widget.Button BtnSampel;
     private widget.Button BtnSeek3;
@@ -2384,7 +2467,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                     "if(permintaan_radiologi.jam_permintaan='00:00:00','',permintaan_radiologi.jam_permintaan) as jam_permintaan,reg_periksa.kd_pj,penjab.png_jawab,"+
                     "if(permintaan_radiologi.tgl_sampel='0000-00-00','',permintaan_radiologi.tgl_sampel) as tgl_sampel,if(permintaan_radiologi.jam_sampel='00:00:00','',permintaan_radiologi.jam_sampel) as jam_sampel,"+
                     "permintaan_radiologi.tgl_hasil,if(permintaan_radiologi.jam_hasil='00:00:00','',permintaan_radiologi.jam_hasil) as jam_hasil,"+
-                    "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,poliklinik.nm_poli,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir "+
+                    "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,poliklinik.nm_poli,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir,CONCAT(umurdaftar,' ',sttsumur) as umurdaftar,pasien.jk "+
                     "from permintaan_radiologi inner join reg_periksa on permintaan_radiologi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join dokter on permintaan_radiologi.dokter_perujuk=dokter.kd_dokter "+
@@ -2414,7 +2497,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                 while(rs.next()){
                     tabMode.addRow(new String[]{
                         rs.getString("noorder"),rs.getString("no_rawat"),rs.getString("no_rkm_medis")+" "+
-                        rs.getString("nm_pasien")+" ["+rs.getString("tgl_lahir")+"]",rs.getString("tgl_permintaan"),rs.getString("jam_permintaan"),
+                        rs.getString("nm_pasien")+" ["+rs.getString("tgl_lahir")+" | "+rs.getString("umurdaftar")+" | "+rs.getString("jk")+"]",rs.getString("tgl_permintaan"),rs.getString("jam_permintaan"),
                         rs.getString("tgl_sampel"),rs.getString("jam_sampel"),rs.getString("tgl_hasil"),
                         rs.getString("jam_hasil"),rs.getString("dokter_perujuk"),rs.getString("nm_dokter"),
                         rs.getString("nm_poli"),rs.getString("informasi_tambahan"),rs.getString("diagnosa_klinis"),
@@ -2471,7 +2554,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                     "if(permintaan_radiologi.jam_permintaan='00:00:00','',permintaan_radiologi.jam_permintaan) as jam_permintaan,permintaan_radiologi.tgl_sampel,"+
                     "if(permintaan_radiologi.jam_sampel='00:00:00','',permintaan_radiologi.jam_sampel) as jam_sampel, permintaan_radiologi.tgl_hasil,"+
                     "if(permintaan_radiologi.jam_hasil='00:00:00','',permintaan_radiologi.jam_hasil) as jam_hasil,"+
-                    "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,poliklinik.nm_poli,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir "+
+                    "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,poliklinik.nm_poli,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir,CONCAT(umurdaftar,' ',sttsumur) as umurdaftar,pasien.jk "+
                     "from permintaan_radiologi inner join reg_periksa on permintaan_radiologi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join permintaan_pemeriksaan_radiologi on permintaan_radiologi.noorder=permintaan_pemeriksaan_radiologi.noorder "+
@@ -2504,7 +2587,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode2.addRow(new String[]{
-                        rs.getString("noorder"),rs.getString("no_rawat"),rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ["+rs.getString("tgl_lahir")+"]",
+                        rs.getString("noorder"),rs.getString("no_rawat"),rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ["+rs.getString("tgl_lahir")+" | "+rs.getString("umurdaftar")+" | "+rs.getString("jk")+"]",
                         rs.getString("nm_perawatan"),rs.getString("tgl_permintaan"),rs.getString("jam_permintaan"),
                         rs.getString("tgl_sampel"),rs.getString("jam_sampel"),rs.getString("tgl_hasil"),
                         rs.getString("jam_hasil"),rs.getString("dokter_perujuk"),rs.getString("nm_dokter"),
@@ -2616,7 +2699,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                         "if(permintaan_radiologi.jam_permintaan='00:00:00','',permintaan_radiologi.jam_permintaan) as jam_permintaan,reg_periksa.kd_pj,penjab.png_jawab,"+
                         "if(permintaan_radiologi.tgl_sampel='0000-00-00','',permintaan_radiologi.tgl_sampel) as tgl_sampel,if(permintaan_radiologi.jam_sampel='00:00:00','',permintaan_radiologi.jam_sampel) as jam_sampel,"+
                         "permintaan_radiologi.tgl_hasil,if(permintaan_radiologi.jam_hasil='00:00:00','',permintaan_radiologi.jam_hasil) as jam_hasil,"+
-                        "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir "+
+                        "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir,CONCAT(umurdaftar,' ',sttsumur) as umurdaftar,pasien.jk "+
                         "from permintaan_radiologi inner join reg_periksa on permintaan_radiologi.no_rawat=reg_periksa.no_rawat "+
                         "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join dokter on permintaan_radiologi.dokter_perujuk=dokter.kd_dokter "+
@@ -2636,7 +2719,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                         "if(permintaan_radiologi.jam_permintaan='00:00:00','',permintaan_radiologi.jam_permintaan) as jam_permintaan,reg_periksa.kd_pj,penjab.png_jawab,"+
                         "if(permintaan_radiologi.tgl_sampel='0000-00-00','',permintaan_radiologi.tgl_sampel) as tgl_sampel,if(permintaan_radiologi.jam_sampel='00:00:00','',permintaan_radiologi.jam_sampel) as jam_sampel,"+
                         "permintaan_radiologi.tgl_hasil,if(permintaan_radiologi.jam_hasil='00:00:00','',permintaan_radiologi.jam_hasil) as jam_hasil,"+
-                        "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir "+
+                        "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir,CONCAT(umurdaftar,' ',sttsumur) as umurdaftar,pasien.jk "+
                         "from permintaan_radiologi inner join reg_periksa on permintaan_radiologi.no_rawat=reg_periksa.no_rawat "+
                         "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join dokter on permintaan_radiologi.dokter_perujuk=dokter.kd_dokter "+
@@ -2671,7 +2754,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                 while(rs.next()){
                     tabMode3.addRow(new String[]{
                         rs.getString("noorder"),rs.getString("no_rawat"),rs.getString("no_rkm_medis")+" "+
-                        rs.getString("nm_pasien")+" ["+rs.getString("tgl_lahir")+"]",rs.getString("tgl_permintaan"),rs.getString("jam_permintaan"),
+                        rs.getString("nm_pasien")+" ["+rs.getString("tgl_lahir")+" | "+rs.getString("umurdaftar")+" | "+rs.getString("jk")+"]",rs.getString("tgl_permintaan"),rs.getString("jam_permintaan"),
                         rs.getString("tgl_sampel"),rs.getString("jam_sampel"),rs.getString("tgl_hasil"),
                         rs.getString("jam_hasil"),rs.getString("dokter_perujuk"),rs.getString("nm_dokter"),
                         rs.getString("nm_bangsal"),rs.getString("informasi_tambahan"),rs.getString("diagnosa_klinis"),
@@ -2729,7 +2812,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                         "if(permintaan_radiologi.jam_permintaan='00:00:00','',permintaan_radiologi.jam_permintaan) as jam_permintaan,permintaan_radiologi.tgl_sampel,"+
                         "if(permintaan_radiologi.jam_sampel='00:00:00','',permintaan_radiologi.jam_sampel) as jam_sampel, permintaan_radiologi.tgl_hasil,"+
                         "if(permintaan_radiologi.jam_hasil='00:00:00','',permintaan_radiologi.jam_hasil) as jam_hasil,"+
-                        "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir from permintaan_radiologi "+
+                        "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir,CONCAT(umurdaftar,' ',sttsumur) as umurdaftar,pasien.jk from permintaan_radiologi "+
                         "inner join reg_periksa on permintaan_radiologi.no_rawat=reg_periksa.no_rawat "+
                         "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join permintaan_pemeriksaan_radiologi on permintaan_radiologi.noorder=permintaan_pemeriksaan_radiologi.noorder "+
@@ -2752,7 +2835,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                         "if(permintaan_radiologi.jam_permintaan='00:00:00','',permintaan_radiologi.jam_permintaan) as jam_permintaan,permintaan_radiologi.tgl_sampel,"+
                         "if(permintaan_radiologi.jam_sampel='00:00:00','',permintaan_radiologi.jam_sampel) as jam_sampel, permintaan_radiologi.tgl_hasil,"+
                         "if(permintaan_radiologi.jam_hasil='00:00:00','',permintaan_radiologi.jam_hasil) as jam_hasil,"+
-                        "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir from permintaan_radiologi "+
+                        "permintaan_radiologi.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis,pasien.tgl_lahir,CONCAT(umurdaftar,' ',sttsumur) as umurdaftar,pasien.jk from permintaan_radiologi "+
                         "inner join reg_periksa on permintaan_radiologi.no_rawat=reg_periksa.no_rawat "+
                         "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join permintaan_pemeriksaan_radiologi on permintaan_radiologi.noorder=permintaan_pemeriksaan_radiologi.noorder "+
@@ -2789,7 +2872,7 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode4.addRow(new String[]{
-                        rs.getString("noorder"),rs.getString("no_rawat"),rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ["+rs.getString("tgl_lahir")+"]",
+                        rs.getString("noorder"),rs.getString("no_rawat"),rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ["+rs.getString("tgl_lahir")+" | "+rs.getString("umurdaftar")+" | "+rs.getString("jk")+"]",
                         rs.getString("nm_perawatan"),rs.getString("tgl_permintaan"),rs.getString("jam_permintaan"),
                         rs.getString("tgl_sampel"),rs.getString("jam_sampel"),rs.getString("tgl_hasil"),
                         rs.getString("jam_hasil"),rs.getString("dokter_perujuk"),rs.getString("nm_dokter"),

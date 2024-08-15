@@ -32,7 +32,7 @@ public class DlgCariReturJual extends javax.swing.JDialog {
     private Jurnal jur=new Jurnal();
     private riwayatobat Trackobat=new riwayatobat();
     public  DlgCariPetugas petugas=new DlgCariPetugas(null,false);
-    public  DlgBarang barang=new DlgBarang(null,false);
+    public  DlgBarangByResep barang=new DlgBarangByResep(null,false);
     private double ttlretur=0,subtotal=0;
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps,ps2;
@@ -973,7 +973,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select returjual.no_retur_jual,returjual.tgl_retur, "+
-                    "returjual.nip,petugas.nama,pasien.no_rkm_medis,pasien.nm_pasien,bangsal.nm_bangsal "+
+                    "returjual.nip,petugas.nama,pasien.no_rkm_medis,pasien.nm_pasien,bangsal.nm_bangsal,ket "+
                     " from returjual inner join petugas inner join pasien inner join bangsal "+
                     " inner join detreturjual inner join databarang inner join kodesatuan "+
                     " on detreturjual.kode_brng=databarang.kode_brng "+
@@ -1002,7 +1002,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                    rs.getString(2),
                                    rs.getString(3)+", "+rs.getString(4),
                                    rs.getString(5)+", "+rs.getString(6),
-                                   "Retur Jual : di "+rs.getString(7),"","","","",""
+                                   "Retur Jual : di "+rs.getString(7),"Dari: "+rs.getString(8),"","","",""
                     });
                     ps2=koneksi.prepareStatement("select detreturjual.nota_jual,detreturjual.kode_brng,databarang.nama_brng, "+
                             "detreturjual.kode_sat,kodesatuan.satuan,detreturjual.h_retur,detreturjual.jml_retur, "+

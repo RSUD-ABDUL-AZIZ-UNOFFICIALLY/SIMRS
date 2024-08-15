@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="390" columnWidth="533" leftMargin="42" rightMargin="20" topMargin="20" bottomMargin="20" uuid="479507e5-0db3-4ea9-9590-dbfa174d1542">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
@@ -430,6 +430,14 @@ on bridging_surat_kontrol_bpjs.no_sep=bridging_sep.no_sep]]>
 				</textElement>
 				<text><![CDATA[Demikian atas bantuannya diucapkan banyak terima kasih]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="367" y="135" width="163" height="26" uuid="c09b79c8-1c12-4717-b62e-f23b4522411d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="13" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomr}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

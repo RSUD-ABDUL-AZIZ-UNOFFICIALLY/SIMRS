@@ -60,9 +60,9 @@ public class DlgDeposit extends javax.swing.JDialog {
     private Date date = new Date();
     private String now=dateFormat.format(date),Uang_Muka_Ranap=Sequel.cariIsi("select Uang_Muka_Ranap from set_akun_ranap2");
     private int i=0;
-    private PreparedStatement ps;
-    private ResultSet rs;
-    private double ppn=0,nilaippn=0,totaldeposit=0,tottaldibayar=0,totalppn=0;
+    private PreparedStatement ps,ps2;
+    private ResultSet rs,rs2;
+    private double ppn=0,nilaippn=0,totaldeposit=0,tottaldibayar=0,totalppn=0,totaluang=0;
     private boolean sukses=true;
     private Jurnal jur=new Jurnal();
     private File file;
@@ -452,7 +452,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -466,7 +466,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -559,7 +559,7 @@ public class DlgDeposit extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2022" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -663,6 +663,11 @@ public class DlgDeposit extends javax.swing.JDialog {
         ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ChkJln.setName("ChkJln"); // NOI18N
+        ChkJln.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkJlnItemStateChanged(evt);
+            }
+        });
         FormInput.add(ChkJln);
         ChkJln.setBounds(415, 40, 23, 23);
 
@@ -1106,7 +1111,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
             if(tbObat.getSelectedRow()!= -1){
-                Valid.panggilUrl("billing/LaporanBilling6.php?norawat="+Nomor.getText().replaceAll(" ","_")+"&pasien="+TNoRM.getText()+"_"+TPasien.getText().replaceAll(" ","_")+"&tanggal="+DTPTgl.getSelectedItem()+"&deposit="+BesarDeposit.getText()+"&petugas="+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().replaceAll(" ","_")+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+                Valid.panggilUrl("billing/LaporanBilling6.php?norawat="+Nomor.getText().replaceAll(" ","_")+"&pasien="+TNoRM.getText()+"_"+TPasien.getText().replaceAll(" ","_")+"&tanggal="+DTPTgl.getSelectedItem()+"&deposit="+BesarDeposit.getText()+"&keterangan="+Keterangan.getText()+"&petugas="+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().replaceAll(" ","_")+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
             }
         }
     }//GEN-LAST:event_MnKwitansiDepositActionPerformed
@@ -1137,6 +1142,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
         tampilAkunBayar();
     }//GEN-LAST:event_BtnAll1ActionPerformed
+
+    private void ChkJlnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkJlnItemStateChanged
+        autoNomor();
+    }//GEN-LAST:event_ChkJlnItemStateChanged
 
     /**
     * @param args the command line arguments
@@ -1304,6 +1313,82 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
         ChkInput.setSelected(true);
+        isForm();
+    }
+    
+    public void setForBilling(String norwt,Date tgl1,Date tgl2, String noresep, String ket) {
+        TNoRw.setText(norwt);
+        TCari.setText(norwt);
+        isRawat();
+        DTPCari1.setDate(tgl1);
+        DTPCari2.setDate(tgl2);
+        ChkInput.setSelected(true);
+        Keterangan.setText(ket+noresep);
+        try{
+            ps=koneksi.prepareStatement("SELECT\n" +
+                "	resep_obat.tgl_perawatan, \n" +
+                "	resep_obat.jam, \n" +
+                "	resep_obat.no_rawat\n" +
+                "FROM\n" +
+                "	resep_obat\n" +
+                "WHERE\n" +
+                "	resep_obat.no_resep = ?");
+                try {
+                    ps.setString(1,noresep);
+                    rs=ps.executeQuery();
+                    totaluang=0;
+                    while(rs.next()){
+                        
+//                        System.out.println("no_resep:"+noresep);
+//                        System.out.println("tgl_perawatan:"+rs.getString(1));
+//                        System.out.println("jam:"+rs.getString(2));
+//                        System.out.println("no_rawat:"+rs.getString(3));
+                        
+                        ps2=koneksi.prepareStatement("SELECT\n" +
+                            "	SUM(detail_pemberian_obat.total) \n" +
+                            "FROM\n" +
+                            "	detail_pemberian_obat\n" +
+                            "WHERE\n" +
+                            "	detail_pemberian_obat.tgl_perawatan = ? AND\n" +
+                            "	detail_pemberian_obat.jam = ? AND\n" +
+                            "	detail_pemberian_obat.no_rawat =   ?");
+                        try {
+//                            System.out.println("tt:"+rs.getString(1));
+                            ps2.setString(1,rs.getString(1));
+                            ps2.setString(2,rs.getString(2));
+                            ps2.setString(3,rs.getString(3));
+
+                            rs2=ps2.executeQuery();
+                            while(rs2.next()){
+//                                System.out.println("TOTAL:"+rs2.getDouble(1));
+                                totaluang=totaluang+rs2.getDouble(1);
+                            }
+                                BesarDeposit.setText(Valid.SetAngka(totaluang+(totaluang*0.11)));
+//                                System.out.println("TOTAL2:"+totaluang);
+                        } catch (Exception e) {
+                            System.out.println("Notif : "+e);
+                        } finally{
+                            if(rs2!=null){
+                                rs2.close();
+                            }
+                            if(ps2!=null){
+                                ps2.close();
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : "+e);
+                } finally{
+                    if(rs!=null){
+                        rs.close();
+                    }
+                    if(ps!=null){
+                        ps.close();
+                    }
+                }
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
         isForm();
     }
     

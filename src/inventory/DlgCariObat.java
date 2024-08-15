@@ -2067,7 +2067,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.Table tbObatRacikan;
     // End of variables declaration//GEN-END:variables
 
-    public void tampilobat() {        
+    public void tampilobat() { 
+        
+        aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
         z=0;
         for(i=0;i<tbObat.getRowCount();i++){
             if(!tbObat.getValueAt(i,0).toString().equals("")){
@@ -2204,7 +2206,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "and (databarang.kode_brng like ? or databarang.nama_brng like ? or kategori_barang.nama like ? or "+
                         "golongan_barang.nama like ? or data_batch.no_batch like ? or data_batch.no_faktur like ? or "+
                         "jenis.nama like ? or databarang.letak_barang like ?) ")+
-                        "order by data_batch.tgl_kadaluarsa asc");
+                        "order by data_batch.tgl_kadaluarsa ASC");
                     try{
                         psobat.setDouble(1,kenaikan);
                         psobat.setString(2,kdgudang.getText());
@@ -2321,7 +2323,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         sql+" where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? "+(TCari.getText().trim().equals("")?"":
                         "and (databarang.kode_brng like ? or databarang.nama_brng like ? or kategori_barang.nama like ? or "+
                         "golongan_barang.nama like ? or data_batch.no_batch like ? or data_batch.no_faktur like ? or "+
-                        "jenis.nama like ? or databarang.letak_barang like ?)")+" order by data_batch.tgl_kadaluarsa asc");
+                        "jenis.nama like ? or databarang.letak_barang like ?)")+" order by data_batch.tgl_kadaluarsa ASC");
                     try{
                         psobat.setString(1,kdgudang.getText());
                         if(!TCari.getText().trim().equals("")){
@@ -2472,6 +2474,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     
     public void tampilobat2(String no_resep) {     
         this.noresep=no_resep; 
+        this.aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
         try {
             Valid.tabelKosong(tabModeobat);
             Valid.tabelKosong(tabModeObatRacikan);
@@ -2499,7 +2502,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 "select data_batch.no_batch, data_batch.kode_brng, data_batch.tgl_beli, data_batch.tgl_kadaluarsa, data_batch.asal, data_batch.no_faktur, "+
                                 "data_batch.h_beli,(data_batch.h_beli+(data_batch.h_beli*?)) as harga, gudangbarang.stok,data_batch."+hppfarmasi+" as dasar from data_batch inner join gudangbarang "+
                                 "on data_batch.kode_brng=gudangbarang.kode_brng and data_batch.no_batch=gudangbarang.no_batch and data_batch.no_faktur=gudangbarang.no_faktur where "+
-                                "gudangbarang.stok>0 and data_batch.kode_brng=? and gudangbarang.kd_bangsal=? order by data_batch.tgl_kadaluarsa,gudangbarang.stok desc limit 1");
+                                "gudangbarang.stok>0 and data_batch.kode_brng=? and gudangbarang.kd_bangsal=? order by data_batch.tgl_kadaluarsa ASC limit 1");
                             try {
                                 psbatch.setDouble(1,kenaikan);
                                 psbatch.setString(2,rsobat.getString("kode_brng"));
@@ -2524,7 +2527,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(1)..!!");
                                 tabModeobat.addRow(new Object[] {
                                    false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
@@ -2568,7 +2571,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
                             sisacari=0;
-                            psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                            psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
                                 psstok.setString(1,kdgudang.getText());
                                 psstok.setString(2,rsobat.getString("kode_brng"));
@@ -2588,7 +2591,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(2)..!!");
                                 tabModeobat.addRow(new Object[] {false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("harga"),100),
                                    rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
@@ -2638,7 +2641,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 "data_batch.h_beli, data_batch.ralan, data_batch.kelas1, data_batch.kelas2, data_batch.kelas3, data_batch.utama, data_batch.vip, data_batch.vvip, data_batch.beliluar, "+
                                 "data_batch.jualbebas, data_batch.karyawan, data_batch.jumlahbeli,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar from data_batch inner join gudangbarang "+
                                 "on data_batch.kode_brng=gudangbarang.kode_brng and data_batch.no_batch=gudangbarang.no_batch and data_batch.no_faktur=gudangbarang.no_faktur where "+
-                                "gudangbarang.stok>0 and data_batch.kode_brng=? and gudangbarang.kd_bangsal=? order by data_batch.tgl_kadaluarsa,gudangbarang.stok desc limit 1");
+                                "gudangbarang.stok>0 and data_batch.kode_brng=? and gudangbarang.kd_bangsal=? order by data_batch.tgl_kadaluarsa ASC limit 1");
                             try {
                                 psbatch.setString(1,rsobat.getString("kode_brng"));
                                 psbatch.setString(2,kdgudang.getText());
@@ -2671,7 +2674,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             }
                             
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(3)..!!");
                                 tabModeobat.addRow(new Object[] {
                                    false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
@@ -2716,7 +2719,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
                             sisacari=0;
-                            psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                            psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
                                 psstok.setString(1,kdgudang.getText());
                                 psstok.setString(2,rsobat.getString("kode_brng"));
@@ -2736,7 +2739,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(4)..!!");
                                 if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                                     tabModeobat.addRow(new Object[] {false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("karyawan"),100),
@@ -2846,7 +2849,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         "select data_batch.no_batch, data_batch.kode_brng, data_batch.tgl_beli, data_batch.tgl_kadaluarsa, data_batch.asal, data_batch.no_faktur, "+
                                         "data_batch.h_beli,(data_batch.h_beli+(data_batch.h_beli*?)) as harga, gudangbarang.stok,data_batch."+hppfarmasi+" as dasar from data_batch inner join gudangbarang "+
                                         "on data_batch.kode_brng=gudangbarang.kode_brng and data_batch.no_batch=gudangbarang.no_batch and data_batch.no_faktur=gudangbarang.no_faktur where "+
-                                        "gudangbarang.stok>0 and data_batch.kode_brng=? and gudangbarang.kd_bangsal=? order by data_batch.tgl_kadaluarsa,gudangbarang.stok desc limit 1");
+                                        "gudangbarang.stok>0 and data_batch.kode_brng=? and gudangbarang.kd_bangsal=? order by data_batch.tgl_kadaluarsa ASC limit 1");
                                     try {
                                         psbatch.setDouble(1,kenaikan);
                                         psbatch.setString(2,rs2.getString("kode_brng"));
@@ -2871,7 +2874,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         }
                                     }
                                     if(rs2.getDouble("jml")>sisacari){
-                                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(5)..!!");
                                         tabModeDetailObatRacikan.addRow(new Object[]{
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                             rs2.getString("kode_sat"),hargacari,h_belicari,
@@ -2916,7 +2919,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
                                     sisacari=0;
-                                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                                     try {
                                         psstok.setString(1,kdgudang.getText());
                                         psstok.setString(2,rs2.getString("kode_brng"));
@@ -2936,7 +2939,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         }
                                     }
                                     if(rs2.getDouble("jml")>sisacari){
-                                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(6)..!!");
                                         tabModeDetailObatRacikan.addRow(new Object[]{
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                             rs2.getString("kode_sat"),rs2.getDouble("harga"),rs2.getDouble("dasar"),
@@ -2987,7 +2990,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         "data_batch.h_beli, data_batch.ralan, data_batch.kelas1, data_batch.kelas2, data_batch.kelas3, data_batch.utama, data_batch.vip, data_batch.vvip, data_batch.beliluar, "+
                                         "data_batch.jualbebas, data_batch.karyawan, data_batch.jumlahbeli,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar from data_batch inner join gudangbarang "+
                                         "on data_batch.kode_brng=gudangbarang.kode_brng and data_batch.no_batch=gudangbarang.no_batch and data_batch.no_faktur=gudangbarang.no_faktur where "+
-                                        "gudangbarang.stok>0 and data_batch.kode_brng=? and gudangbarang.kd_bangsal=? order by data_batch.tgl_kadaluarsa,gudangbarang.stok desc limit 1");
+                                        "gudangbarang.stok>0 and data_batch.kode_brng=? and gudangbarang.kd_bangsal=? order by data_batch.tgl_kadaluarsa ASC limit 1");
                                     try {
                                         psbatch.setString(1,rs2.getString("kode_brng"));
                                         psbatch.setString(2,kdgudang.getText());
@@ -3019,7 +3022,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         }
                                     }
                                     if(rs2.getDouble("jml")>sisacari){
-                                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(7)..!!");
                                         tabModeDetailObatRacikan.addRow(new Object[]{
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                             rs2.getString("kode_sat"),hargacari,h_belicari,
@@ -3063,7 +3066,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
                                     sisacari=0;
-                                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                                     try {
                                         psstok.setString(1,kdgudang.getText());
                                         psstok.setString(2,rs2.getString("kode_brng"));
@@ -3083,7 +3086,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         }
                                     }
                                     if(rs2.getDouble("jml")>sisacari){
-                                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(8)..!!");
                                         if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                                             tabModeDetailObatRacikan.addRow(new Object[]{
                                                 rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
@@ -3204,7 +3207,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         if(Double.parseDouble(tbObat.getValueAt(row,1).toString())>0){
                             stokbarang=0;  
                             if(aktifkanbatch.equals("yes")){
-                                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
+                                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                                 try {
                                     psstok.setString(1,kdgudang.getText());
                                     psstok.setString(2,tbObat.getValueAt(row,2).toString());
@@ -3226,7 +3229,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                     }
                                 }
                             }else{
-                                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                                 try {
                                     psstok.setString(1,kdgudang.getText());
                                     psstok.setString(2,tbObat.getValueAt(row,2).toString());
@@ -3280,8 +3283,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             }
 
                             if(stokbarang<y){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
-                                tbObat.setValueAt("",row,1);
+                                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(9)..!!");
+//                                tbObat.setValueAt("",row,1);
                             }
                         }
                         if((tbObat.getSelectedColumn()==16)||(tbObat.getSelectedColumn()==17)){
@@ -3302,7 +3305,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         try {            
             stokbarang=0;  
             if(aktifkanbatch.equals("yes")){
-                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
+                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                 try {
                     psstok.setString(1,kdgudang.getText());
                     psstok.setString(2,tbObat.getValueAt(data,2).toString());
@@ -3324,7 +3327,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     }
                 }
             }else{
-                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                 try {
                     psstok.setString(1,kdgudang.getText());
                     psstok.setString(2,tbObat.getValueAt(data,2).toString());
@@ -3378,7 +3381,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 y=0;
             }
             if(stokbarang<y){
-                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(10)..!!");
             }
         } catch (Exception e) {
             tbObat.setValueAt(0,data,10);
@@ -3655,7 +3658,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "and (databarang.kode_brng like ? or databarang.nama_brng like ? or kategori_barang.nama like ? or "+
                         "golongan_barang.nama like ? or data_batch.no_batch like ? or data_batch.no_faktur like ? or "+
                         "jenis.nama like ? or databarang.letak_barang like ?) ")+
-                        "order by data_batch.tgl_kadaluarsa asc");
+                        "order by data_batch.tgl_kadaluarsa ASC");
                     try {
                         psobat.setDouble(1,kenaikan);
                         psobat.setString(2,kdgudang.getText());
@@ -3776,7 +3779,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         sql+" where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? "+(TCari.getText().trim().equals("")?"":
                         "and (databarang.kode_brng like ? or databarang.nama_brng like ? or kategori_barang.nama like ? or "+
                         "golongan_barang.nama like ? or data_batch.no_batch like ? or data_batch.no_faktur like ? or "+
-                        "jenis.nama like ? or databarang.letak_barang like ?)")+" order by data_batch.tgl_kadaluarsa asc");
+                        "jenis.nama like ? or databarang.letak_barang like ?)")+" order by data_batch.tgl_kadaluarsa ASC");
                     try{
                         psobat.setString(1,kdgudang.getText());
                         if(!TCari.getText().trim().equals("")){
@@ -3955,7 +3958,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 if(Valid.SetAngka(tbDetailObatRacikan.getValueAt(row,10).toString())>0){
                     stokbarang=0;  
                     if(aktifkanbatch.equals("yes")){
-                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
+                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                         try {
                             psstok.setString(1,kdgudang.getText());
                             psstok.setString(2,tbDetailObatRacikan.getValueAt(row,1).toString());
@@ -3977,7 +3980,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             }
                         }
                     }else{
-                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                         try {
                             psstok.setString(1,kdgudang.getText());
                             psstok.setString(2,tbDetailObatRacikan.getValueAt(row,1).toString());
@@ -4008,7 +4011,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     }
 
                     if(stokbarang<y){
-                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(11)..!!");
                         tbDetailObatRacikan.setValueAt("",row,9);
                         tbDetailObatRacikan.setValueAt(0,row,10);
                         tbDetailObatRacikan.setValueAt(0,row,11);
@@ -4032,7 +4035,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         try {
             stokbarang=0;  
             if(aktifkanbatch.equals("yes")){
-                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
+                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                 try {
                     psstok.setString(1,kdgudang.getText());
                     psstok.setString(2,tbDetailObatRacikan.getValueAt(data,1).toString());
@@ -4054,7 +4057,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     }
                 }
             }else{
-                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                 try {
                     psstok.setString(1,kdgudang.getText());
                     psstok.setString(2,tbDetailObatRacikan.getValueAt(data,1).toString());
@@ -4084,7 +4087,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             }
 
             if(stokbarang<y){
-                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(12)..!!");
             }
         } catch (Exception e) {
             tbDetailObatRacikan.setValueAt(0,data,10);
@@ -4144,7 +4147,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         if(TabRawat.getSelectedIndex()==0){
             try {
                 if(!tbObat.getValueAt(tbObat.getSelectedRow(),16).toString().equals("")){
-                    ps2=koneksi.prepareStatement("select * from data_batch where data_batch.no_batch=? and data_batch.kode_brng=? and data_batch.sisa>0 order by data_batch.tgl_kadaluarsa limit 1");
+                    ps2=koneksi.prepareStatement("select * from data_batch where data_batch.no_batch=? and data_batch.kode_brng=? and data_batch.sisa>0 order by data_batch.tgl_kadaluarsa ASC limit 1");
                     try {
                         ps2.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
                         ps2.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
@@ -4183,7 +4186,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             try {
                 stokbarang=0;
                 if(aktifkanbatch.equals("yes")){
-                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
+                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                     try {
                         psstok.setString(1,kdgudang.getText());
                         psstok.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
@@ -4205,7 +4208,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         }
                     }
                 }else{
-                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                     try {
                         psstok.setString(1,kdgudang.getText());
                         psstok.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
@@ -4234,7 +4237,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     y=0;
                 }
                 if(stokbarang<y){
-                    JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                    JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(13)..!!");
                     tbObat.setValueAt("",tbObat.getSelectedRow(),1);
                 }
             } catch (Exception e) {
@@ -4243,7 +4246,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }else if(TabRawat.getSelectedIndex()==1){
             try {
                 if(!tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),16).toString().equals("")){
-                    ps2=koneksi.prepareStatement("select * from data_batch where data_batch.no_batch=? and data_batch.kode_brng=? and data_batch.sisa>0 order by data_batch.tgl_kadaluarsa limit 1");
+                    ps2=koneksi.prepareStatement("select * from data_batch where data_batch.no_batch=? and data_batch.kode_brng=? and data_batch.sisa>0 order by data_batch.tgl_kadaluarsa ASC limit 1");
                     try {
                         ps2.setString(1,tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),16).toString());
                         ps2.setString(2,tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),1).toString());
@@ -4280,7 +4283,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 try {
                     stokbarang=0;
                     if(aktifkanbatch.equals("yes")){
-                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
+                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                         try {
                             psstok.setString(1,kdgudang.getText());
                             psstok.setString(2,tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),1).toString());
@@ -4302,7 +4305,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             }
                         }
                     }else{
-                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                         try {
                             psstok.setString(1,kdgudang.getText());
                             psstok.setString(2,tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),1).toString());
@@ -4331,7 +4334,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         y=0;
                     }
                     if(stokbarang<y){
-                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                        JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi(14)..!!");
                         tbDetailObatRacikan.setValueAt(0,tbDetailObatRacikan.getSelectedRow(),10);
                     }
                 } catch (Exception e) {
