@@ -37,13 +37,13 @@ public class koneksiDB {
                         "  biaya apapun. Dilarang keras memperjualbelikan/mengambil \n" +
                         "  keuntungan dari Software ini dalam bentuk apapun tanpa seijin pembuat \n" +
                         "  software (Khanza.Soft Media).\n"+
-                        "                                                                           \n"+
+                        "                                                                            \n"+
                         "  #    ____  ___  __  __  ____   ____    _  __ _                              \n" +
                         "  #   / ___||_ _||  \\/  ||  _ \\ / ___|  | |/ /| |__    __ _  _ __   ____ __ _ \n" +
                         "  #   \\___ \\ | | | |\\/| || |_) |\\___ \\  | ' / | '_ \\  / _` || '_ \\ |_  // _` |\n" +
                         "  #    ___) || | | |  | ||  _ <  ___) | | . \\ | | | || (_| || | | | / /| (_| |\n" +
                         "  #   |____/|___||_|  |_||_| \\_\\|____/  |_|\\_\\|_| |_| \\__,_||_| |_|/___|\\__,_|\n" +
-                        "  #  V4-1-12 25-03-2024 08:27                                                                       \n"+
+                        "  #                                                                     \n"+
                         "                                                                           \n"+
                         "  Licensi yang dianut di software ini https://en.wikipedia.org/wiki/Aladdin_Free_Public_License \n"+
                         "  Informasi dan panduan bisa dicek di halaman https://github.com/mas-elkhanza/SIMRS-Khanza/wiki \n"+

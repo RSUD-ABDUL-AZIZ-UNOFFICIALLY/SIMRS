@@ -522,7 +522,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{tgl_perawatan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tgl_operasi}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="81" width="534" height="1" uuid="d23d9c8b-7342-437c-84b3-9a737a130680"/>

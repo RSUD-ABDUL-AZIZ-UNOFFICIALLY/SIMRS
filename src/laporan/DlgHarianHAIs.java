@@ -627,18 +627,6 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         darah=1;
                         jmldarah=jmldarah+1;
                     }
-                    if(!rs.getString("MDRO").equals("")){
-                        mdro=1;
-                        jmlMDRO=jmlMDRO+1;
-                    }
-                    if(!rs.getString("TirahBaring").equals("")){
-                        tirahbaring=1;
-                        jmlTirahBaring=jmlTirahBaring+1;
-                    }
-                    if(!rs.getString("Operasi").equals("")){
-                        operasi=1;
-                        jmlOperasi=jmlOperasi+1;
-                    }
                     if(!rs.getString("ANTIBIOTIK").equals("")){
                         antibiotik=1;
                         jmlANTIBIOTIK=jmlANTIBIOTIK+1;
@@ -656,6 +644,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     jmlHAP=jmlHAP+rs.getInt("HAP");
                     jmlTinea=jmlTinea+rs.getInt("Tinea");
                     jmlScabies=jmlScabies+rs.getInt("Scabies");
+                    jmlMDRO=jmlMDRO+rs.getInt("MDRO");
+                    jmlTirahBaring=jmlTirahBaring+rs.getInt("TirahBaring");
+                    jmlOperasi=jmlOperasi+rs.getInt("Operasi");
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'>"+i+"</td>"+
@@ -679,9 +670,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+darah+"</td>"+
                             "<td valign='middle' align='center'>"+urine+"</td>"+
                             "<td valign='middle' align='center'>"+antibiotik+"</td>"+
-                            "<td valign='middle' align='center'>"+mdro+"</td>"+
-                            "<td valign='middle' align='center'>"+tirahbaring+"</td>"+
-                            "<td valign='middle' align='center'>"+operasi+"</td>"+
+                            "<td valign='middle' align='center'>"+rs.getString("MDRO")+"</td>"+
+                            "<td valign='middle' align='center'>"+rs.getString("TirahBaring")+"</td>"+
+                            "<td valign='middle' align='center'>"+rs.getString("Operasi")+"</td>"+
                             "<td valign='middle' align='left'>"+rs.getString("ruang")+"</td>"+
                         "</tr>"
                     );

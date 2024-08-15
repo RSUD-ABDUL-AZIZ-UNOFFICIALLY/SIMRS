@@ -58,8 +58,8 @@ public final class DlgResepObat extends javax.swing.JDialog {
     public DlgCariDokter dokter=new DlgCariDokter(null,false);
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date date = new Date();
-    private String now=dateFormat.format(date),lembarobat="",status="",rincianobat="",finger="";
-    private double total=0,jumlahtotal=0;
+    private String now=dateFormat.format(date),lembarobat="",status="",rincianobat="",finger="",Txppn="",tampilkan_ppnobat_ralan="",tampilkan_ppnobat_ranap="";
+    private double total=0,jumlahtotal=0,ppnobat=0,ttl=0;
     private Properties prop = new Properties();
     private DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
     private int i=0,pilihan=0,getno=0;
@@ -286,6 +286,8 @@ public final class DlgResepObat extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
         LoadHTML2.setDocument(doc);
+        tampilkan_ppnobat_ralan=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ralan from set_nota"); 
+        tampilkan_ppnobat_ranap=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ranap from set_nota"); 
     }
 
     /** This method is called from within the constructor to
@@ -1547,6 +1549,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }//GEN-LAST:event_ppResepObatActionPerformed
 
     private void ppLembarObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLembarObatActionPerformed
+        String stts_obat="Ralan";
         if(tabMode.getRowCount()==0){
              JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
              TNoRw.requestFocus();
@@ -1569,6 +1572,18 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("norm",TNoRm.getText());
             param.put("peresep",NmDokter.getText());
             param.put("noresep",NoResep.getText());
+            stts_obat=Sequel.cariIsi("select status from detail_pemberian_obat where detail_pemberian_obat.tgl_perawatan='"+Valid.SetTgl(DTPBeri.getSelectedItem()+"")+"' and detail_pemberian_obat.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and detail_pemberian_obat.no_rawat='"+TNoRw.getText()+"' ");
+            if(tampilkan_ppnobat_ralan.equals("Yes")&&stts_obat.equals("Ralan")){
+                param.put("ppnonof",tampilkan_ppnobat_ralan);
+                param.put("stts",stts_obat);
+            }else if(tampilkan_ppnobat_ranap.equals("Yes")&&stts_obat.equals("Ranap")){
+                param.put("ppnonof",tampilkan_ppnobat_ranap);
+                param.put("stts",stts_obat);
+            }else{
+                param.put("ppnonof","no");
+                param.put("stts",stts_obat);
+            }
+            
             param.put("jam",cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
             
@@ -2342,7 +2357,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Valid.tabelKosong(tabMode);
         try{  
             ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,"+
-                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter "+
+                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,resep_obat.status "+
                     " from resep_obat inner join reg_periksa inner join pasien inner join dokter on resep_obat.no_rawat=reg_periksa.no_rawat  "+
                     " and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and resep_obat.kd_dokter=dokter.kd_dokter where "+
                     " concat(resep_obat.tgl_perawatan,' ',resep_obat.jam) between ? and ? "+
@@ -2368,7 +2383,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien"),
                         rs.getString("nm_dokter")
                     });
-                    tabMode.addRow(new String[]{"","Nama Obat","Jumlah x Harga + Embalase + Tuslah = Total","Aturan Pakai"});                
+                    tabMode.addRow(new String[]{"","Nama Obat","Jumlah x Harga + Embalase + Tuslah + Ppn = Total","Aturan Pakai"});                
                     ps2=koneksi.prepareStatement("select databarang.kode_brng,databarang.nama_brng,detail_pemberian_obat.jml,"+
                         "detail_pemberian_obat.biaya_obat,detail_pemberian_obat.embalase,detail_pemberian_obat.tuslah,detail_pemberian_obat.total from "+
                         "detail_pemberian_obat inner join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng "+
@@ -2386,14 +2401,26 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rs2=ps2.executeQuery();
                         total=0;
                         while(rs2.next()){
+                            if(tampilkan_ppnobat_ralan.equals("Yes")){
+                                ppnobat=Math.round(rs2.getDouble("total")*0.11);
+                                ttl=rs2.getDouble("total")+ppnobat;
+                                Txppn=" + "+Valid.SetAngka(ppnobat);
+                            }else if(tampilkan_ppnobat_ranap.equals("Yes")&&rs.getString("status").equals("ranap")){
+                                        ppnobat=Math.round(rs2.getDouble("total")*0.11);
+                                        ttl=rs2.getDouble("total")+ppnobat;
+                                        Txppn=" + "+Valid.SetAngka(ppnobat);
+                            }else{
+                                Txppn=" + 0";
+                                ttl=rs2.getDouble("total"); 
+                            }
                             tabMode.addRow(new String[]{
                                 "",rs2.getString("nama_brng"),rs2.getString("jml")+"  x  "+Valid.SetAngka(rs2.getDouble("biaya_obat"))+
-                                " + "+Valid.SetAngka(rs2.getDouble("embalase"))+" + "+Valid.SetAngka(rs2.getDouble("tuslah"))+" = "+Valid.SetAngka(rs2.getDouble("total")),
+                                " + "+Valid.SetAngka(rs2.getDouble("embalase"))+" + "+Valid.SetAngka(rs2.getDouble("tuslah"))+Txppn+" = "+Valid.SetAngka(ttl),
                                 Sequel.cariIsi("select aturan from aturan_pakai where tgl_perawatan='"+rs.getString("tgl_perawatan")+"' and "+
                                 "jam='"+rs.getString("jam")+"' and no_rawat='"+rs.getString("no_rawat")+"' and kode_brng='"+rs2.getString("kode_brng")+"'")
                             });
-                            total=total+rs2.getDouble("total");
-                            jumlahtotal=jumlahtotal+rs2.getDouble("total");
+                            total=total+ttl;
+                            jumlahtotal=jumlahtotal+ttl;
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2445,13 +2472,25 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                 rs2=ps2.executeQuery();
                                 total=0;
                                 while(rs2.next()){
+                                    if(tampilkan_ppnobat_ralan.equals("Yes")&&rs.getString("status").equals("ralan")){
+                                        ppnobat=Math.round(rs2.getDouble("total")*0.11);
+                                        ttl=rs2.getDouble("total")+ppnobat;
+                                        Txppn=" + "+Valid.SetAngka(ppnobat);
+                                    }else if(tampilkan_ppnobat_ranap.equals("Yes")&&rs.getString("status").equals("ranap")){
+                                        ppnobat=Math.round(rs2.getDouble("total")*0.11);
+                                        ttl=rs2.getDouble("total")+ppnobat;
+                                        Txppn=" + "+Valid.SetAngka(ppnobat);
+                                    }else{
+                                        Txppn=" + 0";
+                                        ttl=rs2.getDouble("total"); 
+                                    }
                                     tabMode.addRow(new String[]{
                                         "","   "+rs2.getString("nama_brng"),rs2.getString("jml")+"  x  "+Valid.SetAngka(rs2.getDouble("biaya_obat"))+
-                                        " + "+Valid.SetAngka(rs2.getDouble("embalase"))+" + "+Valid.SetAngka(rs2.getDouble("tuslah"))+" = "+Valid.SetAngka(rs2.getDouble("total")),
+                                        " + "+Valid.SetAngka(rs2.getDouble("embalase"))+" + "+Valid.SetAngka(rs2.getDouble("tuslah"))+Txppn+" = "+Valid.SetAngka(ttl),
                                         ""
                                     });
-                                    total=total+rs2.getDouble("total");
-                                    jumlahtotal=jumlahtotal+rs2.getDouble("total");
+                                    total=total+ttl;
+                                    jumlahtotal=jumlahtotal+ttl;
                                 }                                
                             } catch (Exception e) {
                                 System.out.println("Notifikasi Detail Racikan : "+e);

@@ -701,10 +701,14 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnJadwalOperasi = new javax.swing.JMenuItem();
         MnPermintaanLab = new javax.swing.JMenuItem();
         MnPermintaanRadiologi = new javax.swing.JMenuItem();
-        MnHasilPeriksaRadiologi = new javax.swing.JMenuItem();
         MnPermintaanRanap = new javax.swing.JMenuItem();
         MnPermintaanInformasiObat = new javax.swing.JMenuItem();
         MnPermintaanDarah = new javax.swing.JMenuItem();
+        MnHasil = new javax.swing.JMenu();
+        MnHasilPeriksaRadiologi = new javax.swing.JMenuItem();
+        MnHasilPeriksaLab = new javax.swing.JMenuItem();
+        MnHasilPeriksaLabPA = new javax.swing.JMenuItem();
+        MnHasilPeriksaLabMB = new javax.swing.JMenuItem();
         MnKamarInap = new javax.swing.JMenuItem();
         MnTindakan = new javax.swing.JMenu();
         MnRawatJalan = new javax.swing.JMenuItem();
@@ -1905,22 +1909,6 @@ public final class DlgIGD extends javax.swing.JDialog {
         });
         MnPermintaan.add(MnPermintaanRadiologi);
 
-        MnHasilPeriksaRadiologi.setBackground(new java.awt.Color(255, 255, 254));
-        MnHasilPeriksaRadiologi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnHasilPeriksaRadiologi.setForeground(new java.awt.Color(50, 50, 50));
-        MnHasilPeriksaRadiologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnHasilPeriksaRadiologi.setText("Hasil Pemeriksaan Radiologi");
-        MnHasilPeriksaRadiologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnHasilPeriksaRadiologi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnHasilPeriksaRadiologi.setName("MnHasilPeriksaRadiologi"); // NOI18N
-        MnHasilPeriksaRadiologi.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnHasilPeriksaRadiologi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnHasilPeriksaRadiologiActionPerformed(evt);
-            }
-        });
-        MnPermintaan.add(MnHasilPeriksaRadiologi);
-
         MnPermintaanRanap.setBackground(new java.awt.Color(255, 255, 254));
         MnPermintaanRanap.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPermintaanRanap.setForeground(new java.awt.Color(50, 50, 50));
@@ -1957,7 +1945,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnPermintaanDarah.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPermintaanDarah.setForeground(new java.awt.Color(50, 50, 50));
         MnPermintaanDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnPermintaanDarah.setText("Pemeriksaan Darah");
+        MnPermintaanDarah.setText("Permintaan Darah");
         MnPermintaanDarah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnPermintaanDarah.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPermintaanDarah.setName("MnPermintaanDarah"); // NOI18N
@@ -1968,6 +1956,82 @@ public final class DlgIGD extends javax.swing.JDialog {
             }
         });
         MnPermintaan.add(MnPermintaanDarah);
+
+        MnHasil.setBackground(new java.awt.Color(255, 255, 254));
+        MnHasil.setForeground(new java.awt.Color(50, 50, 50));
+        MnHasil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnHasil.setText("Hasil Pemeriksaan");
+        MnHasil.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnHasil.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnHasil.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnHasil.setName("MnHasil"); // NOI18N
+        MnHasil.setPreferredSize(new java.awt.Dimension(200, 26));
+
+        MnHasilPeriksaRadiologi.setBackground(new java.awt.Color(255, 255, 254));
+        MnHasilPeriksaRadiologi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnHasilPeriksaRadiologi.setForeground(new java.awt.Color(50, 50, 50));
+        MnHasilPeriksaRadiologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnHasilPeriksaRadiologi.setText("Hasil Pemeriksaan Radiologi");
+        MnHasilPeriksaRadiologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnHasilPeriksaRadiologi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnHasilPeriksaRadiologi.setName("MnHasilPeriksaRadiologi"); // NOI18N
+        MnHasilPeriksaRadiologi.setPreferredSize(new java.awt.Dimension(170, 26));
+        MnHasilPeriksaRadiologi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnHasilPeriksaRadiologiActionPerformed(evt);
+            }
+        });
+        MnHasil.add(MnHasilPeriksaRadiologi);
+
+        MnHasilPeriksaLab.setBackground(new java.awt.Color(255, 255, 254));
+        MnHasilPeriksaLab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnHasilPeriksaLab.setForeground(new java.awt.Color(50, 50, 50));
+        MnHasilPeriksaLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnHasilPeriksaLab.setText("Hasil Pemeriksaan Lab PK");
+        MnHasilPeriksaLab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnHasilPeriksaLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnHasilPeriksaLab.setName("MnHasilPeriksaLab"); // NOI18N
+        MnHasilPeriksaLab.setPreferredSize(new java.awt.Dimension(170, 26));
+        MnHasilPeriksaLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnHasilPeriksaLabActionPerformed(evt);
+            }
+        });
+        MnHasil.add(MnHasilPeriksaLab);
+
+        MnHasilPeriksaLabPA.setBackground(new java.awt.Color(255, 255, 254));
+        MnHasilPeriksaLabPA.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnHasilPeriksaLabPA.setForeground(new java.awt.Color(50, 50, 50));
+        MnHasilPeriksaLabPA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnHasilPeriksaLabPA.setText("Hasil Pemeriksaan Lab PA");
+        MnHasilPeriksaLabPA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnHasilPeriksaLabPA.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnHasilPeriksaLabPA.setName("MnHasilPeriksaLabPA"); // NOI18N
+        MnHasilPeriksaLabPA.setPreferredSize(new java.awt.Dimension(170, 26));
+        MnHasilPeriksaLabPA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnHasilPeriksaLabPAActionPerformed(evt);
+            }
+        });
+        MnHasil.add(MnHasilPeriksaLabPA);
+
+        MnHasilPeriksaLabMB.setBackground(new java.awt.Color(255, 255, 254));
+        MnHasilPeriksaLabMB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnHasilPeriksaLabMB.setForeground(new java.awt.Color(50, 50, 50));
+        MnHasilPeriksaLabMB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnHasilPeriksaLabMB.setText("Hasil Pemeriksaan Lab MB");
+        MnHasilPeriksaLabMB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnHasilPeriksaLabMB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnHasilPeriksaLabMB.setName("MnHasilPeriksaLabMB"); // NOI18N
+        MnHasilPeriksaLabMB.setPreferredSize(new java.awt.Dimension(170, 26));
+        MnHasilPeriksaLabMB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnHasilPeriksaLabMBActionPerformed(evt);
+            }
+        });
+        MnHasil.add(MnHasilPeriksaLabMB);
+
+        MnPermintaan.add(MnHasil);
 
         jPopupMenu1.add(MnPermintaan);
 
@@ -4615,7 +4679,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         panelGlass7.add(jLabel15);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-06-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-07-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -4629,7 +4693,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         panelGlass7.add(jLabel17);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-06-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-07-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4721,7 +4785,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         jLabel9.setBounds(165, 72, 36, 23);
 
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-06-2024" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-07-2024" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -10584,12 +10648,42 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private void MnHasilPeriksaRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHasilPeriksaRadiologiActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgCariPeriksaRadiologi form=new DlgCariPeriksaRadiologi(null,false);
-        form.setPasien(TNoRw.getText());
+        form.setPasien(TNoRw.getText(),DTPCari1.getDate());
         form.setSize(this.getWidth(),this.getHeight());
         form.setLocationRelativeTo(this);
         form.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnHasilPeriksaRadiologiActionPerformed
+
+    private void MnHasilPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHasilPeriksaLabActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPeriksaLab form=new DlgCariPeriksaLab(null,false);
+        form.setPasien(TNoRw.getText(),DTPCari1.getDate());
+        form.setSize(this.getWidth(),this.getHeight());
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_MnHasilPeriksaLabActionPerformed
+
+    private void MnHasilPeriksaLabPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHasilPeriksaLabPAActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPeriksaLabPA form=new DlgCariPeriksaLabPA(null,false);
+        form.setPasien(TNoRw.getText(),DTPCari1.getDate());
+        form.setSize(this.getWidth(),this.getHeight());
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_MnHasilPeriksaLabPAActionPerformed
+
+    private void MnHasilPeriksaLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHasilPeriksaLabMBActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPeriksaLabMB form=new DlgCariPeriksaLabMB(null,false);
+        form.setPasien(TNoRw.getText(),DTPCari1.getDate());
+        form.setSize(this.getWidth(),this.getHeight());
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_MnHasilPeriksaLabMBActionPerformed
 
     /**
     * @data args the command line arguments
@@ -10704,6 +10798,10 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenu MnHapusData;
     private javax.swing.JMenuItem MnHapusObatOperasi;
     private javax.swing.JMenuItem MnHapusTagihanOperasi;
+    private javax.swing.JMenu MnHasil;
+    private javax.swing.JMenuItem MnHasilPeriksaLab;
+    private javax.swing.JMenuItem MnHasilPeriksaLabMB;
+    private javax.swing.JMenuItem MnHasilPeriksaLabPA;
     private javax.swing.JMenuItem MnHasilPeriksaRadiologi;
     private javax.swing.JMenuItem MnHemodialisa;
     private javax.swing.JMenuItem MnJKRA;

@@ -440,6 +440,8 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         WindowTerkirim = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jPopupMenuLabel = new javax.swing.JPopupMenu();
+        MnLabelBaris8 = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -552,7 +554,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-05-2023 15:36:07" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-06-2024 09:02:43" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -584,6 +586,28 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         });
         WindowTerkirim.getContentPane().add(jButton1);
         jButton1.setBounds(200, 15, 72, 30);
+
+        jPopupMenuLabel.setForeground(new java.awt.Color(50, 50, 50));
+        jPopupMenuLabel.setAutoscrolls(true);
+        jPopupMenuLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPopupMenuLabel.setFocusTraversalPolicyProvider(true);
+        jPopupMenuLabel.setName("jPopupMenuLabel"); // NOI18N
+
+        MnLabelBaris8.setBackground(new java.awt.Color(255, 255, 254));
+        MnLabelBaris8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnLabelBaris8.setForeground(new java.awt.Color(50, 50, 50));
+        MnLabelBaris8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnLabelBaris8.setMnemonic('L');
+        MnLabelBaris8.setText("Label 8 Baris");
+        MnLabelBaris8.setToolTipText("L");
+        MnLabelBaris8.setName("MnLabelBaris8"); // NOI18N
+        MnLabelBaris8.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnLabelBaris8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnLabelBaris8ActionPerformed(evt);
+            }
+        });
+        jPopupMenuLabel.add(MnLabelBaris8);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -893,6 +917,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
 
             }
         ));
+        tbLabRalan.setComponentPopupMenu(jPopupMenuLabel);
         tbLabRalan.setName("tbLabRalan"); // NOI18N
         tbLabRalan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1032,6 +1057,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
 
             }
         ));
+        tbLabRanap.setComponentPopupMenu(jPopupMenuLabel);
         tbLabRanap.setName("tbLabRanap"); // NOI18N
         tbLabRanap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -3794,6 +3820,75 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         } 
     }//GEN-LAST:event_BtnAmbilVanslabActionPerformed
 
+    private void MnLabelBaris8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLabelBaris8ActionPerformed
+        if(TabPilihRawat.getSelectedIndex()==0){
+            if(TabRawatJalan.getSelectedIndex()==0){
+                if(!NoRawat.equals("")){
+                    if(NoPermintaan.trim().equals("")){
+                        Valid.textKosong(TCari,"No.Permintaan");
+                    }else{ 
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptLabelBaris4.jasper","report","::[ Label Nama Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
+                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.gol_darah,"+
+                            "pasien.tgl_daftar,pasien.no_tlp,pasien.umur "+
+                            "from reg_periksa "+
+                            "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
+                            " where reg_periksa.no_rawat='"+NoRawat+"' ",param);
+                        this.setCursor(Cursor.getDefaultCursor());
+                    }
+                }else{            
+                    JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+                    TCari.requestFocus();
+                } 
+            }else if(TabRawatJalan.getSelectedIndex()==1){
+                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih Data Permintaan...!!!!");
+                TabRawatJalan.setSelectedIndex(0);
+                TCari.requestFocus();
+            }
+        }else if(TabPilihRawat.getSelectedIndex()==1){
+            if(TabRawatInap.getSelectedIndex()==0){
+                if(!NoRawat.equals("")){
+                    if(NoPermintaan.trim().equals("")||DiagnosaKlinis.trim().equals("")){
+                        Valid.textKosong(TCari,"No.Permintaan");
+                    }else{ 
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptLabelBaris4.jasper","report","::[ Label Nama Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
+                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.gol_darah,"+
+                            "pasien.tgl_daftar,pasien.no_tlp,pasien.umur "+
+                            "from reg_periksa "+
+                            "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
+                            " where reg_periksa.no_rawat='"+NoRawat+"' ",param);
+                        this.setCursor(Cursor.getDefaultCursor());
+                    }
+                }else{            
+                    JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+                    TCari.requestFocus();
+                } 
+            }else if(TabRawatInap.getSelectedIndex()==1){
+                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih Data Permintaan...!!!!");
+                TabRawatInap.setSelectedIndex(0);
+                TCari.requestFocus();
+            }
+        } 
+//        System.out.println("NoRawat:"+NoRawat);
+    }//GEN-LAST:event_MnLabelBaris8ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -3850,6 +3945,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.PanelBiasa FormMenu;
     private widget.TextBox Kamar;
     private widget.Label LCount;
+    private javax.swing.JMenuItem MnLabelBaris8;
     private widget.PanelBiasa PanelAccor;
     private widget.ScrollPane ScrollMenu;
     private widget.TextBox TCari;
@@ -3876,6 +3972,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.Label jLabel18;
     private widget.Label jLabel26;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenuLabel;
     private widget.Label label10;
     private widget.Label label11;
     private widget.Label label18;

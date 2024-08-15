@@ -22,6 +22,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -2620,8 +2621,9 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         ppBerkasDigital.setEnabled(akses.getberkas_digital_perawatan());     
     }
     
-    public void setPasien(String pasien){
+    public void setPasien(String pasien, Date tgl){
         NoRawat.setText(pasien);
+        Tgl1.setDate(tgl);
     }
  
     private void isPhoto(){

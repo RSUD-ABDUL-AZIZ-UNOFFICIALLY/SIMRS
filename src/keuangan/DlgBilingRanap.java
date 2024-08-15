@@ -528,7 +528,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         tbRadiologi.setDefaultRenderer(Object.class, new WarnaTable());
         
         tabModeApotek=new DefaultTableModel(null,new Object[]{
-            "No.Resep","Tanggal","Jam","Dokter Peresep","Status"
+            "No.Resep","Tanggal","Jam","Dokter Peresep","Status","Stts.Bayar"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -537,7 +537,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         tbApotek.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbApotek.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 6; i++) {
             TableColumn column = tbApotek.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -548,6 +548,8 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             }else if(i==3){
                 column.setPreferredWidth(200);
             }else if(i==4){
+                column.setPreferredWidth(100);
+            }else if(i==5){
                 column.setPreferredWidth(100);
             }
         }
@@ -884,6 +886,8 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         ppBersihkanPiutang = new javax.swing.JMenuItem();
         PopupBayar = new javax.swing.JPopupMenu();
         ppBersihkanBayar = new javax.swing.JMenuItem();
+        PopupDeposit = new javax.swing.JPopupMenu();
+        ppDeposit = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass1 = new widget.panelisi();
         jLabel3 = new widget.Label();
@@ -2001,6 +2005,23 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         });
         PopupBayar.add(ppBersihkanBayar);
 
+        PopupDeposit.setName("PopupDeposit"); // NOI18N
+
+        ppDeposit.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppDeposit.setForeground(new java.awt.Color(50, 50, 50));
+        ppDeposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppDeposit.setText("Pembayaran Dengan Deposit");
+        ppDeposit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppDeposit.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppDeposit.setName("ppDeposit"); // NOI18N
+        ppDeposit.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppDeposit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppDepositActionPerformed(evt);
+            }
+        });
+        PopupDeposit.add(ppDeposit);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -2063,7 +2084,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-08-2023 10:16:02" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-07-2024 13:49:25" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -2573,6 +2594,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             }
         ));
         tbApotek.setToolTipText("");
+        tbApotek.setComponentPopupMenu(PopupDeposit);
         tbApotek.setName("tbApotek"); // NOI18N
         scrollPane8.setViewportView(tbApotek);
 
@@ -3447,7 +3469,7 @@ private void MnReturJualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         DlgReturJual returjual=new DlgReturJual(null,false);     
         returjual.emptTeks();  
         returjual.isCek(); 
-        returjual.setPasien(TNoRM.getText(),TNoRw.getText());
+        returjual.setPasien(TNoRM.getText(),TNoRw.getText(),"Ranap");
         returjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         returjual.setLocationRelativeTo(internalFrame1);
         returjual.setVisible(true);
@@ -4069,7 +4091,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             DlgReturJual returjual=new DlgReturJual(null,false);
             returjual.emptTeks();
             returjual.isCek();
-            returjual.setPasien(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",norawatbayi),norawatbayi);
+            returjual.setPasien(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",norawatbayi),norawatbayi,"Ranap");
             returjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             returjual.setLocationRelativeTo(internalFrame1);
             returjual.setVisible(true);
@@ -4383,8 +4405,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psobatlangsung.setString(1,TNoRw.getText());
                     rscariobat=psobatlangsung.executeQuery();
                     while(rscariobat.next()){
+                        String cekbayar = Sequel.cariIsi("select ifnull('Sudah','') from deposit where keterangan like '%"+rscariobat.getString("no_resep")+"%' ");
                         tabModeApotek.addRow(new String[]{
-                            rscariobat.getString("no_resep"),rscariobat.getString("tgl_peresepan"),rscariobat.getString("jam_peresepan"),rscariobat.getString("nm_dokter"),rscariobat.getString("status")
+                            rscariobat.getString("no_resep"),rscariobat.getString("tgl_peresepan"),rscariobat.getString("jam_peresepan"),rscariobat.getString("nm_dokter"),rscariobat.getString("status"),cekbayar
                         });
                     }
                 } catch (Exception e) {
@@ -4556,6 +4579,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_MnCariPeriksaLabMBActionPerformed
 
+    private void ppDepositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDepositActionPerformed
+        deposit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        deposit.setLocationRelativeTo(internalFrame1);
+        deposit.setForBilling(TNoRw.getText(),new Date(),new Date(),tbApotek.getValueAt(tbApotek.getSelectedRow(),0).toString(),"Bayar Obat Ranap ");
+        
+        deposit.tampil();
+        deposit.setVisible(true);
+    }//GEN-LAST:event_ppDepositActionPerformed
+
 
 
     /**
@@ -4640,6 +4672,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private javax.swing.JMenuItem MnTambahan1;
     private javax.swing.JMenuItem MnUbahLamaInap;
     private javax.swing.JPopupMenu PopupBayar;
+    private javax.swing.JPopupMenu PopupDeposit;
     private javax.swing.JPopupMenu PopupPiutang;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
@@ -4697,6 +4730,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.panelisi panelisi3;
     private javax.swing.JMenuItem ppBersihkanBayar;
     private javax.swing.JMenuItem ppBersihkanPiutang;
+    private javax.swing.JMenuItem ppDeposit;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane3;
@@ -7268,11 +7302,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     if((-1*ttlPotongan)>0){
                         Sequel.menyimpan("tampjurnal","'"+Potongan_Ranap+"','Potongan Ranap','"+(-1*ttlPotongan)+"','0'","Rekening");    
                     }
-
-                    if((-1*ttlRetur_Obat)>0){
-                        Sequel.menyimpan("tampjurnal","'"+Retur_Obat_Ranap+"','Retur Obat Ranap','"+(-1*ttlRetur_Obat)+"','0'","debet=debet+'"+(-1*ttlRetur_Obat)+"'","kd_rek='"+Retur_Obat_Ranap+"'");    
-                        Sequel.menyimpan("tampjurnal","'"+HPP_Obat_Rawat_Inap+"','HPP Persediaan Obat Rawat Inap','0','"+(-1*ttlRetur_Obat)+"'","kredit=kredit+'"+(-1*ttlRetur_Obat)+"'","kd_rek='"+Persediaan_Obat_Rawat_Inap+"'");    
-                        Sequel.menyimpan("tampjurnal","'"+Persediaan_Obat_Rawat_Inap+"','Persediaan Obat Rawat Inap','"+(-1*ttlRetur_Obat)+"','0'","debet=debet+'"+(-1*ttlRetur_Obat)+"'","kd_rek='"+Persediaan_Obat_Rawat_Inap+"'");     
+                    if(chkObat.isSelected()==true){
+                        if((-1*ttlRetur_Obat)>0){
+                            Sequel.menyimpan("tampjurnal","'"+Retur_Obat_Ranap+"','Retur Obat Ranap','"+(-1*ttlRetur_Obat)+"','0'","debet=debet+'"+(-1*ttlRetur_Obat)+"'","kd_rek='"+Retur_Obat_Ranap+"'");    
+                            Sequel.menyimpan("tampjurnal","'"+HPP_Obat_Rawat_Inap+"','HPP Persediaan Obat Rawat Inap','0','"+(-1*ttlRetur_Obat)+"'","kredit=kredit+'"+(-1*ttlRetur_Obat)+"'","kd_rek='"+Persediaan_Obat_Rawat_Inap+"'");    
+                            Sequel.menyimpan("tampjurnal","'"+Persediaan_Obat_Rawat_Inap+"','Persediaan Obat Rawat Inap','"+(-1*ttlRetur_Obat)+"','0'","debet=debet+'"+(-1*ttlRetur_Obat)+"'","kd_rek='"+Persediaan_Obat_Rawat_Inap+"'");     
+                        }
                     }
 
                     if(ttlRegistrasi>0){
@@ -7310,16 +7345,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                          "kredit=kredit+"+ttlRadiologi,"kd_rek='"+Radiologi_Ranap+"'");     
                     }
 
-                    if((ttlObat-obatlangsung-ppnobat)>0){
-                        Sequel.menyimpan("tampjurnal","'"+Obat_Ranap+"','Obat Ranap','0','"+(ttlObat-obatlangsung-ppnobat)+"'","kredit=kredit+'"+(ttlObat-obatlangsung-ppnobat)+"'","kd_rek='"+Obat_Ranap+"'");    
-                    }
+                    if(chkObat.isSelected()==true){
+                        if((ttlObat-obatlangsung-ppnobat)>0){
+                            Sequel.menyimpan("tampjurnal","'"+Obat_Ranap+"','Obat Ranap','0','"+(ttlObat-obatlangsung-ppnobat)+"'","kredit=kredit+'"+(ttlObat-obatlangsung-ppnobat)+"'","kd_rek='"+Obat_Ranap+"'");    
+                        }
+                        if(obatlangsung>0){
+                            Sequel.menyimpan("tampjurnal","'"+Obat_Langsung_Ranap+"','Obat Ranap','0','"+obatlangsung+"'","kredit=kredit+'"+(obatlangsung)+"'","kd_rek='"+Obat_Langsung_Ranap+"'");    
+                        }
 
-                    if(obatlangsung>0){
-                        Sequel.menyimpan("tampjurnal","'"+Obat_Langsung_Ranap+"','Obat Ranap','0','"+obatlangsung+"'","kredit=kredit+'"+(obatlangsung)+"'","kd_rek='"+Obat_Langsung_Ranap+"'");    
-                    }
-
-                    if(ppnobat>0){
-                        Sequel.menyimpan("tampjurnal","'"+PPN_Keluaran+"','PPN Keluaran','0','"+ppnobat+"'","kredit=kredit+'"+(ppnobat)+"'","kd_rek='"+PPN_Keluaran+"'");    
+                        if(ppnobat>0){
+                            Sequel.menyimpan("tampjurnal","'"+PPN_Keluaran+"','PPN Keluaran','0','"+ppnobat+"'","kredit=kredit+'"+(ppnobat)+"'","kd_rek='"+PPN_Keluaran+"'");    
+                        }
                     }
 
                     if(ttlOperasi>0){

@@ -249,6 +249,15 @@
             <Property name="verticalGap" type="int" value="9"/>
           </Layout>
           <SubComponents>
+            <Component class="javax.swing.JCheckBox" name="ChkClosing">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ByClosing"/>
+                <Property name="name" type="java.lang.String" value="ChkClosing" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="ChkClosingItemStateChanged"/>
+              </Events>
+            </Component>
             <Component class="widget.Label" name="label11">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tanggal :"/>

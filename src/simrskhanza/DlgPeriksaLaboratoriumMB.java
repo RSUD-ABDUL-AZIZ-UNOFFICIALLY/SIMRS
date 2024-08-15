@@ -1235,7 +1235,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
     DlgCariPeriksaLabMB form=new DlgCariPeriksaLabMB(null,false);
     form.isCek();
-    form.setPasien(TNoRw.getText());
+    form.setPasien(TNoRw.getText(), Tanggal.getDate());
     form.setSize(this.getWidth(),this.getHeight());
     form.setLocationRelativeTo(this);
     form.setVisible(true);

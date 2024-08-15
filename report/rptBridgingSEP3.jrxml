@@ -308,7 +308,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement mode="Transparent" x="75" y="76" width="250" height="18" uuid="a0492620-c0af-433f-ae3a-f22496986794"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="12" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -340,7 +340,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement mode="Transparent" x="75" y="94" width="250" height="18" uuid="6b8cdabd-cd2b-469a-ba49-9c975e04081a"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="12" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -746,7 +746,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Poli Perujuk]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="132" width="132" height="20" uuid="50fd97a8-2f4e-43b9-a929-038972776460">
+				<reportElement mode="Transparent" x="400" y="132" width="168" height="20" uuid="50fd97a8-2f4e-43b9-a929-038972776460">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -756,7 +756,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{flagprosedur}.replaceAll("0","- Prosedur Tidak Berkelanjutan").replaceAll("1","- Prosedur dan Terapi Berkelanjutan")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="121" width="132" height="10" uuid="f1527798-5888-4beb-a31b-3a20d60a0cb9">
+				<reportElement mode="Transparent" x="400" y="121" width="168" height="10" uuid="f1527798-5888-4beb-a31b-3a20d60a0cb9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -826,21 +826,21 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Jns. Rawat]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="83" width="132" height="13" uuid="53ee7e3f-02c9-40d8-a384-ce51c9e5e82e">
+				<reportElement mode="Transparent" x="400" y="83" width="180" height="13" uuid="53ee7e3f-02c9-40d8-a384-ce51c9e5e82e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="10"/>
+					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{peserta}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="97" width="140" height="20" uuid="29fdafe5-47b2-4ac9-b634-4365db28b351">
+				<reportElement mode="Transparent" x="400" y="97" width="180" height="20" uuid="29fdafe5-47b2-4ac9-b634-4365db28b351">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="12" isBold="true"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="15" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{if(bridging_sep.jnspelayanan='1','Rawat Inap','Rawat Jalan')}]]></textFieldExpression>
@@ -917,7 +917,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement mode="Transparent" x="75" y="421" width="250" height="18" uuid="5740c215-19f9-4114-baf1-ca5991930561"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="12" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -949,7 +949,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement mode="Transparent" x="75" y="439" width="250" height="18" uuid="f53daca3-8a69-4f77-ab31-493c8b533ea6"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="12" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -1355,7 +1355,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Poli Perujuk]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="477" width="132" height="20" uuid="389ee04d-1666-4756-97d1-bb66ca5fd83c">
+				<reportElement mode="Transparent" x="400" y="477" width="168" height="20" uuid="389ee04d-1666-4756-97d1-bb66ca5fd83c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1365,7 +1365,7 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<textFieldExpression><![CDATA[$F{flagprosedur}.replaceAll("0","- Prosedur Tidak Berkelanjutan").replaceAll("1","- Prosedur dan Terapi Berkelanjutan")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="466" width="132" height="10" uuid="98af03bb-d726-4222-b843-47d7a2f68a48">
+				<reportElement mode="Transparent" x="400" y="466" width="168" height="10" uuid="98af03bb-d726-4222-b843-47d7a2f68a48">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1435,21 +1435,21 @@ bridging_sep.nmdpdjp from bridging_sep  where no_sep= $P{parameter}]]>
 				<text><![CDATA[Jns. Rawat]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="428" width="132" height="13" uuid="01ac796b-44cb-47d7-aa0a-f9708406a4e7">
+				<reportElement mode="Transparent" x="400" y="428" width="180" height="13" uuid="01ac796b-44cb-47d7-aa0a-f9708406a4e7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="10"/>
+					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{peserta}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="400" y="442" width="140" height="20" uuid="9c87b283-198e-4dde-97c6-95aff12ddda5">
+				<reportElement mode="Transparent" x="400" y="442" width="180" height="20" uuid="9c87b283-198e-4dde-97c6-95aff12ddda5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="12" isBold="true"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="15" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{if(bridging_sep.jnspelayanan='1','Rawat Inap','Rawat Jalan')}]]></textFieldExpression>
