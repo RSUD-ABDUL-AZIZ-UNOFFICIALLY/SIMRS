@@ -5682,18 +5682,19 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         isRawat();            
     }
       
-    public void setNoRm3(String norwt, Date tgl1) {
+    public void setNoRm3(String norwt, Date tgl1, String norm) {
         TCari.setText(norwt);
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl1);
+        TNoRM.setText(norm);
         TabRawat.setSelectedIndex(1);
     }
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getbpjs_sep());
-        BtnHapus.setEnabled(akses.getbpjs_sep());
-        BtnPrint.setEnabled(akses.getbpjs_sep());
-        BtnEdit.setEnabled(akses.getbpjs_sep());      
+        BtnSimpan.setEnabled(akses.getcreate_sep());
+        BtnHapus.setEnabled(akses.getcreate_sep());
+        BtnPrint.setEnabled(akses.getcreate_sep());
+        BtnEdit.setEnabled(akses.getcreate_sep());      
         ppDetailSEPPeserta.setEnabled(akses.getbpjs_sep());
         ppPengajuan.setEnabled(akses.getbpjs_sep());
         ppPengajuan1.setEnabled(akses.getbpjs_sep());

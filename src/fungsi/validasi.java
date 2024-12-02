@@ -478,6 +478,17 @@ public final class validasi {
             sek.meghapus(table,field,nilai_field.getText());   
         }
     }
+
+    public void hapusTableTx(DefaultTableModel tabMode,TextArea nilai_field,String table,String field) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            nilai_field.requestFocus();
+        }else if(nilai_field.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
+        }else if(! nilai_field.getText().trim().equals("")){            
+            sek.meghapus(table,field,nilai_field.getText());   
+        }
+    }
     
     public boolean hapusTabletf(DefaultTableModel tabMode,JTextField nilai_field,String table,String field) {
         status=true;
@@ -1434,13 +1445,21 @@ public final class validasi {
     public double roundDown(double number, int multiple) {
         if(PEMBULATANHARGAOBAT.equals("yes")){
             result = multiple;
+            int division;
+            
             if (number % multiple == 0) {
                 return (int) number;
             }
 
             if (number % multiple != 0) {
-                int division = (int) ((number / multiple) + 0);
-                result = division * multiple;
+                if(number % multiple >= 601){
+                    division = (int) ((number / multiple) + 1);
+                    result = division * multiple;
+                }else{
+                   division = (int) ((number / multiple) + 0);
+                   result = (division * multiple)+500;
+                }
+
             }
             return result;
         }else{

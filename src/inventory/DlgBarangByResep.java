@@ -44,7 +44,7 @@ public class DlgBarangByResep extends javax.swing.JDialog {
     private PreparedStatement ps4;
     private ResultSet rs;
     private int i = 0;
-    public String noRetur="",status="Ranap",carivalue="";
+    public String noRetur="",status="",carivalue="",caristts="";
     public String aktifkanbatch="no",pengaturanharga=Sequel.cariIsi("select set_harga_obat.setharga from set_harga_obat");
     
     public DlgBarangByResep(java.awt.Frame parent, boolean modal) {
@@ -543,6 +543,12 @@ private void ppStokBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GE
         }else{
             carivalue="";
         }
+        
+//        if (!status.equals("")) {
+//            caristts="AND detail_pemberian_obat.status=?";
+//        }else{
+//            caristts="";
+//        }
         if(aktifkanbatch.equals("yes")){
             Valid.tabelKosong(tabMode);
             try {
@@ -564,12 +570,14 @@ private void ppStokBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GE
                         + " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "
                         + " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "
                         + " inner join detail_pemberian_obat on detail_pemberian_obat.kode_brng=data_batch.kode_brng and detail_pemberian_obat.no_batch=data_batch.no_batch and detail_pemberian_obat.no_faktur=data_batch.no_faktur "
-                        + " where detail_pemberian_obat.no_rawat=? AND detail_pemberian_obat.status=? AND databarang.status='1' "
+                        + " where detail_pemberian_obat.no_rawat=? AND databarang.status='1' "
+//                        +caristts
                         +carivalue
-                        + "group by databarang.kode_brng,detail_pemberian_obat.no_batch,detail_pemberian_obat.no_faktur order by detail_pemberian_obat.tgl_perawatan DESC,detail_pemberian_obat.jam DESC");
+//                        + "group by databarang.kode_brng,detail_pemberian_obat.no_batch,detail_pemberian_obat.no_faktur "
+                        + "order by detail_pemberian_obat.tgl_perawatan DESC,detail_pemberian_obat.jam DESC");
                 try {
-                    ps4.setString(1,NoRetur);
-                    ps4.setString(2,Status);
+                    ps4.setString(1,noRetur);
+//                    ps4.setString(2,status);
                     rs = ps4.executeQuery();
                     while (rs.next()) {
                         tabMode.addRow(new Object[]{
@@ -630,10 +638,14 @@ private void ppStokBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GE
                         + " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "
                         + " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "
                         + " inner join detail_pemberian_obat on detail_pemberian_obat.kode_brng=databarang.kode_brng "
-                        + " where detail_pemberian_obat.no_rawat=? AND detail_pemberian_obat.status=? group by databarang.kode_brng order by detail_pemberian_obat.tgl_perawatan DESC,detail_pemberian_obat.jam DESC");
+                        + " where detail_pemberian_obat.no_rawat=? AND databarang.status='1' "
+//                        +caristts
+                        +carivalue
+//                        + "group by databarang.kode_brng "
+                        + "order by detail_pemberian_obat.tgl_perawatan DESC,detail_pemberian_obat.jam DESC");
                 try {
-                    ps4.setString(1,NoRetur);
-                    ps4.setString(2,Status);
+                    ps4.setString(1,noRetur);
+//                    ps4.setString(2,status);
                     rs = ps4.executeQuery();
                     while (rs.next()) {
                         tabMode.addRow(new Object[]{
@@ -650,8 +662,8 @@ private void ppStokBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GE
                             rs.getDouble("biaya_obat"),
                             rs.getDouble("total"),
                             rs.getString("expire"),
-                            rs.getString("no_batch"),
-                            rs.getString("no_faktur"),
+                            "",
+                            "",
                             rs.getString("tgl_perawatan"),
                             rs.getString("jam"),
                             rs.getString("status")

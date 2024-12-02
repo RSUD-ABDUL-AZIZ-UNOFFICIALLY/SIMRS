@@ -79,7 +79,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     public DlgPemberianObat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        TCari1.setText("");
         tabModePO=new DefaultTableModel(null,new Object[]{
                 "Tgl.Beri","Jam Beri","No.Rawat","No.R.M.","Nama Pasien","Kode Obat","Nama Obat/Alkes","Embalase",
                 "Tuslah","Jml","Biaya Obat","Total","Harga Beli","Gudang","No.Batch","No.Faktur"
@@ -399,6 +399,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
+        TCari1 = new widget.TextBox();
         PanelInput = new javax.swing.JPanel();
         FormInput = new widget.PanelBiasa();
         jLabel3 = new widget.Label();
@@ -479,7 +480,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2019" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-05-2023" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -637,7 +638,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel14);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2019" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-05-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -650,7 +651,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2019" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-05-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -727,6 +728,15 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         });
         panelGlass9.add(BtnCari);
 
+        TCari1.setName("TCari1"); // NOI18N
+        TCari1.setPreferredSize(new java.awt.Dimension(190, 23));
+        TCari1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCari1KeyPressed(evt);
+            }
+        });
+        panelGlass9.add(TCari1);
+
         jPanel3.add(panelGlass9, java.awt.BorderLayout.PAGE_START);
 
         internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -774,7 +784,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         jLabel7.setBounds(-2, 42, 80, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2019" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-05-2023" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1107,6 +1117,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
+        TCari1.setText("");
         TCariPasien.setText("");
         tampilPO();
 }//GEN-LAST:event_BtnAllActionPerformed
@@ -1291,6 +1302,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         // TODO add your handling code here:
     }//GEN-LAST:event_TanggalKeyPressed
 
+    private void TCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCari1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TCari1KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1329,6 +1344,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.ScrollPane Scroll;
     private widget.TextBox TBiayaObat;
     private widget.TextBox TCari;
+    private widget.TextBox TCari1;
     private widget.TextBox TCariPasien;
     private widget.TextBox THBeli;
     private widget.TextBox TKdOb;
@@ -1366,6 +1382,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     public void tampilPO() {
         pas="";
+        String caribyDepo="";
+        if (!TCari1.equals("")) {
+            caribyDepo=" AND detail_pemberian_obat.kd_bangsal like '%"+TCari1.getText()+"%' ";
+        }
         if(!TCariPasien.getText().equals("")){
            pas=" and reg_periksa.no_rkm_medis='"+TCariPasien.getText()+"' "; 
         }
@@ -1382,6 +1402,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
            "detail_pemberian_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
            "pasien.nm_pasien like ? or detail_pemberian_obat.kode_brng like ? or databarang.nama_brng like ? or "+
            "detail_pemberian_obat.no_faktur like ? or detail_pemberian_obat.no_batch like ?) ")+
+           caribyDepo +
            "order by detail_pemberian_obat.tgl_perawatan";
         
         Valid.tabelKosong(tabModePO);
@@ -1431,6 +1452,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     
     public void tampilPO2() {
         pas="";
+        String caribyDepo="";
+        if (!TCari1.equals("")) {
+            caribyDepo=" AND detail_pemberian_obat.kd_bangsal like '%"+TCari1.getText()+"%' ";
+        }
         if(!TCariPasien.getText().equals("")){
            pas=" and reg_periksa.no_rkm_medis='"+TCariPasien.getText()+"' "; 
         }
@@ -1447,6 +1472,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
            "detail_pemberian_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
            "pasien.nm_pasien like ? or detail_pemberian_obat.kode_brng like ? or databarang.nama_brng like ? or "+
            "detail_pemberian_obat.no_faktur like ? or detail_pemberian_obat.no_batch like ?) ")+
+           caribyDepo +
            "order by detail_pemberian_obat.tgl_perawatan";
         
         Valid.tabelKosong(tabModePO);

@@ -11,28 +11,21 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
-import java.awt.Cursor;
-import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.util.Calendar;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -59,7 +52,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
     private DlgCariPetugas perawat1=new DlgCariPetugas(null,false);
     private DlgCariPetugas perawat2=new DlgCariPetugas(null,false);
     private DlgCariPetugas perawat3=new DlgCariPetugas(null,false);
-    private StringBuilder htmlContent;
+    private MasterCariTemplateLaporanOperasi template=new MasterCariTemplateLaporanOperasi(null,false);
     private String finger="";
     
     /** Creates new form DlgRujuk
@@ -70,10 +63,13 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         initComponents();
         isCek2();
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Rawat","No.RM","Nama Pasien","J.K.","Tgl.Lahir","Tanggal Mulai","Tanggal Selesai","Kategori","Kode Dokter","Nama Dokter",
-            "Perawat1","Nama Perawat1","Perawat2","nama Perawat2","Perawat3","nama Perawat3","Diagnosa Pra Operasi","Diagnosa Pasca Operasi","Tindakan Operasi","T. Anestesi Lokal Jenis",
-            "T. Anestesi Lokal Lokasi","T. Anestesi Lokal Obat","R. Hipersensitivitas","Ket R. Hipersensitivitas","Kejadian Toksikasi","Ket. Kejadian Toksikasi","Laporan Operasi","I. Pasca Operasi Obat","I. Pasca Operasi Edukasi","I. Pasca Operasi Lainnya",
-            "Permintaan PA","Jumlah Pendarahan"
+            "No.Rawat","No.RM","Nama Pasien","J.K.","Tgl.Lahir",
+            "Tanggal Mulai","Jam Mulai","Jam Selesai","Lama Operasi","Kategori","Kode Dokter","Nama Dokter",
+            "Perawat1","Nama Perawat1","Perawat2","nama Perawat2","Perawat3",
+            "nama Perawat3","Diagnosa Pasca Operasi","Tindakan Operasi",
+            "Laporan Operasi","Komplikasi","Ket Komplikasi","Jml. Pendarahan","Jml. Transfusi",
+            "Jml. Jaringan","Ukuran","Fiksasi","Pabrik","Type",
+            "Nomor P.","Status","Ruangan"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -82,7 +78,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 32; i++) {
+        for (i = 0; i < 33; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -98,7 +94,6 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         
-        TxLaporanOperasi.setDocument(new batasInput((int)500).getKata(TxLaporanOperasi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -216,6 +211,29 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
         
+        template.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(template.getTable().getSelectedRow()!= -1){  
+                    TxLaporanOperasi.setText(template.getTable().getValueAt(template.getTable().getSelectedRow(),6).toString());
+                    TxLaporanOperasi.requestFocus();
+                }            
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -248,18 +266,17 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         LoadHTML = new widget.editorpane();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnCetakLaporan = new javax.swing.JMenuItem();
-        MnInputMonotoring = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         TabRawat = new javax.swing.JTabbedPane();
         internalFrame2 = new widget.InternalFrame();
         scrollInput = new widget.ScrollPane();
         FormInput = new widget.PanelBiasa();
         jSeparator1 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         TNoRw = new widget.TextBox();
         TPasien = new widget.TextBox();
+        TxStatus = new widget.ComboBox();
         TNoRM = new widget.TextBox();
         label14 = new widget.Label();
         KdDokter = new widget.TextBox();
@@ -291,40 +308,47 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         scrollPane3 = new widget.ScrollPane();
         TxTindakanOperasi = new widget.TextArea();
         jLabel31 = new widget.Label();
-        jLabel9 = new widget.Label();
-        TxtalObat = new widget.TextBox();
-        TxtalJenis = new widget.TextBox();
-        TxtalLokasi = new widget.TextBox();
-        jLabel12 = new widget.Label();
-        jLabel13 = new widget.Label();
-        jLabel14 = new widget.Label();
-        label15 = new widget.Label();
-        TxRh = new widget.ComboBox();
-        TxKetRh = new widget.TextBox();
-        label16 = new widget.Label();
-        TxKt = new widget.ComboBox();
-        TxKetKt = new widget.TextBox();
         label17 = new widget.Label();
-        TxKirimPA = new widget.ComboBox();
+        TxKomplikasi = new widget.ComboBox();
+        TxKetKomplikasi = new widget.TextBox();
         jLabel15 = new widget.Label();
         TxJmlhPendarahan = new widget.TextBox();
-        scrollPane4 = new widget.ScrollPane();
-        TxipoObat = new widget.TextArea();
         jLabel32 = new widget.Label();
         jLabel33 = new widget.Label();
-        scrollPane5 = new widget.ScrollPane();
-        TxipoEdukasi = new widget.TextArea();
-        jLabel34 = new widget.Label();
-        scrollPane6 = new widget.ScrollPane();
-        TxipoLainnya = new widget.TextArea();
-        jLabel35 = new widget.Label();
-        jLabel16 = new widget.Label();
-        TxDiagnosaPraBedah = new widget.TextBox();
         jLabel17 = new widget.Label();
         TxDiagnosaPascaBedah = new widget.TextBox();
         label13 = new widget.Label();
-        TglOpSelesai = new widget.Tanggal();
         TglOpMulai = new widget.Tanggal();
+        jLabel18 = new widget.Label();
+        TxJenisJaringan = new widget.TextBox();
+        TxJmlhTransfusi = new widget.TextBox();
+        TxUkuran = new widget.TextBox();
+        jLabel34 = new widget.Label();
+        TxFiksasi = new widget.TextBox();
+        jLabel35 = new widget.Label();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel36 = new widget.Label();
+        jLabel37 = new widget.Label();
+        TxPabrikan = new widget.TextBox();
+        jLabel38 = new widget.Label();
+        TxType = new widget.TextBox();
+        jLabel39 = new widget.Label();
+        TxNoPendaftaran = new widget.TextBox();
+        label12 = new widget.Label();
+        CmbJam = new widget.ComboBox();
+        CmbMenit = new widget.ComboBox();
+        CmbDetik = new widget.ComboBox();
+        CmbJam1 = new widget.ComboBox();
+        CmbMenit1 = new widget.ComboBox();
+        CmbDetik1 = new widget.ComboBox();
+        label15 = new widget.Label();
+        CmbJam2 = new widget.ComboBox();
+        CmbMenit2 = new widget.ComboBox();
+        CmbDetik2 = new widget.ComboBox();
+        jLabel40 = new widget.Label();
+        TxRuang = new widget.TextBox();
+        jLabel41 = new widget.Label();
+        btnTemplate = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -366,26 +390,12 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnCetakLaporan);
 
-        MnInputMonotoring.setBackground(new java.awt.Color(255, 255, 254));
-        MnInputMonotoring.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnInputMonotoring.setForeground(new java.awt.Color(50, 50, 50));
-        MnInputMonotoring.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnInputMonotoring.setText("Monitoring Selama Operasi");
-        MnInputMonotoring.setName("MnInputMonotoring"); // NOI18N
-        MnInputMonotoring.setPreferredSize(new java.awt.Dimension(220, 26));
-        MnInputMonotoring.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnInputMonotoringActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnInputMonotoring);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new java.awt.BorderLayout(1, 1));
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Laporan Operasi dengan Lokal Anestesi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Laporan Operasi dengan Lokal ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setPreferredSize(new java.awt.Dimension(467, 480));
@@ -413,7 +423,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         FormInput.setBackground(new java.awt.Color(255, 255, 255));
         FormInput.setBorder(null);
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(870, 1628));
+        FormInput.setPreferredSize(new java.awt.Dimension(870, 1200));
         FormInput.setLayout(null);
 
         jSeparator1.setBackground(new java.awt.Color(239, 244, 234));
@@ -423,17 +433,13 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         FormInput.add(jSeparator1);
         jSeparator1.setBounds(0, 70, 750, 1);
 
-        jSeparator4.setName("jSeparator4"); // NOI18N
-        FormInput.add(jSeparator4);
-        jSeparator4.setBounds(0, 263, 770, 3);
-
         jSeparator3.setName("jSeparator3"); // NOI18N
         FormInput.add(jSeparator3);
-        jSeparator3.setBounds(0, 460, 770, 3);
+        jSeparator3.setBounds(0, 310, 770, 3);
 
         jSeparator2.setName("jSeparator2"); // NOI18N
         FormInput.add(jSeparator2);
-        jSeparator2.setBounds(420, 570, 330, 3);
+        jSeparator2.setBounds(420, 480, 330, 3);
 
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
@@ -450,6 +456,17 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(240, 30, 300, 23);
+
+        TxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ralan", "Ranap" }));
+        TxStatus.setName("TxStatus"); // NOI18N
+        TxStatus.setPreferredSize(new java.awt.Dimension(100, 23));
+        TxStatus.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TxStatusItemStateChanged(evt);
+            }
+        });
+        FormInput.add(TxStatus);
+        TxStatus.setBounds(510, 770, 230, 20);
 
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
@@ -520,7 +537,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(540, 40, 70, 23);
 
-        label11.setText("Tgl. Selesaii :");
+        label11.setText("Mulai :");
         label11.setName("label11"); // NOI18N
         label11.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label11);
@@ -530,7 +547,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         jLabel109.setText("PROSEDUR OPERASI DAN RINCIAN TEMUAN");
         jLabel109.setName("jLabel109"); // NOI18N
         FormInput.add(jLabel109);
-        jLabel109.setBounds(10, 470, 250, 23);
+        jLabel109.setBounds(10, 320, 230, 23);
 
         scrollPane14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane14.setName("scrollPane14"); // NOI18N
@@ -547,13 +564,13 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         scrollPane14.setViewportView(TxLaporanOperasi);
 
         FormInput.add(scrollPane14);
-        scrollPane14.setBounds(20, 490, 380, 500);
+        scrollPane14.setBounds(20, 340, 380, 500);
 
         label27.setText("Perawat 1 :");
         label27.setName("label27"); // NOI18N
         label27.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label27);
-        label27.setBounds(330, 110, 81, 23);
+        label27.setBounds(351, 110, 60, 23);
 
         btnPerawat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPerawat1.setMnemonic('2');
@@ -589,7 +606,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         label29.setName("label29"); // NOI18N
         label29.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label29);
-        label29.setBounds(330, 140, 81, 23);
+        label29.setBounds(351, 140, 60, 23);
 
         kdperawat2.setEditable(false);
         kdperawat2.setName("kdperawat2"); // NOI18N
@@ -625,7 +642,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         label30.setName("label30"); // NOI18N
         label30.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label30);
-        label30.setBounds(330, 170, 81, 23);
+        label30.setBounds(351, 170, 60, 23);
 
         kdperawat3.setEditable(false);
         kdperawat3.setName("kdperawat3"); // NOI18N
@@ -660,7 +677,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         jLabel5.setText("Kategori :");
         jLabel5.setName("jLabel5"); // NOI18N
         FormInput.add(jLabel5);
-        jLabel5.setBounds(50, 140, 60, 23);
+        jLabel5.setBounds(450, 360, 60, 23);
 
         Kategori.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Khusus", "Besar", "Sedang", "Kecil", "Elektive", "Emergency", "Besar Emergency", "Khusus Emergency", "Besar Elektive", "Khusus Elektive" }));
         Kategori.setName("Kategori"); // NOI18N
@@ -670,7 +687,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(Kategori);
-        Kategori.setBounds(120, 140, 170, 23);
+        Kategori.setBounds(520, 360, 220, 23);
 
         scrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane3.setName("scrollPane3"); // NOI18N
@@ -687,163 +704,49 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         scrollPane3.setViewportView(TxTindakanOperasi);
 
         FormInput.add(scrollPane3);
-        scrollPane3.setBounds(30, 290, 310, 100);
+        scrollPane3.setBounds(150, 230, 560, 60);
 
-        jLabel31.setText("Tindakan Operasi");
+        jLabel31.setText("Tindakan Operasi :");
         jLabel31.setName("jLabel31"); // NOI18N
         FormInput.add(jLabel31);
-        jLabel31.setBounds(20, 270, 90, 23);
+        jLabel31.setBounds(50, 230, 90, 23);
 
-        jLabel9.setText("Obat :");
-        jLabel9.setName("jLabel9"); // NOI18N
-        FormInput.add(jLabel9);
-        jLabel9.setBounds(350, 370, 90, 23);
-
-        TxtalObat.setHighlighter(null);
-        TxtalObat.setName("TxtalObat"); // NOI18N
-        TxtalObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtalObatActionPerformed(evt);
-            }
-        });
-        TxtalObat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtalObatKeyPressed(evt);
-            }
-        });
-        FormInput.add(TxtalObat);
-        TxtalObat.setBounds(450, 370, 260, 23);
-
-        TxtalJenis.setHighlighter(null);
-        TxtalJenis.setName("TxtalJenis"); // NOI18N
-        TxtalJenis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtalJenisActionPerformed(evt);
-            }
-        });
-        TxtalJenis.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtalJenisKeyPressed(evt);
-            }
-        });
-        FormInput.add(TxtalJenis);
-        TxtalJenis.setBounds(450, 310, 260, 23);
-
-        TxtalLokasi.setHighlighter(null);
-        TxtalLokasi.setName("TxtalLokasi"); // NOI18N
-        TxtalLokasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtalLokasiActionPerformed(evt);
-            }
-        });
-        TxtalLokasi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtalLokasiKeyPressed(evt);
-            }
-        });
-        FormInput.add(TxtalLokasi);
-        TxtalLokasi.setBounds(450, 340, 260, 23);
-
-        jLabel12.setText("Teknik Anestesi Lokal :");
-        jLabel12.setName("jLabel12"); // NOI18N
-        FormInput.add(jLabel12);
-        jLabel12.setBounds(350, 290, 110, 23);
-
-        jLabel13.setText("Jenis :");
-        jLabel13.setName("jLabel13"); // NOI18N
-        FormInput.add(jLabel13);
-        jLabel13.setBounds(350, 310, 90, 23);
-
-        jLabel14.setText("Lokasi :");
-        jLabel14.setName("jLabel14"); // NOI18N
-        FormInput.add(jLabel14);
-        jLabel14.setBounds(350, 340, 90, 23);
-
-        label15.setText("Respon Hipersensitivitas :");
-        label15.setName("label15"); // NOI18N
-        label15.setPreferredSize(new java.awt.Dimension(50, 23));
-        FormInput.add(label15);
-        label15.setBounds(10, 400, 130, 20);
-
-        TxRh.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
-        TxRh.setName("TxRh"); // NOI18N
-        TxRh.setPreferredSize(new java.awt.Dimension(100, 23));
-        TxRh.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                TxRhItemStateChanged(evt);
-            }
-        });
-        FormInput.add(TxRh);
-        TxRh.setBounds(140, 400, 90, 20);
-
-        TxKetRh.setHighlighter(null);
-        TxKetRh.setName("TxKetRh"); // NOI18N
-        TxKetRh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxKetRhActionPerformed(evt);
-            }
-        });
-        TxKetRh.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxKetRhKeyPressed(evt);
-            }
-        });
-        FormInput.add(TxKetRh);
-        TxKetRh.setBounds(240, 400, 470, 23);
-
-        label16.setText("Kejadian Toksikasi :");
-        label16.setName("label16"); // NOI18N
-        label16.setPreferredSize(new java.awt.Dimension(50, 23));
-        FormInput.add(label16);
-        label16.setBounds(10, 430, 130, 20);
-
-        TxKt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
-        TxKt.setName("TxKt"); // NOI18N
-        TxKt.setPreferredSize(new java.awt.Dimension(100, 23));
-        TxKt.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                TxKtItemStateChanged(evt);
-            }
-        });
-        FormInput.add(TxKt);
-        TxKt.setBounds(140, 430, 90, 20);
-
-        TxKetKt.setHighlighter(null);
-        TxKetKt.setName("TxKetKt"); // NOI18N
-        TxKetKt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxKetKtActionPerformed(evt);
-            }
-        });
-        TxKetKt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxKetKtKeyPressed(evt);
-            }
-        });
-        FormInput.add(TxKetKt);
-        TxKetKt.setBounds(240, 430, 470, 23);
-
-        label17.setText("Jaringan PA dikirim :");
+        label17.setText("Komplikasi :");
         label17.setName("label17"); // NOI18N
         label17.setPreferredSize(new java.awt.Dimension(50, 23));
         FormInput.add(label17);
-        label17.setBounds(390, 500, 170, 20);
+        label17.setBounds(410, 390, 100, 20);
 
-        TxKirimPA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
-        TxKirimPA.setName("TxKirimPA"); // NOI18N
-        TxKirimPA.setPreferredSize(new java.awt.Dimension(100, 23));
-        TxKirimPA.addItemListener(new java.awt.event.ItemListener() {
+        TxKomplikasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
+        TxKomplikasi.setName("TxKomplikasi"); // NOI18N
+        TxKomplikasi.setPreferredSize(new java.awt.Dimension(100, 23));
+        TxKomplikasi.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                TxKirimPAItemStateChanged(evt);
+                TxKomplikasiItemStateChanged(evt);
             }
         });
-        FormInput.add(TxKirimPA);
-        TxKirimPA.setBounds(560, 500, 140, 20);
+        FormInput.add(TxKomplikasi);
+        TxKomplikasi.setBounds(510, 390, 90, 20);
+
+        TxKetKomplikasi.setHighlighter(null);
+        TxKetKomplikasi.setName("TxKetKomplikasi"); // NOI18N
+        TxKetKomplikasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxKetKomplikasiActionPerformed(evt);
+            }
+        });
+        TxKetKomplikasi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxKetKomplikasiKeyPressed(evt);
+            }
+        });
+        FormInput.add(TxKetKomplikasi);
+        TxKetKomplikasi.setBounds(610, 390, 140, 23);
 
         jLabel15.setText("Jumlah Perdarahan :");
         jLabel15.setName("jLabel15"); // NOI18N
         FormInput.add(jLabel15);
-        jLabel15.setBounds(440, 530, 120, 23);
+        jLabel15.setBounds(410, 420, 100, 23);
 
         TxJmlhPendarahan.setHighlighter(null);
         TxJmlhPendarahan.setName("TxJmlhPendarahan"); // NOI18N
@@ -858,103 +761,22 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(TxJmlhPendarahan);
-        TxJmlhPendarahan.setBounds(560, 530, 140, 23);
+        TxJmlhPendarahan.setBounds(510, 420, 230, 23);
 
-        scrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        scrollPane4.setName("scrollPane4"); // NOI18N
-
-        TxipoObat.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TxipoObat.setColumns(20);
-        TxipoObat.setRows(5);
-        TxipoObat.setName("TxipoObat"); // NOI18N
-        TxipoObat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxipoObatKeyPressed(evt);
-            }
-        });
-        scrollPane4.setViewportView(TxipoObat);
-
-        FormInput.add(scrollPane4);
-        scrollPane4.setBounds(430, 630, 310, 100);
-
-        jLabel32.setText("Instruksi Pasca Operasi");
+        jLabel32.setText("Spesimen Operasi");
         jLabel32.setName("jLabel32"); // NOI18N
         FormInput.add(jLabel32);
-        jLabel32.setBounds(420, 580, 120, 23);
+        jLabel32.setBounds(420, 490, 90, 23);
 
-        jLabel33.setText("Obat :");
+        jLabel33.setText("Jenis Jaringan :");
         jLabel33.setName("jLabel33"); // NOI18N
         FormInput.add(jLabel33);
-        jLabel33.setBounds(420, 610, 40, 23);
+        jLabel33.setBounds(430, 520, 80, 23);
 
-        scrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        scrollPane5.setName("scrollPane5"); // NOI18N
-
-        TxipoEdukasi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TxipoEdukasi.setColumns(20);
-        TxipoEdukasi.setRows(5);
-        TxipoEdukasi.setName("TxipoEdukasi"); // NOI18N
-        TxipoEdukasi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxipoEdukasiKeyPressed(evt);
-            }
-        });
-        scrollPane5.setViewportView(TxipoEdukasi);
-
-        FormInput.add(scrollPane5);
-        scrollPane5.setBounds(430, 760, 310, 100);
-
-        jLabel34.setText("Edukasi & Follow Up :");
-        jLabel34.setName("jLabel34"); // NOI18N
-        FormInput.add(jLabel34);
-        jLabel34.setBounds(420, 740, 110, 23);
-
-        scrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        scrollPane6.setName("scrollPane6"); // NOI18N
-
-        TxipoLainnya.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TxipoLainnya.setColumns(20);
-        TxipoLainnya.setRows(5);
-        TxipoLainnya.setName("TxipoLainnya"); // NOI18N
-        TxipoLainnya.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxipoLainnyaKeyPressed(evt);
-            }
-        });
-        scrollPane6.setViewportView(TxipoLainnya);
-
-        FormInput.add(scrollPane6);
-        scrollPane6.setBounds(430, 890, 310, 100);
-
-        jLabel35.setText("Lain-lain :");
-        jLabel35.setName("jLabel35"); // NOI18N
-        FormInput.add(jLabel35);
-        jLabel35.setBounds(420, 870, 60, 23);
-
-        jLabel16.setText("Diagnosa Pra Bedah :");
-        jLabel16.setName("jLabel16"); // NOI18N
-        FormInput.add(jLabel16);
-        jLabel16.setBounds(30, 200, 110, 23);
-
-        TxDiagnosaPraBedah.setHighlighter(null);
-        TxDiagnosaPraBedah.setName("TxDiagnosaPraBedah"); // NOI18N
-        TxDiagnosaPraBedah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxDiagnosaPraBedahActionPerformed(evt);
-            }
-        });
-        TxDiagnosaPraBedah.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxDiagnosaPraBedahKeyPressed(evt);
-            }
-        });
-        FormInput.add(TxDiagnosaPraBedah);
-        TxDiagnosaPraBedah.setBounds(150, 200, 560, 23);
-
-        jLabel17.setText("Diagnosa Pasca Bedah :");
+        jLabel17.setText("Diagnosa Pasca Operasi :");
         jLabel17.setName("jLabel17"); // NOI18N
         FormInput.add(jLabel17);
-        jLabel17.setBounds(20, 230, 120, 23);
+        jLabel17.setBounds(10, 200, 130, 23);
 
         TxDiagnosaPascaBedah.setHighlighter(null);
         TxDiagnosaPascaBedah.setName("TxDiagnosaPascaBedah"); // NOI18N
@@ -969,29 +791,295 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(TxDiagnosaPascaBedah);
-        TxDiagnosaPascaBedah.setBounds(150, 230, 560, 23);
+        TxDiagnosaPascaBedah.setBounds(150, 200, 560, 23);
 
-        label13.setText("Tgl. Mulai :");
+        label13.setText("Tgl. Operasi :");
         label13.setName("label13"); // NOI18N
         label13.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label13);
         label13.setBounds(32, 80, 80, 23);
 
-        TglOpSelesai.setForeground(new java.awt.Color(50, 70, 50));
-        TglOpSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2024 08:18:28" }));
-        TglOpSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
-        TglOpSelesai.setName("TglOpSelesai"); // NOI18N
-        TglOpSelesai.setOpaque(false);
-        FormInput.add(TglOpSelesai);
-        TglOpSelesai.setBounds(120, 110, 170, 23);
-
         TglOpMulai.setForeground(new java.awt.Color(50, 70, 50));
-        TglOpMulai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2024" }));
-        TglOpMulai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+        TglOpMulai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-09-2024" }));
+        TglOpMulai.setDisplayFormat("dd-MM-yyyy");
         TglOpMulai.setName("TglOpMulai"); // NOI18N
         TglOpMulai.setOpaque(false);
+        TglOpMulai.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TglOpMulaiItemStateChanged(evt);
+            }
+        });
         FormInput.add(TglOpMulai);
         TglOpMulai.setBounds(120, 80, 170, 23);
+
+        jLabel18.setText("Jumlah Transfusi :");
+        jLabel18.setName("jLabel18"); // NOI18N
+        FormInput.add(jLabel18);
+        jLabel18.setBounds(410, 450, 100, 23);
+
+        TxJenisJaringan.setHighlighter(null);
+        TxJenisJaringan.setName("TxJenisJaringan"); // NOI18N
+        TxJenisJaringan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxJenisJaringanActionPerformed(evt);
+            }
+        });
+        TxJenisJaringan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxJenisJaringanKeyPressed(evt);
+            }
+        });
+        FormInput.add(TxJenisJaringan);
+        TxJenisJaringan.setBounds(510, 520, 230, 23);
+
+        TxJmlhTransfusi.setHighlighter(null);
+        TxJmlhTransfusi.setName("TxJmlhTransfusi"); // NOI18N
+        TxJmlhTransfusi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxJmlhTransfusiActionPerformed(evt);
+            }
+        });
+        TxJmlhTransfusi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxJmlhTransfusiKeyPressed(evt);
+            }
+        });
+        FormInput.add(TxJmlhTransfusi);
+        TxJmlhTransfusi.setBounds(510, 450, 230, 23);
+
+        TxUkuran.setHighlighter(null);
+        TxUkuran.setName("TxUkuran"); // NOI18N
+        TxUkuran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxUkuranActionPerformed(evt);
+            }
+        });
+        TxUkuran.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxUkuranKeyPressed(evt);
+            }
+        });
+        FormInput.add(TxUkuran);
+        TxUkuran.setBounds(510, 550, 230, 23);
+
+        jLabel34.setText("Ukuran :");
+        jLabel34.setName("jLabel34"); // NOI18N
+        FormInput.add(jLabel34);
+        jLabel34.setBounds(430, 550, 80, 23);
+
+        TxFiksasi.setHighlighter(null);
+        TxFiksasi.setName("TxFiksasi"); // NOI18N
+        TxFiksasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxFiksasiActionPerformed(evt);
+            }
+        });
+        TxFiksasi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxFiksasiKeyPressed(evt);
+            }
+        });
+        FormInput.add(TxFiksasi);
+        TxFiksasi.setBounds(510, 580, 230, 23);
+
+        jLabel35.setText("Fiksasi :");
+        jLabel35.setName("jLabel35"); // NOI18N
+        FormInput.add(jLabel35);
+        jLabel35.setBounds(430, 580, 80, 23);
+
+        jSeparator5.setName("jSeparator5"); // NOI18N
+        FormInput.add(jSeparator5);
+        jSeparator5.setBounds(420, 630, 330, 3);
+
+        jLabel36.setText("Pemakaian Implan");
+        jLabel36.setName("jLabel36"); // NOI18N
+        FormInput.add(jLabel36);
+        jLabel36.setBounds(420, 640, 90, 23);
+
+        jLabel37.setText("Pabrik :");
+        jLabel37.setName("jLabel37"); // NOI18N
+        FormInput.add(jLabel37);
+        jLabel37.setBounds(430, 670, 80, 23);
+
+        TxPabrikan.setHighlighter(null);
+        TxPabrikan.setName("TxPabrikan"); // NOI18N
+        TxPabrikan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxPabrikanActionPerformed(evt);
+            }
+        });
+        TxPabrikan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxPabrikanKeyPressed(evt);
+            }
+        });
+        FormInput.add(TxPabrikan);
+        TxPabrikan.setBounds(510, 670, 230, 23);
+
+        jLabel38.setText("Type :");
+        jLabel38.setName("jLabel38"); // NOI18N
+        FormInput.add(jLabel38);
+        jLabel38.setBounds(430, 700, 80, 23);
+
+        TxType.setHighlighter(null);
+        TxType.setName("TxType"); // NOI18N
+        TxType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxTypeActionPerformed(evt);
+            }
+        });
+        TxType.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxTypeKeyPressed(evt);
+            }
+        });
+        FormInput.add(TxType);
+        TxType.setBounds(510, 700, 230, 23);
+
+        jLabel39.setText("<html>Nomor Pendaftaran :</html>");
+        jLabel39.setName("jLabel39"); // NOI18N
+        FormInput.add(jLabel39);
+        jLabel39.setBounds(440, 730, 70, 23);
+
+        TxNoPendaftaran.setHighlighter(null);
+        TxNoPendaftaran.setName("TxNoPendaftaran"); // NOI18N
+        TxNoPendaftaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxNoPendaftaranActionPerformed(evt);
+            }
+        });
+        TxNoPendaftaran.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxNoPendaftaranKeyPressed(evt);
+            }
+        });
+        FormInput.add(TxNoPendaftaran);
+        TxNoPendaftaran.setBounds(510, 730, 230, 23);
+
+        label12.setText("Selesaii :");
+        label12.setName("label12"); // NOI18N
+        label12.setPreferredSize(new java.awt.Dimension(70, 23));
+        FormInput.add(label12);
+        label12.setBounds(30, 140, 80, 23);
+
+        CmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        CmbJam.setName("CmbJam"); // NOI18N
+        CmbJam.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbJamItemStateChanged(evt);
+            }
+        });
+        FormInput.add(CmbJam);
+        CmbJam.setBounds(120, 110, 62, 23);
+
+        CmbMenit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbMenit.setName("CmbMenit"); // NOI18N
+        CmbMenit.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbMenitItemStateChanged(evt);
+            }
+        });
+        FormInput.add(CmbMenit);
+        CmbMenit.setBounds(180, 110, 62, 23);
+
+        CmbDetik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbDetik.setName("CmbDetik"); // NOI18N
+        CmbDetik.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbDetikItemStateChanged(evt);
+            }
+        });
+        FormInput.add(CmbDetik);
+        CmbDetik.setBounds(240, 110, 62, 23);
+
+        CmbJam1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        CmbJam1.setName("CmbJam1"); // NOI18N
+        CmbJam1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbJam1ItemStateChanged(evt);
+            }
+        });
+        FormInput.add(CmbJam1);
+        CmbJam1.setBounds(120, 140, 62, 23);
+
+        CmbMenit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbMenit1.setName("CmbMenit1"); // NOI18N
+        CmbMenit1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbMenit1ItemStateChanged(evt);
+            }
+        });
+        FormInput.add(CmbMenit1);
+        CmbMenit1.setBounds(180, 140, 62, 23);
+
+        CmbDetik1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbDetik1.setName("CmbDetik1"); // NOI18N
+        CmbDetik1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbDetik1ItemStateChanged(evt);
+            }
+        });
+        FormInput.add(CmbDetik1);
+        CmbDetik1.setBounds(240, 140, 62, 23);
+
+        label15.setText("Lama Operasi :");
+        label15.setName("label15"); // NOI18N
+        label15.setPreferredSize(new java.awt.Dimension(70, 23));
+        FormInput.add(label15);
+        label15.setBounds(30, 170, 80, 23);
+
+        CmbJam2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        CmbJam2.setName("CmbJam2"); // NOI18N
+        FormInput.add(CmbJam2);
+        CmbJam2.setBounds(120, 170, 62, 23);
+
+        CmbMenit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbMenit2.setName("CmbMenit2"); // NOI18N
+        FormInput.add(CmbMenit2);
+        CmbMenit2.setBounds(180, 170, 62, 23);
+
+        CmbDetik2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbDetik2.setName("CmbDetik2"); // NOI18N
+        FormInput.add(CmbDetik2);
+        CmbDetik2.setBounds(240, 170, 62, 23);
+
+        jLabel40.setText("Nama Ruang :");
+        jLabel40.setName("jLabel40"); // NOI18N
+        FormInput.add(jLabel40);
+        jLabel40.setBounds(440, 800, 70, 23);
+
+        TxRuang.setHighlighter(null);
+        TxRuang.setName("TxRuang"); // NOI18N
+        TxRuang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxRuangActionPerformed(evt);
+            }
+        });
+        TxRuang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxRuangKeyPressed(evt);
+            }
+        });
+        FormInput.add(TxRuang);
+        TxRuang.setBounds(510, 800, 230, 23);
+
+        jLabel41.setText("Status :");
+        jLabel41.setName("jLabel41"); // NOI18N
+        FormInput.add(jLabel41);
+        jLabel41.setBounds(440, 770, 70, 23);
+
+        btnTemplate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnTemplate.setMnemonic('2');
+        btnTemplate.setToolTipText("Alt+2");
+        btnTemplate.setName("btnTemplate"); // NOI18N
+        btnTemplate.setPreferredSize(new java.awt.Dimension(28, 23));
+        btnTemplate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTemplateActionPerformed(evt);
+            }
+        });
+        FormInput.add(btnTemplate);
+        btnTemplate.setBounds(240, 320, 28, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -1034,7 +1122,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-09-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1048,7 +1136,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-09-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1254,38 +1342,53 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         }else if(NmDokter.getText().trim().equals("")){
             Valid.textKosong(BtnDokter,"Dokter");
         }else if(nmperawat1.getText().trim().equals("")){
-//            Valid.textKosong(btnPerawat1,"Perawat1");
             kdperawat1.setText("-");
             nmperawat1.setText("-");
         }else if(nmperawat2.getText().trim().equals("")){
-//            Valid.textKosong(btnPerawat2,"Perawat2");
             kdperawat2.setText("-");
             nmperawat2.setText("-");
         }else if(nmperawat3.getText().trim().equals("")){
-//            Valid.textKosong(btnPerawat3,"Perawat3");
             kdperawat3.setText("-");
             nmperawat3.setText("-");
-        }else if(TxDiagnosaPraBedah.getText().trim().equals("")){
-            Valid.textKosong(TxDiagnosaPraBedah,"Diagnosa Pra Bedah");
         }else if(TxDiagnosaPascaBedah.getText().trim().equals("")){
             Valid.textKosong(TxDiagnosaPascaBedah,"Diagnosa Pasca Bedah");
         }else if(TxLaporanOperasi.getText().trim().equals("")){
             Valid.textKosong(TxLaporanOperasi,"laporan Operasi");
         }else{
-            
-            if(Sequel.menyimpantf("laporan_operasi_lokal","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data Laporan Operasi Lokal",24,new String[]{
-                TNoRw.getText(),
-                Valid.SetTgl(TglOpMulai.getSelectedItem()+""),
-                Valid.SetTgl(TglOpSelesai.getSelectedItem()+""),
-                Kategori.getSelectedItem().toString(),KdDokter.getText(),kdperawat1.getText(),kdperawat2.getText(),kdperawat3.getText(),
-                TxDiagnosaPraBedah.getText(),TxDiagnosaPascaBedah.getText(),TxTindakanOperasi.getText(),TxtalJenis.getText(),TxtalLokasi.getText(),TxtalObat.getText(),TxRh.getSelectedItem().toString(),
-                TxKetRh.getText(),TxKt.getSelectedItem().toString(),TxKetKt.getText(),TxLaporanOperasi.getText(),TxipoObat.getText(),TxipoEdukasi.getText(),TxipoLainnya.getText(),
-                TxKirimPA.getSelectedItem().toString(),TxJmlhPendarahan.getText()
+            try {
+                if(Sequel.menyimpantf("laporan_operasi_lokal","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data Laporan Operasi Lokal",25,new String[]{
+                  TNoRw.getText(),
+                  Valid.SetTgl(TglOpMulai.getSelectedItem()+""),
+                  CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+                  CmbJam1.getSelectedItem()+":"+CmbMenit1.getSelectedItem()+":"+CmbDetik1.getSelectedItem(),
+                  CmbJam2.getSelectedItem()+":"+CmbMenit2.getSelectedItem()+":"+CmbDetik2.getSelectedItem(),
+                  Kategori.getSelectedItem().toString(),
+                  KdDokter.getText(),
+                  kdperawat1.getText(),
+                  kdperawat2.getText(),
+                  kdperawat3.getText(),
+                  TxDiagnosaPascaBedah.getText(),
+                  TxTindakanOperasi.getText(),
+                  TxLaporanOperasi.getText(),
+                  TxKomplikasi.getSelectedItem().toString(),
+                  TxKetKomplikasi.getText(),
+                  TxJmlhPendarahan.getText(),
+                  TxJmlhTransfusi.getText(),
+                  TxJenisJaringan.getText(),
+                  TxUkuran.getText(),
+                  TxFiksasi.getText(),
+                  TxPabrikan.getText(),
+                  TxType.getText(),
+                  TxNoPendaftaran.getText(),
+                  TxStatus.getSelectedItem().toString(),
+                  TxRuang.getText()
                 })==true){
-                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
-                    emptTeks();
+                      JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+                      emptTeks();
+               }  
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Proses gagal...!E: "+e);
             }
-            
         }
     
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1312,7 +1415,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     hapus();
                 }else{
-                    if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString())){
+                    if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString())){
                         hapus();
                     }else{
                         JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh dokter yang bersangkutan..!!");
@@ -1348,7 +1451,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString())){
+                    if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString())){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh dokter yang bersangkutan..!!");
@@ -1483,15 +1586,15 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());          
             param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());          
-            param.put("dokter",tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());          
-            param.put("tanggaloperasi",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());          
+            param.put("dokter",tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());          
             param.put("tglmulai",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());          
-            param.put("tglselesai",tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());          
+            param.put("jammulai",tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());          
+            param.put("status",tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());          
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),9).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString())); 
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),10).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString())); 
             
-            Valid.MyReport("rptLaporanOperasiLokal.jasper","report","::[ Laporan Operasi dengan Lokal Anestesi ]::",param);
+            Valid.MyReport("rptLaporanOperasiLokal.jasper","report","::[ Laporan Operasi dengan Lokal ]::",param);
         }
     }//GEN-LAST:event_MnCetakLaporanActionPerformed
 
@@ -1551,57 +1654,9 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         
     }//GEN-LAST:event_TxTindakanOperasiKeyPressed
 
-    private void TxtalObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtalObatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtalObatActionPerformed
-
-    private void TxtalObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtalObatKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtalObatKeyPressed
-
-    private void TxtalJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtalJenisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtalJenisActionPerformed
-
-    private void TxtalJenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtalJenisKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtalJenisKeyPressed
-
-    private void TxtalLokasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtalLokasiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtalLokasiActionPerformed
-
-    private void TxtalLokasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtalLokasiKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtalLokasiKeyPressed
-
-    private void TxRhItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TxRhItemStateChanged
+    private void TxKomplikasiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TxKomplikasiItemStateChanged
         isCek2();
-    }//GEN-LAST:event_TxRhItemStateChanged
-
-    private void TxKetRhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxKetRhActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxKetRhActionPerformed
-
-    private void TxKetRhKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxKetRhKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxKetRhKeyPressed
-
-    private void TxKtItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TxKtItemStateChanged
-        isCek2();
-    }//GEN-LAST:event_TxKtItemStateChanged
-
-    private void TxKetKtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxKetKtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxKetKtActionPerformed
-
-    private void TxKetKtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxKetKtKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxKetKtKeyPressed
-
-    private void TxKirimPAItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TxKirimPAItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxKirimPAItemStateChanged
+    }//GEN-LAST:event_TxKomplikasiItemStateChanged
 
     private void TxJmlhPendarahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxJmlhPendarahanActionPerformed
         // TODO add your handling code here:
@@ -1611,26 +1666,6 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxJmlhPendarahanKeyPressed
 
-    private void TxipoObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxipoObatKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxipoObatKeyPressed
-
-    private void TxipoEdukasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxipoEdukasiKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxipoEdukasiKeyPressed
-
-    private void TxipoLainnyaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxipoLainnyaKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxipoLainnyaKeyPressed
-
-    private void TxDiagnosaPraBedahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxDiagnosaPraBedahActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxDiagnosaPraBedahActionPerformed
-
-    private void TxDiagnosaPraBedahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxDiagnosaPraBedahKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxDiagnosaPraBedahKeyPressed
-
     private void TxDiagnosaPascaBedahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxDiagnosaPascaBedahActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxDiagnosaPascaBedahActionPerformed
@@ -1639,9 +1674,117 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxDiagnosaPascaBedahKeyPressed
 
-    private void MnInputMonotoringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnInputMonotoringActionPerformed
+    private void TxJmlhTransfusiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxJmlhTransfusiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MnInputMonotoringActionPerformed
+    }//GEN-LAST:event_TxJmlhTransfusiActionPerformed
+
+    private void TxJmlhTransfusiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxJmlhTransfusiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxJmlhTransfusiKeyPressed
+
+    private void TxKetKomplikasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxKetKomplikasiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxKetKomplikasiActionPerformed
+
+    private void TxKetKomplikasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxKetKomplikasiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxKetKomplikasiKeyPressed
+
+    private void TxJenisJaringanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxJenisJaringanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxJenisJaringanActionPerformed
+
+    private void TxJenisJaringanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxJenisJaringanKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxJenisJaringanKeyPressed
+
+    private void TxUkuranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxUkuranActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxUkuranActionPerformed
+
+    private void TxUkuranKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxUkuranKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxUkuranKeyPressed
+
+    private void TxFiksasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxFiksasiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxFiksasiActionPerformed
+
+    private void TxFiksasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxFiksasiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxFiksasiKeyPressed
+
+    private void TxPabrikanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxPabrikanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxPabrikanActionPerformed
+
+    private void TxPabrikanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxPabrikanKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxPabrikanKeyPressed
+
+    private void TxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxTypeActionPerformed
+
+    private void TxTypeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxTypeKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxTypeKeyPressed
+
+    private void TxNoPendaftaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxNoPendaftaranActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxNoPendaftaranActionPerformed
+
+    private void TxNoPendaftaranKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxNoPendaftaranKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxNoPendaftaranKeyPressed
+
+    private void TglOpMulaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TglOpMulaiItemStateChanged
+        
+    }//GEN-LAST:event_TglOpMulaiItemStateChanged
+
+    private void CmbJamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbJamItemStateChanged
+        getLamaOp();
+    }//GEN-LAST:event_CmbJamItemStateChanged
+
+    private void CmbJam1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbJam1ItemStateChanged
+        getLamaOp();
+    }//GEN-LAST:event_CmbJam1ItemStateChanged
+
+    private void CmbMenitItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbMenitItemStateChanged
+        getLamaOp();
+    }//GEN-LAST:event_CmbMenitItemStateChanged
+
+    private void CmbDetikItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbDetikItemStateChanged
+        getLamaOp();
+    }//GEN-LAST:event_CmbDetikItemStateChanged
+
+    private void CmbMenit1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbMenit1ItemStateChanged
+        getLamaOp();
+    }//GEN-LAST:event_CmbMenit1ItemStateChanged
+
+    private void CmbDetik1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbDetik1ItemStateChanged
+        getLamaOp();
+    }//GEN-LAST:event_CmbDetik1ItemStateChanged
+
+    private void TxRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxRuangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxRuangActionPerformed
+
+    private void TxRuangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxRuangKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxRuangKeyPressed
+
+    private void TxStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TxStatusItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxStatusItemStateChanged
+
+    private void btnTemplateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemplateActionPerformed
+        template.emptTeks();
+        template.isCek();
+        template.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        template.setLocationRelativeTo(internalFrame1);
+        template.setVisible(true);
+    }//GEN-LAST:event_btnTemplateActionPerformed
 
     /**
     * @param args the command line arguments
@@ -1669,6 +1812,15 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.ComboBox CmbDetik;
+    private widget.ComboBox CmbDetik1;
+    private widget.ComboBox CmbDetik2;
+    private widget.ComboBox CmbJam;
+    private widget.ComboBox CmbJam1;
+    private widget.ComboBox CmbJam2;
+    private widget.ComboBox CmbMenit;
+    private widget.ComboBox CmbMenit1;
+    private widget.ComboBox CmbMenit2;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.PanelBiasa FormInput;
@@ -1678,7 +1830,6 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
     private javax.swing.JMenuItem MnCetakLaporan;
-    private javax.swing.JMenuItem MnInputMonotoring;
     private widget.TextBox NmDokter;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
@@ -1688,38 +1839,34 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
     private javax.swing.JTabbedPane TabRawat;
     private widget.TextBox TglLahir;
     private widget.Tanggal TglOpMulai;
-    private widget.Tanggal TglOpSelesai;
     private widget.TextBox TxDiagnosaPascaBedah;
-    private widget.TextBox TxDiagnosaPraBedah;
+    private widget.TextBox TxFiksasi;
+    private widget.TextBox TxJenisJaringan;
     private widget.TextBox TxJmlhPendarahan;
-    private widget.TextBox TxKetKt;
-    private widget.TextBox TxKetRh;
-    private widget.ComboBox TxKirimPA;
-    private widget.ComboBox TxKt;
+    private widget.TextBox TxJmlhTransfusi;
+    private widget.TextBox TxKetKomplikasi;
+    private widget.ComboBox TxKomplikasi;
     private widget.TextArea TxLaporanOperasi;
-    private widget.ComboBox TxRh;
+    private widget.TextBox TxNoPendaftaran;
+    private widget.TextBox TxPabrikan;
+    private widget.TextBox TxRuang;
+    private widget.ComboBox TxStatus;
     private widget.TextArea TxTindakanOperasi;
-    private widget.TextArea TxipoEdukasi;
-    private widget.TextArea TxipoLainnya;
-    private widget.TextArea TxipoObat;
-    private widget.TextBox TxtalJenis;
-    private widget.TextBox TxtalLokasi;
-    private widget.TextBox TxtalObat;
+    private widget.TextBox TxType;
+    private widget.TextBox TxUkuran;
     private widget.Button btnPerawat1;
     private widget.Button btnPerawat2;
     private widget.Button btnPerawat3;
+    private widget.Button btnTemplate;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
     private widget.Label jLabel10;
     private widget.Label jLabel109;
     private widget.Label jLabel11;
-    private widget.Label jLabel12;
-    private widget.Label jLabel13;
-    private widget.Label jLabel14;
     private widget.Label jLabel15;
-    private widget.Label jLabel16;
     private widget.Label jLabel17;
+    private widget.Label jLabel18;
     private widget.Label jLabel19;
     private widget.Label jLabel21;
     private widget.Label jLabel31;
@@ -1727,24 +1874,29 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
     private widget.Label jLabel33;
     private widget.Label jLabel34;
     private widget.Label jLabel35;
+    private widget.Label jLabel36;
+    private widget.Label jLabel37;
+    private widget.Label jLabel38;
+    private widget.Label jLabel39;
+    private widget.Label jLabel40;
+    private widget.Label jLabel41;
     private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
-    private widget.Label jLabel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private widget.TextBox kdperawat1;
     private widget.TextBox kdperawat2;
     private widget.TextBox kdperawat3;
     private widget.Label label11;
+    private widget.Label label12;
     private widget.Label label13;
     private widget.Label label14;
     private widget.Label label15;
-    private widget.Label label16;
     private widget.Label label17;
     private widget.Label label27;
     private widget.Label label29;
@@ -1757,9 +1909,6 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane14;
     private widget.ScrollPane scrollPane3;
-    private widget.ScrollPane scrollPane4;
-    private widget.ScrollPane scrollPane5;
-    private widget.ScrollPane scrollPane6;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
@@ -1775,7 +1924,9 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
                 "	pasien.jk, \n" +
                 "	pasien.tgl_lahir, \n" +
                 "	laporan_operasi_lokal.tanggal_mulai, \n" +
-                "	laporan_operasi_lokal.tanggal_selesai, \n" +
+                "	laporan_operasi_lokal.jam_mulai, \n" +
+                "	laporan_operasi_lokal.jam_selesai, \n" +
+                "	laporan_operasi_lokal.lama_op, \n" +
                 "	laporan_operasi_lokal.kategori, \n" +
                 "	laporan_operasi_lokal.dokter, \n" +
                 "	dokter.nm_dokter, \n" +
@@ -1785,22 +1936,21 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
                 "	perawat2.nama AS nm_perawat2, \n" +
                 "	laporan_operasi_lokal.perawat3, \n" +
                 "	perawat3.nama AS nm_perawat3, \n" +
-                "	laporan_operasi_lokal.diagnosa_pra_bedah, \n" +
                 "	laporan_operasi_lokal.diagnosa_pasca_bedah, \n" +
                 "	laporan_operasi_lokal.tindakan_operasi, \n" +
-                "	laporan_operasi_lokal.tal_jenis, \n" +
-                "	laporan_operasi_lokal.tal_lokasi, \n" +
-                "	laporan_operasi_lokal.tal_obat, \n" +
-                "	laporan_operasi_lokal.respon_hipersensitivitas, \n" +
-                "	laporan_operasi_lokal.ket_respon_hipersensitivitas, \n" +
-                "	laporan_operasi_lokal.kejadian_toksikasi, \n" +
-                "	laporan_operasi_lokal.ket_kejadian_toksikasi, \n" +
                 "	laporan_operasi_lokal.laporan_operasi, \n" +
-                "	laporan_operasi_lokal.ipo_obat, \n" +
-                "	laporan_operasi_lokal.ipo_edukasi_follow_up, \n" +
-                "	laporan_operasi_lokal.ipo_lainnya, \n" +
-                "	laporan_operasi_lokal.permintaan_pa, \n" +
-                "	laporan_operasi_lokal.jumlah_pendarahan\n" +
+                "	laporan_operasi_lokal.komplikasi, \n" +
+                "	laporan_operasi_lokal.ket_komplikasi, \n" +
+                "	laporan_operasi_lokal.jml_pendarahan, \n" +
+                "	laporan_operasi_lokal.jml_transfusi, \n" +
+                "	laporan_operasi_lokal.jns_jaringan, \n" +
+                "	laporan_operasi_lokal.ukuran, \n" +
+                "	laporan_operasi_lokal.fiksasi, \n" +
+                "	laporan_operasi_lokal.pabrik, \n" +
+                "	laporan_operasi_lokal.type, \n" +
+                "	laporan_operasi_lokal.nomor_pendaftaran, \n" +
+                "	laporan_operasi_lokal.`status`, \n" +
+                "	laporan_operasi_lokal.nama_ruang\n" +
                 "FROM\n" +
                 "	laporan_operasi_lokal\n" +
                 "	INNER JOIN\n" +
@@ -1826,9 +1976,18 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
                 "	INNER JOIN\n" +
                 "	petugas AS perawat3\n" +
                 "	ON \n" +
-                "		laporan_operasi_lokal.perawat3 = perawat3.nip where "+
-                "laporan_operasi_lokal.tanggal_mulai between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
-                "laporan_operasi_lokal.dokter like ? or dokter.nm_dokter like ?) order by laporan_operasi_lokal.tanggal_mulai"
+                "		laporan_operasi_lokal.perawat3 = perawat3.nip\n" +
+                "WHERE\n" +
+                "	laporan_operasi_lokal.tanggal_mulai BETWEEN ? AND ? AND\n" +
+                "	(\n" +
+                "		reg_periksa.no_rawat LIKE ? OR\n" +
+                "		pasien.no_rkm_medis LIKE ? OR\n" +
+                "		pasien.nm_pasien LIKE ? OR\n" +
+                "		laporan_operasi_lokal.dokter LIKE ? OR\n" +
+                "		dokter.nm_dokter LIKE ?\n" +
+                "	)\n" +
+                "ORDER BY\n" +
+                "	laporan_operasi_lokal.tanggal_mulai ASC"
             );
             
             try {
@@ -1850,7 +2009,9 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
                         rs.getString("jk"),
                         rs.getString("tgl_lahir"),
                         rs.getString("tanggal_mulai"),
-                        rs.getString("tanggal_selesai"),
+                        rs.getString("jam_mulai"),
+                        rs.getString("jam_selesai"),
+                        rs.getString("lama_op"),
                         rs.getString("kategori"),
                         rs.getString("dokter"),
                         rs.getString("nm_dokter"),
@@ -1860,22 +2021,21 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
                         rs.getString("nm_perawat2"),
                         rs.getString("perawat3"),
                         rs.getString("nm_perawat3"),
-                        rs.getString("diagnosa_pra_bedah"),
                         rs.getString("diagnosa_pasca_bedah"),
                         rs.getString("tindakan_operasi"),
-                        rs.getString("tal_jenis"),
-                        rs.getString("tal_lokasi"),
-                        rs.getString("tal_obat"),
-                        rs.getString("respon_hipersensitivitas"),
-                        rs.getString("ket_respon_hipersensitivitas"),
-                        rs.getString("kejadian_toksikasi"),
-                        rs.getString("ket_kejadian_toksikasi"),
                         rs.getString("laporan_operasi"),
-                        rs.getString("ipo_obat"),
-                        rs.getString("ipo_edukasi_follow_up"),
-                        rs.getString("ipo_lainnya"),
-                        rs.getString("permintaan_pa"),
-                        rs.getString("jumlah_pendarahan")
+                        rs.getString("komplikasi"),
+                        rs.getString("ket_komplikasi"),
+                        rs.getString("jml_pendarahan"),
+                        rs.getString("jml_transfusi"),
+                        rs.getString("jns_jaringan"),
+                        rs.getString("ukuran"),
+                        rs.getString("fiksasi"),
+                        rs.getString("pabrik"),
+                        rs.getString("type"),
+                        rs.getString("nomor_pendaftaran"),
+                        rs.getString("status"),
+                        rs.getString("nama_ruang"),
                     });
                 }
             } catch (Exception e) {
@@ -1897,29 +2057,27 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
 
     public void emptTeks() {
         TglOpMulai.setDate(new Date());
-        TglOpSelesai.setDate(new Date());
         TabRawat.setSelectedIndex(0);
-        KdDokter.setText("");
-        NmDokter.setText("");
+//        KdDokter.setText("");
+//        NmDokter.setText("");
         kdperawat1.setText("-");
         nmperawat1.setText("-");
         kdperawat2.setText("-");
         nmperawat2.setText("-");
         kdperawat3.setText("-");
         nmperawat3.setText("-");
-        TxDiagnosaPraBedah.setText("");
         TxDiagnosaPascaBedah.setText("");
-        TxtalJenis.setText("");
-        TxtalLokasi.setText("");
-        TxtalObat.setText("");
         TxTindakanOperasi.setText("");
-        TxRh.setSelectedIndex(0);
-        TxKt.setSelectedIndex(0);
-        TxKirimPA.setSelectedIndex(0);
+        TxKomplikasi.setSelectedIndex(0);
+        TxKetKomplikasi.setText("");
+        TxJenisJaringan.setText("");
+        TxFiksasi.setText("");
+        TxUkuran.setText("");
+        TxPabrikan.setText("");
+        TxType.setText("");
+        TxNoPendaftaran.setText("");
         TxJmlhPendarahan.setText("");
-        TxipoObat.setText("");
-        TxipoEdukasi.setText("");
-        TxipoLainnya.setText("");
+        TxJmlhTransfusi.setText("");
         TxLaporanOperasi.setText("");
         TxLaporanOperasi.requestFocus();
     } 
@@ -1932,32 +2090,39 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
             Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             Valid.SetTgl2(TglOpMulai,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Valid.SetTgl2(TglOpSelesai,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Kategori.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            kdperawat1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            nmperawat1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            kdperawat2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            nmperawat2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            kdperawat3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            nmperawat3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            TxDiagnosaPraBedah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            TxDiagnosaPascaBedah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            TxTindakanOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            TxtalJenis.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            TxtalLokasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            TxtalObat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            TxRh.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            TxKetRh.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-            TxKt.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
-            TxKetKt.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
-            TxLaporanOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
-            TxipoObat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            TxipoEdukasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            TxipoLainnya.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            TxKirimPA.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
-            TxJmlhPendarahan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
+            CmbJam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString().substring(0,2));
+            CmbMenit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString().substring(3,5));
+            CmbDetik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString().substring(6,8));
+            CmbJam1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(0,2));
+            CmbMenit1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(3,5));
+            CmbDetik1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(6,8));
+            CmbJam2.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().substring(0,2));
+            CmbMenit2.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().substring(3,5));
+            CmbDetik2.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().substring(6,8));
+            Kategori.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            kdperawat1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            nmperawat1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            kdperawat2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            nmperawat2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            kdperawat3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            nmperawat3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
+            TxDiagnosaPascaBedah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
+            TxTindakanOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
+            TxLaporanOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
+            TxKomplikasi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
+            TxKetKomplikasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
+            TxJmlhPendarahan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
+            TxJmlhTransfusi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
+            TxJenisJaringan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
+            TxUkuran.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
+            TxFiksasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
+            TxPabrikan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
+            TxType.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
+            TxNoPendaftaran.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
+            TxStatus.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
+            TxRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
         }
     }
 
@@ -1998,6 +2163,11 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         DTPCari2.setDate(tgl2);    
         isRawat(); 
     }
+ 
+    public void setStatus(String status,String ruang) {
+        TxStatus.setSelectedItem(status);
+        TxRuang.setText(ruang);
+    }
     
     public void setNoRm(String norwt,Date tgl2,String KodeDokter,String NamaDokter,String Operasi) {
         TNoRw.setText(norwt);
@@ -2015,7 +2185,7 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.getpenilaian_pre_operasi());
         if(akses.getjml2()>=1){
             KdDokter.setEditable(false);
-            BtnDokter.setEnabled(false);
+//            BtnDokter.setEnabled(false);
             KdDokter.setText(akses.getkode());
             NmDokter.setText(dokter.tampil3(KdDokter.getText()));
             if(NmDokter.getText().equals("")){
@@ -2032,8 +2202,15 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
     private void hapus() {
         int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin Ingin Menghapus??","::[Konfirmasi Hapus Data]::",JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            if(Sequel.queryu2tf("delete from laporan_operasi_lokal where no_rawat=? and tanggal_mulai=? and dokter=?",3,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()
+            if(Sequel.queryu2tf("delete from laporan_operasi_lokal where no_rawat=? and tanggal_mulai=? and jam_mulai=? and jam_selesai=? and dokter=? and status=? and kategori=? and tindakan_operasi=? ",8,new String[]{
+                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),10).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),31).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),9).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()
             })==true){
                 JOptionPane.showMessageDialog(null,"Berhail menghapus..!!");
                 tabMode.removeRow(tbObat.getSelectedRow());
@@ -2048,39 +2225,119 @@ public final class RMLaporanOperasi extends javax.swing.JDialog {
     private void ganti() {
         int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin ingin Mengubah??","::[Konfirmasi Ubah Data]::",JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            if(Sequel.mengedittf("laporan_operasi_lokal",
-                    "no_rawat=? and tanggal_mulai=? and tanggal_selesai=? and dokter=?",
-                    "tanggal_mulai=?,tanggal_selesai=?,kategori=?,dokter=?,perawat1=?,perawat2=?,perawat3=?,diagnosa_pra_bedah=?,diagnosa_pasca_bedah=?,tindakan_operasi=?,tal_jenis=?,tal_lokasi=?,tal_obat=?,respon_hipersensitivitas=?,ket_respon_hipersensitivitas=?,kejadian_toksikasi=?,ket_kejadian_toksikasi=?,laporan_operasi=?,ipo_obat=?,ipo_edukasi_follow_up=?,ipo_lainnya=?,permintaan_pa=?,jumlah_pendarahan=?",27,new String[]{
-                    Valid.SetTgl(TglOpMulai.getSelectedItem()+""),
-                    Valid.SetTgl(TglOpSelesai.getSelectedItem()+""),
-                    Kategori.getSelectedItem().toString(),KdDokter.getText(),kdperawat1.getText(),kdperawat2.getText(),kdperawat3.getText(),
-                    TxDiagnosaPraBedah.getText(),TxDiagnosaPascaBedah.getText(),TxTindakanOperasi.getText(),TxtalJenis.getText(),TxtalLokasi.getText(),TxtalObat.getText(),TxRh.getSelectedItem().toString(),
-                    TxKetRh.getText(),TxKt.getSelectedItem().toString(),TxKetKt.getText(),TxLaporanOperasi.getText(),TxipoObat.getText(),TxipoEdukasi.getText(),TxipoLainnya.getText(),
-                    TxKirimPA.getSelectedItem().toString(),TxJmlhPendarahan.getText(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),8).toString(),
-                })==true){
-                   tampil();
-                   emptTeks();
-                   TabRawat.setSelectedIndex(1);
+            try {
+                if(Sequel.queryu2tf("UPDATE laporan_operasi_lokal SET tanggal_mulai=?,jam_mulai=?,"
+                        + "jam_selesai=?,lama_op=?,kategori=?,dokter=?,perawat1=?,"
+                        + "perawat2=?,perawat3=?,diagnosa_pasca_bedah=?,tindakan_operasi=?,"
+                        + "laporan_operasi=?,komplikasi=?,ket_komplikasi=?,jml_pendarahan=?,"
+                        + "jml_transfusi=?,jns_jaringan=?,ukuran=?,fiksasi=?,pabrik=?,"
+                        + "type=?,nomor_pendaftaran=?,status=?,nama_ruang=? WHERE no_rawat=? and tanggal_mulai=? and jam_mulai=? and jam_selesai=? and dokter=? and status=? and kategori=? and tindakan_operasi=? ",32,new String[]{
+                        Valid.SetTgl(TglOpMulai.getSelectedItem()+""),
+                        CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+                        CmbJam1.getSelectedItem()+":"+CmbMenit1.getSelectedItem()+":"+CmbDetik1.getSelectedItem(),
+                        CmbJam2.getSelectedItem()+":"+CmbMenit2.getSelectedItem()+":"+CmbDetik2.getSelectedItem(),
+                        Kategori.getSelectedItem().toString(),
+                        KdDokter.getText(),
+                        kdperawat1.getText(),
+                        kdperawat2.getText(),
+                        kdperawat3.getText(),
+                        TxDiagnosaPascaBedah.getText(),
+                        TxTindakanOperasi.getText(),
+                        TxLaporanOperasi.getText(),
+                        TxKomplikasi.getSelectedItem().toString(),
+                        TxKetKomplikasi.getText(),
+                        TxJmlhPendarahan.getText(),
+                        TxJmlhTransfusi.getText(),
+                        TxJenisJaringan.getText(),
+                        TxUkuran.getText(),
+                        TxFiksasi.getText(),
+                        TxPabrikan.getText(),
+                        TxType.getText(),
+                        TxNoPendaftaran.getText(),
+                        TxStatus.getSelectedItem().toString(),
+                        TxRuang.getText(),
+                            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),
+                            tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),
+                            tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),
+                            tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),
+                            tbObat.getValueAt(tbObat.getSelectedRow(),10).toString(),
+                            tbObat.getValueAt(tbObat.getSelectedRow(),31).toString(),
+                            tbObat.getValueAt(tbObat.getSelectedRow(),9).toString(),
+                            tbObat.getValueAt(tbObat.getSelectedRow(),19).toString(),
+                    })==true){
+                       tampil();
+                       emptTeks();
+                       TabRawat.setSelectedIndex(1);
+                }else{
+                    JOptionPane.showMessageDialog(null,"Proses simpan gagal...!");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Proses simpan gagal...!E:"+e);
             }
         }
     }
 
     private void isCek2(){
         
-        if(TxRh.getSelectedItem().equals("Ya")){
-            TxKetRh.setVisible(true);
+        if(TxKomplikasi.getSelectedItem().equals("Ya")){
+            TxKetKomplikasi.setVisible(true);
         }else{
-            TxKetRh.setVisible(false);
-            TxKetRh.setText("");
+            TxKetKomplikasi.setVisible(false);
+            TxKetKomplikasi.setText("");
         }
+          
+    }
+    
+    private void getLamaOp(){
         
-        if(TxKt.getSelectedItem().equals("Ya")){
-            TxKetKt.setVisible(true);
-        }else{
-            TxKetKt.setVisible(false);
-            TxKetKt.setText("");
-        }  
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        try {
+            // Get selected time strings
+            String startTimeStr = CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem();
+            String endTimeStr = CmbJam1.getSelectedItem()+":"+CmbMenit1.getSelectedItem()+":"+CmbDetik1.getSelectedItem();
+            String nol_jam = "";
+            String nol_menit = "";
+            String nol_detik = "";
+            
+            // Parse the strings to LocalTime
+            LocalTime startTime = LocalTime.parse(startTimeStr, formatter);
+            LocalTime endTime = LocalTime.parse(endTimeStr, formatter);
+
+            // Calculate the duration
+            Duration duration;
+            if (endTime.isBefore(startTime)) {
+                // If end time is before start time, assume it is the next day
+                duration = Duration.between(startTime, endTime.plusHours(24));
+            } else {
+                duration = Duration.between(startTime, endTime);
+            }
+            // Extract hours, minutes, and seconds
+            long hours = duration.toHours();
+            long minutes = duration.toMinutes() % 60;
+            long seconds = duration.getSeconds() % 60;
+                if (hours <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_jam = "0";
+                }
+                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
+                if (minutes <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_menit = "0";
+                }
+                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
+                if (seconds <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_detik = "0";
+                }
+            // Display the result
+            CmbJam2.setSelectedItem(nol_jam+Long.toString(hours));
+            CmbMenit2.setSelectedItem(nol_menit+Long.toString(minutes));
+            CmbDetik2.setSelectedItem(nol_detik+Long.toString(seconds));
+        } catch (Exception ex) {
+            CmbJam2.setSelectedItem("00");
+            CmbMenit2.setSelectedItem("00");
+            CmbDetik2.setSelectedItem("00");
+        }
     }
 
 }

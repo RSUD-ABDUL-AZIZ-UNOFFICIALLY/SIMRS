@@ -15,6 +15,9 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="parameter" class="java.lang.String"/>
+	<parameter name="ruang" class="java.lang.String"/>
+	<parameter name="noorder" class="java.lang.String"/>
+	<parameter name="keterangan" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk,
                     pasien.tgl_lahir, pasien.gol_darah, pasien.tgl_daftar,
@@ -56,7 +59,7 @@
 	<title>
 		<band height="541">
 			<textField pattern="">
-				<reportElement mode="Transparent" x="15" y="6" width="200" height="11" uuid="446da730-2ccd-4926-8453-cd6936b3057e">
+				<reportElement mode="Transparent" x="15" y="4" width="200" height="11" uuid="446da730-2ccd-4926-8453-cd6936b3057e">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -67,7 +70,7 @@
 				<textFieldExpression><![CDATA["No.RM : "+$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="15" y="16" width="200" height="11" uuid="fc41c518-554d-461e-8b3f-30894b692a2e">
+				<reportElement mode="Opaque" x="15" y="14" width="200" height="11" uuid="fc41c518-554d-461e-8b3f-30894b692a2e">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -78,7 +81,7 @@
 				<textFieldExpression><![CDATA["Nama : "+$F{nm_pasien}+" ("+$F{jk}+")"]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement mode="Transparent" x="15" y="26" width="200" height="11" uuid="f1eed47b-9b8e-4fcc-a398-93b29325c285">
+				<reportElement mode="Transparent" x="15" y="24" width="200" height="11" uuid="f1eed47b-9b8e-4fcc-a398-93b29325c285">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -89,7 +92,7 @@
 				<textFieldExpression><![CDATA["Tgl. Lahir : "+$F{tgl_lahir}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="15" y="35" width="200" height="11" uuid="2ec90801-ffdd-4b82-8cf0-e7f6995cb43a">
+				<reportElement x="15" y="33" width="200" height="11" uuid="2ec90801-ffdd-4b82-8cf0-e7f6995cb43a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -100,7 +103,7 @@
 				<textFieldExpression><![CDATA["Umur : "+$F{umur}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="230" y="16" width="200" height="11" uuid="dbb6b95c-5ca6-48cf-bd5d-c68298bd92d9">
+				<reportElement mode="Opaque" x="230" y="14" width="200" height="11" uuid="dbb6b95c-5ca6-48cf-bd5d-c68298bd92d9">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -111,7 +114,7 @@
 				<textFieldExpression><![CDATA["Nama : "+$F{nm_pasien}+" ("+$F{jk}+")"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="230" y="35" width="200" height="11" uuid="27bc2125-6a36-4c9a-b6e2-61bf2c28921e">
+				<reportElement x="230" y="33" width="200" height="11" uuid="27bc2125-6a36-4c9a-b6e2-61bf2c28921e">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -122,7 +125,7 @@
 				<textFieldExpression><![CDATA["Umur : "+$F{umur}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Transparent" x="230" y="6" width="200" height="11" uuid="1eccab33-65a5-4b46-862b-4a67db78fba8">
+				<reportElement mode="Transparent" x="230" y="4" width="200" height="11" uuid="1eccab33-65a5-4b46-862b-4a67db78fba8">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -133,7 +136,7 @@
 				<textFieldExpression><![CDATA["No.RM : "+$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement mode="Transparent" x="230" y="26" width="200" height="11" uuid="52254126-9831-4f05-b99a-f4c6cfa44dac">
+				<reportElement mode="Transparent" x="230" y="24" width="200" height="11" uuid="52254126-9831-4f05-b99a-f4c6cfa44dac">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -144,7 +147,7 @@
 				<textFieldExpression><![CDATA["Tgl. Lahir : "+$F{tgl_lahir}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="15" y="86" width="200" height="11" forecolor="rgba(0, 0, 0, 0.0)" backcolor="rgba(255, 255, 255, 0.0)" uuid="d14ab15e-0313-4311-ba9a-dcefcfbffee7">
+				<reportElement mode="Transparent" x="15" y="85" width="200" height="11" forecolor="#000000" backcolor="rgba(255, 255, 255, 0.0)" uuid="d14ab15e-0313-4311-ba9a-dcefcfbffee7">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -155,7 +158,7 @@
 				<textFieldExpression><![CDATA["Nama : "+$F{nm_pasien}+" ("+$F{jk}+")"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="15" y="105" width="200" height="11" forecolor="rgba(0, 0, 0, 0.0)" backcolor="rgba(255, 255, 255, 0.0)" uuid="a59cca62-c369-4e26-b7db-4f3cbf768cce">
+				<reportElement mode="Transparent" x="15" y="104" width="200" height="11" forecolor="#000000" backcolor="rgba(255, 255, 255, 0.0)" uuid="a59cca62-c369-4e26-b7db-4f3cbf768cce">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -166,7 +169,7 @@
 				<textFieldExpression><![CDATA["Umur : "+$F{umur}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="15" y="76" width="200" height="11" forecolor="rgba(0, 0, 0, 0.0)" backcolor="rgba(255, 255, 255, 0.0)" uuid="4dcb4651-f87f-4cc4-bed0-d505d149386c">
+				<reportElement mode="Transparent" x="15" y="75" width="200" height="11" forecolor="#000000" backcolor="rgba(255, 255, 255, 0.0)" uuid="4dcb4651-f87f-4cc4-bed0-d505d149386c">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -177,7 +180,7 @@
 				<textFieldExpression><![CDATA["No.RM : "+$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement mode="Opaque" x="15" y="96" width="200" height="11" forecolor="rgba(0, 0, 0, 0.0)" backcolor="rgba(255, 255, 255, 0.0)" uuid="84fe246f-9cc2-46e2-a071-0251e702c1c7">
+				<reportElement mode="Transparent" x="15" y="95" width="200" height="11" forecolor="#000000" backcolor="rgba(255, 255, 255, 0.0)" uuid="84fe246f-9cc2-46e2-a071-0251e702c1c7">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -188,7 +191,7 @@
 				<textFieldExpression><![CDATA["Tgl. Lahir : "+$F{tgl_lahir}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="230" y="87" width="200" height="11" forecolor="rgba(0, 0, 0, 0.0)" backcolor="rgba(255, 255, 255, 0.0)" uuid="96c48e1f-82bc-4b0a-b419-4e68fc228796">
+				<reportElement mode="Transparent" x="230" y="85" width="200" height="11" forecolor="#000000" backcolor="rgba(255, 255, 255, 0.0)" uuid="96c48e1f-82bc-4b0a-b419-4e68fc228796">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -199,7 +202,7 @@
 				<textFieldExpression><![CDATA["Nama : "+$F{nm_pasien}+" ("+$F{jk}+")"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="230" y="106" width="200" height="11" forecolor="rgba(0, 0, 0, 0.0)" backcolor="rgba(255, 255, 255, 0.0)" uuid="9cf4b59b-866f-42ab-851c-02859427795e">
+				<reportElement mode="Transparent" x="230" y="104" width="200" height="11" forecolor="#000000" backcolor="rgba(255, 255, 255, 0.0)" uuid="9cf4b59b-866f-42ab-851c-02859427795e">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -210,7 +213,7 @@
 				<textFieldExpression><![CDATA["Umur : "+$F{umur}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="230" y="77" width="200" height="11" forecolor="rgba(0, 0, 0, 0.0)" backcolor="rgba(255, 255, 255, 0.0)" uuid="ffc04b66-f89e-4c2c-a497-68972de417aa">
+				<reportElement mode="Transparent" x="230" y="75" width="200" height="11" forecolor="#000000" backcolor="rgba(255, 255, 255, 0.0)" uuid="ffc04b66-f89e-4c2c-a497-68972de417aa">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -221,7 +224,7 @@
 				<textFieldExpression><![CDATA["No.RM : "+$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement mode="Opaque" x="230" y="97" width="200" height="11" forecolor="rgba(0, 0, 0, 0.0)" backcolor="rgba(255, 255, 255, 0.0)" uuid="3f7e2702-1a79-411a-8b65-096d1628617b">
+				<reportElement mode="Transparent" x="230" y="95" width="200" height="11" forecolor="#000000" backcolor="rgba(255, 255, 255, 0.0)" uuid="3f7e2702-1a79-411a-8b65-096d1628617b">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -230,6 +233,101 @@
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Tgl. Lahir : "+$F{tgl_lahir}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="44" width="200" height="9" uuid="dbadca2e-4b04-43c6-a981-0720d95335ba">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Tahoma" size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["["+$P{noorder}+"]  "+$P{ruang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="44" width="200" height="9" uuid="6b5ea699-aa9f-40ea-86b0-9281f7666994">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Tahoma" size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["["+$P{noorder}+"]  "+$P{ruang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="15" y="115" width="200" height="9" forecolor="#000000" uuid="fc5cbe15-2d72-434d-99a5-270e947b8edf">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Tahoma" size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["["+$P{noorder}+"]  "+$P{ruang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="230" y="115" width="200" height="9" forecolor="#000000" uuid="e1098236-8f7e-4a24-835e-3b4ff4f8c050">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Tahoma" size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["["+$P{noorder}+"]  "+$P{ruang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="53" width="200" height="9" uuid="f4fcf0c2-27b1-443e-9f66-0f3053fce6de">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Tahoma" size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ket:"+$P{keterangan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="53" width="200" height="9" uuid="810d37de-145e-4edc-a0f9-70b88834d223">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Tahoma" size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ket:"+$P{keterangan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="124" width="200" height="9" uuid="f2aab124-aaa3-4f50-ba7c-fc11228acc57">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Tahoma" size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ket:"+$P{keterangan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="124" width="200" height="9" uuid="7a5ef330-a7e0-45e1-bb5f-a5aadcbe5ab5">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Tahoma" size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ket:"+$P{keterangan}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

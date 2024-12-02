@@ -57,7 +57,7 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     private double all=0,pembulatan=0,Laborat=0,Radiologi=0,Obat=0,Ralan_Dokter=0,Ralan_Dokter_paramedis=0,Ralan_Paramedis=0,Tambahan=0,Potongan=0,Registrasi=0,
                     ttlLaborat=0,Deposit=0,ttlDeposit=0,ttlRadiologi=0,ttlObat=0,ttlRalan_Dokter=0,ttlRalan_Paramedis=0,ttlTambahan=0,ttlPotongan=0,ttlRegistrasi=0,
-                   Operasi=0,ttlOperasi=0;
+                   Operasi=0,ttlOperasi=0,ttlbult=0,kurangbulat=0,total1=0;
     private String Keterangan="Belum Lunas",pilihan="",tampilkan="Semua",TglClosing="",cekClose="",innerjoin="";
     private StringBuilder htmlContent;
     private int i=0;
@@ -74,7 +74,7 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
         Object[] rowRwJlDr={"Tanggal","No.Nota","No.RM","Nama Pasien","Poli/Unit","Perujuk",
                             "Registrasi","Obat+Emb+Tsl","Paket Tindakan","Operasi",
                             "Laborat","Radiologi","Tambahan","Potongan",
-                            "Total","Dokter","Keterangan","Deposit","Bayar","Pembulatan","TGL. Closing"};
+                            "Total Semua Bayar","Dokter","Keterangan","Deposit/Pembayaran Obat","Bayar","Pembulatan","Total","TGL. Closing"};
         tabMode=new DefaultTableModel(null,rowRwJlDr){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -83,7 +83,7 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
         tbBangsal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbBangsal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 18; i++) {
+        for (i = 0; i < 19; i++) {
             TableColumn column = tbBangsal.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(65);
@@ -100,7 +100,7 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
             }else if(i==15){
                 column.setPreferredWidth(120);
             }else{
-                column.setPreferredWidth(85);
+                column.setPreferredWidth(110);
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
@@ -700,12 +700,13 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Radiologi</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%'>Tambahan</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%'>Potongan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total Semua Bayar</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Dokter</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Keterangan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Deposit</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Deposit/Pembayaran Obat</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Bayar</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Pembulatan</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>TGL.Closing</td>"+
                                 "</tr>"
                             ); 
@@ -733,6 +734,7 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,18)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,19)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,20)+"</td>"+
+                                        "<td valign='top' align='right'>"+tabMode.getValueAt(i,21)+"</td>"+
                                     "</tr>"
                                 ); 
                             }            
@@ -780,12 +782,13 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Radiologi</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%'>Tambahan</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%'>Potongan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total Semua Bayar</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Dokter</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Keterangan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Deposit</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Deposit/Pembayaran Obat</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Bayar</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Pembulatan</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>TGL.Closing</td>"+
                                 "</tr>"
                             ); 
@@ -813,6 +816,7 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,18)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,19)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,20)+"</td>"+
+                                        "<td valign='top' align='right'>"+tabMode.getValueAt(i,21)+"</td>"+
                                     "</tr>"
                                 ); 
                             }            
@@ -845,11 +849,11 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
                             htmlContent.append(                             
-                                "\"Tanggal\";\"No.Nota\";\"No.RM\";\"Nama Pasien\";\"Poli/Unit\";\"Perujuk\";\"Registrasi\";\"Obat+Emb+Tsl\";\"Paket Tindakan\";\"Operasi\";\"Laborat\";\"Radiologi\";\"Tambahan\";\"Potongan\";\"Total\";\"Dokter\";\"Keterangan\";\"Deposit\";\"Bayar\";\"Pembulatan\";\"TGL.Closing\"\n"
+                                "\"Tanggal\";\"No.Nota\";\"No.RM\";\"Nama Pasien\";\"Poli/Unit\";\"Perujuk\";\"Registrasi\";\"Obat+Emb+Tsl\";\"Paket Tindakan\";\"Operasi\";\"Laborat\";\"Radiologi\";\"Tambahan\";\"Potongan\";\"Total Semua Bayar\";\"Dokter\";\"Keterangan\";\"Deposit\";\"Bayar\";\"Pembulatan\";\"Total\";\"TGL.Closing\"\n"
                             ); 
                             for(i=0;i<tabMode.getRowCount();i++){  
                                 htmlContent.append(                             
-                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\";\""+tabMode.getValueAt(i,18)+"\";\""+tabMode.getValueAt(i,19)+"\";\""+tabMode.getValueAt(i,20)+"\"\n"
+                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\";\""+tabMode.getValueAt(i,18)+"\";\""+tabMode.getValueAt(i,19)+"\";\""+tabMode.getValueAt(i,20)+"\";\""+tabMode.getValueAt(i,21)+"\"\n"
                                 ); 
                             }            
 
@@ -884,7 +888,8 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
                                                     tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
                                                     tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
                                                     tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','"+
-                                                    tabMode.getValueAt(r,20).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","data");
+                                                    tabMode.getValueAt(r,20).toString().replaceAll("'","`")+"','"+
+                                                    tabMode.getValueAt(r,21).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","data");
                             }
 
                             Map<String, Object> param = new HashMap<>();                 
@@ -1170,7 +1175,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     
                 rs=ps.executeQuery();
                 all=0;
-                pembulatan=0;ttlDeposit=0;
+                pembulatan=0;ttlDeposit=0;ttlbult=0;
                 ttlLaborat=0;ttlRadiologi=0;ttlOperasi=0;ttlObat=0;ttlRalan_Dokter=0;ttlRalan_Paramedis=0;ttlTambahan=0;ttlPotongan=0;ttlRegistrasi=0;
                 while(rs.next()){
                     Operasi=0;Laborat=0;Radiologi=0;Obat=0;Ralan_Dokter=0;Ralan_Dokter_paramedis=0;Ralan_Paramedis=0;Tambahan=0;Potongan=0;Registrasi=0;
@@ -1286,8 +1291,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                     all=all+Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Dokter_paramedis+Ralan_Paramedis+Tambahan+Potongan+Registrasi;
-                    pembulatan=pembulatan+Valid.roundUp((Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Dokter_paramedis+Ralan_Paramedis+Tambahan+Potongan+Registrasi)-Deposit,1000);
+                    pembulatan=pembulatan+Valid.roundDown((Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Dokter_paramedis+Ralan_Paramedis+Tambahan+Potongan+Registrasi)-Deposit,1000);
                     ttlDeposit=ttlDeposit+Deposit;
+                    total1=(Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Dokter_paramedis+Ralan_Paramedis+Tambahan+Potongan+Registrasi)-Deposit;
+                    kurangbulat=Valid.roundDown(total1,1000)-total1;
+                    ttlbult=ttlbult+(Valid.roundDown(total1,1000)-total1);
                     if((Laborat+Operasi+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi)>0){
                         Keterangan="Sudah Bayar";
                     }                
@@ -1310,8 +1318,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             Valid.SetAngka(Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi),
                             rs.getString("nm_dokter"),Keterangan,
                             Valid.SetAngka(Deposit),
-                            Valid.SetAngka((Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi)-Deposit),
-                            Valid.SetAngka(Valid.roundUp((Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi)-Deposit,1000)),
+                            Valid.SetAngka(total1),
+                            Valid.SetAngka(kurangbulat),
+                            Valid.SetAngka(Valid.roundDown(total1,1000)),
                             TglClosing
                         });
                     }else if(tampilkan.equals("Sudah Bayar")&&Keterangan.equals("Sudah Bayar")){
@@ -1332,8 +1341,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             Valid.SetAngka(Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi),
                             rs.getString("nm_dokter"),Keterangan,
                             Valid.SetAngka(Deposit),
-                            Valid.SetAngka((Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi)-Deposit),
-                            Valid.SetAngka(Valid.roundUp((Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi)-Deposit,1000)),
+                            Valid.SetAngka(total1),
+                            Valid.SetAngka(kurangbulat),
+                            Valid.SetAngka(Valid.roundDown(total1,1000)),
                             TglClosing
                         });
                     }else if(tampilkan.equals("Semua")){
@@ -1354,8 +1364,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             Valid.SetAngka(Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi),
                             rs.getString("nm_dokter"),Keterangan,
                             Valid.SetAngka(Deposit),
-                            Valid.SetAngka((Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi)-Deposit),
-                            Valid.SetAngka(Valid.roundUp((Operasi+Laborat+Radiologi+Obat+Ralan_Dokter+Ralan_Paramedis+Ralan_Dokter_paramedis+Tambahan+Potongan+Registrasi)-Deposit,1000)),
+                            Valid.SetAngka(total1),
+                            Valid.SetAngka(kurangbulat),
+                            Valid.SetAngka(Valid.roundDown(total1,1000)),
                             TglClosing
                         });
                     }
@@ -1374,7 +1385,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 Valid.SetAngka(ttlTambahan),
                                 Valid.SetAngka(ttlPotongan),
                                 Valid.SetAngka(ttlLaborat+ttlRadiologi+ttlObat+ttlRalan_Dokter+ttlRalan_Paramedis+
-                                        ttlTambahan+ttlPotongan+ttlRegistrasi+ttlOperasi),"","",Valid.SetAngka(ttlDeposit),"",Valid.SetAngka(pembulatan),""
+                                        ttlTambahan+ttlPotongan+ttlRegistrasi+ttlOperasi),"","",Valid.SetAngka(ttlDeposit),"",Valid.SetAngka(ttlbult),Valid.SetAngka(pembulatan),""
                     });
                     LCount.setText(Valid.SetAngka(all));
                 }else{

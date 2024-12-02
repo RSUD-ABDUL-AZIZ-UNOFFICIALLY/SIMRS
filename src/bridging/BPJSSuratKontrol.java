@@ -247,6 +247,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         } catch (Exception ex) {
             JADIKANBOOKINGSURATKONTROLAPIBPJS="no";
         }
+        BtnSimpanSurat.setVisible(false);
     }
  
     /** This method is called from within the constructor to
@@ -262,6 +263,8 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnSurat = new javax.swing.JMenuItem();
         NoKartu = new widget.TextBox();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        MnCariSurat = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -320,6 +323,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         JK = new widget.TextBox();
         jLabel17 = new widget.Label();
         Diagnosa = new widget.TextBox();
+        BtnSimpanSurat = new widget.Button();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -342,6 +346,24 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         NoKartu.setEditable(false);
         NoKartu.setHighlighter(null);
         NoKartu.setName("NoKartu"); // NOI18N
+
+        jPopupMenu2.setName("jPopupMenu2"); // NOI18N
+
+        MnCariSurat.setBackground(new java.awt.Color(255, 255, 254));
+        MnCariSurat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCariSurat.setForeground(new java.awt.Color(50, 50, 50));
+        MnCariSurat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCariSurat.setText("Cari Surat Kontrol");
+        MnCariSurat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCariSurat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCariSurat.setName("MnCariSurat"); // NOI18N
+        MnCariSurat.setPreferredSize(new java.awt.Dimension(160, 26));
+        MnCariSurat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCariSuratActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(MnCariSurat);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -570,7 +592,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         R1.setPreferredSize(new java.awt.Dimension(115, 23));
         panelCari.add(R1);
 
-        DTPTanggalSurat1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2023" }));
+        DTPTanggalSurat1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024" }));
         DTPTanggalSurat1.setDisplayFormat("dd-MM-yyyy");
         DTPTanggalSurat1.setName("DTPTanggalSurat1"); // NOI18N
         DTPTanggalSurat1.setOpaque(false);
@@ -593,7 +615,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
 
-        DTPTanggalSurat2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2023" }));
+        DTPTanggalSurat2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024" }));
         DTPTanggalSurat2.setDisplayFormat("dd-MM-yyyy");
         DTPTanggalSurat2.setName("DTPTanggalSurat2"); // NOI18N
         DTPTanggalSurat2.setOpaque(false);
@@ -619,7 +641,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(120, 23));
         panelCari.add(R2);
 
-        DTPTanggalKontrol1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2023" }));
+        DTPTanggalKontrol1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024" }));
         DTPTanggalKontrol1.setDisplayFormat("dd-MM-yyyy");
         DTPTanggalKontrol1.setName("DTPTanggalKontrol1"); // NOI18N
         DTPTanggalKontrol1.setOpaque(false);
@@ -642,7 +664,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        DTPTanggalKontrol2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2023" }));
+        DTPTanggalKontrol2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024" }));
         DTPTanggalKontrol2.setDisplayFormat("dd-MM-yyyy");
         DTPTanggalKontrol2.setName("DTPTanggalKontrol2"); // NOI18N
         DTPTanggalKontrol2.setOpaque(false);
@@ -721,7 +743,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         NoSEP.setBounds(286, 10, 150, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2023" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -736,7 +758,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jLabel10.setText("Tanggal Surat :");
         jLabel10.setName("jLabel10"); // NOI18N
         FormInput.add(jLabel10);
-        jLabel10.setBounds(277, 70, 100, 23);
+        jLabel10.setBounds(297, 70, 80, 23);
 
         KdDokter.setEditable(false);
         KdDokter.setHighlighter(null);
@@ -801,7 +823,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jLabel14.setBounds(491, 70, 100, 23);
 
         TanggalKontrol.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKontrol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2023 16:29:08" }));
+        TanggalKontrol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024 16:02:39" }));
         TanggalKontrol.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalKontrol.setName("TanggalKontrol"); // NOI18N
         TanggalKontrol.setOpaque(false);
@@ -818,7 +840,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         FormInput.add(jLabel15);
         jLabel15.setBounds(0, 70, 90, 23);
 
-        NoSurat.setEditable(false);
+        NoSurat.setComponentPopupMenu(jPopupMenu2);
         NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
         NoSurat.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -883,6 +905,18 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         Diagnosa.setName("Diagnosa"); // NOI18N
         FormInput.add(Diagnosa);
         Diagnosa.setBounds(509, 10, 218, 23);
+
+        BtnSimpanSurat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnSimpanSurat.setMnemonic('2');
+        BtnSimpanSurat.setName("BtnSimpanSurat"); // NOI18N
+        BtnSimpanSurat.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnSimpanSurat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanSuratActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnSimpanSurat);
+        BtnSimpanSurat.setBounds(270, 70, 20, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1282,6 +1316,64 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         R1.setSelected(true);
     }//GEN-LAST:event_DTPTanggalSurat2KeyPressed
 
+    private void MnCariSuratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCariSuratActionPerformed
+        if(!NoSEP.getText().equals("")){
+            try {
+                headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+                headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
+                utc=String.valueOf(api.GetUTCdatetimeAsString());
+                headers.add("X-Timestamp",utc);
+                headers.add("X-Signature",api.getHmac(utc));
+                headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
+                URL = link+"/RencanaKontrol/noSuratKontrol/"+NoSurat.getText();	
+                requestEntity = new HttpEntity(headers);
+                //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+                root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+                nameNode = root.path("metaData");
+                System.out.println("code : "+nameNode.path("code").asText());
+                System.out.println("message : "+nameNode.path("message").asText());
+                if(nameNode.path("message").asText().equals("Sukses")){
+                    response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
+                    
+                    NoSEP.setText(response.path("sep").path("noSep").asText());
+                    KdPoli.setText(response.path("poliTujuan").asText());
+                    NmPoli.setText(Sequel.cariIsi("select nm_poli_bpjs from maping_poli_bpjs where kd_poli_bpjs=?",response.path("poliTujuan").asText()));
+                    KdDokter.setText(response.path("kodeDokter").asText());
+                    NmDokter.setText(response.path("namaDokter").asText());
+                    Valid.SetTgl(TanggalSurat,response.path("tglTerbit").asText());
+                    Valid.SetTgl(TanggalKontrol,response.path("tglRencanaKontrol").asText());
+                    BtnSimpanSurat.setVisible(true);
+                }else {
+//                    NoSurat.setText("");
+                    BtnSimpanSurat.setVisible(false);
+                    JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
+                }   
+            } catch (Exception ex) {
+                System.out.println("Notifikasi Peserta : "+ex);
+                if(ex.toString().contains("UnknownHostException")){
+                    JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
+                    dispose();
+                }
+            }
+        }
+    }//GEN-LAST:event_MnCariSuratActionPerformed
+
+    private void BtnSimpanSuratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanSuratActionPerformed
+        if(Sequel.menyimpantf("bridging_surat_kontrol_bpjs","?,?,?,?,?,?,?,?","No.Surat",8,new String[]{
+                NoSEP.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),response.asText(),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText()
+            })==true){
+            BtnSimpanSurat.setVisible(false);
+            emptTeks();
+            tampil();
+            if(JADIKANBOOKINGSURATKONTROLAPIBPJS.equals("yes")){
+                if(isBooking()==false){
+                    JOptionPane.showMessageDialog(null,"Gagal menyimpan booking, silahkan hubungi administrator...!!!!");
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnSimpanSuratActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1309,6 +1401,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnPoli;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.Button BtnSimpanSurat;
     private widget.CekBox ChkInput;
     private widget.Tanggal DTPTanggalKontrol1;
     private widget.Tanggal DTPTanggalKontrol2;
@@ -1321,6 +1414,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.TextBox KdPoli;
     private widget.Label LCount;
     private widget.Label LCount1;
+    private javax.swing.JMenuItem MnCariSurat;
     private javax.swing.JMenuItem MnSurat;
     private widget.TextBox NmDokter;
     private widget.TextBox NmPasien;
@@ -1357,6 +1451,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private widget.panelisi panelCari;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass8;

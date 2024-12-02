@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2020-02-23T23:34:46 -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="557" leftMargin="19" rightMargin="19" topMargin="19" bottomMargin="19" uuid="982210cc-eaea-4e91-ae19-0742e8c79b83">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
@@ -54,7 +53,7 @@ pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.pekerja
 concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) as alamatpj from pasien 
 inner join kelurahan inner join kecamatan inner join kabupaten 
 inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel 
-and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
+and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis= $P{norm}]]>
 	</queryString>
 	<field name="no_rkm_medis" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="no_rkm_medis"/>
@@ -359,15 +358,15 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<text><![CDATA[Nomor Telpon/HP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="352" y="757" width="199" height="11" uuid="d5e1f5b6-56c0-432a-a12a-342fb714d37e"/>
+				<reportElement x="371" y="757" width="179" height="11" uuid="d5e1f5b6-56c0-432a-a12a-342fb714d37e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Perawat Penanggung Jawab :]]></text>
+				<text><![CDATA[Dokter Penanggung Jawab]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="788" width="6" height="11" uuid="1af6d30a-c080-4126-a217-8f95553adad4"/>
+				<reportElement x="371" y="788" width="6" height="11" uuid="1af6d30a-c080-4126-a217-8f95553adad4"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -375,7 +374,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<text><![CDATA[(]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="546" y="788" width="6" height="11" uuid="ae554c0e-6957-448c-ab30-c45e8d5eb663"/>
+				<reportElement x="543" y="788" width="6" height="11" uuid="ae554c0e-6957-448c-ab30-c45e8d5eb663"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -1592,12 +1591,12 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<text><![CDATA[....................................................................................................................]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-1" y="757" width="199" height="11" uuid="5e7bf968-693d-461c-8ff6-246ea845aab3"/>
+				<reportElement x="2" y="757" width="180" height="11" uuid="5e7bf968-693d-461c-8ff6-246ea845aab3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[DPJP AKhir :]]></text>
+				<text><![CDATA[Pasien/Kel. Pasien]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="9" y="573" width="209" height="11" uuid="f5f738e6-91f2-4d89-9368-c272972e4a06"/>
@@ -1867,6 +1866,46 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="788" width="6" height="11" uuid="938083e9-9cc4-467b-87b7-aceac97c29fe"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[(]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="788" width="6" height="11" uuid="161b6978-5c06-4862-90fc-e71cd004999a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="757" width="170" height="11" uuid="b2f34a9c-80ab-42ad-b0d9-cc90fe59bffc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Kepala Ruangan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="788" width="6" height="11" uuid="bccaaea3-07e0-4627-a1d2-78a5f8dbd23a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[(]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="788" width="6" height="11" uuid="4fb451d6-11a9-4c8f-8ba0-258c6bbad186"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[)]]></text>
 			</staticText>
 		</band>
 	</title>

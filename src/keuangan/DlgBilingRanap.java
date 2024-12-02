@@ -210,7 +210,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?",
             sqlpstemporary="insert into temporary_bayar_ranap values('0',?,?,?,?,?,?,?,?,'','','','','','','','','')",
             Host_to_Host_Bank_Jateng="",Akun_BRI_API="",Host_to_Host_Bank_Papua="",Host_to_Host_Bank_Jabar="",KodeBankJabar="",PPN_Keluaran="";    
-    private double ttl=0,y=0,subttl=0,lab,ttlobat,ttlretur,ppnobat,piutang=0,kekurangan=0,itembayar=0,itempiutang=0,subttlOP=0,
+    private double ttl=0,y=0,subttl=0,lab,ttlobat,ttlretur,ppnobat,piutang=0,kekurangan=0,itembayar=0,itempiutang=0,subttlOP=0,subttlOPObat=0,
             tamkur=0,detailjs=0,detailbhp=0,besarppn=0,tagihanppn=0,bayar=0,total=0,uangdeposit=0,sisadeposit=0,
             ttlLaborat=0,ttlRadiologi=0,ttlOperasi=0,ttlObat=0,ttlRanap_Dokter=0,ttlRanap_Paramedis=0,ttlRalan_Dokter=0,
             ttlRalan_Paramedis=0,ttlTambahan=0,ttlPotongan=0,ttlKamar=0,ttlRegistrasi=0,ttlHarian=0,ttlRetur_Obat=0,ttlResep_Pulang=0,
@@ -3819,19 +3819,25 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     Sequel.menyimpan("temporary_bayar_ranap","'0','TOTAL TAGIHAN',':','','','','','<b>"+TtlSemua.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','PPN',':','','','','','<b>"+Valid.SetAngka(besarppn)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','TAGIHAN+PPN',':','','','','','<b>"+TagihanPPn.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','','','','','','','','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','DEPOSIT',':','','','','','<b>"+Deposit.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','BAYAR',':','','','','','<b>"+Valid.SetAngka(bayar)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','KEMBALI',':','','','','','<b>"+TKembali.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                   if(chkObat.isSelected()==true){
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','','','','','','','','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','PEMBAYARAN OBAT',':','','','','','<b>"+Deposit.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','BAYAR',':','','','','','<b>"+Valid.SetAngka(bayar)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','PEMBULATAN',':','','','','','<b>"+Valid.SetAngka(Valid.roundDown(bayar,1000)-bayar)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','TOTAL BAYAR',':','','','','','<b>"+Valid.SetAngka(Valid.roundDown(bayar,1000))+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                   }
+//                    Sequel.menyimpan("temporary_bayar_ranap","'0','KEMBALI',':','','','','','<b>"+TKembali.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                 }else if(ChkPiutang.isSelected()==true){                                            
                     Sequel.menyimpan("temporary_bayar_ranap","'0','','','','','','','','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','TOTAL TAGIHAN',':','','','','','<b>"+TtlSemua.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','PPN',':','','','','','<b>"+Valid.SetAngka(besarppn)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','TAGIHAN + PPN',':','','','','','<b>"+TagihanPPn.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','','','','','','','','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','DEPOSIT',':','','','','','<b>"+Deposit.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','EKSES',':','','','','','<b>"+Valid.SetAngka(bayar)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','SISA PIUTANG',':','','','','','<b>"+Valid.SetAngka(piutang)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter");                                      
+                    if(chkObat.isSelected()==true){
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','','','','','','','','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','PEMBAYARAN OBAT',':','','','','','<b>"+Deposit.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','EKSES',':','','','','','<b>"+Valid.SetAngka(bayar)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','SISA PIUTANG',':','','','','','<b>"+Valid.SetAngka(piutang)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter");                                      
+                    }                
                 }                
 
                 i = 0;
@@ -5111,6 +5117,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private void prosesCariObat(String norawat) {    
         subttl=0;
         subttlOP=0;
+        subttlOPObat=0;
         ttlobat=0;
         ttlretur=0;
         obatlangsung=0;
@@ -5181,7 +5188,59 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  subttlOP=subttlOP+rsobatoperasi.getDouble("total");
                             }
                         }
-                    }                    
+                    }
+                    if(subttlOP>1){
+                        tabModeRwJlDr.addRow(new Object[]{true,"","Total BHP Operasi : "+Valid.SetAngka(subttlOP),"",null,null,null,null,"TtlObat"});
+                    }
+                        try{
+                            pscariobat=koneksi.prepareStatement(
+                                    "select databarang.nama_brng,jenis.nama,detail_pemberian_obat.biaya_obat,"+
+                                    "sum(detail_pemberian_obat.jml) as jml,sum(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah) as tambahan,"+
+                                    "(sum(detail_pemberian_obat.total)-sum(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah)) as total "+
+                                    "from detail_pemberian_obat inner join databarang inner join jenis "+
+                                    "on detail_pemberian_obat.kode_brng=databarang.kode_brng and databarang.kdjns=jenis.kdjns where "+
+                                    "detail_pemberian_obat.no_rawat=? and detail_pemberian_obat.status like ? AND detail_pemberian_obat.kd_bangsal='APRO' group by databarang.kode_brng,detail_pemberian_obat.biaya_obat order by jenis.nama");
+                            try {
+                                pscariobat.setString(1,norawat);
+                                if((chkRalan.isSelected()==true)&&(chkRanap.isSelected()==true)){
+                                    pscariobat.setString(2,"%%");
+                                }else if((chkRalan.isSelected()==true)&&(chkRanap.isSelected()==false)){
+                                    pscariobat.setString(2,"%Ralan%");
+                                }else if((chkRalan.isSelected()==false)&&(chkRanap.isSelected()==true)){
+                                    pscariobat.setString(2,"%Ranap%");
+                                }else if((chkRalan.isSelected()==false)&&(chkRanap.isSelected()==false)){
+                                    pscariobat.setString(2,"%Kosong%");
+                                }
+                                rscariobat=pscariobat.executeQuery();
+                                if(centangobatranap.equals("Yes")){
+                                    while(rscariobat.next()){
+                                        tabModeRwJlDr.addRow(new Object[]{true,"                           ",rscariobat.getString("nama_brng")+" ("+rscariobat.getString("nama")+")",":",
+                                                       rscariobat.getDouble("biaya_obat"),rscariobat.getDouble("jml"),rscariobat.getDouble("tambahan"),
+                                                       (rscariobat.getDouble("total")+rscariobat.getDouble("tambahan")),"Obat"});
+                                        subttlOPObat=subttlOPObat+rscariobat.getDouble("total")+rscariobat.getDouble("tambahan");
+                                    }
+                                }else{
+                                    while(rscariobat.next()){
+                                        tabModeRwJlDr.addRow(new Object[]{false,"                           ",rscariobat.getString("nama_brng")+" ("+rscariobat.getString("nama")+")",":",
+                                                       rscariobat.getDouble("biaya_obat"),rscariobat.getDouble("jml"),rscariobat.getDouble("tambahan"),
+                                                       (rscariobat.getDouble("total")+rscariobat.getDouble("tambahan")),"Obat"});
+                                        subttlOPObat=subttlOPObat+rscariobat.getDouble("total")+rscariobat.getDouble("tambahan");
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                                System.out.println("Notifikasi obat op : "+e);
+                            } finally{
+                                if(rscariobat!=null){
+                                    rscariobat.close();
+                                }
+                                if(pscariobat!=null){
+                                    pscariobat.close();
+                                }                
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi : "+e);
+                        }                    
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
                 } finally{
@@ -5197,11 +5256,21 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 System.out.println("Notifikasi : "+e);
             }
 
-            if(subttlOP>1){
-                tabModeRwJlDr.addRow(new Object[]{true,"","Total Obat & BHP Operasi : "+Valid.SetAngka(subttlOP),"",null,null,null,null,"TtlObat"});
+            if(subttlOPObat>1){
+                tabModeRwJlDr.addRow(new Object[]{true,"","Total Obat Operasi : "+Valid.SetAngka(subttlOPObat),"",null,null,null,null,"TtlObat"});
+            }
+            if((subttlOPObat)>0){
+                if(tampilkan_ppnobat_ranap.equals("Yes")){
+                    ppnobat=Math.round((subttlOPObat)*0.11);
+                    tabModeRwJlDr.addRow(new Object[]{true,"","PPN Obat",":",ppnobat,1,0,ppnobat,"Obat"});
+                    tabModeRwJlDr.addRow(new Object[]{true,"","Total Obat Operasi : "+Valid.SetAngka(subttlOPObat+ppnobat),"",null,null,null,null,"TtlObat"});
+                    tabModeRwJlDr.addRow(new Object[]{true,"","Total Obat & BHP Operasi Bersih : "+Valid.SetAngka3(subttlOP+subttlOPObat+ppnobat),"",null,null,null,null,"TtlRetur Obat"});
+                }else{
+                    tabModeRwJlDr.addRow(new Object[]{true,"","Total Obat Operasi : "+Valid.SetAngka(subttlOPObat),"",null,null,null,null,"TtlObat"});
+                    tabModeRwJlDr.addRow(new Object[]{true,"","Total Obat & BHP Operasi Bersih : "+Valid.SetAngka3(subttlOP+subttlOPObat),"",null,null,null,null,"TtlRetur Obat"});
+                }            
             }
             tabModeRwJlDr.addRow(new Object[]{true,x+". Obat & BHP",":","",null,null,null,null,"Obat"});
-
             try{
                 pscariobat=koneksi.prepareStatement(
                         "select databarang.nama_brng,jenis.nama,detail_pemberian_obat.biaya_obat,"+
@@ -5209,7 +5278,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         "(sum(detail_pemberian_obat.total)-sum(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah)) as total "+
                         "from detail_pemberian_obat inner join databarang inner join jenis "+
                         "on detail_pemberian_obat.kode_brng=databarang.kode_brng and databarang.kdjns=jenis.kdjns where "+
-                        "detail_pemberian_obat.no_rawat=? and detail_pemberian_obat.status like ? group by databarang.kode_brng,detail_pemberian_obat.biaya_obat order by jenis.nama");
+                        "detail_pemberian_obat.no_rawat=? and detail_pemberian_obat.status like ? AND detail_pemberian_obat.kd_bangsal!='APRO' group by databarang.kode_brng,detail_pemberian_obat.biaya_obat order by jenis.nama");
                 try {
                     pscariobat.setString(1,norawat);
                     if((chkRalan.isSelected()==true)&&(chkRanap.isSelected()==true)){

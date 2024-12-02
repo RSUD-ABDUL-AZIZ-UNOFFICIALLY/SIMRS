@@ -7124,16 +7124,27 @@ public final class DlgReg extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 isRegistrasi();
             }else{
-                if(aktifjadwal.equals("aktif")){
-                    if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+KdDokter.getText()+"' and reg_periksa.tgl_registrasi='"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"' ")>=kuota){
-                        JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
-                        TCari.requestFocus();
-                    }else{
-                        isRegistrasi();
-                    }                    
+//                if(aktifjadwal.equals("aktif")){
+//                    if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+KdDokter.getText()+"' and reg_periksa.tgl_registrasi='"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"' ")>=kuota){
+//                        JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
+//                        TCari.requestFocus();
+//                    }else{
+//                        isRegistrasi();
+//                    }                    
+//                }else{
+//                    isRegistrasi();
+//                }  
+                if(Sequel.cariInteger(
+                        "select count(pasien.no_rkm_medis) from pasien inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                        " where reg_periksa.tgl_registrasi='"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"' AND reg_periksa.no_rkm_medis='"+TNoRM.getText()+"' AND reg_periksa.kd_poli!='IGDK' ")>0){
+                   
+                    int reply = JOptionPane.showConfirmDialog(rootPane,"Confirm, Pasien ini terdaftar pada tgl yang sama. Yakin inging didaftarkan kembali??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        cekRegist();
+                    } 
                 }else{
-                    isRegistrasi();
-                }  
+                    cekRegist();
+                } 
             }                          
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -15493,6 +15504,19 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     
     private void UpdateUmur(){
         Sequel.mengedit("pasien","no_rkm_medis=?","umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))",1,new String[]{TNoRM.getText()});
+    }
+    
+    private void cekRegist(){
+        if(aktifjadwal.equals("aktif")){
+            if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+KdDokter.getText()+"' and reg_periksa.tgl_registrasi='"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"' ")>=kuota){
+                JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
+                TCari.requestFocus();
+            }else{
+                isRegistrasi();
+            }                    
+        }else{
+            isRegistrasi();
+        } 
     }
 
     private void isRegistrasi() {

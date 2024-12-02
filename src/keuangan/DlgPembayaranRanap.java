@@ -52,7 +52,7 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
     private ResultSet rs,rs2;
     private DlgCariBangsal bangsal=new DlgCariBangsal(null,false);
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
-    private double all=0,pembulatan=0,Laborat=0,Radiologi=0,Operasi=0,Obat=0,Ranap_Dokter=0,Ranap_Paramedis=0,Ranap_Dokter_Paramedis=0,Ralan_Dokter=0,
+    private double all=0,pembulatan=0,ttlbult=0,total1=0,kurangbulat=0,Laborat=0,Radiologi=0,Operasi=0,Obat=0,Ranap_Dokter=0,Ranap_Paramedis=0,Ranap_Dokter_Paramedis=0,Ralan_Dokter=0,
              Ralan_Paramedis=0,Ralan_Dokter_Paramedis=0,Tambahan=0,Potongan=0,Kamar=0,Registrasi=0,Harian=0,Retur_Obat=0,Resep_Pulang=0,
              Service=0,Deposit=0,ttlDeposit=0,ttlLaborat=0,ttlRadiologi=0,ttlOperasi=0,ttlObat=0,ttlRanap_Dokter=0,ttlRanap_Paramedis=0,ttlRalan_Dokter=0,
              ttlRalan_Paramedis=0,ttlTambahan=0,ttlPotongan=0,ttlKamar=0,ttlRegistrasi=0,ttlHarian=0,ttlRetur_Obat=0,ttlResep_Pulang=0,ttlService=0;
@@ -70,7 +70,7 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
         setSize(885,674);
 
         Object[] rowRwJlDr={"Tgl.Pulang","No.Nota","No.RM","Nama Pasien","Kamar/Bangsal","Perujuk","Registrasi","Tindakan","Obt+Emb+Tsl","Retur Obat","Resep Pulang",
-                            "Laborat","Radiologi","Potongan","Tambahan","Kamar+Service","Operasi","Harian","Total Bayar","Deposit","Bayar","Pembulatan","TGL. Closing"};
+                            "Laborat","Radiologi","Potongan","Tambahan","Kamar+Service","Operasi","Harian","Total Semua Bayar","Deposit/Pembayaran Obat","Bayar","Pembulatan","Total","TGL. Closing"};
         tabMode=new DefaultTableModel(null,rowRwJlDr){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -79,7 +79,7 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
         tbBangsal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbBangsal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 22; i++) {
+        for (i = 0; i < 23; i++) {
             TableColumn column = tbBangsal.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(70);
@@ -100,7 +100,7 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
             }else if(i==20){
                 column.setPreferredWidth(110);
             }else{
-                column.setPreferredWidth(75);
+                column.setPreferredWidth(110);
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
@@ -608,10 +608,11 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Kamar+Service</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Operasi</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%'>Harian</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total Bayar</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Deposit</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total Semua Bayar</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Deposit/Pembayaran Obat</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Bayar</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Pembulatan</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>TGL.Closing</td>"+
                                 "</tr>"
                             ); 
@@ -641,6 +642,7 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,20)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,21)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,22)+"</td>"+
+                                        "<td valign='top' align='right'>"+tabMode.getValueAt(i,23)+"</td>"+
                                     "</tr>"
                                 ); 
                             }            
@@ -692,10 +694,11 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Kamar+Service</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Operasi</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%'>Harian</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total Bayar</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Deposit</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total Semua Bayar</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Deposit/Pembayaran Obat</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Bayar</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Pembulatan</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Total</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>TGL.Closing</td>"+
                                 "</tr>"
                             ); 
@@ -725,6 +728,7 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,20)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,21)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,22)+"</td>"+
+                                        "<td valign='top' align='right'>"+tabMode.getValueAt(i,23)+"</td>"+
                                     "</tr>"
                                 ); 
                             }            
@@ -757,11 +761,11 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
                             htmlContent.append(                             
-                                "\"Tgl.Pulang\";\"No.Nota\";\"No.RM\";\"Nama Pasien\";\"Kamar/Bangsal\";\"Perujuk\";\"Registrasi\";\"Tindakan\";\"Obt+Emb+Tsl\";\"Retur Obat\";\"Resep Pulang\";\"Laborat\";\"Radiologi\";\"Potongan\";\"Tambahan\";\"Kamar+Service\";\"Operasi\";\"Harian\";\"Total Bayar\";\"Deposit\";\"Bayar\";\"Pembulatan\";\"TGL.Closing\"\n"
+                                "\"Tgl.Pulang\";\"No.Nota\";\"No.RM\";\"Nama Pasien\";\"Kamar/Bangsal\";\"Perujuk\";\"Registrasi\";\"Tindakan\";\"Obt+Emb+Tsl\";\"Retur Obat\";\"Resep Pulang\";\"Laborat\";\"Radiologi\";\"Potongan\";\"Tambahan\";\"Kamar+Service\";\"Operasi\";\"Harian\";\"Total Semua Bayar\";\"Deposit/Pembayaran Obat\";\"Bayar\";\"Pembulatan\";\"Total\";\"TGL.Closing\"\n"
                             ); 
                             for(i=0;i<tabMode.getRowCount();i++){  
                                 htmlContent.append(                             
-                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\";\""+tabMode.getValueAt(i,18)+"\";\""+tabMode.getValueAt(i,19)+"\";\""+tabMode.getValueAt(i,20)+"\";\""+tabMode.getValueAt(i,21)+"\";\""+tabMode.getValueAt(i,22)+"\"\n"
+                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\";\""+tabMode.getValueAt(i,18)+"\";\""+tabMode.getValueAt(i,19)+"\";\""+tabMode.getValueAt(i,20)+"\";\""+tabMode.getValueAt(i,21)+"\";\""+tabMode.getValueAt(i,22)+"\";\""+tabMode.getValueAt(i,23)+"\"\n"
                                 ); 
                             }            
 
@@ -798,7 +802,8 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
                                                     tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','"+
                                                     tabMode.getValueAt(r,20).toString().replaceAll("'","`")+"','"+
                                                     tabMode.getValueAt(r,21).toString().replaceAll("'","`")+"','"+
-                                                    tabMode.getValueAt(r,22).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                    tabMode.getValueAt(r,22).toString().replaceAll("'","`")+"','"+
+                                                    tabMode.getValueAt(r,23).toString().replaceAll("'","`")+"','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                             }
 
                             Map<String, Object> param = new HashMap<>();                 
@@ -1071,7 +1076,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 ttlRanap_Dokter=0;ttlRanap_Paramedis=0;ttlRalan_Dokter=0;
                 ttlRalan_Paramedis=0;ttlTambahan=0;ttlPotongan=0;ttlKamar=0;
                 ttlRegistrasi=0;ttlHarian=0;ttlRetur_Obat=0;ttlResep_Pulang=0;
-                ttlService=0;
+                ttlService=0;ttlbult=0;
                 while(rs.next()){
                     if(!rs.getString("stts_pulang").equals("-")){
                     if(!rs.getString("stts_pulang").equals("Pindah Kamar")){
@@ -1505,7 +1510,10 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         }
 
                         all=all+Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service;
-                        pembulatan=pembulatan+Valid.roundUp((Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)-Deposit,1000);
+                        pembulatan=pembulatan+Valid.roundDown((Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)-Deposit,1000);
+                        total1=(Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)-Deposit;
+                        kurangbulat=Valid.roundDown(total1,1000)-total1;
+                        ttlbult=ttlbult+(Valid.roundDown(total1,1000)-total1);
                         ttlDeposit=ttlDeposit+Deposit;
                         if((Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)>0){
                             Keterangan="Sudah Bayar";
@@ -1513,51 +1521,87 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         
                         if(tampilkan.equals("Belum Bayar")&&Keterangan.equals("Belum Bayar")){
                             tabMode.addRow(new Object[]{
-                                rs.getString("tgl_keluar"),Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_rawat")),
-                                rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("kd_kamar")+" "+rs.getString("nm_bangsal"),
-                                Sequel.cariIsi("select perujuk from rujuk_masuk where no_rawat=?",rs.getString("no_rawat")),Valid.SetAngka(Registrasi),
+                                rs.getString("tgl_keluar"),
+                                Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_rawat")),
+                                rs.getString("no_rkm_medis"),
+                                rs.getString("nm_pasien"),
+                                rs.getString("kd_kamar")+" "+rs.getString("nm_bangsal"),
+                                Sequel.cariIsi("select perujuk from rujuk_masuk where no_rawat=?",rs.getString("no_rawat")),
+                                Valid.SetAngka(Registrasi),
                                 Valid.SetAngka(Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis),
-                                Valid.SetAngka(Obat),Valid.SetAngka(Retur_Obat),Valid.SetAngka(Resep_Pulang),Valid.SetAngka(Laborat),Valid.SetAngka(Radiologi),Valid.SetAngka(Potongan),
-                                Valid.SetAngka(Tambahan),Valid.SetAngka(Kamar+Service),Valid.SetAngka(Operasi),Valid.SetAngka(Harian),Valid.SetAngka(Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
+                                Valid.SetAngka(Obat),
+                                Valid.SetAngka(Retur_Obat),
+                                Valid.SetAngka(Resep_Pulang),
+                                Valid.SetAngka(Laborat),
+                                Valid.SetAngka(Radiologi),
+                                Valid.SetAngka(Potongan),
+                                Valid.SetAngka(Tambahan),
+                                Valid.SetAngka(Kamar+Service),
+                                Valid.SetAngka(Operasi),
+                                Valid.SetAngka(Harian),
+                                Valid.SetAngka(Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
                                         Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service),
                                 Valid.SetAngka(Deposit),
-                                Valid.SetAngka((Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
-                                        Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)-Deposit),
-                                Valid.SetAngka(Valid.roundUp((Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
-                                        Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)-Deposit,1000)),
+                                Valid.SetAngka(total1),
+                                Valid.SetAngka(kurangbulat),
+                                Valid.SetAngka(Valid.roundDown(total1,1000)),
                                 TglClosing
                             });
                         }else if(tampilkan.equals("Sudah Bayar")&&Keterangan.equals("Sudah Bayar")){
                             tabMode.addRow(new Object[]{
-                                rs.getString("tgl_keluar"),Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_rawat")),
-                                rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("kd_kamar")+" "+rs.getString("nm_bangsal"),
-                                Sequel.cariIsi("select perujuk from rujuk_masuk where no_rawat=?",rs.getString("no_rawat")),Valid.SetAngka(Registrasi),
+                                rs.getString("tgl_keluar"),
+                                Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_rawat")),
+                                rs.getString("no_rkm_medis"),
+                                rs.getString("nm_pasien"),
+                                rs.getString("kd_kamar")+" "+rs.getString("nm_bangsal"),
+                                Sequel.cariIsi("select perujuk from rujuk_masuk where no_rawat=?",rs.getString("no_rawat")),
+                                Valid.SetAngka(Registrasi),
                                 Valid.SetAngka(Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis),
-                                Valid.SetAngka(Obat),Valid.SetAngka(Retur_Obat),Valid.SetAngka(Resep_Pulang),Valid.SetAngka(Laborat),Valid.SetAngka(Radiologi),Valid.SetAngka(Potongan),
-                                Valid.SetAngka(Tambahan),Valid.SetAngka(Kamar+Service),Valid.SetAngka(Operasi),Valid.SetAngka(Harian),Valid.SetAngka(Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
+                                Valid.SetAngka(Obat),
+                                Valid.SetAngka(Retur_Obat),
+                                Valid.SetAngka(Resep_Pulang),
+                                Valid.SetAngka(Laborat),
+                                Valid.SetAngka(Radiologi),
+                                Valid.SetAngka(Potongan),
+                                Valid.SetAngka(Tambahan),
+                                Valid.SetAngka(Kamar+Service),
+                                Valid.SetAngka(Operasi),
+                                Valid.SetAngka(Harian),
+                                Valid.SetAngka(Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
                                         Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service),
                                 Valid.SetAngka(Deposit),
-                                Valid.SetAngka((Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
-                                        Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)-Deposit),
-                                Valid.SetAngka(Valid.roundUp((Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
-                                        Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)-Deposit,1000)),
+                                Valid.SetAngka(total1),
+                                Valid.SetAngka(kurangbulat),
+                                Valid.SetAngka(Valid.roundDown(total1,1000)),
                                 TglClosing
                                 
                             });
                         }else if(tampilkan.equals("Semua")){
                             tabMode.addRow(new Object[]{
-                                rs.getString("tgl_keluar"),Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_rawat")),
-                                rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("kd_kamar")+" "+rs.getString("nm_bangsal"),
-                                Sequel.cariIsi("select perujuk from rujuk_masuk where no_rawat=?",rs.getString("no_rawat")),Valid.SetAngka(Registrasi),
+                                rs.getString("tgl_keluar"),
+                                Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_rawat")),
+                                rs.getString("no_rkm_medis"),
+                                rs.getString("nm_pasien"),
+                                rs.getString("kd_kamar")+" "+rs.getString("nm_bangsal"),
+                                Sequel.cariIsi("select perujuk from rujuk_masuk where no_rawat=?",rs.getString("no_rawat")),
+                                Valid.SetAngka(Registrasi),
                                 Valid.SetAngka(Ranap_Dokter+Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis),
-                                Valid.SetAngka(Obat),Valid.SetAngka(Retur_Obat),Valid.SetAngka(Resep_Pulang),Valid.SetAngka(Laborat),Valid.SetAngka(Radiologi),Valid.SetAngka(Potongan),
-                                Valid.SetAngka(Tambahan),Valid.SetAngka(Kamar+Service),Valid.SetAngka(Operasi),Valid.SetAngka(Harian),Valid.SetAngka(Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
+                                Valid.SetAngka(Obat),
+                                Valid.SetAngka(Retur_Obat),
+                                Valid.SetAngka(Resep_Pulang),
+                                Valid.SetAngka(Laborat),
+                                Valid.SetAngka(Radiologi),
+                                Valid.SetAngka(Potongan),
+                                Valid.SetAngka(Tambahan),
+                                Valid.SetAngka(Kamar+Service),
+                                Valid.SetAngka(Operasi),
+                                Valid.SetAngka(Harian),
+                                Valid.SetAngka(Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
                                         Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service),
                                 Valid.SetAngka(Deposit),
-                                Valid.SetAngka((Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
-                                        Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)-Deposit),
-                                Valid.SetAngka(Valid.roundUp((Laborat+Radiologi+Operasi+Obat+Ranap_Dokter+
-                                        Ranap_Dokter_Paramedis+Ranap_Paramedis+Ralan_Dokter+Ralan_Dokter_Paramedis+Ralan_Paramedis+Tambahan+Potongan+Kamar+Registrasi+Harian+Retur_Obat+Resep_Pulang+Service)-Deposit,1000)),
+                                Valid.SetAngka(total1),
+                                Valid.SetAngka(kurangbulat),
+                                Valid.SetAngka(Valid.roundDown(total1,1000)),
                                 TglClosing
                                 
                             });
@@ -1571,7 +1615,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     tabMode.addRow(new Object[]{
                             ">> Total ",":","","","","",Valid.SetAngka(ttlRegistrasi),Valid.SetAngka(ttlRanap_Dokter+ttlRanap_Paramedis+ttlRalan_Dokter+ttlRalan_Paramedis),
                             Valid.SetAngka(ttlObat),Valid.SetAngka(ttlRetur_Obat),Valid.SetAngka(ttlResep_Pulang),Valid.SetAngka(ttlLaborat),Valid.SetAngka(ttlRadiologi),Valid.SetAngka(ttlPotongan),
-                            Valid.SetAngka(ttlTambahan),Valid.SetAngka(ttlKamar+ttlService),Valid.SetAngka(ttlOperasi),Valid.SetAngka(ttlHarian),Valid.SetAngka(all),Valid.SetAngka(ttlDeposit),"",Valid.SetAngka(pembulatan),""
+                            Valid.SetAngka(ttlTambahan),Valid.SetAngka(ttlKamar+ttlService),Valid.SetAngka(ttlOperasi),Valid.SetAngka(ttlHarian),Valid.SetAngka(all),Valid.SetAngka(ttlDeposit),"",Valid.SetAngka(ttlbult),Valid.SetAngka(pembulatan),""
                     });
                     LCount.setText(Valid.SetAngka(all));
                 }else{

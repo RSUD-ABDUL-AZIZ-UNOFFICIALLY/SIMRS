@@ -2478,6 +2478,16 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public void onCari(){
         KodePj.requestFocus(); 
     }
+    
+    private void cekUmur(String tglLahir){
+        String umur = Sequel.cariIsi("SELECT TIMESTAMPDIFF(YEAR, '"+tglLahir+"', CURDATE()) AS umur");
+//        System.out.println("umur: "+umur);
+        if(Integer.parseInt(umur) >= 18){
+            rbDewasa.setSelected(true);
+        }else{
+            rbAnak.setSelected(true);
+        }
+    }
 
     private void isRawat(){
         if(status.equals("Ranap")){
@@ -2512,7 +2522,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Sequel.mengedit("pasien","no_rkm_medis=?","umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))",1,new String[]{TNoRM.getText()});
         try {
             pstindakan=koneksi.prepareStatement(
-                "select reg_periksa.no_rkm_medis,reg_periksa.kd_pj,reg_periksa.kd_dokter,dokter.nm_dokter,pasien.nm_pasien,pasien.jk,pasien.umur,"+
+                "select reg_periksa.no_rkm_medis,reg_periksa.kd_pj,reg_periksa.kd_dokter,dokter.nm_dokter,pasien.nm_pasien,pasien.jk,pasien.umur,pasien.tgl_lahir,"+
                 "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat "+
                 "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
                 "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
@@ -2529,6 +2539,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     Jk.setText(rstindakan.getString("jk"));
                     Umur.setText(rstindakan.getString("umur"));
                     Alamat.setText(rstindakan.getString("alamat"));
+                    cekUmur(rstindakan.getString("tgl_lahir"));
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);

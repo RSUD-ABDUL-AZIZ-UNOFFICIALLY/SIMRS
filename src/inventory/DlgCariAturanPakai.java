@@ -379,12 +379,12 @@ public final class DlgCariAturanPakai extends javax.swing.JDialog {
             fileWriter = new FileWriter(file);
             iyem="";
             
-            ps=koneksi.prepareStatement("select * from master_aturan_pakai order by aturan ");
+            ps=koneksi.prepareStatement("select * from master_aturan_pakai order by aturan REGEXP '\r\n' ");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new String[]{rs.getString(1)});
-                    iyem=iyem+"{\"AturanPakai\":\""+rs.getString(1)+"\"},";
+                    tabMode.addRow(new String[]{rs.getString(1).replace("\n", "\\n")});
+                    iyem=iyem+"{\"AturanPakai\":\""+rs.getString(1).replace("\n", "\\n")+"\"},";
                 }
             } catch (Exception e) {
                 System.out.println(e);

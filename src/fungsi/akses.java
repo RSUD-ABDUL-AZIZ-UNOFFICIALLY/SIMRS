@@ -47,7 +47,7 @@ public final class akses {
             rekap_per_shift=false,bpjs_cek_nik=false,bpjs_cek_kartu=false,bpjs_cek_riwayat=false,obat_per_cara_bayar=false,kunjungan_ranap=false,bayar_piutang=false,
             payment_point=false,bpjs_cek_nomor_rujukan=false,icd9=false,darurat_stok=false,retensi_rm=false,temporary_presensi=false,jurnal_harian=false,
             sirkulasi_obat2=false,edit_registrasi=false,bpjs_referensi_diagnosa=false,bpjs_referensi_poli=false,industrifarmasi=false,harian_js=false,bulanan_js=false,
-            harian_paket_bhp=false,bulanan_paket_bhp=false,piutang_pasien2=false,bpjs_referensi_faskes=false,bpjs_sep=false,pengambilan_utd=false,tarif_utd=false,
+            harian_paket_bhp=false,bulanan_paket_bhp=false,piutang_pasien2=false,bpjs_referensi_faskes=false,create_sep=false,bpjs_sep=false,pengambilan_utd=false,tarif_utd=false,
             pengambilan_utd2=false,utd_medis_rusak=false,pengambilan_penunjang_utd=false,pengambilan_penunjang_utd2=false,utd_penunjang_rusak=false,
             suplier_penunjang=false,utd_donor=false,bpjs_monitoring_klaim=false,utd_cekal_darah=false,utd_komponen_darah=false,utd_stok_darah=false,
             utd_pemisahan_darah=false,harian_kamar=false,rincian_piutang_pasien=false,keuntungan_beri_obat_nonpiutang=false,reklasifikasi_ralan=false,
@@ -212,7 +212,9 @@ public final class akses {
             checklist_kriteria_masuk_icu=false,checklist_kriteria_keluar_icu=false,akses_dokter_lain_rawat_jalan=false,follow_up_dbd=false,penilaian_risiko_jatuh_neonatus=false,
             persetujuan_pengajuan_biaya=false,pemeriksaan_fisik_ralan_per_penyakit=false,penilaian_lanjutan_resiko_jatuh_geriatri=false,pemantauan_ews_neonatus=false,
             validasi_persetujuan_pengajuan_biaya=false,riwayat_perawatan_icare_bpjs=false,rekap_pengajuan_biaya=false,penilaian_awal_medis_ralan_kulit_kelamin=false,
-            akun_host_to_host_bank_mandiri=false,penilaian_medis_hemodialisa=false,penilaian_level_kecemasan_ranap_anak=false;
+            akun_host_to_host_bank_mandiri=false,penilaian_medis_hemodialisa=false,penilaian_level_kecemasan_ranap_anak=false,hasil_endoskopi_faring_laring=false,
+            hasil_endoskopi_hidung=false,hasil_endoskopi_telinga=false,hasil_pemeriksaan_ekg=false,hasil_usg_urologi=false,hasil_usg_gynecologi=false,hasil_usg_neonatus=false,
+            hasil_usg_guided=false,hasil_tindakan_umum=false,hasil_spirometri=false;
     
     public static void setData(String user, String pass) {
         try {        
@@ -420,6 +422,7 @@ public final class akses {
                         akses.piutang_pasien2=true;
                         akses.bpjs_referensi_faskes=true;
                         akses.bpjs_sep=true;
+                        akses.create_sep=true;
                         akses.pengambilan_utd=true;
                         akses.tarif_utd=true;
                         akses.pengambilan_utd2=true;
@@ -1207,6 +1210,16 @@ public final class akses {
                         akses.akun_host_to_host_bank_mandiri=true;
                         akses.penilaian_medis_hemodialisa=true;
                         akses.penilaian_level_kecemasan_ranap_anak=true;
+                        akses.hasil_usg_urologi=true;
+                        akses.hasil_usg_gynecologi=true;
+                        akses.hasil_pemeriksaan_ekg=true;
+                        akses.hasil_usg_neonatus=true;
+                        akses.hasil_endoskopi_faring_laring=true;
+                        akses.hasil_endoskopi_hidung=true;
+                        akses.hasil_endoskopi_telinga=true;
+                        akses.hasil_usg_guided=true;
+                        akses.hasil_tindakan_umum=true;
+                        akses.hasil_spirometri=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -1398,6 +1411,7 @@ public final class akses {
                         akses.piutang_pasien2=rs2.getBoolean("piutang_pasien2");
                         akses.bpjs_referensi_faskes=rs2.getBoolean("bpjs_referensi_faskes");
                         akses.bpjs_sep=rs2.getBoolean("bpjs_sep");
+                        akses.create_sep=rs2.getBoolean("create_sep");
                         akses.pengambilan_utd=rs2.getBoolean("pengambilan_utd");
                         akses.tarif_utd=rs2.getBoolean("tarif_utd");
                         akses.pengambilan_utd2=rs2.getBoolean("pengambilan_utd2");
@@ -2185,6 +2199,16 @@ public final class akses {
                         akses.akun_host_to_host_bank_mandiri=rs2.getBoolean("akun_host_to_host_bank_mandiri");
                         akses.penilaian_medis_hemodialisa=rs2.getBoolean("penilaian_medis_hemodialisa");
                         akses.penilaian_level_kecemasan_ranap_anak=rs2.getBoolean("penilaian_level_kecemasan_ranap_anak");
+                        akses.hasil_usg_urologi=rs2.getBoolean("hasil_usg_urologi");
+                        akses.hasil_usg_gynecologi=rs2.getBoolean("hasil_usg_gynecologi");
+                        akses.hasil_pemeriksaan_ekg=rs2.getBoolean("hasil_pemeriksaan_ekg");
+                        akses.hasil_usg_neonatus=rs2.getBoolean("hasil_usg_neonatus");
+                        akses.hasil_endoskopi_faring_laring=rs2.getBoolean("hasil_endoskopi_faring_laring");
+                        akses.hasil_endoskopi_hidung=rs2.getBoolean("hasil_endoskopi_hidung");
+                        akses.hasil_endoskopi_telinga=rs2.getBoolean("hasil_endoskopi_telinga");
+                        akses.hasil_usg_guided=rs2.getBoolean("hasil_usg_guided");
+                        akses.hasil_tindakan_umum=rs2.getBoolean("hasil_tindakan_umum");
+                        akses.hasil_spirometri=rs2.getBoolean("hasil_spirometri");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";                  
                         akses.penyakit= false;
@@ -2374,6 +2398,7 @@ public final class akses {
                         akses.piutang_pasien2=false;
                         akses.bpjs_referensi_faskes=false;
                         akses.bpjs_sep=false;
+                        akses.create_sep=false;
                         akses.pengambilan_utd=false;
                         akses.tarif_utd=false;
                         akses.pengambilan_utd2=false;
@@ -3161,6 +3186,16 @@ public final class akses {
                         akses.akun_host_to_host_bank_mandiri=false;
                         akses.penilaian_medis_hemodialisa=false;
                         akses.penilaian_level_kecemasan_ranap_anak=false;
+                        akses.hasil_usg_urologi=false;
+                        akses.hasil_usg_gynecologi=false;
+                        akses.hasil_pemeriksaan_ekg=false;
+                        akses.hasil_usg_neonatus=false;
+                        akses.hasil_endoskopi_faring_laring=false;
+                        akses.hasil_endoskopi_hidung=false;
+                        akses.hasil_endoskopi_telinga=false;
+                        akses.hasil_usg_guided=false;
+                        akses.hasil_tindakan_umum=false;
+                        akses.hasil_spirometri=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -3399,6 +3434,7 @@ public final class akses {
     public static boolean getpiutang_pasien2(){return akses.piutang_pasien2;}
     public static boolean getbpjs_referensi_faskes(){return akses.bpjs_referensi_faskes;} 
     public static boolean getbpjs_sep(){return akses.bpjs_sep;} 
+    public static boolean getcreate_sep(){return akses.create_sep;} 
     public static boolean getpengambilan_utd(){return akses.pengambilan_utd;} 
     public static boolean gettarif_utd(){return akses.tarif_utd;} 
     public static boolean getpengambilan_utd2(){return akses.pengambilan_utd2;}  
@@ -4197,4 +4233,14 @@ public final class akses {
     public static boolean getakun_host_to_host_bank_mandiri(){return akses.akun_host_to_host_bank_mandiri;}
     public static boolean getpenilaian_medis_ralan_hemodialisa(){return akses.penilaian_medis_hemodialisa;}
     public static boolean getpenilaian_level_kecemasan_ranap_anak(){return akses.penilaian_level_kecemasan_ranap_anak;}
+    public static boolean gethasil_usg_urologi(){return akses.hasil_usg_urologi;}
+    public static boolean gethasil_usg_gynecologi(){return akses.hasil_usg_gynecologi;}
+    public static boolean gethasil_pemeriksaan_ekg(){return akses.hasil_pemeriksaan_ekg;}
+    public static boolean gethasil_usg_neonatus(){return akses.hasil_usg_neonatus;}
+    public static boolean gethasil_endoskopi_faring_laring(){return akses.hasil_endoskopi_faring_laring;}
+    public static boolean gethasil_endoskopi_hidung(){return akses.hasil_endoskopi_hidung;}
+    public static boolean gethasil_endoskopi_telinga(){return akses.hasil_endoskopi_telinga;}
+    public static boolean gethasil_usg_guided(){return akses.hasil_usg_guided;}
+    public static boolean gethasil_tindakan_umum(){return akses.hasil_tindakan_umum;}
+    public static boolean gethasil_spirometri(){return akses.hasil_spirometri;}
 }   

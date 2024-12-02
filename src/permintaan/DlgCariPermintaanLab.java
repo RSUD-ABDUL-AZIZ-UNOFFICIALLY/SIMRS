@@ -3835,6 +3835,9 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
+                        param.put("ruang",Ruang);
+                        param.put("noorder",NoPermintaan);
+                        param.put("keterangan",InformasiTambahan);
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Valid.MyReportqry("rptLabelBaris4.jasper","report","::[ Label Nama Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                             "pasien.tmp_lahir, pasien.tgl_lahir,pasien.gol_darah,"+
@@ -3867,6 +3870,9 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
+                        param.put("ruang",Ruang);
+                        param.put("noorder",NoPermintaan);
+                        param.put("keterangan",InformasiTambahan);
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Valid.MyReportqry("rptLabelBaris4.jasper","report","::[ Label Nama Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                             "pasien.tmp_lahir, pasien.tgl_lahir,pasien.gol_darah,"+

@@ -462,7 +462,7 @@ public class DlgPasien extends javax.swing.JDialog {
         TKtp.setDocument(new batasInput((byte)20).getKata(TKtp));
         Kdpnj.setDocument(new batasInput((byte)3).getKata(Kdpnj));
         TTlp.setDocument(new batasInput((int)40).getKata(TTlp));
-        TTmp.setDocument(new batasInput((byte)15).getKata(TTmp));
+        TTmp.setDocument(new batasInput((byte)100).getKata(TTmp));
         Alamat.setDocument(new batasInput((int)250).getFilter(Alamat));
         AlamatPj.setDocument(new batasInput((int)250).getFilter(AlamatPj));
         Pekerjaan.setDocument(new batasInput((byte)100).getKata(Pekerjaan));

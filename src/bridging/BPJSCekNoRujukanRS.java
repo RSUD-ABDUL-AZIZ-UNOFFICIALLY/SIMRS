@@ -7153,12 +7153,12 @@ public final class BPJSCekNoRujukanRS extends javax.swing.JDialog {
     }
 
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getbpjs_sep());
-        ppPengajuan.setEnabled(akses.getbpjs_sep());
-        ppPengajuan1.setEnabled(akses.getbpjs_sep());
-        ppPengajuan2.setEnabled(akses.getbpjs_sep());
-        ppPengajuan3.setEnabled(akses.getbpjs_sep());
-        ppStatusFinger.setEnabled(akses.getbpjs_sep());
+        BtnSimpan.setEnabled(akses.getcreate_sep());
+        ppPengajuan.setEnabled(akses.getcreate_sep());
+        ppPengajuan1.setEnabled(akses.getcreate_sep());
+        ppPengajuan2.setEnabled(akses.getcreate_sep());
+        ppPengajuan3.setEnabled(akses.getcreate_sep());
+        ppStatusFinger.setEnabled(akses.getcreate_sep());
     }
     
     public boolean SimpanAntrianOnSite(){

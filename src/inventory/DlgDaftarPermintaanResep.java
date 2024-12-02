@@ -3231,9 +3231,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             akses.setkdbangsal(bangsal);
         }
         DlgInputResepPulang dlgresepulang=new DlgInputResepPulang(null,false);
-        dlgresepulang.setNoRm(NoRawat,NoRM,Pasien,"-",DTPCari1.getSelectedItem().toString(),Sequel.cariIsi("select current_time()"));
         dlgresepulang.isCek();
+        dlgresepulang.setNoRm(NoRawat,NoRM,Pasien,Status,TglPeresepan,JamPeresepan);
         dlgresepulang.tampil2(NoResep);
+//        DlgCariObatPulang dlgresepulang=new DlgCariObatPulang(null,false);
+//        dlgresepulang.setNoRm(NoRawat,NoRM,Pasien,Valid.SetTgl2(TglPeresepan));
+//        dlgresepulang.tampilobat2(NoResep);
+        
         dlgresepulang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dlgresepulang.setLocationRelativeTo(internalFrame1);
         TeksKosong();

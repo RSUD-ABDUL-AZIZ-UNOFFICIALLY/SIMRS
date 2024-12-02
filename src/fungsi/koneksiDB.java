@@ -37,7 +37,7 @@ public class koneksiDB {
                         "  biaya apapun. Dilarang keras memperjualbelikan/mengambil \n" +
                         "  keuntungan dari Software ini dalam bentuk apapun tanpa seijin pembuat \n" +
                         "  software (Khanza.Soft Media).\n"+
-                        "                                                                            \n"+
+                        "     V4-1-19 22/11/2024 09:33                                                                       \n"+
                         "  #    ____  ___  __  __  ____   ____    _  __ _                              \n" +
                         "  #   / ___||_ _||  \\/  ||  _ \\ / ___|  | |/ /| |__    __ _  _ __   ____ __ _ \n" +
                         "  #   \\___ \\ | | | |\\/| || |_) |\\___ \\  | ' / | '_ \\  / _` || '_ \\ |_  // _` |\n" +
@@ -1385,6 +1385,16 @@ public class koneksiDB {
             var=EnkripsiAES.decrypt(prop.getProperty("USERKEYAPISMARTCLAIM"));
         }catch(Exception e){
             var=""; 
+        }
+        return var;
+    }   
+    
+    public static String TANGGALMUNDUR(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("TANGGALMUNDUR");
+        }catch(Exception e){
+            var="yes"; 
         }
         return var;
     }

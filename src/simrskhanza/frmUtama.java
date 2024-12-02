@@ -751,10 +751,12 @@ import laporan.LaporanTahunanIRJ;
 import surat.MasterMenolakAnjuranMedis;
 import permintaan.DlgBookingPeriksa;
 import permintaan.DlgCariPermintaanDarah;
+import permintaan.DlgCariPermintaanHD;
 import permintaan.DlgCariPermintaanLabMB;
 import permintaan.DlgCariPermintaanLabPA;
 import permintaan.DlgPermintaanPelayananInformasiObat;
 import permintaan.DlgPermintaanRanap;
+import permintaan.DlgSilaporHelpdesk;
 import perpustakaan.PerpustakaanAnggota;
 import perpustakaan.PerpustakaanBayarDenda;
 import perpustakaan.PerpustakaanCariEbook;
@@ -1046,7 +1048,7 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu6.setOpaque(false);
         jMenu7.setOpaque(false);
         jMenu4.setOpaque(false);
-
+        jMenu8.setVisible(false);
         cariNIK.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1627,6 +1629,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaboratoriumPA = new widget.ButtonBig();
         btnLaboratoriumMB = new widget.ButtonBig();
         btnPermintaanDarah = new widget.ButtonBig();
+        btnPermintaanHD = new widget.ButtonBig();
         internalFrame1 = new widget.InternalFrame();
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1656,7 +1659,6 @@ public class frmUtama extends javax.swing.JFrame {
         scrollPane1 = new widget.ScrollPane();
         PanelWall = new usu.widget.glass.PanelGlass();
         panelJudul = new usu.widget.glass.PanelGlass();
-        jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         FlayMenu = new usu.widget.glass.PanelGlass();
@@ -1719,6 +1721,7 @@ public class frmUtama extends javax.swing.JFrame {
         jSeparator13 = new javax.swing.JPopupMenu.Separator();
         MnRekapHadir6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
 
         DlgLogin.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         DlgLogin.setName("DlgLogin"); // NOI18N
@@ -1933,7 +1936,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15/08/2024" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10/09/2024" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7009,6 +7012,17 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
 
+        btnPermintaanHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_32_Disease_infected_infection_kidney_6088186.png"))); // NOI18N
+        btnPermintaanHD.setText("Permintaan HD");
+        btnPermintaanHD.setIconTextGap(0);
+        btnPermintaanHD.setName("btnPermintaanHD"); // NOI18N
+        btnPermintaanHD.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPermintaanHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPermintaanHDActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("::[ Khanza SIMKES 2022 ]::");
         setBackground(new java.awt.Color(255, 254, 254));
@@ -7130,7 +7144,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnToolRad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Surgeon.png"))); // NOI18N
         btnToolRad.setMnemonic('A');
-        btnToolRad.setText("Radiologi");
+        btnToolRad.setText("Penunjang");
         btnToolRad.setToolTipText("Alt+A");
         btnToolRad.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolRad.setIconTextGap(2);
@@ -7370,16 +7384,6 @@ public class frmUtama extends javax.swing.JFrame {
         panelJudul.setPreferredSize(new java.awt.Dimension(200, 170));
         panelJudul.setRound(false);
         panelJudul.setLayout(null);
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel12.setText("Ver. 4-1-17.15-08-2024.09:32");
-        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel12.setName("jLabel12"); // NOI18N
-        jLabel12.setPreferredSize(new java.awt.Dimension(430, 30));
-        panelJudul.add(jLabel12);
-        jLabel12.setBounds(210, 120, 680, 30);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(50, 50, 50));
@@ -8208,6 +8212,33 @@ public class frmUtama extends javax.swing.JFrame {
         });
         MenuBar.add(jMenu4);
 
+        jMenu8.setBackground(new java.awt.Color(20, 0, 20));
+        jMenu8.setBorder(null);
+        jMenu8.setForeground(new java.awt.Color(255, 255, 253));
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/63.png"))); // NOI18N
+        jMenu8.setMnemonic('G');
+        jMenu8.setText("Silapor Helpdesk");
+        jMenu8.setToolTipText("");
+        jMenu8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jMenu8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMenu8.setName("jMenu8"); // NOI18N
+        jMenu8.setPreferredSize(new java.awt.Dimension(121, 26));
+        jMenu8.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu8MenuSelected(evt);
+            }
+        });
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
+        MenuBar.add(jMenu8);
+
         setJMenuBar(MenuBar);
 
         pack();
@@ -8262,6 +8293,7 @@ public class frmUtama extends javax.swing.JFrame {
                 lblStts.setText("Status Admin : ");
                 lblUser.setText("Log Out");
                 BtnMenu.setEnabled(false);
+                jMenu8.setVisible(false);
                 isTutup();
                 break;
             case "Log In":
@@ -8300,7 +8332,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnResepObatDepan.setEnabled(true);
                     MnGantiPassword.setEnabled(false);
                     MnPengajuanCutiPegawai.setEnabled(false);
-
+                    jMenu8.setVisible(true);
                     DlgLogin.dispose();
                     BtnLog.setText("Log Out");
                     MnLogin.setText("Log Out");
@@ -8346,7 +8378,7 @@ public class frmUtama extends javax.swing.JFrame {
                         btnPermintaanLabPA.setEnabled(akses.getpermintaan_lab());
                         btnPermintaanLabMB.setEnabled(akses.getpermintaan_lab());
                     }
-                        
+                    jMenu8.setVisible(true);    
                     btnToolIGD.setEnabled(akses.getigd());                
                     btnLaboratorium.setEnabled(akses.getperiksa_lab());
                     btnLaboratoriumPA.setEnabled(akses.getpemeriksaan_lab_pa());
@@ -8385,7 +8417,7 @@ public class frmUtama extends javax.swing.JFrame {
                     edPwd.setText("");           
                      
                     BtnMenu.setEnabled(false);
-
+                    jMenu8.setVisible(true);
                     edAdmin.requestFocus();
                     BtnLog.setText("Log In");
                     MnLogin.setText("Log In");
@@ -8393,6 +8425,7 @@ public class frmUtama extends javax.swing.JFrame {
                     lblUser.setText("Log Out");   
                 }
             } catch (Exception e) {
+                jMenu8.setVisible(false);
                 System.out.println("Notifikasi : "+e);
             }
         }
@@ -9795,7 +9828,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         FlayMenu.add(btnLaboratorium);
         FlayMenu.add(btnLaboratoriumPA);
         FlayMenu.add(btnLaboratoriumMB);
-        FlayMenu.add(btnPermintaanDarah);
 //        if((akses.getpermintaan_lab()==true)||(akses.getperiksa_lab()==true)||(akses.getpemeriksaan_lab_pa()==true)||(akses.getpemeriksaan_lab_mb()==true)){
 //            btnPermintaanLab.setEnabled(true);
 //            btnPermintaanLabPA.setEnabled(true);
@@ -9813,7 +9845,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnLaboratorium.setEnabled(akses.getpermintaan_lab());
         btnLaboratoriumPA.setEnabled(akses.getpermintaan_lab());
         btnLaboratoriumMB.setEnabled(akses.getpermintaan_lab());
-        btnPermintaanDarah.setEnabled(akses.getpermintaan_lab());
         FlayMenu.setVisible(true); 
     }//GEN-LAST:event_btnToolLabActionPerformed
 
@@ -10165,6 +10196,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         FlayMenu.removeAll();        
         FlayMenu.add(btnPermintaanRadiologi);
         FlayMenu.add(btnPeriksaRadiologi);
+        FlayMenu.add(btnPermintaanDarah);
+        FlayMenu.add(btnPermintaanHD);
 //        if((akses.getpermintaan_radiologi()==true)||(akses.getperiksa_radiologi()==true)){
 //            btnPermintaanRadiologi.setEnabled(true);
 //        }else{
@@ -10172,6 +10205,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 //        }
         btnPermintaanRadiologi.setEnabled(akses.getpermintaan_radiologi());
         btnPeriksaRadiologi.setEnabled(akses.getpermintaan_radiologi());
+        btnPermintaanDarah.setEnabled(akses.getpermintaan_lab());
+        btnPermintaanHD.setEnabled(akses.gethemodialisa());
         FlayMenu.setVisible(true); 
     }//GEN-LAST:event_btnToolRadActionPerformed
 
@@ -14582,6 +14617,34 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnRHKasirActionPerformed
+
+    private void btnPermintaanHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermintaanHDActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPermintaanHD form=new DlgCariPermintaanHD(null,false);
+        form.isCek();
+        form.setPasien(null, "Ralan");
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnPermintaanHDActionPerformed
+
+    private void jMenu8MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu8MenuSelected
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu8MenuSelected
+
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSilaporHelpdesk form=new DlgSilaporHelpdesk(null,false);
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_jMenu8MouseClicked
 
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -21038,6 +21101,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig btnPenyakitRanapCaraBayar;
     private widget.ButtonBig btnPeriksaRadiologi;
     private widget.ButtonBig btnPermintaanDarah;
+    private widget.ButtonBig btnPermintaanHD;
     private widget.ButtonBig btnPermintaanLab;
     private widget.ButtonBig btnPermintaanMedis;
     private widget.ButtonBig btnPermintaanNonMedis;
@@ -21230,7 +21294,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.InternalFrame internalFrame4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -21241,6 +21304,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator12;

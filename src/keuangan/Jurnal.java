@@ -31,7 +31,11 @@ public class Jurnal {
                 if(rscek.next()){
                     if(rscek.getInt("debet")==rscek.getInt("kredit")){
                         if(rscek.getInt("jml")>0){
-                            nojur=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(jurnal.no_jurnal,6),signed)),0) from jurnal where jurnal.tgl_jurnal='"+rscek.getString("tanggal")+"' ","JR"+rscek.getString("tanggal").replaceAll("-",""),6);
+//                            nojur=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(jurnal.no_jurnal,6),signed)),0) from jurnal where jurnal.tgl_jurnal='"+rscek.getString("tanggal")+"' ","JR"+rscek.getString("tanggal").replaceAll("-",""),6);
+                                long currentTimeMillis = System.currentTimeMillis();                                
+                                nojur="JRSA"+String.format("%014d", currentTimeMillis);
+//                                System.out.println("Jurnal 1:"+nojur);
+//                                System.out.println("TEST:"+String.format("%16d", currentTimeMillis+1));
                             try {
                                  sukses=true;
                                  ps=koneksi.prepareStatement("insert into jurnal values(?,?,?,?,?,?)");
@@ -53,7 +57,9 @@ public class Jurnal {
                                  }
 
                                  if(sukses==false){
-                                     nojur=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(jurnal.no_jurnal,6),signed)),0) from jurnal where jurnal.tgl_jurnal='"+rscek.getString("tanggal")+"' ","JR"+rscek.getString("tanggal").replaceAll("-",""),6);
+//                                     nojur=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(jurnal.no_jurnal,6),signed)),0) from jurnal where jurnal.tgl_jurnal='"+rscek.getString("tanggal")+"' ","JR"+rscek.getString("tanggal").replaceAll("-",""),6);
+                                     nojur="JRSA"+String.format("%014d", currentTimeMillis+1);
+//                                     System.out.println("Jurnal After 1:"+nojur);
                                      sukses=true;
                                      ps=koneksi.prepareStatement("insert into jurnal values(?,?,?,?,?,?)");
                                      try {

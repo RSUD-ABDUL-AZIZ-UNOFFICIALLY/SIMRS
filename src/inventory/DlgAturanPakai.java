@@ -108,7 +108,8 @@ public class DlgAturanPakai extends javax.swing.JDialog {
         tbkabupaten = new widget.Table();
         panelGlass7 = new widget.panelisi();
         jLabel4 = new widget.Label();
-        Nama = new widget.TextBox();
+        ScrollPane = new widget.ScrollPane();
+        Nama = new widget.TextArea();
         panelGlass9 = new widget.panelisi();
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
@@ -133,7 +134,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Aturan Pakai ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Aturan Pakai ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -161,7 +162,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
         panelGlass7.setName("panelGlass7"); // NOI18N
-        panelGlass7.setPreferredSize(new java.awt.Dimension(44, 47));
+        panelGlass7.setPreferredSize(new java.awt.Dimension(44, 80));
         panelGlass7.setLayout(null);
 
         jLabel4.setText("Aturan Pakai :");
@@ -169,14 +170,22 @@ public class DlgAturanPakai extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(0, 12, 90, 23);
 
+        ScrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ScrollPane.setName("ScrollPane"); // NOI18N
+
+        Nama.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Nama.setColumns(20);
+        Nama.setRows(5);
         Nama.setName("Nama"); // NOI18N
         Nama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 NamaKeyPressed(evt);
             }
         });
-        panelGlass7.add(Nama);
-        Nama.setBounds(95, 12, 550, 23);
+        ScrollPane.setViewportView(Nama);
+
+        panelGlass7.add(ScrollPane);
+        ScrollPane.setBounds(100, 20, 550, 60);
 
         internalFrame1.add(panelGlass7, java.awt.BorderLayout.PAGE_START);
 
@@ -318,13 +327,9 @@ public class DlgAturanPakai extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NamaKeyPressed
-        Valid.pindah(evt,TCari,BtnSimpan,TCari);
-}//GEN-LAST:event_NamaKeyPressed
-
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(Nama.getText().trim().equals("")){
-            Valid.textKosong(Nama,"Kabupaten");
+            Valid.textKosong(Nama,"1x1");
         }else{
             Sequel.menyimpan("master_aturan_pakai","'"+Nama.getText()+"'","Aturan Pakai");
             tampil();
@@ -351,7 +356,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        Valid.hapusTable(tabMode,Nama,"master_aturan_pakai","aturan");
+        Valid.hapusTableTx(tabMode,Nama,"master_aturan_pakai","aturan");
         tampil();
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -453,6 +458,10 @@ public class DlgAturanPakai extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbkabupatenKeyReleased
 
+    private void NamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NamaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NamaKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -477,8 +486,9 @@ public class DlgAturanPakai extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
     private widget.Label LCount;
-    private widget.TextBox Nama;
+    private widget.TextArea Nama;
     private widget.ScrollPane Scroll;
+    private widget.ScrollPane ScrollPane;
     private widget.TextBox TCari;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel4;
